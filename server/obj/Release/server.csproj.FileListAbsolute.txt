@@ -1,0 +1,7 @@
+C:\Users\Daria\Documents\adbd\server\bin\Release\server.exe.config
+C:\Users\Daria\Documents\adbd\server\bin\Release\server.exe
+C:\Users\Daria\Documents\adbd\server\bin\Release\server.pdb
+C:\Users\Daria\Documents\adbd\server\obj\Release\server.csproj.AssemblyReference.cache
+C:\Users\Daria\Documents\adbd\server\obj\Release\server.csproj.CoreCompileInputs.cache
+C:\Users\Daria\Documents\adbd\server\obj\Release\server.exe
+C:\Users\Daria\Documents\adbd\server\obj\Release\server.pdb

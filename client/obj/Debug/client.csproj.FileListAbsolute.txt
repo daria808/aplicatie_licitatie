@@ -1,0 +1,14 @@
+C:\Users\Daria\Documents\adbd\client\obj\Debug\client.csproj.AssemblyReference.cache
+C:\Users\Daria\Documents\adbd\client\obj\Debug\client.csproj.CoreCompileInputs.cache
+C:\Users\Daria\Documents\adbd\client\bin\Debug\client.exe.config
+C:\Users\Daria\Documents\adbd\client\bin\Debug\client.exe
+C:\Users\Daria\Documents\adbd\client\bin\Debug\client.pdb
+C:\Users\Daria\Documents\adbd\client\obj\Debug\client.exe
+C:\Users\Daria\Documents\adbd\client\obj\Debug\client.pdb
+C:\Users\Daria\Documents\scoala\adbd\client\bin\Debug\client.exe.config
+C:\Users\Daria\Documents\scoala\adbd\client\bin\Debug\client.exe
+C:\Users\Daria\Documents\scoala\adbd\client\bin\Debug\client.pdb
+C:\Users\Daria\Documents\scoala\adbd\client\obj\Debug\client.csproj.AssemblyReference.cache
+C:\Users\Daria\Documents\scoala\adbd\client\obj\Debug\client.csproj.CoreCompileInputs.cache
+C:\Users\Daria\Documents\scoala\adbd\client\obj\Debug\client.exe
+C:\Users\Daria\Documents\scoala\adbd\client\obj\Debug\client.pdb

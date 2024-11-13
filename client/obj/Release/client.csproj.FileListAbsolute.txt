@@ -1,0 +1,7 @@
+C:\Users\Daria\Documents\adbd\client\bin\Release\client.exe.config
+C:\Users\Daria\Documents\adbd\client\bin\Release\client.exe
+C:\Users\Daria\Documents\adbd\client\bin\Release\client.pdb
+C:\Users\Daria\Documents\adbd\client\obj\Release\client.csproj.AssemblyReference.cache
+C:\Users\Daria\Documents\adbd\client\obj\Release\client.csproj.CoreCompileInputs.cache
+C:\Users\Daria\Documents\adbd\client\obj\Release\client.exe
+C:\Users\Daria\Documents\adbd\client\obj\Release\client.pdb

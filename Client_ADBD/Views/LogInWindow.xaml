@@ -1,0 +1,559 @@
+﻿<Window x:Class="Client_ADBD.LogInWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:local="clr-namespace:Client_ADBD"
+        xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
+        xmlns:helpers="clr-namespace:Client_ADBD.Helpers"
+        mc:Ignorable="d"
+        Title="LogInWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True" >
+
+    <Window.Resources>
+
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="ButtonArrow" BasedOn="{StaticResource ButtonBaseStyle}" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{DynamicResource RegionBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid x:Name="lg_buttonGrid" Margin="-35,-9,15,0">
+                                <Rectangle x:Name="lg_buttonRectangle" Height="32" VerticalAlignment="Center" Margin="3,0,0,0" RadiusX="20.837" RadiusY="20.837" Fill="#FF084537" Opacity="0.6"/>
+                                <Image x:Name="lg_buttonImage" Source="/Views/icons8-right-arrow-40.png" Opacity="0.8" Margin="6,7,3,6"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True"/>
+                                <Trigger Property="IsPressed" Value="True"/>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Opacity" Value="0.9"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Opacity" Value="0.6"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.4"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="ButtonBack" BasedOn="{StaticResource ButtonBaseStyle}" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{DynamicResource RegionBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid x:Name="lg_buttonGrid" Margin="-1,-8,-3,-9">
+
+                                <Image x:Name="lg_buttonImage" 
+             Source="/Views/icons8-arrow-40.png" 
+             Opacity="0.8" 
+             Width="44" 
+             Height="67" 
+             HorizontalAlignment="Center" 
+             VerticalAlignment="Center"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True"/>
+                                <Trigger Property="IsPressed" Value="True"/>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Opacity" Value="0.9"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Opacity" Value="0.6"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.4"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="ButtonCornerSi" BasedOn="{StaticResource ButtonBaseStyle}" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{DynamicResource RegionBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid x:Name="lg_buttonGrid" Margin="0,0,-3,-9">
+                                <!-- Imaginea va fi centrată în Grid -->
+                                <Image x:Name="lg_buttonImage" 
+                                   Source="/Views/icons8-user-60.png" 
+                                   Opacity="0.8" 
+                                   Width="44" 
+                                   Height="44" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True"/>
+                                <Trigger Property="IsPressed" Value="True"/>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Opacity" Value="0.9"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Opacity" Value="0.6"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.4"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="ButtonCornerSU" BasedOn="{StaticResource ButtonBaseStyle}" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{DynamicResource RegionBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid x:Name="lg_buttonGrid" Margin="-1,-8,-3,-9">
+
+                                <Image x:Name="lg_buttonImage" 
+                        Source="/Views/icons8-add-user-male-60.png" 
+                        Opacity="0.8" 
+                        Width="44" 
+                        Height="67" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True"/>
+                                <Trigger Property="IsPressed" Value="True"/>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Opacity" Value="0.9"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Opacity" Value="0.6"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.4"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
+            <Storyboard x:Key="AccesToSignUp">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_gridSI" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_gridSU" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctLI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.777"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctLI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-139.875"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctSI" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="360"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="80"/>
+                </DoubleAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SignUpForm" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_btUserSI" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="SignUpToSignIn">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_gridSI" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_gridSU" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctSI" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="80"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="640"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctLI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.781"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.248"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctLI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-140.625"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="135.375"/>
+                </DoubleAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SignUpForm" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SignInForm" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_btUserSI" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_btUserSU" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctSI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.989"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctSI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-3.375"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="AccesToSignIn">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_gridSI" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_gridSU" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctSI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.779"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctSI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="140.25"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctLI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.227"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctLI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="139.125"/>
+                </DoubleAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SignInForm" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_btUserSU" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="SignInToSignUp">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_gridSI" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_gridSU" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_btUserSU" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctLI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.225"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.775"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctLI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="139.572"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-139.428"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctSI" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="640"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="80"/>
+                </DoubleAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SignInForm" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lg_btUserSI" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SignUpForm" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctSI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.056"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="lg_rctSI" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                    <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="2.25"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+
+
+        </ResourceDictionary>
+
+    </Window.Resources>
+
+    <Window.DataContext>
+        <!-- Aici setezi DataContext pentru întreaga fereastră -->
+        <ViewModels:VM_LogInWindow/>
+    </Window.DataContext>
+
+
+    <Grid Background="#FFF6F6F6">
+        <Rectangle x:Name="lg_rctLI" HorizontalAlignment="Left" Height="450" Margin="440,0,0,0" Stroke="#FF202020" VerticalAlignment="Center" Width="360" Fill="#FF202020" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="lg_rctSI" HorizontalAlignment="Left" Height="450" Stroke="#FF1B897F" VerticalAlignment="Center" Width="360" Fill="#FF1B897F" Margin="80,0,0,0" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle HorizontalAlignment="Left" Height="450" VerticalAlignment="Center" Width="80" Fill="White">
+            <Rectangle.Stroke>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="Black" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Stroke>
+        </Rectangle>
+
+
+        <Button x:Name="lg_buttonBack" Style="{DynamicResource ButtonBack}" HorizontalAlignment="Left" Margin="13,11,0,0" VerticalAlignment="Top" Background="#FF245C4F" BorderBrush="#FF245C4F" IsCancel="True" RenderTransformOrigin="0.5,0.5" Height="23" Width="40" Command="{Binding BackToStartWindow}">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.223"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+
+        <!--SIGN IN GRID-->
+        <Grid x:Name="lg_gridSI" HorizontalAlignment="Left" Height="94" VerticalAlignment="Center" Width="92" Margin="198,0,0,0">
+
+            <Grid.InputBindings>
+                <MouseBinding Command="{Binding ChangeToSignInCommand}" Gesture="LeftClick" />
+            </Grid.InputBindings>
+
+
+            <Label x:Name="lg_lbSU1" Content="SIGN UP" Margin="413,178,0,0" VerticalAlignment="Top" Background="#FF202020" IsEnabled="False" Foreground="#FFFAFAFA" BorderBrush="#FF202020" Opacity="1" FontSize="16" Height="36" Width="92" HorizontalAlignment="Left"/>
+
+
+            <Image x:Name="lg_phUserSI" HorizontalAlignment="Center" Height="70" VerticalAlignment="Top" Width="54" Source="/Views/icons8-male-user-60.png" RenderTransformOrigin="2.206,1.15"/>
+            <Label x:Name="lg_lbSI" Content="SIGN IN" Margin="0,54,0,0" VerticalAlignment="Top" Background="#FF1B897F" IsEnabled="False" Foreground="#FFFAFAFA" BorderBrush="#FF1B897F" Opacity="1" FontSize="16" Height="36" Width="92"/>
+        </Grid>
+
+        <!--SIGN UP GRID-->
+        <Grid x:Name="lg_gridSU" HorizontalAlignment="Left" Height="107" Margin="565,169,0,0" VerticalAlignment="Top" Width="98">
+
+            <Grid.InputBindings>
+                <MouseBinding Command="{Binding ChangeToSignUpCommand}" Gesture="LeftClick" />
+            </Grid.InputBindings>
+
+            <Image x:Name="lg_phUserSU" HorizontalAlignment="Center" Height="60" VerticalAlignment="Top" Width="66" Source="/Views/icons8-add-user-male-60.png" RenderTransformOrigin="2.206,1.15" Margin="0,5,0,0"/>
+            <TextBlock x:Name="lg_lbSU" HorizontalAlignment="Center" Margin="0,70,0,0" TextWrapping="Wrap" Text="SIGN UP" VerticalAlignment="Top" Foreground="White" FontSize="16" UseLayoutRounding="False" Width="78" Height="27"/>
+        </Grid>
+
+        <Button x:Name="lg_btUserSI" Style="{StaticResource ButtonCornerSi}" 
+        Command="{Binding SignUpToSignInCommand}" 
+        ToolTip="Sign Up" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Height="29" Width="41" Visibility="Hidden"/>
+
+        <Button x:Name="lg_btUserSU" Style="{StaticResource ButtonCornerSU}" Command="{Binding SignInToSignUpCommand}" ToolTip="Sign Up" HorizontalAlignment="Left" Margin="738,10,0,0" VerticalAlignment="Top" Height="44" Width="44" RenderTransformOrigin="3.756,3.095" Visibility="Hidden"/>
+
+        <hc:TextBox x:Name="lg_tbSI" hc:InfoElement.Placeholder="LOGIN" Margin="56,93,78,316" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Foreground="White" CaretBrush="White" Grid.Column="1" Grid.RowSpan="2" Visibility="Hidden"/>
+
+        <!--SIGN IN FORM -->
+        <Grid x:Name="SignInForm" HorizontalAlignment="Left" Height="288" Margin="216,88,0,0" VerticalAlignment="Top" Width="398" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+
+            <TextBlock x:Name="lg_lbSI2" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="SIGN IN" VerticalAlignment="Top" Foreground="White" FontSize="24"/>
+
+            <StackPanel x:Name="sp_usernameSI" Margin="0,0,26,0" Width="300" VerticalAlignment="Top">
+                <hc:TextBox x:Name="lg_tbUsername" hc:InfoElement.Placeholder="USERNAME" Text="{Binding Username, UpdateSourceTrigger=LostFocus}" Margin="0,81,26,0" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Foreground="White" CaretBrush="White" VerticalAlignment="Top"/>
+                <Rectangle x:Name="lg_lineUsername" Height="1" Stroke="White" Width="300" Fill="White"/>
+                <TextBlock Foreground="Red" FontSize="12" Text="{Binding UsernameError, UpdateSourceTrigger=LostFocus}" />
+            </StackPanel>
+
+            <StackPanel x:Name="sp_passwordSI" Margin="26,0,62,0" VerticalAlignment="Top">
+                <!--
+                <hc:PasswordBox x:Name="lg_tbPassword" ShowEyeButton="True" hc:InfoElement.Placeholder="PASSWORD"  Margin="0,141,26,0" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Foreground="White" CaretBrush="White" VerticalAlignment="Top"   LostFocus="PasswordBox_LostFocus"/>
+                -->
+                <PasswordBox x:Name="lg_tbPassword"  Margin="0,141,26,0" Width="300" Background="Transparent" BorderBrush="Transparent" FontSize="16" Foreground="White" CaretBrush="White" VerticalAlignment="Top" LostFocus="PasswordBox_LostFocus" />
+
+                <Rectangle x:Name="lg_linePassword" Height="1" Stroke="White" Width="300" Fill="White"/>
+                <TextBlock Text="{Binding PasswordError, UpdateSourceTrigger=LostFocus}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+            </StackPanel>
+
+            <Button x:Name="lg_buttonNextSI" Style="{DynamicResource ButtonArrow}"  HorizontalAlignment="Left" Margin="318,242,0,0" VerticalAlignment="Top" Background="#FF245C4F" BorderBrush="#FF245C4F" IsCancel="True" RenderTransformOrigin="0.5,0.5" Height="30" Width="79" Command="{Binding SignIn}">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.223"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+
+            <Image x:Name="lg_phGoogle" HorizontalAlignment="Left" Height="31" Margin="12,221,0,0" VerticalAlignment="Top" Width="28" Source="/Views/icons8-google-40.png" RenderTransformOrigin="0.586,1.098"/>
+            <Image x:Name="lg_phTwitter" HorizontalAlignment="Left" Height="31" Margin="76,221,0,0" VerticalAlignment="Top" Width="35" Source="/Views/icons8-twitter-40.png" RenderTransformOrigin="1.771,0.501"/>
+            <Image x:Name="lg_phFacebook" HorizontalAlignment="Left" Height="31" Margin="40,221,0,0" VerticalAlignment="Top" Width="35" Source="/Views/icons8-facebook-f-40.png" RenderTransformOrigin="0.857,0.598"/>
+
+        </Grid>
+
+
+        <!--SIGN UP FORM-->
+        <Grid x:Name="SignUpForm" HorizontalAlignment="Left" Height="376" Margin="216,42,0,0" VerticalAlignment="Top" Width="552" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+
+
+            <TextBlock x:Name="lg_lbSU2" HorizontalAlignment="Left" Margin="7,10,0,0" TextWrapping="Wrap" Text="SIGN UP" VerticalAlignment="Top" Foreground="White" FontSize="24"/>
+
+            <Button x:Name="lg_buttonNextSU" Style="{DynamicResource ButtonArrow}" HorizontalAlignment="Left" Margin="457,334,0,0" VerticalAlignment="Top" Background="#FF245C4F" BorderBrush="#FF245C4F" IsCancel="True" RenderTransformOrigin="0.5,0.5" Height="30" Width="79" Command="{Binding SignUp}">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.223"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+
+            <Image x:Name="lg_phGoogle1" HorizontalAlignment="Left" Height="31" Margin="10,323,0,0" VerticalAlignment="Top" Width="28" Source="/Views/icons8-google-40.png" RenderTransformOrigin="0.586,1.098"/>
+            <Image x:Name="lg_phTwitter1" HorizontalAlignment="Left" Height="31" Margin="74,323,0,0" VerticalAlignment="Top" Width="35" Source="/Views/icons8-twitter-40.png" RenderTransformOrigin="1.771,0.501"/>
+            <Image x:Name="lg_phFacebook1" HorizontalAlignment="Left" Height="31" Margin="38,320,0,0" VerticalAlignment="Top" Width="35" Source="/Views/icons8-facebook-f-40.png" RenderTransformOrigin="0.857,0.598"/>
+            <Grid x:Name="grid" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="74,63,0,0" Height="260" Width="330">
+                <!-- Definirea coloanelor și a liniilor -->
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+
+
+
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0,0,20">
+                    <!-- First Name -->
+                    <!-- Linie sub First Name -->
+                    <hc:TextBox x:Name="lg_tbFirstName" hc:InfoElement.Placeholder="FIRST NAME" 
+                Text="{Binding FirstName, UpdateSourceTrigger=LostFocus}" 
+                Width="299" Background="{x:Null}" BorderBrush="{x:Null}" 
+                FontSize="16" Foreground="White" CaretBrush="White" Height="30"/>
+                    <Rectangle Height="1" Width="300" Fill="White"/>
+                    <TextBlock Text="{Binding FirstNameError, UpdateSourceTrigger=LostFocus}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0,0,20">
+                    <!-- Last Name -->
+                    <hc:TextBox x:Name="lg_tbLastName" hc:InfoElement.Placeholder="LAST NAME" 
+                Text="{Binding LastName, UpdateSourceTrigger=LostFocus}" 
+                Margin="0,0,26,0" Width="272" Background="{x:Null}" BorderBrush="{x:Null}" 
+                FontSize="16" Foreground="White" CaretBrush="White" Height="31"/>
+                    <!-- Linie sub Last Name -->
+                    <Rectangle Height="1" Width="300" Fill="White"/>
+                    <TextBlock Text="{Binding LastNameError, UpdateSourceTrigger=LostFocus}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+
+                </StackPanel>
+
+
+
+                <!-- Username -->
+                <StackPanel Grid.Row="2" Grid.Column="0" Width="300" VerticalAlignment="Top" Margin="0,0,0,20">
+                    <hc:TextBox x:Name="lg_tbUsername2" hc:InfoElement.Placeholder="USERNAME" 
+                    Text="{Binding Username2, UpdateSourceTrigger=LostFocus}" 
+                    Margin="0,0,26,0" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" 
+                    FontSize="16" Foreground="White" CaretBrush="White" VerticalAlignment="Top"/>
+                    <Rectangle x:Name="lg_lineUsername2" Height="1" Stroke="White" Width="300" Fill="White" />
+                    <TextBlock Foreground="Red" FontSize="12" Text="{Binding UsernameError2, UpdateSourceTrigger=LostFocus}" />
+
+
+                </StackPanel>
+
+                <!-- Password -->
+                <StackPanel Grid.Row="3" Grid.Column="0" Width="300" VerticalAlignment="Top" Margin="0,0,0,20">
+                    <hc:PasswordBox x:Name="lg_tbPassword2" ShowEyeButton="True" 
+                        hc:InfoElement.Placeholder="PASSWORD" 
+                      
+                        Margin="0,0,26,0" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" 
+                        FontSize="16" Foreground="White" CaretBrush="White" VerticalAlignment="Top"/>
+                    <Rectangle x:Name="lg_linePassword1" Height="1" Stroke="White" Width="300" Fill="White"/>
+                    <TextBlock Text="{Binding PasswordError2, UpdateSourceTrigger=LostFocus}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+                </StackPanel>
+
+                <!---Email-->
+                <StackPanel Grid.Row="4" Grid.Column="0" Width="300" VerticalAlignment="Top" Margin="0,0,0,20">
+                    <hc:TextBox x:Name="lg_tbEmail" 
+                         hc:InfoElement.Placeholder="EMAIL" 
+                         Text="{Binding Email, UpdateSourceTrigger=LostFocus}"
+                         Margin="0,0,26,0" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" 
+                         FontSize="16" Foreground="White" CaretBrush="White" VerticalAlignment="Top"/>
+                    <Rectangle x:Name="lg_lineEmail" Height="1" Stroke="White" Width="300" Fill="White"/>
+                    <TextBlock Text="{Binding EmailError, UpdateSourceTrigger=LostFocus}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+                </StackPanel>
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+
+</Window>

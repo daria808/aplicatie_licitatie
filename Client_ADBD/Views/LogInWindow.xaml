@@ -416,13 +416,12 @@
             </StackPanel>
 
             <StackPanel x:Name="sp_passwordSI" Margin="26,0,62,0" VerticalAlignment="Top">
-                <!--
-                <hc:PasswordBox x:Name="lg_tbPassword" ShowEyeButton="True" hc:InfoElement.Placeholder="PASSWORD"  Margin="0,141,26,0" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Foreground="White" CaretBrush="White" VerticalAlignment="Top"   LostFocus="PasswordBox_LostFocus"/>
-                -->
-                <PasswordBox x:Name="lg_tbPassword"  Margin="0,141,26,0" Width="300" Background="Transparent" BorderBrush="Transparent" FontSize="16" Foreground="White" CaretBrush="White" VerticalAlignment="Top" LostFocus="PasswordBox_LostFocus" />
 
+
+                <PasswordBox x:Name="lg_tbPassword"  Margin="0,141,26,0" Width="251" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Foreground="White" CaretBrush="White" LostFocus="PasswordBox_LostFocus"  PasswordChanged="PasswordBox_PasswordChanged" SelectionBrush="{x:Null}" Height="14" BorderThickness="0"/>
                 <Rectangle x:Name="lg_linePassword" Height="1" Stroke="White" Width="300" Fill="White"/>
                 <TextBlock Text="{Binding PasswordError, UpdateSourceTrigger=LostFocus}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+
             </StackPanel>
 
             <Button x:Name="lg_buttonNextSI" Style="{DynamicResource ButtonArrow}"  HorizontalAlignment="Left" Margin="318,242,0,0" VerticalAlignment="Top" Background="#FF245C4F" BorderBrush="#FF245C4F" IsCancel="True" RenderTransformOrigin="0.5,0.5" Height="30" Width="79" Command="{Binding SignIn}">
@@ -439,12 +438,13 @@
             <Image x:Name="lg_phGoogle" HorizontalAlignment="Left" Height="31" Margin="12,221,0,0" VerticalAlignment="Top" Width="28" Source="/Views/icons8-google-40.png" RenderTransformOrigin="0.586,1.098"/>
             <Image x:Name="lg_phTwitter" HorizontalAlignment="Left" Height="31" Margin="76,221,0,0" VerticalAlignment="Top" Width="35" Source="/Views/icons8-twitter-40.png" RenderTransformOrigin="1.771,0.501"/>
             <Image x:Name="lg_phFacebook" HorizontalAlignment="Left" Height="31" Margin="40,221,0,0" VerticalAlignment="Top" Width="35" Source="/Views/icons8-facebook-f-40.png" RenderTransformOrigin="0.857,0.598"/>
+            <TextBlock x:Name="tb_placeholderPW"  Height="22" Margin="47,144,130,0" TextWrapping="Wrap" Text="PASSWORD" VerticalAlignment="Top" Width="221" FontSize="16" Foreground="#FFB8B5B5" Visibility="{Binding IsPasswordEmpty, Converter={StaticResource Boolean2VisibilityConverter}}"/>
 
         </Grid>
 
 
         <!--SIGN UP FORM-->
-        <Grid x:Name="SignUpForm" HorizontalAlignment="Left" Height="376" Margin="216,42,0,0" VerticalAlignment="Top" Width="552" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+        <Grid x:Name="SignUpForm" HorizontalAlignment="Left" Height="416" Margin="198,24,0,0" VerticalAlignment="Top" Width="570" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -457,7 +457,7 @@
 
             <TextBlock x:Name="lg_lbSU2" HorizontalAlignment="Left" Margin="7,10,0,0" TextWrapping="Wrap" Text="SIGN UP" VerticalAlignment="Top" Foreground="White" FontSize="24"/>
 
-            <Button x:Name="lg_buttonNextSU" Style="{DynamicResource ButtonArrow}" HorizontalAlignment="Left" Margin="457,334,0,0" VerticalAlignment="Top" Background="#FF245C4F" BorderBrush="#FF245C4F" IsCancel="True" RenderTransformOrigin="0.5,0.5" Height="30" Width="79" Command="{Binding SignUp}">
+            <Button x:Name="lg_buttonNextSU" Style="{DynamicResource ButtonArrow}" HorizontalAlignment="Left" Margin="491,380,0,0" VerticalAlignment="Top" Background="#FF245C4F" BorderBrush="#FF245C4F" IsCancel="True" RenderTransformOrigin="0.5,0.5" Height="30" Width="79" Command="{Binding SignUp}">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -468,10 +468,11 @@
                 </Button.RenderTransform>
             </Button>
 
-            <Image x:Name="lg_phGoogle1" HorizontalAlignment="Left" Height="31" Margin="10,323,0,0" VerticalAlignment="Top" Width="28" Source="/Views/icons8-google-40.png" RenderTransformOrigin="0.586,1.098"/>
-            <Image x:Name="lg_phTwitter1" HorizontalAlignment="Left" Height="31" Margin="74,323,0,0" VerticalAlignment="Top" Width="35" Source="/Views/icons8-twitter-40.png" RenderTransformOrigin="1.771,0.501"/>
-            <Image x:Name="lg_phFacebook1" HorizontalAlignment="Left" Height="31" Margin="38,320,0,0" VerticalAlignment="Top" Width="35" Source="/Views/icons8-facebook-f-40.png" RenderTransformOrigin="0.857,0.598"/>
-            <Grid x:Name="grid" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="74,63,0,0" Height="260" Width="330">
+            <Image x:Name="lg_phGoogle1" HorizontalAlignment="Left" Height="31" Margin="9,378,0,0" VerticalAlignment="Top" Width="28" Source="/Views/icons8-google-40.png" RenderTransformOrigin="0.586,1.098"/>
+            <TextBlock x:Name="tb_placeholderPW2"  Height="22" Margin="151,272,198,0" TextWrapping="Wrap" Text="PASSWORD" VerticalAlignment="Top" Width="221" FontSize="16" Foreground="#FFB8B5B5" Visibility="{Binding IsPasswordEmpty2, Converter={StaticResource Boolean2VisibilityConverter}}"/>
+            <Image x:Name="lg_phTwitter1" HorizontalAlignment="Left" Height="31" Margin="73,378,0,0" VerticalAlignment="Top" Width="35" Source="/Views/icons8-twitter-40.png" RenderTransformOrigin="1.771,0.501"/>
+            <Image x:Name="lg_phFacebook1" HorizontalAlignment="Left" Height="31" Margin="37,375,0,0" VerticalAlignment="Top" Width="35" Source="/Views/icons8-facebook-f-40.png" RenderTransformOrigin="0.857,0.598"/>
+            <Grid x:Name="grid" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,59,0,0" Height="338" Width="295">
                 <!-- Definirea coloanelor și a liniilor -->
 
                 <Grid.RowDefinitions>
@@ -530,25 +531,26 @@
 
                 <!-- Password -->
                 <StackPanel Grid.Row="3" Grid.Column="0" Width="300" VerticalAlignment="Top" Margin="0,0,0,20">
-                    <hc:PasswordBox x:Name="lg_tbPassword2" ShowEyeButton="True" 
-                        hc:InfoElement.Placeholder="PASSWORD" 
-                      
+                    <PasswordBox x:Name="lg_tbPassword2" LostFocus="PasswordBox_LostFocus2" PasswordChanged="PasswordBox_PasswordChanged2" BorderThickness="0"
+
                         Margin="0,0,26,0" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" 
                         FontSize="16" Foreground="White" CaretBrush="White" VerticalAlignment="Top"/>
                     <Rectangle x:Name="lg_linePassword1" Height="1" Stroke="White" Width="300" Fill="White"/>
                     <TextBlock Text="{Binding PasswordError2, UpdateSourceTrigger=LostFocus}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
                 </StackPanel>
 
-                <!---Email-->
+                <!--Email-->
                 <StackPanel Grid.Row="4" Grid.Column="0" Width="300" VerticalAlignment="Top" Margin="0,0,0,20">
                     <hc:TextBox x:Name="lg_tbEmail" 
                          hc:InfoElement.Placeholder="EMAIL" 
                          Text="{Binding Email, UpdateSourceTrigger=LostFocus}"
-                         Margin="0,0,26,0" Width="300" Background="{x:Null}" BorderBrush="{x:Null}" 
-                         FontSize="16" Foreground="White" CaretBrush="White" VerticalAlignment="Top"/>
+                         Margin="0,0,26,0" Width="300" BorderBrush="{x:Null}" 
+                         FontSize="16" Foreground="White" CaretBrush="White" VerticalAlignment="Top" Background="{x:Null}"/>
                     <Rectangle x:Name="lg_lineEmail" Height="1" Stroke="White" Width="300" Fill="White"/>
                     <TextBlock Text="{Binding EmailError, UpdateSourceTrigger=LostFocus}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
                 </StackPanel>
+
+
 
             </Grid>
 

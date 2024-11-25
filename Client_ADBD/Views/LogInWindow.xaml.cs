@@ -58,10 +58,47 @@ namespace Client_ADBD
             {
                 var passwordBox = (PasswordBox)sender;  // Correct custom control casting
                 ((dynamic)this.DataContext).Password = passwordBox.Password;
-                Console.WriteLine(passwordBox.Password);
                // ((dynamic)this.DataContext).Password = ((hc:PasswordBox)sender).Password;
             }
 
         }
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            {
+                var passwordBox = (PasswordBox)sender;
+
+                // Actualizează parola în timp real în ViewModel
+                ((dynamic)this.DataContext).Password = passwordBox.Password;
+
+
+            }
+        }
+
+
+
+        private void PasswordBox_LostFocus2(object sender, RoutedEventArgs e)
+        {
+
+            if (this.DataContext != null)
+            {
+                var passwordBox = (PasswordBox)sender;  // Correct custom control casting
+                ((dynamic)this.DataContext).Password2 = passwordBox.Password;
+                // ((dynamic)this.DataContext).Password = ((hc:PasswordBox)sender).Password;
+            }
+        }
+
+        private void PasswordBox_PasswordChanged2(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            {
+                var passwordBox = (PasswordBox)sender;
+
+                ((dynamic)this.DataContext).Password2 = passwordBox.Password;
+
+
+            }
+        }
+
     }
 }

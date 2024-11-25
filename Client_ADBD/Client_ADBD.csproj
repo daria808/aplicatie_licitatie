@@ -101,6 +101,7 @@
       <DependentUpon>AuctionApp.dbml</DependentUpon>
     </Compile>
     <Compile Include="DatabaseManager.cs" />
+    <Compile Include="Helpers\Convertor.cs" />
     <Compile Include="Helpers\Hash.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Helpers\Validation.cs" />

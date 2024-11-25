@@ -18,8 +18,8 @@ namespace Client_ADBD.ViewModels
         private string _username;
         private string _password;
 
-        private string UsernameError { get; set; }
-        private string PasswordError { get; set; }
+        private string _usernameError;
+        private string _passwordError;  
 
 
         private string _firstName;
@@ -28,12 +28,12 @@ namespace Client_ADBD.ViewModels
         private string _password2;
         private string _email;
 
-       
-        private string FirstNameError {  get; set; }
-        private string LastNameError { get; set; } 
-        private string UsernameError2 {  get; set; }    
-        private string PasswordError2 {  get; set; }
-        private string EmailError { get; set; }
+
+        private string _firstNameError;
+        private string _lastNameError;
+        private string _usernameError2;    
+        private string _passwordError2;
+        private string _emailError;
 
         private string _sigInError;
         private string _sigUpError;
@@ -52,6 +52,9 @@ namespace Client_ADBD.ViewModels
         public ICommand BackToStartWindow {  get; } 
         public ICommand SignIn {  get; }
         public ICommand SignUp { get; }
+
+       public bool IsPasswordEmpty => string.IsNullOrEmpty(Password);
+       public bool IsPasswordEmpty2 => string.IsNullOrEmpty(Password2);
         public VM_LogInWindow()
         {
            
@@ -67,8 +70,8 @@ namespace Client_ADBD.ViewModels
 
         private void AddUser()
         {
-            bool areIncomplete = (_firstName == null || _lastName == null||_username2==null||_password2==null||_email==null||_password==null);
-            bool areErrors = (FirstNameError != null || LastNameError != null || UsernameError2 != null || PasswordError2 != null || EmailError != null);
+            bool areIncomplete = (_firstName == null || _lastName == null||_username2==null||_password2==null||_email==null);
+            bool areErrors = ((!string.IsNullOrEmpty(FirstNameError))|| (!string.IsNullOrEmpty(LastNameError))  || (!string.IsNullOrEmpty(UsernameError2))|| (!string.IsNullOrEmpty(PasswordError2))|| (!string.IsNullOrEmpty(EmailError)));
 
             if (areIncomplete)
             {
@@ -148,6 +151,7 @@ namespace Client_ADBD.ViewModels
                 _password = value;
                 ValidatePassword();
                 OnPropertyChange(nameof(Password));
+                OnPropertyChange(nameof(IsPasswordEmpty));
             }
         }
         public string FirstName
@@ -178,6 +182,7 @@ namespace Client_ADBD.ViewModels
                 _username2 = value;
                 ValidateUsername2();
                 OnPropertyChange(nameof(Username2));
+        
             }
         }
         public string Password2
@@ -188,6 +193,7 @@ namespace Client_ADBD.ViewModels
                 _password2 = value;
                 ValidatePassword2();
                 OnPropertyChange(nameof(Password2));
+                OnPropertyChange(nameof(IsPasswordEmpty2));
             }
         }
         public string Email
@@ -200,125 +206,125 @@ namespace Client_ADBD.ViewModels
                 OnPropertyChange(nameof(Email));
             }
         }
-        //public string FirstNameError
-        //{
-        //    get => _firstNameError;
-        //    set
-        //    {
-        //        _firstNameError = value;
-        //        OnPropertyChange(nameof(FirstNameError));
-        //    }
-        //}
-        //public string LastNameError
-        //{
-        //    get => _lastNameError;
-        //    set
-        //    {
-        //        _lastNameError = value;
-        //        OnPropertyChange(nameof(LastNameError));
-        //    }
-        //}
-        //public string UsernameError
-        //{
-        //    get => _usernameError;
-        //    set
-        //    {
-        //        _usernameError = value;
-        //        OnPropertyChange(nameof(UsernameError));
-        //    }
-        //}
-        //public string PasswordError
-        //{
-        //    get => _passwordError;
-        //    set
-        //    {
-        //        _passwordError = value;
-        //        OnPropertyChange(nameof(PasswordError2));
-        //    }
-        //}
-        //public string UsernameError2
-        //{
-        //    get => _usernameError2;
-        //    set
-        //    {
-        //        _usernameError2 = value;
-        //        OnPropertyChange(nameof(UsernameError2));
-        //    }
-        //}
-        //public string PasswordError2
-        //{
-        //    get => _passwordError2;
-        //    set
-        //    {
-        //        _passwordError2 = value;
-        //        OnPropertyChange(nameof(PasswordError2));
-        //    }
-        //} 
-        //public string EmailError
-        //{
-        //    get => _emailError;
-        //    set
-        //    {
-        //        _emailError = value;
-        //        OnPropertyChange(nameof(EmailError));
-        //    }
-        //}
-        
-        //void ValidateUsername()
-        //{
-        //    // Validare username
-        //    if (!validation.IsValidUsername(Username, out string usernameError))
-        //    {
-        //        UsernameError = usernameError;
-        //    }
-        //    else
-        //    {
-        //        UsernameError = string.Empty;
-        //    }
-        //}
-
-        //void ValidatePassword()
-        //{
-        //    // Validare parola
-        //    if (!validation.IsValidPassword(Password, out string passwordError))
-        //    {
-
-        //        PasswordError = passwordError;
-        //    }
-        //    else
-        //    {
-        //        PasswordError = string.Empty;
-        //    }
-        //}
-
-        private void ValidateUsername()
+        public string FirstNameError
         {
+            get => _firstNameError;
+            set
+            {
+                _firstNameError = value;
+                OnPropertyChange(nameof(FirstNameError));
+            }
+        }
+        public string LastNameError
+        {
+            get => _lastNameError;
+            set
+            {
+                _lastNameError = value;
+                OnPropertyChange(nameof(LastNameError));
+            }
+        }
+        public string UsernameError
+        {
+            get => _usernameError;
+            set
+            {
+                _usernameError = value;
+                OnPropertyChange(nameof(UsernameError));
+            }
+        }
+        public string PasswordError
+        {
+            get => _passwordError;
+            set
+            {
+                _passwordError = value;
+                OnPropertyChange(nameof(PasswordError));
+            }
+        }
+        public string UsernameError2
+        {
+            get => _usernameError2;
+            set
+            {
+                _usernameError2 = value;
+                OnPropertyChange(nameof(UsernameError2));
+            }
+        }
+        public string PasswordError2
+        {
+            get => _passwordError2;
+            set
+            {
+                _passwordError2 = value;
+                OnPropertyChange(nameof(PasswordError2));
+            }
+        }
+        public string EmailError
+        {
+            get => _emailError;
+            set
+            {
+                _emailError = value;
+                OnPropertyChange(nameof(EmailError));
+            }
+        }
+
+        void ValidateUsername()
+        {
+            // Validare username
             if (!validation.IsValidUsername(Username, out string usernameError))
             {
                 UsernameError = usernameError;
             }
             else
             {
-                //  UsernameError = string.Empty;
                 UsernameError = string.Empty;
             }
         }
 
-        private void ValidatePassword()
-        { 
-
+        void ValidatePassword()
+        {
+            // Validare parola
             if (!validation.IsValidPassword(Password, out string passwordError))
             {
-                //PasswordError = passwordError;
-                PasswordError= passwordError;
+
+                PasswordError = passwordError;
             }
             else
             {
-               // PasswordError = string.Empty;
                 PasswordError = string.Empty;
             }
-
         }
+
+        //private void ValidateUsername()
+        //{
+        //    if (!validation.IsValidUsername(Username, out string usernameError))
+        //    {
+        //        UsernameError = usernameError;
+        //    }
+        //    else
+        //    {
+        //        //  UsernameError = string.Empty;
+        //        UsernameError = string.Empty;
+        //    }
+        //}
+
+        //private void ValidatePassword()
+        //{ 
+
+        //    if (!validation.IsValidPassword(Password, out string passwordError))
+        //    {
+        //        //PasswordError = passwordError;
+        //        PasswordError= passwordError;
+        //    }
+        //    else
+        //    {
+        //       // PasswordError = string.Empty;
+        //        PasswordError = string.Empty;
+        //    }
+
+        //}
 
         private void ValidateFisrtName()
         {

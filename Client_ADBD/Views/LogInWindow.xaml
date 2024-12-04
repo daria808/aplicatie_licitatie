@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:Client_ADBD"
         xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
         xmlns:helpers="clr-namespace:Client_ADBD.Helpers"
+  
         mc:Ignorable="d"
         Title="LogInWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen"

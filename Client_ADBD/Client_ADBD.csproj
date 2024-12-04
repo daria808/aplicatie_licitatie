@@ -105,16 +105,28 @@
     <Compile Include="Helpers\Hash.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Helpers\Validation.cs" />
+    <Compile Include="Models\Auction.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="ViewModels\VM_Account.cs" />
+    <Compile Include="ViewModels\VM_AuctionControler.cs" />
     <Compile Include="ViewModels\VM_Base.cs" />
     <Compile Include="ViewModels\VM_ErrorWindow.cs" />
     <Compile Include="ViewModels\VM_LogInWindow.cs" />
+    <Compile Include="ViewModels\VM_MainPage.cs" />
+    <Compile Include="ViewModels\VM_MainWindow.cs" />
     <Compile Include="ViewModels\VM_StartWindow.cs" />
+    <Compile Include="Views\AccountPage.xaml.cs">
+      <DependentUpon>AccountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ErrorWindow.xaml.cs">
       <DependentUpon>ErrorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LogInWindow.xaml.cs">
       <DependentUpon>LogInWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -126,11 +138,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\UserControl\AuctionControler.xaml.cs">
+      <DependentUpon>AuctionControler.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\AccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ErrorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LogInWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -141,6 +164,10 @@
     <Page Include="Views\StartWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControl\AuctionControler.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +231,47 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\photos\icons8-add-user-male-60.png" />
+    <Resource Include="Views\photos\icons8-arrow-40.png" />
+    <Resource Include="Views\photos\icons8-arrow-40_r.png" />
+    <Resource Include="Views\photos\icons8-facebook-f-40.png" />
+    <Resource Include="Views\photos\icons8-google-40.png" />
+    <Resource Include="Views\photos\icons8-male-user-60.png" />
+    <Resource Include="Views\photos\icons8-right-arrow-40.png" />
+    <Resource Include="Views\photos\icons8-twitter-40.png" />
+    <Resource Include="Views\photos\icons8-user-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\photos\captcha-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\UserControl\2a062e4931f8716c9fa6c9a2c20fec59.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\logo.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\LOGO2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\logo2_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\statistics.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\buy.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\sell.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\about.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\account.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\CommunityToolkit.Mvvm.8.3.2\build\CommunityToolkit.Mvvm.targets" Condition="Exists('..\packages\CommunityToolkit.Mvvm.8.3.2\build\CommunityToolkit.Mvvm.targets')" />

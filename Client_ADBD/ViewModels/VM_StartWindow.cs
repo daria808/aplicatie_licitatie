@@ -21,8 +21,6 @@ namespace Client_ADBD.ViewModels
 
         private void OnNavigate()
         {
-         
-            
             NavigationService.NavigateTo("LogInWindow");
         }
     }

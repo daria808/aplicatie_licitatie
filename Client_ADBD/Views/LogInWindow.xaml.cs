@@ -16,13 +16,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Client_ADBD.Helpers;
+using HandyControl.Controls;
 
 namespace Client_ADBD
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LogInWindow : Window
+    public partial class LogInWindow : System.Windows.Window    
     {
         private VM_LogInWindow viewModel;
         public LogInWindow()
@@ -30,6 +31,9 @@ namespace Client_ADBD
             InitializeComponent();
             viewModel= new VM_LogInWindow();
             DataContext = viewModel;
+
+            viewModel.RequestPasswordReset += ResetPasswordBoxes;
+
             HandleStoryboardTransitions();
         }
 
@@ -56,7 +60,7 @@ namespace Client_ADBD
          
             if (this.DataContext != null)
             {
-                var passwordBox = (PasswordBox)sender;  // Correct custom control casting
+                var passwordBox = (System.Windows.Controls.PasswordBox)sender;  // Correct custom control casting
                 ((dynamic)this.DataContext).Password = passwordBox.Password;
                // ((dynamic)this.DataContext).Password = ((hc:PasswordBox)sender).Password;
             }
@@ -66,7 +70,7 @@ namespace Client_ADBD
         {
             if (this.DataContext != null)
             {
-                var passwordBox = (PasswordBox)sender;
+                var passwordBox = (System.Windows.Controls.PasswordBox)sender;
 
                 // Actualizează parola în timp real în ViewModel
                 ((dynamic)this.DataContext).Password = passwordBox.Password;
@@ -74,30 +78,31 @@ namespace Client_ADBD
 
             }
         }
-
-
-
         private void PasswordBox_LostFocus2(object sender, RoutedEventArgs e)
         {
 
             if (this.DataContext != null)
             {
-                var passwordBox = (PasswordBox)sender;  // Correct custom control casting
+                var passwordBox = (System.Windows.Controls.PasswordBox)sender;  // Correct custom control casting
                 ((dynamic)this.DataContext).Password2 = passwordBox.Password;
                 // ((dynamic)this.DataContext).Password = ((hc:PasswordBox)sender).Password;
             }
         }
-
         private void PasswordBox_PasswordChanged2(object sender, RoutedEventArgs e)
         {
             if (this.DataContext != null)
             {
-                var passwordBox = (PasswordBox)sender;
+                var passwordBox = ( System.Windows.Controls.PasswordBox)sender;
 
                 ((dynamic)this.DataContext).Password2 = passwordBox.Password;
 
 
             }
+        }
+        private void ResetPasswordBoxes()
+        {
+            lg_tbPassword.Password = string.Empty;
+            lg_tbPassword.Password = string.Empty; 
         }
 
     }

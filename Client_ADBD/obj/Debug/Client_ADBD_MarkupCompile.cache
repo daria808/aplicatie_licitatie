@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\laris\Desktop\Client_ADBD\Client_ADBD\App.xaml
-4-1700113516
+72014302247
 
-19-1031191684
+281177317973
 28874184172
-Views\ErrorWindow.xaml;Views\LogInWindow.xaml;Views\MainWindow.xaml;Views\StartWindow.xaml;
+Views\AccountPage.xaml;Views\ErrorWindow.xaml;Views\LogInWindow.xaml;Views\MainPage.xaml;Views\MainWindow.xaml;Views\StartWindow.xaml;Views\UserControl\AuctionControler.xaml;
 
 False
 

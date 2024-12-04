@@ -21,13 +21,6 @@
         <Grid>
 
             <Border Background="#FFDDDDDD" Height="30" VerticalAlignment="Top" >
-                <!--BorderBrush="Black" BorderThickness="0.5">-->
-                <!--<Border.BorderBrush>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="Black" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.BorderBrush>-->
             </Border>
 
             <Button Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Width="26" Height="26"

@@ -52,9 +52,10 @@ namespace Client_ADBD.ViewModels
         public ICommand BackToStartWindow {  get; } 
         public ICommand SignIn {  get; }
         public ICommand SignUp { get; }
-
        public bool IsPasswordEmpty => string.IsNullOrEmpty(Password);
        public bool IsPasswordEmpty2 => string.IsNullOrEmpty(Password2);
+
+        public event Action RequestPasswordReset;
         public VM_LogInWindow()
         {
            
@@ -68,6 +69,10 @@ namespace Client_ADBD.ViewModels
            
         }
 
+        private void TriggerPasswordReset()
+        {
+            RequestPasswordReset?.Invoke();
+        }
         private void AddUser()
         {
             bool areIncomplete = (_firstName == null || _lastName == null||_username2==null||_password2==null||_email==null);
@@ -120,10 +125,30 @@ namespace Client_ADBD.ViewModels
         }
         private void ChangeToSignIn2()
         {
+            Username = string.Empty;
+            Password = string.Empty;
+            UsernameError = string.Empty;
+            PasswordError = string.Empty;
+
+            TriggerPasswordReset();
+      
             StoryBoardSI2?.Invoke(this, EventArgs.Empty);
         }
         private void ChangeToSignUp2()
         {
+            FirstName = string.Empty;
+            FirstNameError = string.Empty;  
+            LastName = string.Empty;
+            LastNameError = string.Empty;
+            Username2 = string.Empty;
+            UsernameError2 = string.Empty;
+            Password2 = string.Empty;
+            PasswordError2 = string.Empty;
+            Email= string.Empty;
+            EmailError = string.Empty;
+
+            TriggerPasswordReset();
+            
             StoryBoardSU2?.Invoke(this, EventArgs.Empty);
         }
         private void GoToStartWindow()
@@ -296,35 +321,6 @@ namespace Client_ADBD.ViewModels
                 PasswordError = string.Empty;
             }
         }
-
-        //private void ValidateUsername()
-        //{
-        //    if (!validation.IsValidUsername(Username, out string usernameError))
-        //    {
-        //        UsernameError = usernameError;
-        //    }
-        //    else
-        //    {
-        //        //  UsernameError = string.Empty;
-        //        UsernameError = string.Empty;
-        //    }
-        //}
-
-        //private void ValidatePassword()
-        //{ 
-
-        //    if (!validation.IsValidPassword(Password, out string passwordError))
-        //    {
-        //        //PasswordError = passwordError;
-        //        PasswordError= passwordError;
-        //    }
-        //    else
-        //    {
-        //       // PasswordError = string.Empty;
-        //        PasswordError = string.Empty;
-        //    }
-
-        //}
 
         private void ValidateFisrtName()
         {

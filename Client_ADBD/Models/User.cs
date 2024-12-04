@@ -6,14 +6,44 @@ using System.Threading.Tasks;
 
 namespace Client_ADBD.Models
 {
-    public class User
+    public enum role
     {
-        public Guid Id { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }  // Parola ar trebui să fie hash-uită înainte de a o salva.
-        public string email { get; set; }
-        public DateTime date_created { get; set; }
-        public DateTime last_login { get; set; }
-        public decimal balance { get; set; }
+        admin,
+        bidder,
+        customer
+    }
+
+    public class Users
+    {
+        public int _id { get; set; }
+
+        public string _fistName { get; set; }
+        public string _lastName { get; set; }
+        public string _username { get; set; }
+        public string _email { get; set; }
+        public DateTime? _dateCreated { get; set; }
+        public DateTime? _lastLogin { get; set; }
+        public decimal? _balance { get; set; }
+
+        bool _isAdmin { get; set; }
+        bool _isBidder { get; set; }
+        bool _isCustomer {  get; set; } 
+
+
+        public Users(int id, string username, string email, DateTime? date_created, DateTime? last_login, decimal? balance)
+        {
+            _id = id;
+            _username = username;
+            _email = email;
+            _dateCreated = date_created;
+            _lastLogin = last_login;
+            _balance = balance ;
+
+            _isAdmin = false;
+            _isBidder = false;
+            _isCustomer = true;
+        }
+
+
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Client_ADBD.Helpers;
+using Client_ADBD.Models;
 
 namespace Client_ADBD
 {
@@ -60,8 +61,7 @@ namespace Client_ADBD
             _dbContext.Users.InsertOnSubmit(newUser);
             _dbContext.SubmitChanges(); 
         }
-
-        public static bool VerifyUserCredentials(string username, string password)
+        static public bool VerifyUserCredentials(string username, string password)
         {
             if (_dbContext == null)
             {
@@ -79,5 +79,18 @@ namespace Client_ADBD
 
             return Hash.VerifyPassword(password, user.password, user.salt);
         }
+        static public List<Users> GetUsers()
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            List<Users> users = _dbContext.Users.Select(u => new Users(u.id_user, u.username, u.email, u.created_at, u.last_login, u.balance)).ToList();
+
+            return users;
+
+        }
+
     }
 }

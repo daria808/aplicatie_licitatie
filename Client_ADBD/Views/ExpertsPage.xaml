@@ -1,0 +1,77 @@
+﻿<Page x:Class="Client_ADBD.Views.ExpertsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client_ADBD.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ExpertsPage">
+
+    <!-- Adăugare ScrollViewer -->
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <StackPanel Orientation="Vertical" Margin="20">
+            <Button Name="btnBack" Command="{Binding BackCommand}" Padding="5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="White" BorderThickness="0" Height="53" Width="84">
+                <Image Source="undo.png" Width="64" Height="43" />
+            </Button>
+
+            <!-- Titlul secțiunii -->
+            <TextBlock Text="EXPERȚI" FontSize="24" FontWeight="Bold" Margin="0,20,0,10" FontFamily="Times New Roman" />
+
+            <!-- Expert 1 -->
+            <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,10">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Image Source="/Views/maria.png" Width="100" Height="100" Margin="0,0,10,0" />
+                    <StackPanel>
+                        <TextBlock Text="Maria Muscalu Albani" FontWeight="Bold" FontSize="16" FontFamily="Times New Roman" />
+                        <TextBlock Width="800" FontFamily="Times New Roman" FontSize="15" Text="Istoric de artă, curator a numeroase expoziții de artă contemporană, curator al expoziției permanente „Corneliu Baba” din cadrul Muzeului de Artă Timișoara, monograf al artistului Corneliu Baba" TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Expert 2 -->
+            <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,10">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Image Source="/Views/ana.jpeg" Width="100" Height="100" Margin="0,0,10,0" />
+                    <StackPanel>
+                        <TextBlock Text="Ana Andreescu" FontFamily="Times New Roman" FontWeight="Bold" FontSize="16" />
+                        <TextBlock Width="800" FontFamily="Times New Roman" FontSize="15" Text="Ex-muzeograf la Oficiul pentru Patrimoniu Cultural al Municipiului București și director al Direcției Cultură Scrisă - Biblioteci, fost director în Ministerul Culturii la Direcția Carte. Distinsă în 2013 cu Ordinul Meritul Cultural în grad de Cavaler; expert atestat de Ministerul Culturii în carte veche românească și străină" TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Expert 3 -->
+            <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,10">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Image Source="/Views/robert.jpg" Width="100" Height="100" Margin="0,0,10,0" />
+                    <StackPanel>
+                        <TextBlock Text="Robert Strebeli" FontFamily="Times New Roman" FontWeight="Bold" FontSize="16" />
+                        <TextBlock Width="800" FontFamily="Times New Roman" FontSize="15" Text="Istoric de artă, specialist în conservarea bunurilor din patrimoniul cultural național, expert atestat de Ministerul Culturii în arta românească de secol XX, în special Școala de la Baia Mare" TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Expert 4 -->
+            <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,10">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Image Source="/Views/ioana.png" Width="100" Height="100" Margin="0,0,10,0" />
+                    <StackPanel>
+                        <TextBlock Text="Dr. Ioana Gabriela Beldiman" FontFamily="Times New Roman" FontWeight="Bold" FontSize="16" />
+                        <TextBlock Width="800" FontFamily="Times New Roman" FontSize="15" Text="Conferențiar univ. șef catedră Istoria și Teoria Artei a Universității Naționale de Arte București, muzeograf și șef secție Muzeul Național de Artă al României (1993 – 1997), curator a numeroase expoziții muzeale, expert pictură românească și europeană sf. sec. XIX – înc. sec. XX, în special Nicolae Grigorescu" TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Expert 5 -->
+            <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,10">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Image Source="/Views/carol.jpg" Width="100" Height="100" Margin="0,0,10,0" />
+                    <StackPanel>
+                        <TextBlock Text="Prof. univ. dr. Carol Căpiță" FontFamily="Times New Roman" FontWeight="Bold" FontSize="16" />
+                        <TextBlock Width="800" FontFamily="Times New Roman" FontSize="15" Text="Arheolog cu experiență de trei decenii în arheologia preistorică și clasică, autor a numeroase studii de specialitate în domeniul arheologiei și al antropologiei, specialist artă preistorică, cu precădere artă africană și asiatică" TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

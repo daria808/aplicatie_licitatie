@@ -13,13 +13,13 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Client_ADBD.ViewModels
 {
-    internal class VM_LogInWindow:VM_Base
+    internal class VM_LogInWindow : VM_Base
     {
         private string _username;
         private string _password;
 
         private string _usernameError;
-        private string _passwordError;  
+        private string _passwordError;
 
 
         private string _firstName;
@@ -31,7 +31,7 @@ namespace Client_ADBD.ViewModels
 
         private string _firstNameError;
         private string _lastNameError;
-        private string _usernameError2;    
+        private string _usernameError2;
         private string _passwordError2;
         private string _emailError;
 
@@ -41,7 +41,7 @@ namespace Client_ADBD.ViewModels
         public ICommand ChangeToSignInCommand { get; }
         public event EventHandler StoryBoardSI;
 
-        public ICommand ChangeToSignUpCommand {  get; }
+        public ICommand ChangeToSignUpCommand { get; }
         public event EventHandler StoryBoardSU;
 
         public ICommand SignUpToSignInCommand { get; }
@@ -49,16 +49,16 @@ namespace Client_ADBD.ViewModels
 
         public ICommand SignInToSignUpCommand { get; }
         public event EventHandler StoryBoardSU2;
-        public ICommand BackToStartWindow {  get; } 
-        public ICommand SignIn {  get; }
+        public ICommand BackToStartWindow { get; }
+        public ICommand SignIn { get; }
         public ICommand SignUp { get; }
-       public bool IsPasswordEmpty => string.IsNullOrEmpty(Password);
-       public bool IsPasswordEmpty2 => string.IsNullOrEmpty(Password2);
+        public bool IsPasswordEmpty => string.IsNullOrEmpty(Password);
+        public bool IsPasswordEmpty2 => string.IsNullOrEmpty(Password2);
 
         public event Action RequestPasswordReset;
         public VM_LogInWindow()
         {
-           
+
             ChangeToSignInCommand = new RelayCommand(ChangeToSignIn);
             ChangeToSignUpCommand = new RelayCommand(ChangeToSignUp);
             SignUpToSignInCommand = new RelayCommand(ChangeToSignIn2);
@@ -66,7 +66,7 @@ namespace Client_ADBD.ViewModels
             BackToStartWindow = new RelayCommand(GoToStartWindow);
             SignIn = new RelayCommand(VerifyCredentials);
             SignUp = new RelayCommand(AddUser);
-           
+
         }
 
         private void TriggerPasswordReset()
@@ -75,8 +75,8 @@ namespace Client_ADBD.ViewModels
         }
         private void AddUser()
         {
-            bool areIncomplete = (_firstName == null || _lastName == null||_username2==null||_password2==null||_email==null);
-            bool areErrors = ((!string.IsNullOrEmpty(FirstNameError))|| (!string.IsNullOrEmpty(LastNameError))  || (!string.IsNullOrEmpty(UsernameError2))|| (!string.IsNullOrEmpty(PasswordError2))|| (!string.IsNullOrEmpty(EmailError)));
+            bool areIncomplete = (_firstName == null || _lastName == null || _username2 == null || _password2 == null || _email == null);
+            bool areErrors = ((!string.IsNullOrEmpty(FirstNameError)) || (!string.IsNullOrEmpty(LastNameError)) || (!string.IsNullOrEmpty(UsernameError2)) || (!string.IsNullOrEmpty(PasswordError2)) || (!string.IsNullOrEmpty(EmailError)));
 
             if (areIncomplete)
             {
@@ -89,14 +89,31 @@ namespace Client_ADBD.ViewModels
             else
             {
                 DatabaseManager.AddUser(FirstName, LastName, Username2, Password2, Email);
-                NavigationService.NavigateTo("MainWindow");
+                var user = (new DatabaseManager()).GetUsers().FirstOrDefault(u => u._username == Username2);
+                if (user != null)
+                {
+                    CurrentUser.User = user;
+
+                    if ((new DatabaseManager()).IsUserAdmin(user._username) == true)
+                    {
+                        NavigationService.NavigateTo("AdminWindow");
+                    }
+                    else
+                    {
+                        NavigationService.NavigateTo("MainWindow");
+                    }
+                }
+                else
+                {
+                    NavigationService.OpenWindow("ErrorWindow", "Utilizatorul nu a fost găsit în LogInWindow!");
+                }
             }
         }
         private void VerifyCredentials()
         {
             bool areIncomplete = (_username == null || _password == null);
-            bool areErros = (!string.IsNullOrEmpty(UsernameError)|| !string.IsNullOrEmpty(PasswordError));
-            
+            bool areErros = (!string.IsNullOrEmpty(UsernameError) || !string.IsNullOrEmpty(PasswordError));
+
             if (areIncomplete)
             {
                 NavigationService.OpenWindow("ErrorWindow", "Câmpuri incomplete!");
@@ -104,20 +121,33 @@ namespace Client_ADBD.ViewModels
             else if (areErros)
             {
                 NavigationService.OpenWindow("ErrorWindow", "Date invalide!");
-            }  
-            else if(DatabaseManager.VerifyUserCredentials(Username,Password))
-            {
-                NavigationService.NavigateTo("MainWindow");
             }
-            else
+            else if (DatabaseManager.VerifyUserCredentials(Username, Password))
             {
-                NavigationService.OpenWindow("ErrorWindow", "Credentiale invalide!");
+                var user = (new DatabaseManager()).GetUsers().FirstOrDefault(u => u._username == Username);
+                if (user != null)
+                {
+                    CurrentUser.User = user;
+
+                    if ((new DatabaseManager()).IsUserAdmin(user._username) == true)
+                    {
+                        NavigationService.NavigateTo("AdminWindow");
+                    }
+                    else
+                    {
+                        NavigationService.NavigateTo("MainWindow");
+                    }
+                }
+                else
+                {
+                    NavigationService.OpenWindow("ErrorWindow", "Utilizatorul nu a fost găsit!");
+                }
             }
 
         }
         private void ChangeToSignIn()
         {
-            StoryBoardSI?.Invoke(this, EventArgs.Empty);    
+            StoryBoardSI?.Invoke(this, EventArgs.Empty);
         }
         private void ChangeToSignUp()
         {
@@ -131,24 +161,24 @@ namespace Client_ADBD.ViewModels
             PasswordError = string.Empty;
 
             TriggerPasswordReset();
-      
+
             StoryBoardSI2?.Invoke(this, EventArgs.Empty);
         }
         private void ChangeToSignUp2()
         {
             FirstName = string.Empty;
-            FirstNameError = string.Empty;  
+            FirstNameError = string.Empty;
             LastName = string.Empty;
             LastNameError = string.Empty;
             Username2 = string.Empty;
             UsernameError2 = string.Empty;
             Password2 = string.Empty;
             PasswordError2 = string.Empty;
-            Email= string.Empty;
+            Email = string.Empty;
             EmailError = string.Empty;
 
             TriggerPasswordReset();
-            
+
             StoryBoardSU2?.Invoke(this, EventArgs.Empty);
         }
         private void GoToStartWindow()
@@ -207,7 +237,7 @@ namespace Client_ADBD.ViewModels
                 _username2 = value;
                 ValidateUsername2();
                 OnPropertyChange(nameof(Username2));
-        
+
             }
         }
         public string Password2
@@ -334,7 +364,8 @@ namespace Client_ADBD.ViewModels
             }
         }
 
-        private void ValidateLastName() {
+        private void ValidateLastName()
+        {
             if (!validation.IsValidName(LastName, out string lastNameError))
             {
                 LastNameError = lastNameError;
@@ -381,6 +412,6 @@ namespace Client_ADBD.ViewModels
                 EmailError = string.Empty;
             }
         }
-        
+
     }
 }

@@ -1,0 +1,84 @@
+﻿<Page x:Class="Client_ADBD.Views.RegulationsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client_ADBD.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegulationsPage">
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <StackPanel Margin="20" >
+                <!-- Back Button -->
+                <Button Name="btnBack" Padding="5" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}" Background="White" BorderThickness="0" Height="40" Width="65">
+                    <Image Source="undo.png" Width="58" Height="36" />
+                </Button>
+
+                <!-- Titlul principal -->
+                <TextBlock Text="REGULAMENT DE LICITARE"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           TextAlignment="Center"
+                           FontFamily="Times New Roman"
+                           Margin="0,10,0,30"/>
+
+                <!-- Conținut -->
+                <StackPanel>
+                    <TextBlock Text="1.1 Vânzarea prin licitație a loturilor de artă sau de obiect de colecție este organizată de un operator economic autorizat de Ministerul Culturii din jurisdicția în care acesta funcționează, companie a grupului AuctionPro, ce operează și are dreptul de a opera sub denumirea AuctionPro, (“AuctionPro” sau „Casa”). Licitația se desfășoară la sediul operatorului economic autorizat sau într-o altă locație anunțată în prealabil, fiind condusă de unul sau mai mulţi reprezentanţi ai AuctionPro (ce poartă denumirea de licitatori sau comisari de licitație)."
+                               TextWrapping="Wrap"
+                               FontFamily="Times New Roman"
+                               Margin="0,10" FontSize="14"/>
+
+                    <TextBlock Text="1.2 În România licitațiile se organizează de către AuctionPro Holding SRL, autorizată sub nr. 496/2022 ori A10 by AuctionPro SRL, autorizată sub nr. 476/24.11.2020, legea aplicabilă fiind legea română; în Bulgaria licitațiile se organizează de către AuctionPro Bulgaria LTD, autorizată sub nr. 207162373/17.11.2022, legea aplicabilă fiind legea bulgărească; în Croația licitațiile se organizează de către AuctionPro Croatia DOO, autorizată sub nr. MBS 081471806/9.11.2022, legea aplicabilă fiind legea croată."
+                               TextWrapping="Wrap"
+                               FontFamily="Times New Roman"
+                               Margin="0,10" FontSize="14"/>
+
+                    <TextBlock Text="1.3  AuctionPro poate organiza unele licitații exclusiv online, fără medierea unui comisar de licitație; aceste licitații online sau „timed online” reproduc în online desfășurarea licitației fizice și li se aplică, de principiu, aceleași reguli de licitare, precum și anumite reguli speciale, prevăzute la art. 11."
+                               TextWrapping="Wrap"
+                               FontFamily="Times New Roman"
+                               Margin="0,10" FontSize="14"/>
+
+                    <TextBlock Text="1.4  Unele licitații pot fi organizate în regim de duplex, adică în două (sau mai multe) săli de licitație, aflate la distanță una de alta, dar asociate procedural și tehnologic, prin software specific și transmisie audio-video, încât să funcționeze unitar, conform Regulamentului de Licitare, precum și art. 9.4., care prevede câteva reguli speciale."
+                               TextWrapping="Wrap"
+                               FontFamily="Times New Roman"
+                               Margin="0,10" FontSize="14"/>
+
+                    <TextBlock Text="2  Deponenţii, prin contractul semnat cu AuctionPro, garantează că lotul pe care îl consignează în vederea vânzării prin licitaţie le aparţine, fiind proprietari, ori că au dreptul de a-l vinde. De asemenea, deponentul va fi răspunzător contractual direct față de adjudecatar, în orice situație care conduce la desfacerea ulterioară a vânzării, urmând să îl despăgubească pe acesta pentru prejudiciul produs. Deponentul își asumă prin contractul de consignație că a pus la dispoziția AuctionPro toate documentele ce conferă juridic deponentului dreptul de a dispune prin vânzare de bunul consignat."
+                               TextWrapping="Wrap"
+                               FontFamily="Times New Roman"
+                               Margin="0,10" FontSize="14"/>
+
+                    <TextBlock Text="3 Catalogul de licitaţie prevede, de regulă, intervalul de estimare a valorii obiectului, fără a indica preţul de pornire al licitaţiei, în cazul obiectelor de artă, respectiv prețul de pornire al licitației obiectului, fără a indica intervalul de estimare a valorii, în cazul obiectelor de colecție. În cazul anumitor obiecte de colecție (precum ceasurile, gențile, obiectele de design, mașinile de colecție), alături de prețul de pornire poate fi indicat un preț de listă; acesta referă la prețul la care alte exemplare ale ediției limitate a obiectului de colecție pot fi găsite la vânzare în magazine oficiale ale artistului/producătorului ori second-hand pe website-uri internaționale de referință pentru tipul de obiect de colecție."
+                               TextWrapping="Wrap"
+                               FontFamily="Times New Roman"
+                               Margin="0,10" FontSize="14"/>
+
+                    <TextBlock Text="4  Taxa de licitaţie variază de la o jurisdicție la alta, funcție de costurile de organizare de piață. În Croația este de 22% din prețul de adjudecare; în România taxa este de 20% din preţul de adjudecare; în Bulgaria taxa este de 18% din prețul de adjudecare. Membrii AuctionPro, deţinători de card de membru AuctionPro Clasic, beneficiază de o reducere a taxei (la 20% în Croația, la 18% în România, la 16,5% în Bulgaria), dacă au cumulat o valoare de adjudecare mai mare de 100.000 euro. "
+                               TextWrapping="Wrap"
+                               FontFamily="Times New Roman"
+                               Margin="0,10" FontSize="14"/>
+
+                    <TextBlock Text="5  Uneori licitațiile generale organizate de AuctionPro găzduiesc unul sau mai multe loturi care se vând în scop caritabil. De regulă vânzării acestor loturi li se aplică regulile generale de licitație. Loturile caritabile din licitațiile generale vor fi, de regulă, marcate cu un logo distinctiv reprezentând o inimă roșie. Atunci când licitațiile găzduiesc o întreagă secțiune caritabilă ori când întreaga vânzare prin licitație are scop caritabil, licitației ori secțiunilor caritabile li se aplică următoarele reguli speciale. "
+                               TextWrapping="Wrap"
+                               FontFamily="Times New Roman"
+                               Margin="0,10" FontSize="14"/>
+
+                    <TextBlock Text="6 Potrivit legii, bunurile culturale creaţie a autorilor în viață se pot exporta definitiv sau temporar fără autorizație/licență/certificat de export, urmând să se ateste în faţa autorităţilor competențe faptul că respectivele bunuri sunt opere create de autori în viaţă. În acest scop, AuctionPro poate elibera, gratuit, adeverinţe, la solicitarea cumpărătorului."
+                               TextWrapping="Wrap"
+                               FontFamily="Times New Roman"
+                               Margin="0,10" FontSize="14"/>
+
+                    <TextBlock Text="7 Cumpărătorul poate contesta autenticitatea unui obiect de artă adjudecat prin comunicarea către AuctionPro a unei contestaţii scrise motivate, însoţite de o opinie scrisă a unui expert acreditat de Ministerul Culturii, general recunoscut de comunitatea profesională drept competent în opera artistului a cărui paternitate face obiectul contestaţiei şi beneficiind, în accepţiunea generală, de o bună reputaţie. În situația în care bunul cultural a fost adjudecat într-o jurisdicție în care experții de artă nu sunt acreditați de Ministerul Culturii ori de o altă autoritate publică, contestația scrisă motivată va fi însoțită de opinia scrisă motivată a unui profesionist specializat în opera artistului și în perioada/tehnica în discuție, recunoscut ca atare de comunitatea profesională. AuctionPro are dreptul de a produce, în termen de 3 luni de la recepţionarea contestaţiei, o contraexpertiză a unui expert beneficiind de un nivel similar de competenţă şi reputaţie. Pentru a evita confuzia, AuctionPro marchează fiecare dintre loturile livrate cu cel puțin un element de siguranţă (timbru purtător al unui cod numeric unic, ireproductibil şi autodistructiv în caz de încercare de desprindere, ce se montează pe verso-ul lotului ori pe certificatul de vânzare ce îl însoțește - atunci când acesta se eliberează în variantă tipărită), probă făcând prin raportare la exemplarul secund al timbrului și compararea lotului cu fotografia conținută în certificatul de vânzare și arhiva fotografică aferentă lotului."
+                               TextWrapping="Wrap"
+                               FontFamily="Times New Roman"
+                               Margin="0, 10" FontSize="14"/>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Page>

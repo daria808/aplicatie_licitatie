@@ -8,30 +8,49 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Client_ADBD.Helpers;
+using Client_ADBD.Views;
+using System.Windows.Controls;
 
 namespace Client_ADBD.ViewModels
 {
     internal class VM_AuctionControler:VM_Base
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Location { get; set; }
         public string Status { get; set; }
+        public int Number {  get; set; }    
 
         private string _timeLeft;
-
         public ICommand NavigateToAuctionDetailsCommand {  get; }
 
         public VM_AuctionControler() 
         {
-            NavigateToAuctionDetailsCommand = new RelayCommand(GoToAuctionWindow);
+            NavigateToAuctionDetailsCommand = new RelayCommand(GoToAuctionPage);
         }
 
-        private void GoToAuctionWindow()
+        /// <summary>
+        /// MODIFICAT!!!
+        /// </summary>
+        private void GoToAuctionPage()
         {
-            NavigationService.OpenWindow("ErrorWindow","Postare");
-        
+            //NavigationService.OpenWindow("ErrorWindow","Postare");
+
+            //var a=DatabaseManager.GetAuctionByName(Name);
+            var a = DatabaseManager.GetAuctionByNumber(Number);
+
+            var mainWindow = App.Current.Windows
+                     .OfType<MainWindow>()
+                     .FirstOrDefault();
+            var frame = mainWindow?.FindName("MainFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new AuctionPage(a));
+            }
+
         }
 
         public string TimeLeft
@@ -48,7 +67,25 @@ namespace Client_ADBD.ViewModels
         }
         public string FormatTime()
         {
-            TimeSpan timeLeft = StartTime - DateTime.Now;
+
+            TimeSpan timeLeft=default;
+
+            if (StartTime > DateTime.Now)
+            {
+
+                timeLeft = StartTime - DateTime.Now;
+                Status = "Upcoming";
+            }
+            else if (EndTime > DateTime.Now)
+            {
+                timeLeft = EndTime - DateTime.Now;
+                Status = "Oncoming";
+            }
+            else
+            {
+                Status = "Closed";
+            }
+               
 
             int years = timeLeft.Days / 365;
             int months = (timeLeft.Days % 365) / 30;
@@ -91,6 +128,16 @@ namespace Client_ADBD.ViewModels
 
         }
 
-
+        //adaugat
+        private string _imagePath;
+        public string ImagePath
+        {
+            get => _imagePath;
+            set
+            {
+                _imagePath = value;
+                OnPropertyChange(nameof(ImagePath));
+            }
+        }
     }
 }

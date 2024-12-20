@@ -1,0 +1,91 @@
+﻿<Page x:Class="Client_ADBD.Views.PostPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client_ADBD.Views"
+      xmlns:UserControls="clr-namespace:Client_ADBD.Views.UserControl"
+      mc:Ignorable="d"
+      Title="PostPage" Height="800" Width="1150">
+
+    <Grid Background="White">
+
+     
+        <Grid Visibility="{Binding MainGridVisibility}" Margin="0,0,0,0"
+              Background="#BB000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="3" >
+
+            <Image  Width="800" Height="800" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Views/casa.jpg"/>
+                <Button Content="X"  HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Margin="10" Background="Transparent" Foreground="LightGray"  Command="{Binding CloseImageCommand}" Panel.ZIndex="1" />
+            
+        </Grid>
+
+        <Grid Background="Transparent" Panel.ZIndex="1">
+            <Grid.Effect>
+                <BlurEffect Radius="{Binding BlurRadius}" />
+                <!--<BlurEffect Radius="{Binding BlurRadius}" />-->
+                <!-- Efectul de blur cu un anumit radius -->
+            </Grid.Effect>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+     
+            <StackPanel Grid.Column="0" Margin="20" Orientation="Vertical">
+                <Button x:Name="BackButton" Background="Transparent" HorizontalAlignment="Left" BorderThickness="0" Margin="-10,-10,0,0" Command="{Binding GoToAuctionPageCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Path Data="M10,20 L30,10 L30,30 Z" Fill="Black" Width="12" Height="12" Stretch="Fill" />
+                        <TextBlock Text="Back" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="10" />
+                    </StackPanel>
+                </Button>
+
+              
+                <Image Source="/Views/casa.jpg" Height="389" Width="480" />
+                <StackPanel Orientation="Horizontal" Margin="10,20,0,0" HorizontalAlignment="Left">
+                    <Image Source="/Views/icons8-add-user-male-60.png" Width="100" Height="100" Margin="5" Stretch="UniformToFill" />
+                    <Image Source="/Views/icons8-add-post-50.png" Width="100" Height="100" Margin="5" Stretch="UniformToFill" />
+                    <Image Source="/Views/buy.png" Width="100" Height="100" Margin="5" Stretch="UniformToFill" />
+                </StackPanel>
+            </StackPanel>
+
+        
+            <StackPanel Grid.Column="1" Margin="20" Orientation="Vertical">
+            
+                <TextBlock Text="1. Mapsutie din argint filigranat" FontSize="20" FontWeight="Bold" Foreground="Black" Margin="0,0,0,10" />
+                <TextBlock Text="Atelier european" FontSize="12" Foreground="Black" Margin="0,0,0,15" TextDecorations="Underline" />
+                <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,0,50,30" />
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="PREȚ DE PORNIRE: " FontSize="12" FontWeight="Bold" />
+                    <TextBlock Text="€100" FontSize="12" />
+                </StackPanel>
+                <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,0,50,20" />
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="PREȚ DE LISTĂ: " FontSize="12" FontWeight="Bold" />
+                    <TextBlock Text="€100" FontSize="12" />
+                </StackPanel>
+                <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,0,50,20" />
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="ADJUDECAT: " FontSize="12" FontWeight="Bold" />
+                    <TextBlock Text="€100" FontSize="12" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="ULTIMA OFERTĂ: " FontSize="12" FontWeight="Bold" Foreground="Red" />
+                    <TextBlock Text="€100" FontSize="12" Foreground="Red" />
+                </StackPanel>
+                <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,0,50,20" />
+
+                <UserControls:BookPostControl Margin="30,0,0,0"/>
+                <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,10,50,25" />
+                <TextBlock Text="DESCRIERE" FontSize="14" FontWeight="Bold" Margin="0,0,0,5" />
+                <TextBlock Text="Argint 875, 141 g, 19 x 4 x 4 cm" FontSize="12" TextWrapping="Wrap" />
+                <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,10,50,25" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
+

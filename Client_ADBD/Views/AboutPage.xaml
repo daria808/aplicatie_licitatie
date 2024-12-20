@@ -1,0 +1,68 @@
+﻿<Page x:Class="Client_ADBD.Views.AboutPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client_ADBD.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AboutPage">
+
+
+    <Grid>
+
+        <Button Name="btnBack" Padding="5" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}" Background="White" BorderThickness="0" Height="53" Width="84">
+            <Image Source="/Views/undo.png" Width="64" Height="43" />
+        </Button>
+
+        <!-- Utilizăm un StackPanel pentru a aranja TextBlock-urile vertical -->
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" >
+            <!-- Secțiunea 1 -->
+            <TextBlock Name="IntroductionText"
+                       Text="   AuctionPro este o aplicație inovatoare creată în anul 2024 de Andone Daria și Larisa Filip, concepută pentru a revoluționa modul în care se desfășoară licitațiile de obiecte de artă."
+                       TextWrapping="Wrap" FontSize="18" FontFamily="Times New Roman" Margin="0, 0, 0, 0"/>
+            <!-- Secțiunea 2 -->
+            <TextBlock Name="PlatformBenefitsText"
+                       Text="Platforma aduce laolaltă pasionații de artă, colecționarii și experții, facilitând procesele de licitare într-un mod modern, transparent și accesibil."
+                       TextWrapping="Wrap" FontSize="18" FontFamily="Times New Roman" Margin="0, 20, 0, 0"/>
+
+            <TextBlock Name="space3" Text="" />
+
+            <!-- Secțiunea 3 -->
+            <TextBlock Name="FeaturesIntroText"
+                       Text="   Aplicația permite utilizatorilor să exploreze o colecție vastă de obiecte de artă, de la picturi și sculpturi la antichități rare, toate prezentate cu detalii clare și fotografii de înaltă calitate. AuctionPro pune accent pe o experiență digitală captivantă, integrând funcționalități precum:"
+                       TextWrapping="Wrap" FontSize="18" FontFamily="Times New Roman" Margin="0, 10, 0, 0" />
+
+            <TextBlock Name="space" Text="" />
+
+            <!-- Listă cu funcționalități -->
+            <TextBlock Name="Feature1Text" FontSize="18" FontFamily="Times New Roman" Margin="0, 10, 0, 0">
+                <Run Text="     1. Licitații live și programate: " FontStyle="Italic"/>
+                <Run Text="Oferă posibilitatea utilizatorilor să participe la licitații în timp real sau să plaseze oferte pentru evenimente viitoare." FontStyle="Normal"/>
+            </TextBlock>
+
+            <TextBlock Name="Feature2Text" FontSize="18" FontFamily="Times New Roman">
+                <Run Text="     2. Profiluri de experți: " FontStyle="Italic"/>
+                <Run Text="Colaborări cu experți în domeniul artei pentru evaluări profesionale și sfaturi personalizate." FontStyle="Normal"/>
+            </TextBlock>
+
+            <TextBlock Name="Feature3Text" FontSize="18" FontFamily="Times New Roman">
+                <Run Text="     3. Istoricul obiectelor: " FontStyle="Italic"/>
+                <Run Text="Fiecare piesă licitată vine cu o poveste detaliată despre originea și semnificația sa culturală." FontStyle="Normal"/>
+            </TextBlock>
+
+            <TextBlock Name="Feature4Text" FontSize="18" FontFamily="Times New Roman" Margin="0, 0, 0, 0">
+                <Run Text="     4. Interfață intuitivă: " FontStyle="Italic"/>
+                <Run Text="Design prietenos și ușor de utilizat pentru a atrage atât utilizatorii experimentați, cât și pe cei începători în domeniul licitațiilor." FontStyle="Normal"/>
+            </TextBlock>
+
+            <!-- Concluzie -->
+            <TextBlock Name="ConclusionText"
+                       Text="   Cu AuctionPro, artiștii, colecționarii și iubitorii de artă au acces la o platformă de încredere, care valorifică tehnologia pentru a sprijini comerțul cultural și pentru a aduce arta mai aproape de toți cei interesați."
+                       TextWrapping="Wrap" FontSize="18" FontFamily="Times New Roman" Margin="0, 20, 0, 0"/>
+
+            <Image Name="AboutPageImage" Source="/Views/judge.png" Width="200" Height="100" Margin="0,30,0,0"/>
+
+        </StackPanel>
+    </Grid>
+</Page>

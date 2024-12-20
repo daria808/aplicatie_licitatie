@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows;
 using System.Diagnostics;
+using System.Runtime.InteropServices.ComTypes;
+using System.Windows.Controls;
 
 namespace Client_ADBD.Helpers
 {
@@ -121,6 +123,127 @@ namespace Client_ADBD.Helpers
                 return false;
             }
         }
+
+        public static string IsValidAuctionName(string auctionName)
+        {
+            if (string.IsNullOrWhiteSpace(auctionName))
+            {
+                return "Numele licitației este obligatoriu.";
+            }
+
+            return string.Empty;
+        }
+        public static string IsValidAuctionType(string auctionType)
+        {
+            if (string.IsNullOrWhiteSpace(auctionType))
+            {
+                return "Tipul licitației este obligatoriu.";
+            }
+
+            return string.Empty;
+        }
+        public static string IsValidStartDate(DateTime startDate, ref bool isValid)
+        {
+            if (startDate == default)
+            {
+                
+                isValid = false;
+                return  "Data de început este obligatorie.";
+            }
+
+            return string.Empty;
+        }
+        public static string IsValidEndDate(DateTime endDate, ref bool isValid)
+        {
+            if (endDate == default)
+            {
+
+                isValid = false;
+                return "Data de sfârșit este obligatorie.";
+            }
+
+            return string.Empty;
+        }
+   
+        public static string IsValidTime(DateTime startDate,string startHour,string startMinute, DateTime endDate,string endHour, string endMinute,ref DateTime startDateTime,ref DateTime endDateTime,ref bool isValid)
+        {
+          
+
+            if (string.IsNullOrWhiteSpace(startHour) || string.IsNullOrWhiteSpace(startMinute)||
+                string.IsNullOrWhiteSpace(endHour) || string.IsNullOrWhiteSpace(endMinute))
+            {
+                return  "Ora și minutele trebuie selectate.";
+                
+            }
+
+         
+            if (isValid)
+            {
+                 startDateTime = startDate.AddHours(int.Parse(startHour)).AddMinutes(int.Parse(startMinute));
+                 endDateTime = endDate.AddHours(int.Parse(endHour)).AddMinutes(int.Parse(endMinute));
+
+                if (endDateTime <= startDateTime)
+                {
+                    return "Data de sfârșit trebuie să fie după data de început.";
+                }
+            }
+         
+            return string.Empty;
+        }
+
+        public static string IsValidImagePath(string imagePath)
+        {
+            if (string.IsNullOrEmpty(imagePath))
+            {
+
+                return "Calea imaginii este necompletată.";
+            }
+
+            return string.Empty;
+        }
+
+        public static string IsValidLocation(string location)
+        {
+
+            if (string.IsNullOrEmpty(location))
+            {
+
+                return "Câmpul corespunzător locației este necompletat.";
+            }
+
+            return string.Empty;
+        }
+
+        public static string IsValidDescription(string description)
+        {
+
+            if (string.IsNullOrEmpty(description))
+            {
+
+                return "Câmpul corespunzător descrierii este necompletat.";
+            }
+
+            if(description.Length>=700)
+            {
+                return "Descrierea poate avea maxim 700 de caractere.";
+            }
+
+            return string.Empty;
+        }
+
+        public static bool IsValidAuction(string AuctionNameError, string AuctionTypeError,string StartDateError,string EndDateError,string TimeError, string ImagePathError,string DescriptionError,string LocationError)
+        {
+            if (string.IsNullOrEmpty(AuctionNameError) && string.IsNullOrEmpty(AuctionTypeError) &&
+              string.IsNullOrEmpty(StartDateError) && string.IsNullOrEmpty(EndDateError) && string.IsNullOrEmpty(TimeError)&&
+              string.IsNullOrEmpty(ImagePathError)&&string.IsNullOrEmpty(LocationError)&&string.IsNullOrEmpty(DescriptionError))
+            {
+                return true;
+            }
+
+            return false;   
+        }
+
+        
     }   
 }
 

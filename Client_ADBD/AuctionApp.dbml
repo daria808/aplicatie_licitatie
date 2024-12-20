@@ -3,11 +3,18 @@
   <Table Name="dbo.Auction" Member="Auctions">
     <Type Name="Auction">
       <Column Name="id_auction" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_auction_type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="auction_number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="location" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="start_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="end_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="id_status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="image_path" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Association Name="Auction_Post" Member="Posts" ThisKey="id_auction" OtherKey="id_auction" Type="Post" />
-      <Association Name="Auction_status_Auction" Member="Auction_status" ThisKey="id_status" OtherKey="id_status" Type="Auction_status" IsForeignKey="true" />
+      <Association Name="Auction_type_Auction" Member="Auction_type" ThisKey="id_auction_type" OtherKey="id_auction_type" Type="Auction_type" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_Auction" Member="User" ThisKey="id_user" OtherKey="id_user" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.[Watch type]" Member="Watch_types">
@@ -16,72 +23,44 @@
       <Column Name="type" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.[Auction status]" Member="Auction_status">
-    <Type Name="Auction_status">
-      <Column Name="id_status" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Auction_status_Auction" Member="Auctions" ThisKey="id_status" OtherKey="id_status" Type="Auction" />
+  <Table Name="dbo.[Auction type]" Member="Auction_types">
+    <Type Name="Auction_type">
+      <Column Name="id_auction_type" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="type_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Auction_type_Auction" Member="Auctions" ThisKey="id_auction_type" OtherKey="id_auction_type" Type="Auction" />
     </Type>
   </Table>
-  <Table Name="dbo.Bid" Member="Bids">
-    <Type Name="Bid">
-      <Column Name="id_bid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="id_post" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_user" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="bid_price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
-      <Column Name="bid_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="Post_Bid" Member="Post" ThisKey="id_post" OtherKey="id_post" Type="Post" IsForeignKey="true" />
-      <Association Name="User_Bid" Member="User" ThisKey="id_user" OtherKey="id_user" Type="User" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.BOOK" Member="BOOKs">
-    <Type Name="BOOK">
+  <Table Name="dbo.Book" Member="Books">
+    <Type Name="Book">
       <Column Name="id_book" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="id_product" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_condition" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_product" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_condition" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="author" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="publication_year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="publisher" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="publishing_house" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="page_number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="book_language" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Book_condition_BOOK" Member="Book_condition" ThisKey="id_condition" OtherKey="id_book_condition" Type="Book_condition" IsForeignKey="true" />
-      <Association Name="Product_BOOK" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" />
+      <Association Name="Book_condition_Book" Member="Book_condition" ThisKey="id_condition" OtherKey="id_book_condition" Type="Book_condition" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Product_Book" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.[Book condition]" Member="Book_conditions">
     <Type Name="Book_condition">
       <Column Name="id_book_condition" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="condition" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Association Name="Book_condition_BOOK" Member="BOOKs" ThisKey="id_book_condition" OtherKey="id_condition" Type="BOOK" />
+      <Association Name="Book_condition_Book" Member="Books" ThisKey="id_book_condition" OtherKey="id_condition" Type="Book" />
     </Type>
   </Table>
   <Table Name="dbo.Jewelry" Member="Jewelries">
     <Type Name="Jewelry">
       <Column Name="id_jewelry" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="id_product" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_material" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_gemstone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_product" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="brand" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="weight" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
       <Column Name="creation_year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Jewelry_gemstone_Jewelry" Member="Jewelry_gemstone" ThisKey="id_gemstone" OtherKey="id_jewelry_gemstone" Type="Jewelry_gemstone" IsForeignKey="true" />
-      <Association Name="Jewelry_material_Jewelry" Member="Jewelry_material" ThisKey="id_material" OtherKey="id_jewelry_material" Type="Jewelry_material" IsForeignKey="true" />
-      <Association Name="Jewelry_type_Jewelry" Member="Jewelry_type" ThisKey="id_type" OtherKey="id_jewelry_type" Type="Jewelry_type" IsForeignKey="true" />
-      <Association Name="Product_Jewelry" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[Jewelry gemstone]" Member="Jewelry_gemstones">
-    <Type Name="Jewelry_gemstone">
-      <Column Name="id_jewelry_gemstone" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="gemstone" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Jewelry_gemstone_Jewelry" Member="Jewelries" ThisKey="id_jewelry_gemstone" OtherKey="id_gemstone" Type="Jewelry" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[Jewelry material]" Member="Jewelry_materials">
-    <Type Name="Jewelry_material">
-      <Column Name="id_jewelry_material" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="material" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Jewelry_material_Jewelry" Member="Jewelries" ThisKey="id_jewelry_material" OtherKey="id_material" Type="Jewelry" />
+      <Association Name="Jewelry_type_Jewelry" Member="Jewelry_type" ThisKey="id_type" OtherKey="id_jewelry_type" Type="Jewelry_type" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Product_Jewelry" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.[Jewelry type]" Member="Jewelry_types">
@@ -94,14 +73,14 @@
   <Table Name="dbo.Painting" Member="Paintings">
     <Type Name="Painting">
       <Column Name="id_painting" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="id_produs" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="author" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="id_produs" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="artist" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="creation_year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="length" Type="System.Decimal" DbType="Decimal(8,2) NOT NULL" CanBeNull="false" />
       <Column Name="width" Type="System.Decimal" DbType="Decimal(8,2) NOT NULL" CanBeNull="false" />
-      <Association Name="Painting_type_Painting" Member="Painting_type" ThisKey="id_type" OtherKey="id_painting_type" Type="Painting_type" IsForeignKey="true" />
-      <Association Name="Product_Painting" Member="Product" ThisKey="id_produs" OtherKey="id_product" Type="Product" IsForeignKey="true" />
+      <Association Name="Painting_type_Painting" Member="Painting_type" ThisKey="id_type" OtherKey="id_painting_type" Type="Painting_type" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Product_Painting" Member="Product" ThisKey="id_produs" OtherKey="id_product" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.[Painting type]" Member="Painting_types">
@@ -114,18 +93,16 @@
   <Table Name="dbo.Post" Member="Posts">
     <Type Name="Post">
       <Column Name="id_post" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="id_user" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_product" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_status" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_auction" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_product" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_auction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="start_price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
       <Column Name="list_price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
-      <Column Name="created_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Post_Bid" Member="Bids" ThisKey="id_post" OtherKey="id_post" Type="Bid" />
-      <Association Name="Auction_Post" Member="Auction" ThisKey="id_auction" OtherKey="id_auction" Type="Auction" IsForeignKey="true" />
-      <Association Name="Post_status_Post" Member="Post_status" ThisKey="id_status" OtherKey="id_status" Type="Post_status" IsForeignKey="true" />
-      <Association Name="Product_Post" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" />
-      <Association Name="User_Post" Member="User" ThisKey="id_user" OtherKey="id_user" Type="User" IsForeignKey="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="image_path" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Auction_Post" Member="Auction" ThisKey="id_auction" OtherKey="id_auction" Type="Auction" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Post_status_Post" Member="Post_status" ThisKey="id_status" OtherKey="id_status" Type="Post_status" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Product_Post" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.[Post status]" Member="Post_status">
@@ -139,9 +116,9 @@
     <Type Name="Product">
       <Column Name="id_product" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="inventory_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Product_BOOK" Member="BOOKs" ThisKey="id_product" OtherKey="id_product" Type="BOOK" />
+      <Association Name="Product_Book" Member="Books" ThisKey="id_product" OtherKey="id_product" Type="Book" />
       <Association Name="Product_Jewelry" Member="Jewelries" ThisKey="id_product" OtherKey="id_product" Type="Jewelry" />
       <Association Name="Product_Painting" Member="Paintings" ThisKey="id_product" OtherKey="id_produs" Type="Painting" />
       <Association Name="Product_Post" Member="Posts" ThisKey="id_product" OtherKey="id_product" Type="Post" />
@@ -152,14 +129,14 @@
   <Table Name="dbo.Sculpture" Member="Sculptures">
     <Type Name="Sculpture">
       <Column Name="id_sculpture" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="id_product" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_sculpture_material" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_product" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_sculpture_material" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="artist" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="length" Type="System.Decimal" DbType="Decimal(8,2) NOT NULL" CanBeNull="false" />
       <Column Name="width" Type="System.Decimal" DbType="Decimal(8,2) NOT NULL" CanBeNull="false" />
       <Column Name="depth" Type="System.Decimal" DbType="Decimal(8,2) NOT NULL" CanBeNull="false" />
-      <Association Name="Product_Sculpture" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" />
-      <Association Name="Sculpture_material_Sculpture" Member="Sculpture_material" ThisKey="id_sculpture_material" OtherKey="id_sculpture_material" Type="Sculpture_material" IsForeignKey="true" />
+      <Association Name="Product_Sculpture" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Sculpture_material_Sculpture" Member="Sculpture_material" ThisKey="id_sculpture_material" OtherKey="id_sculpture_material" Type="Sculpture_material" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.[Sculpture material]" Member="Sculpture_materials">
@@ -172,11 +149,11 @@
   <Table Name="dbo.[User role]" Member="User_roles">
     <Type Name="User_role">
       <Column Name="id_role" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="id_user" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="id_tip" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_tip" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="role_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="User_type_User_role" Member="User_type" ThisKey="id_tip" OtherKey="id_type" Type="User_type" IsForeignKey="true" />
-      <Association Name="User_User_role" Member="User" ThisKey="id_user" OtherKey="id_user" Type="User" IsForeignKey="true" />
+      <Association Name="User_type_User_role" Member="User_type" ThisKey="id_tip" OtherKey="id_type" Type="User_type" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_User_role" Member="User" ThisKey="id_user" OtherKey="id_user" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.[User type]" Member="User_types">
@@ -189,8 +166,8 @@
   <Table Name="dbo.Users" Member="Users">
     <Type Name="User">
       <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="fisrt_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="last_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="fisrt_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="last_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="username" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="email" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="password" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
@@ -198,8 +175,7 @@
       <Column Name="created_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="last_login" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="balance" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
-      <Association Name="User_Bid" Member="Bids" ThisKey="id_user" OtherKey="id_user" Type="Bid" />
-      <Association Name="User_Post" Member="Posts" ThisKey="id_user" OtherKey="id_user" Type="Post" />
+      <Association Name="User_Auction" Member="Auctions" ThisKey="id_user" OtherKey="id_user" Type="Auction" />
       <Association Name="User_User_role" Member="User_roles" ThisKey="id_user" OtherKey="id_user" Type="User_role" />
     </Type>
   </Table>
@@ -210,8 +186,9 @@
       <Column Name="id_mechanism" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="diameter" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
       <Column Name="manufacturer" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Association Name="Product_Watch" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" />
-      <Association Name="Watch_mechanism_Watch" Member="Watch_mechanism" ThisKey="id_mechanism" OtherKey="id_mechanism" Type="Watch_mechanism" IsForeignKey="true" />
+      <Column Name="id_type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Product_Watch" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Watch_mechanism_Watch" Member="Watch_mechanism" ThisKey="id_mechanism" OtherKey="id_mechanism" Type="Watch_mechanism" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.[Watch mechanism]" Member="Watch_mechanisms">

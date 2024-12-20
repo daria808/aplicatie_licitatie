@@ -4,9 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Client_ADBD.Views.UserControl"
+             xmlns:Helpers="clr-namespace:Client_ADBD.Helpers"
+             xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
              mc:Ignorable="d" 
-             Height="200" Width="700">
-    
+             Height="230" Width="800">
+
+    <UserControl.Resources>
+        <Helpers:ImageSourceConverter x:Key="ImageSourceConverter" />
+    </UserControl.Resources>
+
+    <!--</UserControl.DataContext>
+             <ViewModels:VM_AuctionControler/>
+    </UserControl.DataContext>-->
+
     <Border BorderBrush="Gray" 
             BorderThickness="1" 
             CornerRadius="5" 
@@ -38,9 +48,8 @@
 
             <!-- Imaginea licitației -->
             <Image Grid.Column="0"
-                   Source="/Views/UserControl/2a062e4931f8716c9fa6c9a2c20fec59.jpg" 
-                   Stretch="UniformToFill"
-                   Margin="5" />
+                   Source="{Binding ImagePath, Converter={StaticResource ImageSourceConverter}}"
+                   Margin="10,0,0,10" StretchDirection="DownOnly" />
 
             <!-- Detalii licitației -->
             <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10">

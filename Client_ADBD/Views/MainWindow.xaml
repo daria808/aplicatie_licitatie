@@ -1,5 +1,4 @@
-﻿
-<Window x:Class="Client_ADBD.Views.MainWindow"
+﻿<Window x:Class="Client_ADBD.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,7 +13,7 @@
         WindowState="Maximized"
         
         WindowStartupLocation="CenterScreen">
-   
+
     <Grid>
         <!-- Definesc doua coloane pentru layout -->
         <Grid.ColumnDefinitions>
@@ -35,8 +34,13 @@
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0" Background="#FF0D7252" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
-                <Image x:Name="ph_logo" Source="/Views/logo2_2.png" RenderTransformOrigin="0.5,0.5" Margin="13,0,33,0" IsEnabled="False" OpacityMask="#FF367055" Stretch="None">
+                <Image x:Name="ph_logo" 
+                       Source="/Views/logo2_2.png" 
+                       RenderTransformOrigin="0.5,0.5" 
+                       Margin="0"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"
+                       Stretch="Uniform">
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleY="-1"/>
@@ -46,8 +50,8 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-
             </Border>
+
 
             <!-- Panel pentru butoane si ComboBox-uri -->
             <StackPanel Grid.Row="1" Background="#FF009688" Margin="10" Orientation="Vertical">
@@ -78,7 +82,8 @@
                           BorderBrush="Transparent"
                           BorderThickness="0"
                           Foreground="White"
-                          FocusVisualStyle="{x:Null}">
+                          FocusVisualStyle="{x:Null}"
+                          SelectedValue="{Binding Status}" SelectedValuePath="Content">
                         <ComboBox.Template>
                             <ControlTemplate TargetType="ComboBox">
                                 <Border Background="#FF009688"
@@ -157,7 +162,7 @@
                     Background="Transparent">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Width="172">
                         <Image x:Name="statistici_buttonImage"
-                           Source="/Views/statistics.jpeg"
+                           Source="/Views/statistics.png"
                            Opacity="0.8"
                            Width="37"
                            Height="56"
@@ -180,10 +185,11 @@
                     Height="50"
                     BorderBrush="Transparent"
                     BorderThickness="0"
-                    Background="Transparent">
+                    Background="Transparent"
+                        Command="{Binding ShowHowToBuy}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Width="172">
                         <Image x:Name="infoCumparare_buttonImage"
-                           Source="/Views/buy.jpeg"
+                           Source="/Views/buy.png"
                            Opacity="0.8"
                            Width="37"
                            Height="56"
@@ -205,10 +211,11 @@
                     Height="50"
                     BorderBrush="Transparent"
                     BorderThickness="0"
-                    Background="Transparent">
+                    Background="Transparent"
+                    Command="{Binding ShowHowToSell}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Width="172">
                         <Image x:Name="infoVanzare_buttonImage"
-                           Source="/Views/sell.jpeg"
+                           Source="/Views/sell.png"
                            Opacity="0.8"
                            Width="37"
                            Height="56"
@@ -230,10 +237,11 @@
                     Height="50"
                     BorderBrush="Transparent"
                     BorderThickness="0"
-                    Background="Transparent">
+                    Background="Transparent"
+                    Command="{Binding ShowAboutCommand}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Width="172">
                         <Image x:Name="infoNoi_buttonImage"
-                           Source="/Views/about.jpeg"
+                           Source="/Views/about.png"
                            Opacity="0.8"
                            Width="37"
                            Height="56"
@@ -259,7 +267,7 @@
                     Command="{Binding ShowAccountCommand}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Width="172">
                         <Image x:Name="infoCont_buttonImage"
-                           Source="/Views/account.jpeg"
+                           Source="/Views/account.png"
                            Opacity="0.8"
                            Width="37"
                            Height="56"
@@ -274,6 +282,10 @@
 
                 <!--CommandBinding="{Binding ProductsCommand}"-->
 
+                <Button Grid.Row="7" Name="btnBack" Padding="5" Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding BackCommand}" Background="#FF009688" BorderThickness="0" Height="40" Width="65">
+                    <Image Source="undo.png" Width="58" Height="36" />
+                </Button>
+
             </StackPanel>
         </Grid>
 
@@ -281,12 +293,10 @@
         <Border Grid.Column="1" Background="White">
             <Grid>
                 <!-- ContentControl-ul principal pentru alte conținuturi -->
-                <Frame Content="{Binding SelectedViewModel}" NavigationUIVisibility="Hidden" />
+                <Frame x:Name="MainFrame" Content="{Binding SelectedViewModel}" NavigationUIVisibility="Hidden" />
             </Grid>
         </Border>
     </Grid>
 
 
 </Window>
-
-    

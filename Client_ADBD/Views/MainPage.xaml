@@ -8,19 +8,195 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
 
+    <Page.Resources>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Width" Value="0" />
+            <Setter Property="Height" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="Transparent" />
+        </Style>
+    </Page.Resources>
+
 
     <Grid>
-        <!-- Conținutul principal -->
-        <Border Grid.Column="1" Background="White" Margin="0,0,300,0">
-            <ItemsControl ItemsSource="{Binding DisplayedAuctions}" Grid.Row="0">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <UserControl:AuctionControler/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+
+        <Border Grid.Column="1" Background="White" Margin="0,0,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" MinWidth="265" />
+                </Grid.ColumnDefinitions>
 
 
+                <StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,120,0,0" Width="230" Height="144">
+
+
+                    <TextBlock x:Name="tb_filters" Text="Filtre :" FontSize="18" FontFamily="Forte" Margin="0,0,0,20" Foreground="Black"/>
+
+
+                    <ComboBox x:Name="cb_Sort"
+                           VerticalAlignment="Center"
+                           Width="200" 
+                           Height="40"
+                           FontSize="16"
+                           Text="Sortare"
+                           IsEditable="True"
+                           IsReadOnly="True"
+                           RenderTransformOrigin="0.508,0.844"
+                           BorderBrush="Black"
+                           BorderThickness="0"
+                           Foreground="White"
+                           FocusVisualStyle="{x:Null}"
+                           SelectedValue="{Binding SelectedSortOption}" SelectedValuePath="Content">
+
+                        <ComboBox.Template>
+                            <ControlTemplate TargetType="ComboBox">
+                                <Border Background="White"
+                                 BorderBrush="Black"
+                                 BorderThickness="0.3"
+                                 CornerRadius="5">
+
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="Gray" BlurRadius="8" Direction="270" ShadowDepth="3" Opacity="0.5"/>
+                                    </Border.Effect>
+
+                                    <Grid>
+                                        <!--Butonul pentru dropdown-->
+                                        <ToggleButton Name="ToggleButton"
+                                           Focusable="False"
+                                           IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                           ClickMode="Press"
+                                           Background="Transparent"
+                                           BorderBrush="Transparent"
+                                           BorderThickness="1"
+                                           Content="{TemplateBinding Text}" 
+                                           Foreground="Black" />
+
+                                        <!--Textul afisat-->
+                                        <ContentPresenter Name="ContentSite"
+                                            IsHitTestVisible="False"
+                                            Content="{TemplateBinding SelectionBoxItem}"
+                                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                            Margin="10,0,0,0"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left" />
+
+                                        <!--Popup-ul pentru lista de optiuni-->
+                                        <Popup Name="Popup"
+                                        Placement="Bottom"
+                                        IsOpen="{TemplateBinding IsDropDownOpen}"
+                                        AllowsTransparency="False"
+                                        Focusable="False"
+                                        PopupAnimation="Slide">
+                                            <Grid>
+
+                                                <Border Background="White"
+                                                    BorderThickness="1"
+                                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ComboBox}}">
+                                                    <ScrollViewer>
+                                                        <ItemsPresenter />
+                                                    </ScrollViewer>
+                                                </Border>
+                                            </Grid>
+                                        </Popup>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </ComboBox.Template>
+                        <ComboBoxItem   x:Name="cb_sortOpt1"          
+                                 Content="Crescător" 
+                                 HorizontalAlignment="Stretch" 
+                                 Foreground="Black"
+                                 BorderThickness="1"/>
+
+                        <ComboBoxItem x:Name="cbOpt2" Content="Descrescător" 
+                               HorizontalAlignment="Stretch" 
+                               Foreground="Black"
+                               BorderThickness="1"/>
+                    </ComboBox>
+
+
+                    <Button Width="200" Height="40" FontSize="16" Background="#4CAF50" BorderBrush="Black" BorderThickness="1" 
+                         VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Foreground="White" Command="{Binding AddAuctionCommand}">
+
+                        <Button.Effect>
+                            <DropShadowEffect Color="Gray" BlurRadius="8" Direction="270" ShadowDepth="3" Opacity="0.5"/>
+                        </Button.Effect>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="5">
+
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="Gray" BlurRadius="8" Direction="270" ShadowDepth="3" Opacity="0.5"/>
+                                    </Border.Effect>
+
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+
+
+                            </ControlTemplate>
+                        </Button.Template>
+
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <!--Simbolul plus-->
+                            <Path Data="M 10,0 L 10,20 M 0,10 L 20,10" Stroke="White" StrokeThickness="2" />
+                            <TextBlock x:Name="bt_addAction" Text="Adaugă licitație" VerticalAlignment="Center" Margin="10,0,0,0" />
+                        </StackPanel>
+
+                    </Button>
+
+
+                </StackPanel>
+
+
+
+
+                <!-- ItemsControl pentru afișarea licitațiilor -->
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" >
+
+                    <StackPanel x:Name="sp_pageContent">
+                        <ItemsControl ItemsSource="{Binding DisplayedAuctions}" Grid.Column="0" Margin="0,30,0,0" >
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <UserControl:AuctionControler/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+
+
+                        <StackPanel x:Name="sp_prevNextButtons" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10,0,10">
+                            <!-- Buton Previous -->
+                            <Button x:Name="bt_prev" Width="50" Height="30" DockPanel.Dock="Left" Margin="0,10,0,10"
+                                 Command="{Binding PreviousPageCommad}" Background="Transparent" BorderBrush="Transparent">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Path Data="M 15,10 L 5,20 L 15,30" Stroke="Black" StrokeThickness="2" Height="20" Stretch="Fill" Width="12" />
+                                    <TextBlock Text="PREV" Foreground="Black" VerticalAlignment="Center" Margin="5,0,0,0" RenderTransformOrigin="0.578,1.315" />
+                                </StackPanel>
+                            </Button>
+
+                            <!-- Linie verticala de separare -->
+                            <Border Width="1" Background="Black" VerticalAlignment="Center" Margin="0,0"/>
+
+                            <!-- Buton Next -->
+                            <Button x:Name="bt_next" Width="50" Height="30" DockPanel.Dock="Right" Margin="10,10,0,10"
+                                Command="{Binding NextPageCommand}" Background="Transparent" BorderBrush="Transparent">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="NEXT" Foreground="Black" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                    <Path Data="M 5,10 L 15,20 L 5,30" Stroke="Black" StrokeThickness="2" Height="18" Stretch="Fill" />
+                                </StackPanel>
+                            </Button>
+
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+            </Grid>
         </Border>
 
     </Grid>

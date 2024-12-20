@@ -60,6 +60,9 @@ namespace Client_ADBD.Helpers
                         return new ErrorWindow(errorMessage);
                     }
                     return null;
+
+                case "AdminWindow":
+                    return new AdminWindow();
                 case "MainWindow":
                     return new MainWindow();
                 default:

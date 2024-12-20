@@ -36,27 +36,18 @@ namespace Client_ADBD
     partial void InsertWatch_type(Watch_type instance);
     partial void UpdateWatch_type(Watch_type instance);
     partial void DeleteWatch_type(Watch_type instance);
-    partial void InsertAuction_status(Auction_status instance);
-    partial void UpdateAuction_status(Auction_status instance);
-    partial void DeleteAuction_status(Auction_status instance);
-    partial void InsertBid(Bid instance);
-    partial void UpdateBid(Bid instance);
-    partial void DeleteBid(Bid instance);
-    partial void InsertBOOK(BOOK instance);
-    partial void UpdateBOOK(BOOK instance);
-    partial void DeleteBOOK(BOOK instance);
+    partial void InsertAuction_type(Auction_type instance);
+    partial void UpdateAuction_type(Auction_type instance);
+    partial void DeleteAuction_type(Auction_type instance);
+    partial void InsertBook(Book instance);
+    partial void UpdateBook(Book instance);
+    partial void DeleteBook(Book instance);
     partial void InsertBook_condition(Book_condition instance);
     partial void UpdateBook_condition(Book_condition instance);
     partial void DeleteBook_condition(Book_condition instance);
     partial void InsertJewelry(Jewelry instance);
     partial void UpdateJewelry(Jewelry instance);
     partial void DeleteJewelry(Jewelry instance);
-    partial void InsertJewelry_gemstone(Jewelry_gemstone instance);
-    partial void UpdateJewelry_gemstone(Jewelry_gemstone instance);
-    partial void DeleteJewelry_gemstone(Jewelry_gemstone instance);
-    partial void InsertJewelry_material(Jewelry_material instance);
-    partial void UpdateJewelry_material(Jewelry_material instance);
-    partial void DeleteJewelry_material(Jewelry_material instance);
     partial void InsertJewelry_type(Jewelry_type instance);
     partial void UpdateJewelry_type(Jewelry_type instance);
     partial void DeleteJewelry_type(Jewelry_type instance);
@@ -144,27 +135,19 @@ namespace Client_ADBD
 			}
 		}
 		
-		public System.Data.Linq.Table<Auction_status> Auction_status
+		public System.Data.Linq.Table<Auction_type> Auction_types
 		{
 			get
 			{
-				return this.GetTable<Auction_status>();
+				return this.GetTable<Auction_type>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Bid> Bids
+		public System.Data.Linq.Table<Book> Books
 		{
 			get
 			{
-				return this.GetTable<Bid>();
-			}
-		}
-		
-		public System.Data.Linq.Table<BOOK> BOOKs
-		{
-			get
-			{
-				return this.GetTable<BOOK>();
+				return this.GetTable<Book>();
 			}
 		}
 		
@@ -181,22 +164,6 @@ namespace Client_ADBD
 			get
 			{
 				return this.GetTable<Jewelry>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Jewelry_gemstone> Jewelry_gemstones
-		{
-			get
-			{
-				return this.GetTable<Jewelry_gemstone>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Jewelry_material> Jewelry_materials
-		{
-			get
-			{
-				return this.GetTable<Jewelry_material>();
 			}
 		}
 		
@@ -313,15 +280,29 @@ namespace Client_ADBD
 		
 		private int _id_auction;
 		
+		private int _id_auction_type;
+		
+		private int _id_user;
+		
+		private int _auction_number;
+		
+		private string _name;
+		
+		private string _location;
+		
 		private System.DateTime _start_time;
 		
 		private System.DateTime _end_time;
 		
-		private System.Nullable<int> _id_status;
+		private string _description;
+		
+		private string _image_path;
 		
 		private EntitySet<Post> _Posts;
 		
-		private EntityRef<Auction_status> _Auction_status;
+		private EntityRef<Auction_type> _Auction_type;
+		
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -329,18 +310,31 @@ namespace Client_ADBD
     partial void OnCreated();
     partial void Onid_auctionChanging(int value);
     partial void Onid_auctionChanged();
+    partial void Onid_auction_typeChanging(int value);
+    partial void Onid_auction_typeChanged();
+    partial void Onid_userChanging(int value);
+    partial void Onid_userChanged();
+    partial void Onauction_numberChanging(int value);
+    partial void Onauction_numberChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnlocationChanging(string value);
+    partial void OnlocationChanged();
     partial void Onstart_timeChanging(System.DateTime value);
     partial void Onstart_timeChanged();
     partial void Onend_timeChanging(System.DateTime value);
     partial void Onend_timeChanged();
-    partial void Onid_statusChanging(System.Nullable<int> value);
-    partial void Onid_statusChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    partial void Onimage_pathChanging(string value);
+    partial void Onimage_pathChanged();
     #endregion
 		
 		public Auction()
 		{
 			this._Posts = new EntitySet<Post>(new Action<Post>(this.attach_Posts), new Action<Post>(this.detach_Posts));
-			this._Auction_status = default(EntityRef<Auction_status>);
+			this._Auction_type = default(EntityRef<Auction_type>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -360,6 +354,114 @@ namespace Client_ADBD
 					this._id_auction = value;
 					this.SendPropertyChanged("id_auction");
 					this.Onid_auctionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_auction_type", DbType="Int NOT NULL")]
+		public int id_auction_type
+		{
+			get
+			{
+				return this._id_auction_type;
+			}
+			set
+			{
+				if ((this._id_auction_type != value))
+				{
+					if (this._Auction_type.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_auction_typeChanging(value);
+					this.SendPropertyChanging();
+					this._id_auction_type = value;
+					this.SendPropertyChanged("id_auction_type");
+					this.Onid_auction_typeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_user", DbType="Int NOT NULL")]
+		public int id_user
+		{
+			get
+			{
+				return this._id_user;
+			}
+			set
+			{
+				if ((this._id_user != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_userChanging(value);
+					this.SendPropertyChanging();
+					this._id_user = value;
+					this.SendPropertyChanged("id_user");
+					this.Onid_userChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_auction_number", DbType="Int NOT NULL")]
+		public int auction_number
+		{
+			get
+			{
+				return this._auction_number;
+			}
+			set
+			{
+				if ((this._auction_number != value))
+				{
+					this.Onauction_numberChanging(value);
+					this.SendPropertyChanging();
+					this._auction_number = value;
+					this.SendPropertyChanged("auction_number");
+					this.Onauction_numberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location", DbType="VarChar(250)")]
+		public string location
+		{
+			get
+			{
+				return this._location;
+			}
+			set
+			{
+				if ((this._location != value))
+				{
+					this.OnlocationChanging(value);
+					this.SendPropertyChanging();
+					this._location = value;
+					this.SendPropertyChanged("location");
+					this.OnlocationChanged();
 				}
 			}
 		}
@@ -404,26 +506,42 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_status", DbType="Int")]
-		public System.Nullable<int> id_status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
+		public string description
 		{
 			get
 			{
-				return this._id_status;
+				return this._description;
 			}
 			set
 			{
-				if ((this._id_status != value))
+				if ((this._description != value))
 				{
-					if (this._Auction_status.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_statusChanging(value);
+					this.OndescriptionChanging(value);
 					this.SendPropertyChanging();
-					this._id_status = value;
-					this.SendPropertyChanged("id_status");
-					this.Onid_statusChanged();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image_path", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string image_path
+		{
+			get
+			{
+				return this._image_path;
+			}
+			set
+			{
+				if ((this._image_path != value))
+				{
+					this.Onimage_pathChanging(value);
+					this.SendPropertyChanging();
+					this._image_path = value;
+					this.SendPropertyChanged("image_path");
+					this.Onimage_pathChanged();
 				}
 			}
 		}
@@ -441,36 +559,70 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auction_status_Auction", Storage="_Auction_status", ThisKey="id_status", OtherKey="id_status", IsForeignKey=true)]
-		public Auction_status Auction_status
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auction_type_Auction", Storage="_Auction_type", ThisKey="id_auction_type", OtherKey="id_auction_type", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Auction_type Auction_type
 		{
 			get
 			{
-				return this._Auction_status.Entity;
+				return this._Auction_type.Entity;
 			}
 			set
 			{
-				Auction_status previousValue = this._Auction_status.Entity;
+				Auction_type previousValue = this._Auction_type.Entity;
 				if (((previousValue != value) 
-							|| (this._Auction_status.HasLoadedOrAssignedValue == false)))
+							|| (this._Auction_type.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Auction_status.Entity = null;
+						this._Auction_type.Entity = null;
 						previousValue.Auctions.Remove(this);
 					}
-					this._Auction_status.Entity = value;
+					this._Auction_type.Entity = value;
 					if ((value != null))
 					{
 						value.Auctions.Add(this);
-						this._id_status = value.id_status;
+						this._id_auction_type = value.id_auction_type;
 					}
 					else
 					{
-						this._id_status = default(Nullable<int>);
+						this._id_auction_type = default(int);
 					}
-					this.SendPropertyChanged("Auction_status");
+					this.SendPropertyChanged("Auction_type");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Auction", Storage="_User", ThisKey="id_user", OtherKey="id_user", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Auctions.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Auctions.Add(this);
+						this._id_user = value.id_user;
+					}
+					else
+					{
+						this._id_user = default(int);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -594,15 +746,15 @@ namespace Client_ADBD
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Auction status]")]
-	public partial class Auction_status : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Auction type]")]
+	public partial class Auction_type : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _id_status;
+		private int _id_auction_type;
 		
-		private string _name;
+		private string _type_name;
 		
 		private EntitySet<Auction> _Auctions;
 		
@@ -610,59 +762,59 @@ namespace Client_ADBD
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void Onid_statusChanging(int value);
-    partial void Onid_statusChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
+    partial void Onid_auction_typeChanging(int value);
+    partial void Onid_auction_typeChanged();
+    partial void Ontype_nameChanging(string value);
+    partial void Ontype_nameChanged();
     #endregion
 		
-		public Auction_status()
+		public Auction_type()
 		{
 			this._Auctions = new EntitySet<Auction>(new Action<Auction>(this.attach_Auctions), new Action<Auction>(this.detach_Auctions));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_status", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id_status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_auction_type", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_auction_type
 		{
 			get
 			{
-				return this._id_status;
+				return this._id_auction_type;
 			}
 			set
 			{
-				if ((this._id_status != value))
+				if ((this._id_auction_type != value))
 				{
-					this.Onid_statusChanging(value);
+					this.Onid_auction_typeChanging(value);
 					this.SendPropertyChanging();
-					this._id_status = value;
-					this.SendPropertyChanged("id_status");
-					this.Onid_statusChanged();
+					this._id_auction_type = value;
+					this.SendPropertyChanged("id_auction_type");
+					this.Onid_auction_typeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type_name", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string type_name
 		{
 			get
 			{
-				return this._name;
+				return this._type_name;
 			}
 			set
 			{
-				if ((this._name != value))
+				if ((this._type_name != value))
 				{
-					this.OnnameChanging(value);
+					this.Ontype_nameChanging(value);
 					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
+					this._type_name = value;
+					this.SendPropertyChanged("type_name");
+					this.Ontype_nameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auction_status_Auction", Storage="_Auctions", ThisKey="id_status", OtherKey="id_status")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auction_type_Auction", Storage="_Auctions", ThisKey="id_auction_type", OtherKey="id_auction_type")]
 		public EntitySet<Auction> Auctions
 		{
 			get
@@ -698,273 +850,33 @@ namespace Client_ADBD
 		private void attach_Auctions(Auction entity)
 		{
 			this.SendPropertyChanging();
-			entity.Auction_status = this;
+			entity.Auction_type = this;
 		}
 		
 		private void detach_Auctions(Auction entity)
 		{
 			this.SendPropertyChanging();
-			entity.Auction_status = null;
+			entity.Auction_type = null;
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Bid")]
-	public partial class Bid : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id_bid;
-		
-		private System.Nullable<int> _id_post;
-		
-		private System.Nullable<int> _id_user;
-		
-		private decimal _bid_price;
-		
-		private System.DateTime _bid_date;
-		
-		private EntityRef<Post> _Post;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onid_bidChanging(int value);
-    partial void Onid_bidChanged();
-    partial void Onid_postChanging(System.Nullable<int> value);
-    partial void Onid_postChanged();
-    partial void Onid_userChanging(System.Nullable<int> value);
-    partial void Onid_userChanged();
-    partial void Onbid_priceChanging(decimal value);
-    partial void Onbid_priceChanged();
-    partial void Onbid_dateChanging(System.DateTime value);
-    partial void Onbid_dateChanged();
-    #endregion
-		
-		public Bid()
-		{
-			this._Post = default(EntityRef<Post>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_bid", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id_bid
-		{
-			get
-			{
-				return this._id_bid;
-			}
-			set
-			{
-				if ((this._id_bid != value))
-				{
-					this.Onid_bidChanging(value);
-					this.SendPropertyChanging();
-					this._id_bid = value;
-					this.SendPropertyChanged("id_bid");
-					this.Onid_bidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_post", DbType="Int")]
-		public System.Nullable<int> id_post
-		{
-			get
-			{
-				return this._id_post;
-			}
-			set
-			{
-				if ((this._id_post != value))
-				{
-					if (this._Post.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_postChanging(value);
-					this.SendPropertyChanging();
-					this._id_post = value;
-					this.SendPropertyChanged("id_post");
-					this.Onid_postChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_user", DbType="Int")]
-		public System.Nullable<int> id_user
-		{
-			get
-			{
-				return this._id_user;
-			}
-			set
-			{
-				if ((this._id_user != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_userChanging(value);
-					this.SendPropertyChanging();
-					this._id_user = value;
-					this.SendPropertyChanged("id_user");
-					this.Onid_userChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bid_price", DbType="Decimal(10,2) NOT NULL")]
-		public decimal bid_price
-		{
-			get
-			{
-				return this._bid_price;
-			}
-			set
-			{
-				if ((this._bid_price != value))
-				{
-					this.Onbid_priceChanging(value);
-					this.SendPropertyChanging();
-					this._bid_price = value;
-					this.SendPropertyChanged("bid_price");
-					this.Onbid_priceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bid_date", DbType="DateTime NOT NULL")]
-		public System.DateTime bid_date
-		{
-			get
-			{
-				return this._bid_date;
-			}
-			set
-			{
-				if ((this._bid_date != value))
-				{
-					this.Onbid_dateChanging(value);
-					this.SendPropertyChanging();
-					this._bid_date = value;
-					this.SendPropertyChanged("bid_date");
-					this.Onbid_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_Bid", Storage="_Post", ThisKey="id_post", OtherKey="id_post", IsForeignKey=true)]
-		public Post Post
-		{
-			get
-			{
-				return this._Post.Entity;
-			}
-			set
-			{
-				Post previousValue = this._Post.Entity;
-				if (((previousValue != value) 
-							|| (this._Post.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Post.Entity = null;
-						previousValue.Bids.Remove(this);
-					}
-					this._Post.Entity = value;
-					if ((value != null))
-					{
-						value.Bids.Add(this);
-						this._id_post = value.id_post;
-					}
-					else
-					{
-						this._id_post = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Post");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Bid", Storage="_User", ThisKey="id_user", OtherKey="id_user", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Bids.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Bids.Add(this);
-						this._id_user = value.id_user;
-					}
-					else
-					{
-						this._id_user = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BOOK")]
-	public partial class BOOK : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Book")]
+	public partial class Book : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _id_book;
 		
-		private System.Nullable<int> _id_product;
+		private int _id_product;
 		
-		private System.Nullable<int> _id_condition;
+		private int _id_condition;
 		
 		private string _author;
 		
 		private int _publication_year;
 		
-		private string _publisher;
+		private string _publishing_house;
 		
 		private int _page_number;
 		
@@ -980,23 +892,23 @@ namespace Client_ADBD
     partial void OnCreated();
     partial void Onid_bookChanging(int value);
     partial void Onid_bookChanged();
-    partial void Onid_productChanging(System.Nullable<int> value);
+    partial void Onid_productChanging(int value);
     partial void Onid_productChanged();
-    partial void Onid_conditionChanging(System.Nullable<int> value);
+    partial void Onid_conditionChanging(int value);
     partial void Onid_conditionChanged();
     partial void OnauthorChanging(string value);
     partial void OnauthorChanged();
     partial void Onpublication_yearChanging(int value);
     partial void Onpublication_yearChanged();
-    partial void OnpublisherChanging(string value);
-    partial void OnpublisherChanged();
+    partial void Onpublishing_houseChanging(string value);
+    partial void Onpublishing_houseChanged();
     partial void Onpage_numberChanging(int value);
     partial void Onpage_numberChanged();
     partial void Onbook_languageChanging(string value);
     partial void Onbook_languageChanged();
     #endregion
 		
-		public BOOK()
+		public Book()
 		{
 			this._Book_condition = default(EntityRef<Book_condition>);
 			this._Product = default(EntityRef<Product>);
@@ -1023,8 +935,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_product", DbType="Int")]
-		public System.Nullable<int> id_product
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_product", DbType="Int NOT NULL")]
+		public int id_product
 		{
 			get
 			{
@@ -1047,8 +959,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_condition", DbType="Int")]
-		public System.Nullable<int> id_condition
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_condition", DbType="Int NOT NULL")]
+		public int id_condition
 		{
 			get
 			{
@@ -1111,22 +1023,22 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publisher", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string publisher
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publishing_house", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string publishing_house
 		{
 			get
 			{
-				return this._publisher;
+				return this._publishing_house;
 			}
 			set
 			{
-				if ((this._publisher != value))
+				if ((this._publishing_house != value))
 				{
-					this.OnpublisherChanging(value);
+					this.Onpublishing_houseChanging(value);
 					this.SendPropertyChanging();
-					this._publisher = value;
-					this.SendPropertyChanged("publisher");
-					this.OnpublisherChanged();
+					this._publishing_house = value;
+					this.SendPropertyChanged("publishing_house");
+					this.Onpublishing_houseChanged();
 				}
 			}
 		}
@@ -1171,7 +1083,7 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Book_condition_BOOK", Storage="_Book_condition", ThisKey="id_condition", OtherKey="id_book_condition", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Book_condition_Book", Storage="_Book_condition", ThisKey="id_condition", OtherKey="id_book_condition", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Book_condition Book_condition
 		{
 			get
@@ -1188,24 +1100,24 @@ namespace Client_ADBD
 					if ((previousValue != null))
 					{
 						this._Book_condition.Entity = null;
-						previousValue.BOOKs.Remove(this);
+						previousValue.Books.Remove(this);
 					}
 					this._Book_condition.Entity = value;
 					if ((value != null))
 					{
-						value.BOOKs.Add(this);
+						value.Books.Add(this);
 						this._id_condition = value.id_book_condition;
 					}
 					else
 					{
-						this._id_condition = default(Nullable<int>);
+						this._id_condition = default(int);
 					}
 					this.SendPropertyChanged("Book_condition");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_BOOK", Storage="_Product", ThisKey="id_product", OtherKey="id_product", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Book", Storage="_Product", ThisKey="id_product", OtherKey="id_product", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Product Product
 		{
 			get
@@ -1222,17 +1134,17 @@ namespace Client_ADBD
 					if ((previousValue != null))
 					{
 						this._Product.Entity = null;
-						previousValue.BOOKs.Remove(this);
+						previousValue.Books.Remove(this);
 					}
 					this._Product.Entity = value;
 					if ((value != null))
 					{
-						value.BOOKs.Add(this);
+						value.Books.Add(this);
 						this._id_product = value.id_product;
 					}
 					else
 					{
-						this._id_product = default(Nullable<int>);
+						this._id_product = default(int);
 					}
 					this.SendPropertyChanged("Product");
 				}
@@ -1270,7 +1182,7 @@ namespace Client_ADBD
 		
 		private string _condition;
 		
-		private EntitySet<BOOK> _BOOKs;
+		private EntitySet<Book> _Books;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1284,7 +1196,7 @@ namespace Client_ADBD
 		
 		public Book_condition()
 		{
-			this._BOOKs = new EntitySet<BOOK>(new Action<BOOK>(this.attach_BOOKs), new Action<BOOK>(this.detach_BOOKs));
+			this._Books = new EntitySet<Book>(new Action<Book>(this.attach_Books), new Action<Book>(this.detach_Books));
 			OnCreated();
 		}
 		
@@ -1328,16 +1240,16 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Book_condition_BOOK", Storage="_BOOKs", ThisKey="id_book_condition", OtherKey="id_condition")]
-		public EntitySet<BOOK> BOOKs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Book_condition_Book", Storage="_Books", ThisKey="id_book_condition", OtherKey="id_condition")]
+		public EntitySet<Book> Books
 		{
 			get
 			{
-				return this._BOOKs;
+				return this._Books;
 			}
 			set
 			{
-				this._BOOKs.Assign(value);
+				this._Books.Assign(value);
 			}
 		}
 		
@@ -1361,13 +1273,13 @@ namespace Client_ADBD
 			}
 		}
 		
-		private void attach_BOOKs(BOOK entity)
+		private void attach_Books(Book entity)
 		{
 			this.SendPropertyChanging();
 			entity.Book_condition = this;
 		}
 		
-		private void detach_BOOKs(BOOK entity)
+		private void detach_Books(Book entity)
 		{
 			this.SendPropertyChanging();
 			entity.Book_condition = null;
@@ -1382,21 +1294,15 @@ namespace Client_ADBD
 		
 		private int _id_jewelry;
 		
-		private System.Nullable<int> _id_product;
+		private int _id_product;
 		
-		private System.Nullable<int> _id_material;
+		private int _id_type;
 		
-		private System.Nullable<int> _id_type;
-		
-		private System.Nullable<int> _id_gemstone;
+		private string _brand;
 		
 		private decimal _weight;
 		
 		private int _creation_year;
-		
-		private EntityRef<Jewelry_gemstone> _Jewelry_gemstone;
-		
-		private EntityRef<Jewelry_material> _Jewelry_material;
 		
 		private EntityRef<Jewelry_type> _Jewelry_type;
 		
@@ -1408,14 +1314,12 @@ namespace Client_ADBD
     partial void OnCreated();
     partial void Onid_jewelryChanging(int value);
     partial void Onid_jewelryChanged();
-    partial void Onid_productChanging(System.Nullable<int> value);
+    partial void Onid_productChanging(int value);
     partial void Onid_productChanged();
-    partial void Onid_materialChanging(System.Nullable<int> value);
-    partial void Onid_materialChanged();
-    partial void Onid_typeChanging(System.Nullable<int> value);
+    partial void Onid_typeChanging(int value);
     partial void Onid_typeChanged();
-    partial void Onid_gemstoneChanging(System.Nullable<int> value);
-    partial void Onid_gemstoneChanged();
+    partial void OnbrandChanging(string value);
+    partial void OnbrandChanged();
     partial void OnweightChanging(decimal value);
     partial void OnweightChanged();
     partial void Oncreation_yearChanging(int value);
@@ -1424,8 +1328,6 @@ namespace Client_ADBD
 		
 		public Jewelry()
 		{
-			this._Jewelry_gemstone = default(EntityRef<Jewelry_gemstone>);
-			this._Jewelry_material = default(EntityRef<Jewelry_material>);
 			this._Jewelry_type = default(EntityRef<Jewelry_type>);
 			this._Product = default(EntityRef<Product>);
 			OnCreated();
@@ -1451,8 +1353,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_product", DbType="Int")]
-		public System.Nullable<int> id_product
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_product", DbType="Int NOT NULL")]
+		public int id_product
 		{
 			get
 			{
@@ -1475,32 +1377,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_material", DbType="Int")]
-		public System.Nullable<int> id_material
-		{
-			get
-			{
-				return this._id_material;
-			}
-			set
-			{
-				if ((this._id_material != value))
-				{
-					if (this._Jewelry_material.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_materialChanging(value);
-					this.SendPropertyChanging();
-					this._id_material = value;
-					this.SendPropertyChanged("id_material");
-					this.Onid_materialChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_type", DbType="Int")]
-		public System.Nullable<int> id_type
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_type", DbType="Int NOT NULL")]
+		public int id_type
 		{
 			get
 			{
@@ -1523,26 +1401,22 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_gemstone", DbType="Int")]
-		public System.Nullable<int> id_gemstone
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_brand", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string brand
 		{
 			get
 			{
-				return this._id_gemstone;
+				return this._brand;
 			}
 			set
 			{
-				if ((this._id_gemstone != value))
+				if ((this._brand != value))
 				{
-					if (this._Jewelry_gemstone.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_gemstoneChanging(value);
+					this.OnbrandChanging(value);
 					this.SendPropertyChanging();
-					this._id_gemstone = value;
-					this.SendPropertyChanged("id_gemstone");
-					this.Onid_gemstoneChanged();
+					this._brand = value;
+					this.SendPropertyChanged("brand");
+					this.OnbrandChanged();
 				}
 			}
 		}
@@ -1587,75 +1461,7 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Jewelry_gemstone_Jewelry", Storage="_Jewelry_gemstone", ThisKey="id_gemstone", OtherKey="id_jewelry_gemstone", IsForeignKey=true)]
-		public Jewelry_gemstone Jewelry_gemstone
-		{
-			get
-			{
-				return this._Jewelry_gemstone.Entity;
-			}
-			set
-			{
-				Jewelry_gemstone previousValue = this._Jewelry_gemstone.Entity;
-				if (((previousValue != value) 
-							|| (this._Jewelry_gemstone.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Jewelry_gemstone.Entity = null;
-						previousValue.Jewelries.Remove(this);
-					}
-					this._Jewelry_gemstone.Entity = value;
-					if ((value != null))
-					{
-						value.Jewelries.Add(this);
-						this._id_gemstone = value.id_jewelry_gemstone;
-					}
-					else
-					{
-						this._id_gemstone = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Jewelry_gemstone");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Jewelry_material_Jewelry", Storage="_Jewelry_material", ThisKey="id_material", OtherKey="id_jewelry_material", IsForeignKey=true)]
-		public Jewelry_material Jewelry_material
-		{
-			get
-			{
-				return this._Jewelry_material.Entity;
-			}
-			set
-			{
-				Jewelry_material previousValue = this._Jewelry_material.Entity;
-				if (((previousValue != value) 
-							|| (this._Jewelry_material.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Jewelry_material.Entity = null;
-						previousValue.Jewelries.Remove(this);
-					}
-					this._Jewelry_material.Entity = value;
-					if ((value != null))
-					{
-						value.Jewelries.Add(this);
-						this._id_material = value.id_jewelry_material;
-					}
-					else
-					{
-						this._id_material = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Jewelry_material");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Jewelry_type_Jewelry", Storage="_Jewelry_type", ThisKey="id_type", OtherKey="id_jewelry_type", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Jewelry_type_Jewelry", Storage="_Jewelry_type", ThisKey="id_type", OtherKey="id_jewelry_type", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Jewelry_type Jewelry_type
 		{
 			get
@@ -1682,14 +1488,14 @@ namespace Client_ADBD
 					}
 					else
 					{
-						this._id_type = default(Nullable<int>);
+						this._id_type = default(int);
 					}
 					this.SendPropertyChanged("Jewelry_type");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Jewelry", Storage="_Product", ThisKey="id_product", OtherKey="id_product", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Jewelry", Storage="_Product", ThisKey="id_product", OtherKey="id_product", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Product Product
 		{
 			get
@@ -1716,7 +1522,7 @@ namespace Client_ADBD
 					}
 					else
 					{
-						this._id_product = default(Nullable<int>);
+						this._id_product = default(int);
 					}
 					this.SendPropertyChanged("Product");
 				}
@@ -1741,234 +1547,6 @@ namespace Client_ADBD
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Jewelry gemstone]")]
-	public partial class Jewelry_gemstone : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id_jewelry_gemstone;
-		
-		private string _gemstone;
-		
-		private EntitySet<Jewelry> _Jewelries;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onid_jewelry_gemstoneChanging(int value);
-    partial void Onid_jewelry_gemstoneChanged();
-    partial void OngemstoneChanging(string value);
-    partial void OngemstoneChanged();
-    #endregion
-		
-		public Jewelry_gemstone()
-		{
-			this._Jewelries = new EntitySet<Jewelry>(new Action<Jewelry>(this.attach_Jewelries), new Action<Jewelry>(this.detach_Jewelries));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_jewelry_gemstone", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id_jewelry_gemstone
-		{
-			get
-			{
-				return this._id_jewelry_gemstone;
-			}
-			set
-			{
-				if ((this._id_jewelry_gemstone != value))
-				{
-					this.Onid_jewelry_gemstoneChanging(value);
-					this.SendPropertyChanging();
-					this._id_jewelry_gemstone = value;
-					this.SendPropertyChanged("id_jewelry_gemstone");
-					this.Onid_jewelry_gemstoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gemstone", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string gemstone
-		{
-			get
-			{
-				return this._gemstone;
-			}
-			set
-			{
-				if ((this._gemstone != value))
-				{
-					this.OngemstoneChanging(value);
-					this.SendPropertyChanging();
-					this._gemstone = value;
-					this.SendPropertyChanged("gemstone");
-					this.OngemstoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Jewelry_gemstone_Jewelry", Storage="_Jewelries", ThisKey="id_jewelry_gemstone", OtherKey="id_gemstone")]
-		public EntitySet<Jewelry> Jewelries
-		{
-			get
-			{
-				return this._Jewelries;
-			}
-			set
-			{
-				this._Jewelries.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Jewelries(Jewelry entity)
-		{
-			this.SendPropertyChanging();
-			entity.Jewelry_gemstone = this;
-		}
-		
-		private void detach_Jewelries(Jewelry entity)
-		{
-			this.SendPropertyChanging();
-			entity.Jewelry_gemstone = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Jewelry material]")]
-	public partial class Jewelry_material : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id_jewelry_material;
-		
-		private string _material;
-		
-		private EntitySet<Jewelry> _Jewelries;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onid_jewelry_materialChanging(int value);
-    partial void Onid_jewelry_materialChanged();
-    partial void OnmaterialChanging(string value);
-    partial void OnmaterialChanged();
-    #endregion
-		
-		public Jewelry_material()
-		{
-			this._Jewelries = new EntitySet<Jewelry>(new Action<Jewelry>(this.attach_Jewelries), new Action<Jewelry>(this.detach_Jewelries));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_jewelry_material", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id_jewelry_material
-		{
-			get
-			{
-				return this._id_jewelry_material;
-			}
-			set
-			{
-				if ((this._id_jewelry_material != value))
-				{
-					this.Onid_jewelry_materialChanging(value);
-					this.SendPropertyChanging();
-					this._id_jewelry_material = value;
-					this.SendPropertyChanged("id_jewelry_material");
-					this.Onid_jewelry_materialChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_material", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string material
-		{
-			get
-			{
-				return this._material;
-			}
-			set
-			{
-				if ((this._material != value))
-				{
-					this.OnmaterialChanging(value);
-					this.SendPropertyChanging();
-					this._material = value;
-					this.SendPropertyChanged("material");
-					this.OnmaterialChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Jewelry_material_Jewelry", Storage="_Jewelries", ThisKey="id_jewelry_material", OtherKey="id_material")]
-		public EntitySet<Jewelry> Jewelries
-		{
-			get
-			{
-				return this._Jewelries;
-			}
-			set
-			{
-				this._Jewelries.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Jewelries(Jewelry entity)
-		{
-			this.SendPropertyChanging();
-			entity.Jewelry_material = this;
-		}
-		
-		private void detach_Jewelries(Jewelry entity)
-		{
-			this.SendPropertyChanging();
-			entity.Jewelry_material = null;
 		}
 	}
 	
@@ -2094,11 +1672,11 @@ namespace Client_ADBD
 		
 		private int _id_painting;
 		
-		private System.Nullable<int> _id_produs;
+		private int _id_produs;
 		
-		private System.Nullable<int> _id_type;
+		private int _id_type;
 		
-		private string _author;
+		private string _artist;
 		
 		private int _creation_year;
 		
@@ -2116,12 +1694,12 @@ namespace Client_ADBD
     partial void OnCreated();
     partial void Onid_paintingChanging(int value);
     partial void Onid_paintingChanged();
-    partial void Onid_produsChanging(System.Nullable<int> value);
+    partial void Onid_produsChanging(int value);
     partial void Onid_produsChanged();
-    partial void Onid_typeChanging(System.Nullable<int> value);
+    partial void Onid_typeChanging(int value);
     partial void Onid_typeChanged();
-    partial void OnauthorChanging(string value);
-    partial void OnauthorChanged();
+    partial void OnartistChanging(string value);
+    partial void OnartistChanged();
     partial void Oncreation_yearChanging(int value);
     partial void Oncreation_yearChanged();
     partial void OnlengthChanging(decimal value);
@@ -2157,8 +1735,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_produs", DbType="Int")]
-		public System.Nullable<int> id_produs
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_produs", DbType="Int NOT NULL")]
+		public int id_produs
 		{
 			get
 			{
@@ -2181,8 +1759,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_type", DbType="Int")]
-		public System.Nullable<int> id_type
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_type", DbType="Int NOT NULL")]
+		public int id_type
 		{
 			get
 			{
@@ -2205,22 +1783,22 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_author", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string author
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_artist", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string artist
 		{
 			get
 			{
-				return this._author;
+				return this._artist;
 			}
 			set
 			{
-				if ((this._author != value))
+				if ((this._artist != value))
 				{
-					this.OnauthorChanging(value);
+					this.OnartistChanging(value);
 					this.SendPropertyChanging();
-					this._author = value;
-					this.SendPropertyChanged("author");
-					this.OnauthorChanged();
+					this._artist = value;
+					this.SendPropertyChanged("artist");
+					this.OnartistChanged();
 				}
 			}
 		}
@@ -2285,7 +1863,7 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Painting_type_Painting", Storage="_Painting_type", ThisKey="id_type", OtherKey="id_painting_type", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Painting_type_Painting", Storage="_Painting_type", ThisKey="id_type", OtherKey="id_painting_type", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Painting_type Painting_type
 		{
 			get
@@ -2312,14 +1890,14 @@ namespace Client_ADBD
 					}
 					else
 					{
-						this._id_type = default(Nullable<int>);
+						this._id_type = default(int);
 					}
 					this.SendPropertyChanged("Painting_type");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Painting", Storage="_Product", ThisKey="id_produs", OtherKey="id_product", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Painting", Storage="_Product", ThisKey="id_produs", OtherKey="id_product", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Product Product
 		{
 			get
@@ -2346,7 +1924,7 @@ namespace Client_ADBD
 					}
 					else
 					{
-						this._id_produs = default(Nullable<int>);
+						this._id_produs = default(int);
 					}
 					this.SendPropertyChanged("Product");
 				}
@@ -2496,21 +2074,19 @@ namespace Client_ADBD
 		
 		private int _id_post;
 		
-		private System.Nullable<int> _id_user;
+		private int _id_product;
 		
-		private System.Nullable<int> _id_product;
+		private int _id_status;
 		
-		private System.Nullable<int> _id_status;
-		
-		private System.Nullable<int> _id_auction;
+		private int _id_auction;
 		
 		private decimal _start_price;
 		
 		private decimal _list_price;
 		
-		private System.Nullable<System.DateTime> _created_at;
+		private System.DateTime _created_at;
 		
-		private EntitySet<Bid> _Bids;
+		private string _image_path;
 		
 		private EntityRef<Auction> _Auction;
 		
@@ -2518,37 +2094,33 @@ namespace Client_ADBD
 		
 		private EntityRef<Product> _Product;
 		
-		private EntityRef<User> _User;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void Onid_postChanging(int value);
     partial void Onid_postChanged();
-    partial void Onid_userChanging(System.Nullable<int> value);
-    partial void Onid_userChanged();
-    partial void Onid_productChanging(System.Nullable<int> value);
+    partial void Onid_productChanging(int value);
     partial void Onid_productChanged();
-    partial void Onid_statusChanging(System.Nullable<int> value);
+    partial void Onid_statusChanging(int value);
     partial void Onid_statusChanged();
-    partial void Onid_auctionChanging(System.Nullable<int> value);
+    partial void Onid_auctionChanging(int value);
     partial void Onid_auctionChanged();
     partial void Onstart_priceChanging(decimal value);
     partial void Onstart_priceChanged();
     partial void Onlist_priceChanging(decimal value);
     partial void Onlist_priceChanged();
-    partial void Oncreated_atChanging(System.Nullable<System.DateTime> value);
+    partial void Oncreated_atChanging(System.DateTime value);
     partial void Oncreated_atChanged();
+    partial void Onimage_pathChanging(string value);
+    partial void Onimage_pathChanged();
     #endregion
 		
 		public Post()
 		{
-			this._Bids = new EntitySet<Bid>(new Action<Bid>(this.attach_Bids), new Action<Bid>(this.detach_Bids));
 			this._Auction = default(EntityRef<Auction>);
 			this._Post_status = default(EntityRef<Post_status>);
 			this._Product = default(EntityRef<Product>);
-			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -2572,32 +2144,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_user", DbType="Int")]
-		public System.Nullable<int> id_user
-		{
-			get
-			{
-				return this._id_user;
-			}
-			set
-			{
-				if ((this._id_user != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_userChanging(value);
-					this.SendPropertyChanging();
-					this._id_user = value;
-					this.SendPropertyChanged("id_user");
-					this.Onid_userChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_product", DbType="Int")]
-		public System.Nullable<int> id_product
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_product", DbType="Int NOT NULL")]
+		public int id_product
 		{
 			get
 			{
@@ -2620,8 +2168,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_status", DbType="Int")]
-		public System.Nullable<int> id_status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_status", DbType="Int NOT NULL")]
+		public int id_status
 		{
 			get
 			{
@@ -2644,8 +2192,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_auction", DbType="Int")]
-		public System.Nullable<int> id_auction
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_auction", DbType="Int NOT NULL")]
+		public int id_auction
 		{
 			get
 			{
@@ -2708,8 +2256,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_at", DbType="DateTime")]
-		public System.Nullable<System.DateTime> created_at
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_at", DbType="DateTime NOT NULL")]
+		public System.DateTime created_at
 		{
 			get
 			{
@@ -2728,20 +2276,27 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_Bid", Storage="_Bids", ThisKey="id_post", OtherKey="id_post")]
-		public EntitySet<Bid> Bids
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image_path", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string image_path
 		{
 			get
 			{
-				return this._Bids;
+				return this._image_path;
 			}
 			set
 			{
-				this._Bids.Assign(value);
+				if ((this._image_path != value))
+				{
+					this.Onimage_pathChanging(value);
+					this.SendPropertyChanging();
+					this._image_path = value;
+					this.SendPropertyChanged("image_path");
+					this.Onimage_pathChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auction_Post", Storage="_Auction", ThisKey="id_auction", OtherKey="id_auction", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auction_Post", Storage="_Auction", ThisKey="id_auction", OtherKey="id_auction", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Auction Auction
 		{
 			get
@@ -2768,14 +2323,14 @@ namespace Client_ADBD
 					}
 					else
 					{
-						this._id_auction = default(Nullable<int>);
+						this._id_auction = default(int);
 					}
 					this.SendPropertyChanged("Auction");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_status_Post", Storage="_Post_status", ThisKey="id_status", OtherKey="id_status", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_status_Post", Storage="_Post_status", ThisKey="id_status", OtherKey="id_status", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Post_status Post_status
 		{
 			get
@@ -2802,14 +2357,14 @@ namespace Client_ADBD
 					}
 					else
 					{
-						this._id_status = default(Nullable<int>);
+						this._id_status = default(int);
 					}
 					this.SendPropertyChanged("Post_status");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Post", Storage="_Product", ThisKey="id_product", OtherKey="id_product", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Post", Storage="_Product", ThisKey="id_product", OtherKey="id_product", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Product Product
 		{
 			get
@@ -2836,43 +2391,9 @@ namespace Client_ADBD
 					}
 					else
 					{
-						this._id_product = default(Nullable<int>);
+						this._id_product = default(int);
 					}
 					this.SendPropertyChanged("Product");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Post", Storage="_User", ThisKey="id_user", OtherKey="id_user", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Posts.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Posts.Add(this);
-						this._id_user = value.id_user;
-					}
-					else
-					{
-						this._id_user = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -2895,18 +2416,6 @@ namespace Client_ADBD
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Bids(Bid entity)
-		{
-			this.SendPropertyChanging();
-			entity.Post = this;
-		}
-		
-		private void detach_Bids(Bid entity)
-		{
-			this.SendPropertyChanging();
-			entity.Post = null;
 		}
 	}
 	
@@ -3038,7 +2547,7 @@ namespace Client_ADBD
 		
 		private System.Nullable<System.DateTime> _inventory_date;
 		
-		private EntitySet<BOOK> _BOOKs;
+		private EntitySet<Book> _Books;
 		
 		private EntitySet<Jewelry> _Jewelries;
 		
@@ -3066,7 +2575,7 @@ namespace Client_ADBD
 		
 		public Product()
 		{
-			this._BOOKs = new EntitySet<BOOK>(new Action<BOOK>(this.attach_BOOKs), new Action<BOOK>(this.detach_BOOKs));
+			this._Books = new EntitySet<Book>(new Action<Book>(this.attach_Books), new Action<Book>(this.detach_Books));
 			this._Jewelries = new EntitySet<Jewelry>(new Action<Jewelry>(this.attach_Jewelries), new Action<Jewelry>(this.detach_Jewelries));
 			this._Paintings = new EntitySet<Painting>(new Action<Painting>(this.attach_Paintings), new Action<Painting>(this.detach_Paintings));
 			this._Posts = new EntitySet<Post>(new Action<Post>(this.attach_Posts), new Action<Post>(this.detach_Posts));
@@ -3115,7 +2624,7 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string description
 		{
 			get
@@ -3155,16 +2664,16 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_BOOK", Storage="_BOOKs", ThisKey="id_product", OtherKey="id_product")]
-		public EntitySet<BOOK> BOOKs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Book", Storage="_Books", ThisKey="id_product", OtherKey="id_product")]
+		public EntitySet<Book> Books
 		{
 			get
 			{
-				return this._BOOKs;
+				return this._Books;
 			}
 			set
 			{
-				this._BOOKs.Assign(value);
+				this._Books.Assign(value);
 			}
 		}
 		
@@ -3253,13 +2762,13 @@ namespace Client_ADBD
 			}
 		}
 		
-		private void attach_BOOKs(BOOK entity)
+		private void attach_Books(Book entity)
 		{
 			this.SendPropertyChanging();
 			entity.Product = this;
 		}
 		
-		private void detach_BOOKs(BOOK entity)
+		private void detach_Books(Book entity)
 		{
 			this.SendPropertyChanging();
 			entity.Product = null;
@@ -3334,9 +2843,9 @@ namespace Client_ADBD
 		
 		private int _id_sculpture;
 		
-		private System.Nullable<int> _id_product;
+		private int _id_product;
 		
-		private System.Nullable<int> _id_sculpture_material;
+		private int _id_sculpture_material;
 		
 		private string _artist;
 		
@@ -3356,9 +2865,9 @@ namespace Client_ADBD
     partial void OnCreated();
     partial void Onid_sculptureChanging(int value);
     partial void Onid_sculptureChanged();
-    partial void Onid_productChanging(System.Nullable<int> value);
+    partial void Onid_productChanging(int value);
     partial void Onid_productChanged();
-    partial void Onid_sculpture_materialChanging(System.Nullable<int> value);
+    partial void Onid_sculpture_materialChanging(int value);
     partial void Onid_sculpture_materialChanged();
     partial void OnartistChanging(string value);
     partial void OnartistChanged();
@@ -3397,8 +2906,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_product", DbType="Int")]
-		public System.Nullable<int> id_product
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_product", DbType="Int NOT NULL")]
+		public int id_product
 		{
 			get
 			{
@@ -3421,8 +2930,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_sculpture_material", DbType="Int")]
-		public System.Nullable<int> id_sculpture_material
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_sculpture_material", DbType="Int NOT NULL")]
+		public int id_sculpture_material
 		{
 			get
 			{
@@ -3525,7 +3034,7 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Sculpture", Storage="_Product", ThisKey="id_product", OtherKey="id_product", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Sculpture", Storage="_Product", ThisKey="id_product", OtherKey="id_product", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Product Product
 		{
 			get
@@ -3552,14 +3061,14 @@ namespace Client_ADBD
 					}
 					else
 					{
-						this._id_product = default(Nullable<int>);
+						this._id_product = default(int);
 					}
 					this.SendPropertyChanged("Product");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sculpture_material_Sculpture", Storage="_Sculpture_material", ThisKey="id_sculpture_material", OtherKey="id_sculpture_material", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sculpture_material_Sculpture", Storage="_Sculpture_material", ThisKey="id_sculpture_material", OtherKey="id_sculpture_material", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Sculpture_material Sculpture_material
 		{
 			get
@@ -3586,7 +3095,7 @@ namespace Client_ADBD
 					}
 					else
 					{
-						this._id_sculpture_material = default(Nullable<int>);
+						this._id_sculpture_material = default(int);
 					}
 					this.SendPropertyChanged("Sculpture_material");
 				}
@@ -3736,9 +3245,9 @@ namespace Client_ADBD
 		
 		private int _id_role;
 		
-		private System.Nullable<int> _id_user;
+		private int _id_user;
 		
-		private System.Nullable<int> _id_tip;
+		private int _id_tip;
 		
 		private System.DateTime _role_date;
 		
@@ -3752,9 +3261,9 @@ namespace Client_ADBD
     partial void OnCreated();
     partial void Onid_roleChanging(int value);
     partial void Onid_roleChanged();
-    partial void Onid_userChanging(System.Nullable<int> value);
+    partial void Onid_userChanging(int value);
     partial void Onid_userChanged();
-    partial void Onid_tipChanging(System.Nullable<int> value);
+    partial void Onid_tipChanging(int value);
     partial void Onid_tipChanged();
     partial void Onrole_dateChanging(System.DateTime value);
     partial void Onrole_dateChanged();
@@ -3787,8 +3296,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_user", DbType="Int")]
-		public System.Nullable<int> id_user
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_user", DbType="Int NOT NULL")]
+		public int id_user
 		{
 			get
 			{
@@ -3811,8 +3320,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_tip", DbType="Int")]
-		public System.Nullable<int> id_tip
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_tip", DbType="Int NOT NULL")]
+		public int id_tip
 		{
 			get
 			{
@@ -3855,7 +3364,7 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_type_User_role", Storage="_User_type", ThisKey="id_tip", OtherKey="id_type", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_type_User_role", Storage="_User_type", ThisKey="id_tip", OtherKey="id_type", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public User_type User_type
 		{
 			get
@@ -3882,14 +3391,14 @@ namespace Client_ADBD
 					}
 					else
 					{
-						this._id_tip = default(Nullable<int>);
+						this._id_tip = default(int);
 					}
 					this.SendPropertyChanged("User_type");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_User_role", Storage="_User", ThisKey="id_user", OtherKey="id_user", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_User_role", Storage="_User", ThisKey="id_user", OtherKey="id_user", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public User User
 		{
 			get
@@ -3916,7 +3425,7 @@ namespace Client_ADBD
 					}
 					else
 					{
-						this._id_user = default(Nullable<int>);
+						this._id_user = default(int);
 					}
 					this.SendPropertyChanged("User");
 				}
@@ -4084,9 +3593,7 @@ namespace Client_ADBD
 		
 		private System.Nullable<decimal> _balance;
 		
-		private EntitySet<Bid> _Bids;
-		
-		private EntitySet<Post> _Posts;
+		private EntitySet<Auction> _Auctions;
 		
 		private EntitySet<User_role> _User_roles;
 		
@@ -4118,8 +3625,7 @@ namespace Client_ADBD
 		
 		public User()
 		{
-			this._Bids = new EntitySet<Bid>(new Action<Bid>(this.attach_Bids), new Action<Bid>(this.detach_Bids));
-			this._Posts = new EntitySet<Post>(new Action<Post>(this.attach_Posts), new Action<Post>(this.detach_Posts));
+			this._Auctions = new EntitySet<Auction>(new Action<Auction>(this.attach_Auctions), new Action<Auction>(this.detach_Auctions));
 			this._User_roles = new EntitySet<User_role>(new Action<User_role>(this.attach_User_roles), new Action<User_role>(this.detach_User_roles));
 			OnCreated();
 		}
@@ -4144,7 +3650,7 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fisrt_name", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fisrt_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string fisrt_name
 		{
 			get
@@ -4164,7 +3670,7 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_name", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string last_name
 		{
 			get
@@ -4324,29 +3830,16 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Bid", Storage="_Bids", ThisKey="id_user", OtherKey="id_user")]
-		public EntitySet<Bid> Bids
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Auction", Storage="_Auctions", ThisKey="id_user", OtherKey="id_user")]
+		public EntitySet<Auction> Auctions
 		{
 			get
 			{
-				return this._Bids;
+				return this._Auctions;
 			}
 			set
 			{
-				this._Bids.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Post", Storage="_Posts", ThisKey="id_user", OtherKey="id_user")]
-		public EntitySet<Post> Posts
-		{
-			get
-			{
-				return this._Posts;
-			}
-			set
-			{
-				this._Posts.Assign(value);
+				this._Auctions.Assign(value);
 			}
 		}
 		
@@ -4383,25 +3876,13 @@ namespace Client_ADBD
 			}
 		}
 		
-		private void attach_Bids(Bid entity)
+		private void attach_Auctions(Auction entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = this;
 		}
 		
-		private void detach_Bids(Bid entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_Posts(Post entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Posts(Post entity)
+		private void detach_Auctions(Auction entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
@@ -4436,6 +3917,8 @@ namespace Client_ADBD
 		
 		private string _manufacturer;
 		
+		private int _id_type;
+		
 		private EntityRef<Product> _Product;
 		
 		private EntityRef<Watch_mechanism> _Watch_mechanism;
@@ -4454,6 +3937,8 @@ namespace Client_ADBD
     partial void OndiameterChanged();
     partial void OnmanufacturerChanging(string value);
     partial void OnmanufacturerChanged();
+    partial void Onid_typeChanging(int value);
+    partial void Onid_typeChanged();
     #endregion
 		
 		public Watch()
@@ -4571,7 +4056,27 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Watch", Storage="_Product", ThisKey="id_product", OtherKey="id_product", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_type", DbType="Int NOT NULL")]
+		public int id_type
+		{
+			get
+			{
+				return this._id_type;
+			}
+			set
+			{
+				if ((this._id_type != value))
+				{
+					this.Onid_typeChanging(value);
+					this.SendPropertyChanging();
+					this._id_type = value;
+					this.SendPropertyChanged("id_type");
+					this.Onid_typeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Watch", Storage="_Product", ThisKey="id_product", OtherKey="id_product", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Product Product
 		{
 			get
@@ -4605,7 +4110,7 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Watch_mechanism_Watch", Storage="_Watch_mechanism", ThisKey="id_mechanism", OtherKey="id_mechanism", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Watch_mechanism_Watch", Storage="_Watch_mechanism", ThisKey="id_mechanism", OtherKey="id_mechanism", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Watch_mechanism Watch_mechanism
 		{
 			get

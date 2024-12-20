@@ -31,5 +31,29 @@ namespace Client_ADBD.Views
             InitializeComponent();
         }
 
+        private void OldPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is VM_Account viewModel)
+            {
+                viewModel.OldPassword = ((PasswordBox)sender).Password;
+            }
+        }
+
+        private void NewPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is VM_Account viewModel)
+            {
+                viewModel.NewPassword = ((PasswordBox)sender).Password;
+            }
+        }
+
+        private void ConfirmPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is VM_Account viewModel)
+            {
+                viewModel.ConfirmPassword = ((PasswordBox)sender).Password;
+            }
+        }
+
     }
 }

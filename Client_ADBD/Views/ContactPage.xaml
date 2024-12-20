@@ -1,0 +1,99 @@
+﻿<Page x:Class="Client_ADBD.Views.ContactPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm ="clr-namespace:Client_ADBD.ViewModels"
+      mc:Ignorable="d" 
+      Title="ContactPage">
+
+    <Page.Resources>
+        <!-- Stil global pentru font Times New Roman -->
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Times New Roman" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Times New Roman" />
+        </Style>
+    </Page.Resources>
+
+    <!--<Page.DataContext>
+        <vm:VM_ContactPage />
+    </Page.DataContext>-->
+
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid Margin="40, 10, 10, 0">
+            <!-- Definim 3 rânduri pentru text și un rând pentru imagine -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <!-- Acesta va fi pentru imagine -->
+            </Grid.RowDefinitions>
+
+            <Frame Name="MainFrame" NavigationUIVisibility="Hidden" />
+            <!-- Secțiunea 1: Program de Expoziții -->
+            <StackPanel Grid.Row="0" Margin="10">
+                <Button Name="btnBack" Command="{Binding BackCommand}" Padding="5" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="White" BorderThickness="0" Height="53" Width="84">
+                    <Image Source="undo.png" Width="64" Height="43" />
+                </Button>
+                <TextBlock Text="PROGRAM DE EXPOZIȚII:" FontSize="19" FontWeight="Bold" Margin="0,35,0,10" />
+                <TextBlock Text="       Luni - Duminică: 10:00 - 20:00" FontSize="16" Margin="0,0,0,10" />
+                <Button Name="btnConsultants" Command="{Binding ConsultantsCommand}" Content="Consultanți de artă" Padding="10" FontSize="16" Background="White" BorderBrush="Black" HorizontalAlignment="Left" Width="150" />
+                <TextBlock Text="PROGRAM DE RELAȚII CU CLIENȚII:" FontSize="19" FontWeight="Bold" Margin="0,30,0,10" />
+                <TextBlock Text="       Luni - Sâmbătă: 10:00 - 19:00" FontSize="16" Margin="0,0,0,5" />
+                <TextBlock Text="       Duminică: 10:00 - 14:00" FontSize="16" Margin="0,0,0,10" />
+                <TextBlock Text="PROGRAM DE CONSIGNARE ȘI EVALUARE:" FontSize="19" FontWeight="Bold" Margin="0,30,0,10" />
+                <TextBlock Text="       Luni - Vineri: 11:00 - 18:00" FontSize="16" Margin="0,0,0,5" />
+                <TextBlock Text="       Sâmbătă: doar cu programare în prealabil" FontSize="16" FontStyle="Italic" />
+            </StackPanel>
+
+            <!-- Secțiunea 2: Date de Contact -->
+            <StackPanel Grid.Row="1" Margin="10">
+                <TextBlock Text="DATE DE CONTACT:" FontSize="19" FontWeight="Bold" Margin="0,0,0,10" />
+                <TextBlock Text="       AUCTIONPRO S.R.L." FontSize="16" Margin="0,0,0,5" />
+                <TextBlock Text="       Palatul Cesianu-Racoviță, Str. C.A. Rosetti, nr. 5, 010281 București" FontSize="16" Margin="0,0,0,5" />
+                <TextBlock Text="       office@auctionpro.ro" FontSize="16" Margin="0,0,0,5" />
+                <TextBlock Text="       021 210 30 16 / 021 210 30 15" FontSize="16" Margin="0,0,0,10" />
+                <TextBlock Text="       CUI RO 40284718, J40/17654/2018" FontSize="16" Margin="0,0,0,5" />
+                <TextBlock Text="       Garanti Bank" FontSize="16" FontWeight="Bold" Margin="0,20,0,5" />
+                <TextBlock Text="       RO21UGBI0000822003986RON (RON)" FontSize="16" Margin="0,0,0,5" />
+                <TextBlock Text="       RO87UGBI0000822004003EUR (EUR)" FontSize="16" Margin="0,0,0,5" />
+                <TextBlock Text="       RO87UGBI0000822004002USD (USD)" FontSize="16" Margin="0,0,0,5" />
+                <TextBlock Text="       SWIFT: UGBIROBU" FontSize="16" Margin="0,0,0,5" />
+                <TextBlock Text="       Trez RO03TREZ7005069XXX015340(RON)" FontSize="16" />
+            </StackPanel>
+
+            <!-- Secțiunea 3: Persoane de Contact -->
+            <StackPanel Grid.Row="2" Margin="10">
+                <TextBlock Text="PERSOANE DE CONTACT:" FontSize="19" FontWeight="Bold" Margin="0,0,0,10" />
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="       Cerasela Călin" FontSize="16" FontWeight="Bold" />
+                    <TextBlock Text="       Director Contabilitate" FontSize="16" />
+                    <TextBlock Text="       0756 163 363 | cerasela.calin@auctionpro.ro" FontSize="16" />
+                </StackPanel>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="       Anca Bejan" FontSize="16" FontWeight="Bold" />
+                    <TextBlock Text="       PR Manager" FontSize="16" />
+                    <TextBlock Text="       0730 660 511 | anca.bejan@auctionpro.ro" FontSize="16" />
+                </StackPanel>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="       Eliza Leșanu" FontSize="16" FontWeight="Bold" />
+                    <TextBlock Text="       Brand Director" FontSize="16" />
+                    <TextBlock Text="       0744 380 510 | eliza.lesanu@auctionpro.ro" FontSize="16" />
+                </StackPanel>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="       Răzvan Enache" FontSize="16" FontWeight="Bold" />
+                    <TextBlock Text="       Director Administrativ" FontSize="16" />
+                    <TextBlock Text="       0756 066 303 | razvan.enache@auctionpro.ro" FontSize="16" />
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Imaginea plasată pe rândul 3 -->
+            <Image Grid.Row="3" Source="/Views/map.jpeg" Stretch="UniformToFill" HorizontalAlignment="Stretch" Margin="0,90,0,0" />
+
+
+        </Grid>
+    </ScrollViewer>
+</Page>

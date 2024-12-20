@@ -1,0 +1,145 @@
+﻿<Page x:Class="Client_ADBD.Views.AboutUsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
+      xmlns:local="clr-namespace:Client_ADBD.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AboutUsPage">
+
+    <!--<Page.DataContext>
+        <ViewModels:VM_AboutUs />
+    </Page.DataContext>-->
+    
+    <Grid>
+        <!-- Definim două coloane: una pentru meniul din stânga și alta pentru conținutul din dreapta -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Background="White" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Informații" FontSize="20" FontFamily="Times New Roman" FontWeight="Bold" Padding="10" />
+            <ListBox Name="InfoListBox" 
+             FontSize="17" 
+             BorderThickness="0"
+             SelectedValue="{Binding SelectedItem, Mode=TwoWay}" 
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center"
+                     SelectedValuePath="Content">
+                <ListBoxItem Content="Despre noi" FontFamily="Times New Roman"/>
+                <ListBoxItem Content="Istoric AuctionPro" FontFamily="Times New Roman" />
+                <ListBoxItem Content="Experți" FontFamily="Times New Roman" />
+                <ListBoxItem Content="Contact" FontFamily="Times New Roman" />
+            </ListBox>
+        </StackPanel>
+
+        <Button Name="btnBack" Padding="5" Margin="10,10,0,0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Command="{Binding BackCommand}"
+                Background="White" BorderThickness="0" Height="53" Width="84" >
+            <Image Source="undo.png" Width="64" Height="43" />
+        </Button>
+
+        <ScrollViewer Grid.Column="1" Margin="10" VerticalScrollBarVisibility="Auto">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- Definim un număr flexibil de rânduri -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- Coloanele pentru imagini -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Imagine 1 -->
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Gray" BorderThickness="1" Margin="5">
+                    <Grid>
+                        <Image Source="/Views/team.png" Stretch="UniformToFill"/>
+                        <TextBlock Text="Despre noi" FontFamily="Times New Roman" Foreground="White" Background="Black" Opacity="0.7"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                   FontSize="14" FontWeight="Bold" TextAlignment="Center" />
+
+                        <!-- Buton fără efecte de focus sau presare -->
+                        <Button Command="{Binding NavigateToAboutCommand}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                    <!-- Elimină focusul -->
+
+                                    <!-- Elimină efectele la apăsare -->
+                                    <Setter Property="Foreground" Value="Transparent" />
+
+                                    <!-- Triggers pentru stările butonului -->
+                                    <Style.Triggers>
+                                        <!-- Nu modificăm nimic când butonul este apăsat -->
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Trigger>
+
+                                        <!-- Nu modificăm nimic când mouse-ul este peste buton -->
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+                </Border>
+
+
+                <!-- Imagine 2 -->
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="5">
+                    <Grid>
+                        <Image Source="/Views/museum.png" Stretch="UniformToFill" />
+                        <TextBlock Text="Istoric AuctionPro" FontFamily="Times New Roman" Foreground="White" Background="Black" Opacity="0.7"
+                                   VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                                   FontSize="14" FontWeight="Bold" TextAlignment="Center"
+                                  />
+                        <Button Command="{Binding NavigateToHistoryCommand}" Background="Transparent" BorderThickness="0" />
+
+                    </Grid>
+                </Border>
+
+                <!-- Imagine 3 -->
+                <Border Grid.Row="1" Grid.Column="0" BorderBrush="Gray" BorderThickness="1" Margin="5">
+                    <Grid>
+                        <Image Source="/Views/expert.png" Stretch="UniformToFill" />
+                        <TextBlock Text="Experți" FontFamily="Times New Roman" Foreground="White" Background="Black" Opacity="0.7"
+                                   VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                                   FontSize="14" FontWeight="Bold" TextAlignment="Center"
+                                   />
+                        <Button Command="{Binding NavigateToExpertsCommand}" Background="Transparent" BorderThickness="0" />
+                    </Grid>
+                </Border>
+
+                <!-- Imagine 4 -->
+                <Border Grid.Row="1" Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="5">
+                    <Grid>
+                        <Image Source="/Views/contact.png" Stretch="UniformToFill" />
+                        <TextBlock Text="Contact" FontFamily="Times New Roman" Foreground="White" Background="Black" Opacity="0.7"
+                                   VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                                   FontSize="14" FontWeight="Bold" TextAlignment="Center"
+                                   />
+                        <Button Command="{Binding NavigateToContactCommand}" Background="Transparent" BorderThickness="0" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+
+    </Grid>
+</Page>

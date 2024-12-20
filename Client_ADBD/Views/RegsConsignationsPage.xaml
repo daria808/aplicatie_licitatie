@@ -1,0 +1,187 @@
+﻿<Page x:Class="Client_ADBD.Views.RegsConsignationsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client_ADBD.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegsConsignationsPage">
+
+    <Grid>
+        <!-- Scroll pentru întreaga pagină -->
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <StackPanel>
+                <StackPanel Background="White">
+
+                    <TextBlock Text="Regulament de consignare" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+      
+                       HorizontalAlignment="Center" 
+                       Foreground="Black" 
+                       FontFamily="Times New Roman"
+                       Margin="0,20" />
+
+                </StackPanel>
+
+                <!-- Secțiunea principală -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+
+                    <StackPanel Width="350" Margin="10">
+                        <TextBlock Text="1. AuctionPro primeşte în consignaţie obiecte de artă și de colecție în vederea vânzării lor prin licitaţie, privat și/sau prin magazin. Primirea în custodie, evaluarea şi expertizarea operelor se fac la oricare din sediile naționale ale AuctionPro.
+                        În România, consignațiile se organizează de către AP by AuctionPro SRL, autorizată sub nr. - 476/24.11.2020; în Bulgaria, consignațiile se organizează de către AuctionPro Bulgaria LTD, autorizată sub nr. -207162373 din 17.11.2022; în Croația, consignațiile se organizează de către AuctionPro Croatia DOO, autorizată sub MBS 081471806 din 9.11.2022." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="2. Depunerea lucrărilor în custodie/consignaţie se poate face oricând în timpul programului Biroului de Evaluare şi Consignație, după cum urmează: de luni până vineri, între 11-18, iar sâmbăta doar cu programare in prealabil. Pentru discreţie şi a evita aglomeraţia vă recomandăm efectuarea în prealabil a unei programari (după caz, deponenţi@auctionpro.ro; evaluation@auctionpro.bg; konsignacija@auctionpro.hr; telefon: pentru România: 021 210 30 16, 0756 066 302, 0756 163 400, 0758 056 115; pentru Bulgaria: +359 87 730 5826; pentru Croația: +385 97 676 0714; +385 1 3885 594). Tot în vederea optimizării timpului de aşteptare recomandăm persoanelor interesate de evaluarea unui obiect de artă sau de colecție să ne trimită în prealabil, la adresa de email de mai sus, o fotografie clară a operei, verso-ului şi a semnăturii, precum şi informaţii cu privire la a) dimensiunea operei şi provenienţa acesteia, precum şi b) datele de contact ale adresantului, urmând a primi în scurt timp, prin email sau telefon, o opinie preliminară asupra valorii de piaţă a operei şi nivelului de acceptabilitate într-una dintre licitaţiile AuctionPro." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="3. Evaluarea şi expertizarea în vederea vânzării prin licitaţie sunt gratuite. Un exemplar al certificatului de custodie/consignaţie se eliberează deponentului." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="4. Departamentul de Evaluare AuctionPro stabileşte intervalul estimativ al valorii de piaţă a operei (nenegociabil) şi recomandă deponentului un preţ de pornire (negociabil), semnificativ inferior limitei minime a intervalului estimativ al valorii de piaţă. Intervalul estimativ se stabilește de comisia de evaluare a consignatarului și reflectă opinia profesională colectivă a evaluatorilor consignatarului despre valoarea la care piața momentului poate absorbi obiectul, pe baza, între altele, a istoricului de tranzacționare a operelor artistului, tematica și dimensiunile operei, concurența cu opere substituibile în cadrul aceleași licitații, contextul de piață etc. Intervalul estimativ nu poate fi unul optimist, ci unul funcțional, care să asigure realist vânzarea obiectului. Funcție de natura lotului consignat, Casa va afișa în catalogul de licitație estimarea ori prețul de pornire." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="5. Operele selectabile în vederea vânzării prin licitaţie trebuie consignate cu cel puţin 6 saptămâni înaintea datei stabilite pentru desfăşurarea licitaţiei (din raţiuni ce ţin de durata de timp și etapele necesare organizării procesului de vânzare). Excepție fac, acolo unde este reglementat de legea națională, documentele care fac parte din Fondul Arhivistic Național, în cazul cărora pentru respectarea priorității la cumpărare ce aparține Arhivelor Naționale (care au un termen de 60 de zile de a-și exercita preferința) consignarea se va face cu cel puțin 10 săptămâni înainte (mai puțin în cazul în care deponentul face dovada înștiințării Arhivelor Naționale în prealabil). AuctionPro publică pe website, din timp, de regulă cu 6 luni înainte, agenda de licitații pentru următoarea perioadă de un an, încât să înlesnească participarea din timp la sesiunile de colectare în consignaţie de obiecte de artă și de colecție în vederea vânzării lor prin licitaţie." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="6. AuctionPro stabileşte ordinea introducerii în vânzare a operelor primite în consignaţie." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="7. Atunci când operele se vând prin licitaţie, deponentul va primi preţul vânzării (mai puţin comisionul de vânzare; precum și, dacă este cazul, taxe de import, cheltuielile directe în legătură cu bunul, precum cu restaurarea, cu înrămarea, cu restaurarea ramei, cu realizarea de expertize aferent loturilor clasabile ori la cererea Ministerului Culturii, de marketing special etc., agreate prin contractul de consignare), îndată după încasarea integrală a sumei facturate de la adjudecatar. Preţul se achită deponentului: în EUR, dacă vânzarea are loc într-o juridicție care a adoptat EUR; în moneda națională, dacă este rezident; aplicându-se cursul de schimb oficial al Băncii Naționale din data licitaţiei. Dacă deponentul nerezident solicită ca plata să se efectueze într-o altă monedă, atunci, la instrucțiunile scrise ale deponentului, AuctionPro va proceda la schimbarea sumei care se cuvine deponentului în moneda indicată de către acesta la cursul de schimb oficial al Băncii Naționale valabil la data plății, urmând ca deponentului să-i fie plătită suma în valută rezultată din schimbul valutar." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="8. Comisionul vânzării prin licitaţie se calculează în funcţie de numărul şi valoarea operelor consignate, precum si de performanța operei în licitație prin raportarea prețului de adjudecare la prețul de pornire, respectiv la intervalul estimativ a valorii de piață a operei. Din preţul de adjudecare, se vor scădea şi reţine de către AuctionPro eventualele costuri directe în legătură cu bunul, precum cele cu restaurarea, cu înrămarea, cu restaurarea ramei, cu realizarea de expertize aferent loturilor clasabile ori la cererea Ministerului Culturii, de marketing special, operațiuni vamale etc., agreate în prealabil cu deponentul. În cazul în care obiectul nu se vinde, deponentul va achita consignatarului costurile mai sus menționate înainte de retragerea lotului din consignație." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="9. Din prețul vânzării se rețin și plățile în avans ale unui lot consignat sau adjudecat al deponentului și orice alte eventuale datorii anterioare pe care deponentul le are față de AuctionPro (precum, funcție de caz: prețul unor loturi adjudecate de deponent, comisionul de penalizare prevăzut de art. 17 pentru cazul auto-adjudecării, plăți nedatorate de către AuctionPro etc.). În ipoteza în care deponentul are datorii anterioare față de AuctionPro, obiectele consignate de acesta se pot pune în vânzare la un preț care să acopere datoriile deponentului." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="10. Din raţiuni ce ţin de editarea finală a catalogului (online și/sau fizic) de licitaţie şi a altor materiale promoţionale (online și/sau fizice) în legatură cu licitaţia, precum și de celelalte costuri angajate în marketarea și comunicarea loturilor consignate către clientelă, dacă deponentul retrage obiectul din consignaţie, suportă atât eventuale costuri directe în legătura cu obiectul, precum curățarea, restaurarea, înrămarea, campanii dedicate de marketing etc., cât și comisionul minim standard al consignatarului aferent licitației în cauză, aplicat la dublul prețului de pornire (dar minim 500 de euro). Același comision/aceeași penalitate se datorează în cazul în care AuctionPro este nevoit să retragă din licitație opera consignată atunci când o terță persoană contestă în scris și documentat dreptul deponentului de a pune în vânzare opera, iar din dovezile administrate de AuctionPro în prealabil licitației rezultă, în aprecierea AuctionPro, că sunt temeiuri serioase să se considere că deponentul nu este proprietarul operei consignate sau că nu are dreptul să o vândă."
+                                     TextWrapping="Wrap"
+                                     FontSize="14"
+                                     Margin="0,10"
+                                     FontFamily="Times New Roman" />
+
+                        <TextBlock Text="11. AuctionPro va păstra în expunere sau în depozit loturile nevândute prin licitaţia în care au fost alocate, pentru o perioadă cuprinsă între minim două săptămâni și maxim 4 luni de la data licitaţiei, fiind mandatat de deponent să continue în această perioadă marketarea lor, colectarea de oferte (situate cel puţin la limita minimă a intervalului estimativ al valorii de piaţă a operei, prevăzut în catalogul de licitaţie) şi vânzarea în consecinţă. În cazul vânzării după licitaţie în condiţiile acestui articol, deponentul datorează AuctionPro acelaşi comision precum în cazul vânzării prin licitaţie, conform certificatului de consignaţie."
+                                     TextWrapping="Wrap"
+                                     FontSize="14"
+                                     Margin="0,10"
+                                     FontFamily="Times New Roman" />
+                    </StackPanel>
+
+                    <StackPanel Width="350" Margin="10">
+
+                        <TextBlock Text="   În situația prevăzută de art. 22 al Regulamentului de Licitare, anume refuzul explicit sau implicit de plată al adjudecatarului (inclusiv situații precum: se constată că adjudecatarul nu poate fi contactat în termenul de plată ori că datele acestuia de contactare nu sunt/nu mai sunt valide, se constată că adjudecatarul nu este/nu mai este solvabil sau adjudecatarul amână plata sine die, se constată că adjudecarea a fost fraudată, spre ex. prin folosirea de identități false ori stratageme tehnice ori electronice), Casa este autorizată să aleagă, după caz, metoda pe care o consideră în mod rezonabil cea mai eficientă în vederea valorificării lotului adjudecat, inclusiv aplicarea pe penalități, inițierea de proceduri civile ori penale, rezoluționarea cu daune a adjudecării ori readjudecarea către un contraofertant la pas inferior prețului de adjudecare. În toate situațiile prevăzute de art. 22 din Regulamentul de Licitare care presupun continuarea demersurilor de încasare a prețului de adjudecare, consignantul menține durata consignării și păstrează lotul în depozitul Casei, pentru a permite finalizarea vânzării/revânzării, încasarea prețului de adjudecare/readjudecare și transferul lotului."
+                                     TextWrapping="Wrap"
+                                     FontSize="14"
+                                     Margin="0,10"
+                                     FontFamily="Times New Roman" />
+
+                        <TextBlock Text="12. Deponentul este obligat să ridice operele nevândute prin licitaţie de la sediul AuctionPro, în termen de o lună de la data licitaţiei (similar în termen de 2 săptămâni de la refuzul de consignaţie, în cazul operei primite în custodie dar refuzate în consignaţie)."
+                                     TextWrapping="Wrap"
+                                     FontSize="14"
+                                     Margin="0,10"
+                                     FontFamily="Times New Roman" />
+
+                        <TextBlock Text="13. Date fiind limitele fizice ale depozitului propriu al AuctionPro, deponentul autorizează AuctionPro ca, după o lună de la data licitaţiei, să transfere operele neridicate de deponent, în contul şi pe seama deponentului, într-un depozit extern sediului AuctionPro. Începând cu o lună de la data licitaţiei, AuctionPro nu mai răspunde patrimonial faţă de deponent pentru integritatea operei consignate, cu excepţia cazului în care s-a prevăzut altfel prin certificatul de consignaţie (similar în termen de 2 săptămâni de la refuzul de consignaţie, în cazul operei primite în custodie dar refuzate în consignaţie). La ridicarea operelor nevândute (ori neconsignate), ce au depăşit termenul de o lună pentru operele consignate şi nevândute şi respectiv 2 săptămâni pentru cele refuzate la consignaţie, deponentul va achita costurile de transport şi cota-parte din chiria depozitului, convenite de părţi drept egale cu contravaloarea a 10% din limita minimă a intervalului estimativ al valorii de piaţă a operei/lună. În ipoteza în care deponentul nu ridică operele nevândute (ori neconsignate) în termen de 6 luni de la data depozitării externe, AuctionPro este în drept să pună (din nou) în vânzare opera pentru a-şi recupera costurile de transport, depozitare şi oricare altele accesorii."
+                                    TextWrapping="Wrap"
+                                     FontSize="14"
+                                     Margin="0,10"
+                                     FontFamily="Times New Roman" />
+
+                        <TextBlock Text="14. În cazul în care autenticitatea operei vândute este contestată cu succes de cumpărător, AuctionPro restituie preţul încasat cumpărătorului, solicită şi încasează de la deponent preţul vânzării virat acestuia şi îi restituie opera de artă contestată."
+                                    TextWrapping="Wrap"
+                                   FontSize="14"
+                                    Margin="0,10"
+                                    FontFamily="Times New Roman" />
+
+                        <TextBlock Text="15.1. În anumite jurisdicții, legea națională impune vânzătorilor obligația de plăti un drept de suită, iar intermediarului, obligația de a calcula, reține și vira dreptul de suită către un organism de gestiune colectivă a drepturilor de autor."
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+                        <TextBlock Text="15.2. În România, în conformitate cu Legea 8/1996 privind drepturile de autor şi drepturile conexe, AuctionPro are obligaţia de a calcula, reţine şi plăti din preţul de vânzare, în condiţiile legii, sub condiţia să intre, ca şi atribuire, suport şi perioada de realizare, sub incidenţa numitei legi, dreptul de suită cuvenit autorilor şi urmaşilor, în cota procentuală stabilită prin lege, aplicată la preţul de revânzare: a) de la 300 la 3.000 EUR - 5%; b) de la 3.000,01 la 50.000 EUR - 4%; c) de la 50.000,01 la 200.000 EUR - 3%; d) de la 200.000,01 la 350.000 EUR - 1%; e) de la 350.000,01 la 500.000 EUR - 0,5%; f) peste 500.000 euro - 0,25%. Nu se datorează drept de suită în cazul în care preţul de revânzare este situat sub 300 EUR. De asemenea, în nicio situaţie dreptul de suită nu poate depăşi valoarea de 12.500 EUR." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="15.3. În Croația, în conformitate cu Legea 111/2021 privind drepturile de autor și drepturile conexe, AuctionPro are obligaţia de a calcula, reţine şi plăti din preţul de vânzare, în condiţiile legii, sub condiţia să intre, ca şi atribuire, suport şi perioada de realizare, sub incidenţa numitei legi, dreptul de suită cuvenit autorilor şi urmaşilor, în cota procentuală stabilită prin lege, aplicată la preţul de revânzare: a) de la 500 la 50.000 EUR - 5%; b) de la 50.000,01 la 200.000 EUR - 3%; c) de la 200.000,01 la 350.000 EUR - 1%; d) de la 350.000,01 la 500.000 EUR - 0,5%; e) peste 500.000 euro - 0,25%. Nu se datorează drept de suită în cazul în care preţul de revânzare este situat sub 500 EUR. De asemenea, în nicio situaţie dreptul de suită nu poate depăşi valoarea de 12.500 EUR." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="16.1. În anumite jurisdicții, legea națională impune intermediarilor să calculeze, rețină și vireze un impozit special deponenților care sunt și autorii obiectului de artă pus în vânzare." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="16.2. În România, în cazul în care deponentul este şi autorul operei depuse, AuctionPro va calcula, reţine şi vira impozitul pe venit, aplicând o cotă de 10% la venitul brut (preţul, mai puţin comisionul stabilit în sarcina deponentului), din care se deduce cota forfetară de cheltuieli de 40%, în conformitate cu dispozițiile art. 73 din Codul Fiscal (Legea nr. 227/2015) şi contribuţiile sociale obligatorii reţinute la sursă, respectiv contribuția de asigurări sociale (CAS) – 9,5%, contribuția de asigurări sociale de sănătate – 5,5% şi contribuția la fondul de șomaj – 0,5%." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="17. AuctionPro păstrează discreţia asupra identităţii deponenţilor şi cumpărătorilor, cu excepţia cazului în care aceştia optează pentru dezvăluirea identităţii lor. Deponenții au dreptul de a fi prezenți la licitația în cadrul căreia este supus vânzării lotul consignat. Deponenții nu au dreptul de a participa la licitarea, direct sau prin interpus, a lotului consignat, o eventuală atare participare fiind nulă, cu consecința a) sistării relației de consignare viitoare cu deponentul, respectiv b) obligării acestora la plata comisioanelor de licitație, în cazul adjudecării lotului, respectiv în cazul refuzului de plată a adjudecatarului, indiferent de motiv. Participarea deponentului la licitare se constată suveran de casa de licitație, inclusiv în temeiul înregistrării software/audio/video a procesului de licitație." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="18. AuctionPro păstrează dreptul de a publica imagini şi descrieri ale operei de artă primite în custodie sau consignaţie în oricare materiale cu scop promoţional." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="19.1. Deponentul garantează că este singurul proprietar al obiectului consignat și/sau are dreptul de a dispune de el prin vânzare, că are autoritatea necesară, a întreprins toate acţiunile necesare cerute conform legilor aplicabile pentru a putea încheia în mod valabil acest contract şi pentru a putea îndeplini şi/sau respecta în mod corespunzător obligaţiile decurgând din acest contract şi nu mai este necesară nicio altă aprobare pentru încheierea acestui contract. Deponentul va depune toate diligențele pentru a pune la dispoziția AuctionPro toate documentele ce conferă juridic deponentului titlu asupra lotului consignat." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+
+                        <TextBlock Text="19.2. În măsura în care, în prealabil licitației, ni se adresează în scris opoziții aparent justificate la vânzarea bunului, din partea unor terți ce manifestă credibil drepturi asupra obiectului (cazul litigiilor existente asupra proprietății, partajelor, notificărilor executorilor judecătorești etc.), obiectul se va retrage de Casa AuctionPro din licitație, cu suportarea de către deponent a costurilor. De asemenea, deponentul va fi răspunzător contractual, direct față de adjudecatar în orice situație care conduce la desfacerea ulterioară a vânzării, urmând să îl despăgubească pe acesta pentru prejudiciul produs." 
+                                   TextWrapping="Wrap"
+                                   FontSize="14"
+                                   Margin="0,10"
+                                   FontFamily="Times New Roman" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <Button Name="btnBack" Padding="5" Margin="2,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}" Background="White" BorderThickness="0" Height="40" Width="65">
+            <Image Source="undo.png" Width="58" Height="36" />
+        </Button>
+
+    </Grid>
+</Page>

@@ -50,6 +50,7 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -77,6 +78,10 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Transactions.Workflows, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Transactions.Workflows.0.1.2.0\lib\net40\System.Transactions.Workflows.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -95,6 +100,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AuctionApp.cs" />
     <Compile Include="AuctionApp.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,34 +108,146 @@
     </Compile>
     <Compile Include="DatabaseManager.cs" />
     <Compile Include="Helpers\Convertor.cs" />
+    <Compile Include="Helpers\CurrentUser.cs" />
     <Compile Include="Helpers\Hash.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
+    <Compile Include="Helpers\ScrollViewerExtensions.cs" />
+    <Compile Include="Helpers\Utilities.cs" />
     <Compile Include="Helpers\Validation.cs" />
-    <Compile Include="Models\Auction.cs" />
-    <Compile Include="Models\Post.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Auction_.cs" />
+    <Compile Include="Models\Book_.cs" />
+    <Compile Include="Models\IPost.cs" />
+    <Compile Include="Models\Jewelry_.cs" />
+    <Compile Include="Models\PostPreview.cs" />
+    <Compile Include="Models\IProduct.cs" />
+    <Compile Include="Models\Sculpture_.cs" />
+    <Compile Include="Models\User_.cs" />
+    <Compile Include="Models\Watch_.cs" />
+    <Compile Include="ViewModels\VM_About.cs" />
+    <Compile Include="ViewModels\VM_AboutUs.cs" />
+    <Compile Include="ViewModels\VM_AddAuctionPage.cs" />
     <Compile Include="ViewModels\VM_Account.cs" />
+    <Compile Include="ViewModels\VM_AddPost.cs" />
+    <Compile Include="ViewModels\VM_AdminViewUserProfilePage.cs" />
+    <Compile Include="ViewModels\VM_AdminWindow.cs" />
+    <Compile Include="ViewModels\VM_ArtConsultants.cs" />
     <Compile Include="ViewModels\VM_AuctionControler.cs" />
+    <Compile Include="ViewModels\VM_AuctionPage.cs" />
     <Compile Include="ViewModels\VM_Base.cs" />
+    <Compile Include="ViewModels\VM_BookControl.cs" />
+    <Compile Include="ViewModels\VM_Buy.cs" />
+    <Compile Include="ViewModels\VM_ConsignationAdvance.cs" />
+    <Compile Include="ViewModels\VM_ContactPage.cs" />
     <Compile Include="ViewModels\VM_ErrorWindow.cs" />
+    <Compile Include="ViewModels\VM_ExpertsPage.cs" />
+    <Compile Include="ViewModels\VM_GiftCertificate.cs" />
+    <Compile Include="ViewModels\VM_HistoryPage.cs" />
+    <Compile Include="ViewModels\VM_JewelryControl.cs" />
     <Compile Include="ViewModels\VM_LogInWindow.cs" />
+    <Compile Include="ViewModels\VM_MainAdminPage.cs" />
     <Compile Include="ViewModels\VM_MainPage.cs" />
     <Compile Include="ViewModels\VM_MainWindow.cs" />
+    <Compile Include="ViewModels\VM_OngoingAuctions.cs" />
+    <Compile Include="ViewModels\VM_PaintingControl.cs" />
+    <Compile Include="ViewModels\VM_ParticipateAuctions.cs" />
+    <Compile Include="ViewModels\VM_PasswordChangeDialog.cs" />
+    <Compile Include="ViewModels\VM_PostControl.cs" />
+    <Compile Include="ViewModels\VM_PostPage.cs" />
+    <Compile Include="ViewModels\VM_RatePayment.cs" />
+    <Compile Include="ViewModels\VM_RegsConsignations.cs" />
+    <Compile Include="ViewModels\VM_RegsSolicitations.cs" />
+    <Compile Include="ViewModels\VM_Regulations.cs" />
+    <Compile Include="ViewModels\VM_SculptureControl.cs" />
+    <Compile Include="ViewModels\VM_Sell.cs" />
     <Compile Include="ViewModels\VM_StartWindow.cs" />
+    <Compile Include="ViewModels\Vm_UsersDetailes.cs" />
+    <Compile Include="ViewModels\VM_WatchControl.cs" />
+    <Compile Include="Views\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AboutUsPage.xaml.cs">
+      <DependentUpon>AboutUsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddAuctionPage.xaml.cs">
+      <DependentUpon>AddAuctionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddPostPage.xaml.cs">
+      <DependentUpon>AddPostPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminViewUserProfilePage.xaml.cs">
+      <DependentUpon>AdminViewUserProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminWindow.xaml.cs">
+      <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ArtConsultantsPage.xaml.cs">
+      <DependentUpon>ArtConsultantsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AuctionPage.xaml.cs">
+      <DependentUpon>AuctionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BuyPage.xaml.cs">
+      <DependentUpon>BuyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConsignationAdvancePage.xaml.cs">
+      <DependentUpon>ConsignationAdvancePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContactPage.xaml.cs">
+      <DependentUpon>ContactPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ErrorWindow.xaml.cs">
       <DependentUpon>ErrorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ExpertsPage.xaml.cs">
+      <DependentUpon>ExpertsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GiftCertificatePage.xaml.cs">
+      <DependentUpon>GiftCertificatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HistoryPage.xaml.cs">
+      <DependentUpon>HistoryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LogInWindow.xaml.cs">
       <DependentUpon>LogInWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainAdminPage.xaml.cs">
+      <DependentUpon>MainAdminPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OngoingAuctionPage.xaml.cs">
+      <DependentUpon>OngoingAuctionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParticipateAuctionsPage.xaml.cs">
+      <DependentUpon>ParticipateAuctionsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PasswordChangeDialog.xaml.cs">
+      <DependentUpon>PasswordChangeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PostPage.xaml.cs">
+      <DependentUpon>PostPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RatePaymentPage.xaml.cs">
+      <DependentUpon>RatePaymentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegsConsignationsPage.xaml.cs">
+      <DependentUpon>RegsConsignationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegsSolicitationsPage.xaml.cs">
+      <DependentUpon>RegsSolicitationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegulationsPage.xaml.cs">
+      <DependentUpon>RegulationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SellPage.xaml.cs">
+      <DependentUpon>SellPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
@@ -141,7 +259,75 @@
     <Compile Include="Views\UserControl\AuctionControler.xaml.cs">
       <DependentUpon>AuctionControler.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControl\BookControl.xaml.cs">
+      <DependentUpon>BookControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\BookPostControl.xaml.cs">
+      <DependentUpon>BookPostControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\JewelryControl.xaml.cs">
+      <DependentUpon>JewelryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\PaintingControl.xaml.cs">
+      <DependentUpon>PaintingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\PostControl.xaml.cs">
+      <DependentUpon>PostControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\SculptureControl.xaml.cs">
+      <DependentUpon>SculptureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\WatchControl.xaml.cs">
+      <DependentUpon>WatchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UsersDetailesPage.xaml.cs">
+      <DependentUpon>UsersDetailesPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AboutUsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddAuctionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddPostPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminViewUserProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ArtConsultantsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AuctionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConsignationAdvancePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContactPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,9 +335,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ExpertsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GiftCertificatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HistoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LogInWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainAdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -161,11 +363,79 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\OngoingAuctionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParticipateAuctionsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PasswordChangeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PostPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RatePaymentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegsConsignationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegsSolicitationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegulationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SellPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\StartWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserControl\AuctionControler.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl\BookControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl\BookPostControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl\JewelryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl\PaintingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl\PostControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl\SculptureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl\WatchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UsersDetailesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -262,16 +532,136 @@
     <Resource Include="Views\statistics.jpeg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\buy.jpeg" />
+    <Resource Include="Views\UserControl\no-image_image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\sell.jpeg" />
+    <Resource Include="Views\licitatie1.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\about.jpeg" />
+    <Resource Include="Views\2a062e4931f8716c9fa6c9a2c20fec59.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\account.jpeg" />
+    <Resource Include="Views\UserControl\3b17acf14f42a9ea23bd5a1eb897a97d.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\UserControl\6003d07c30262b17578c92b6c800093e.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\UserControl\c128bc432dd97075b478c98a9d354aec.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\UserControl\icons8-watch-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\UserControl\icons8-picture-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\UserControl\icons8-jewelry-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\UserControl\icons8-book-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\UserControl\icons8-sculpture-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\contact.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\det_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\cezar_burlan.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\mihaela_trifu.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\irina_milenkovici.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\roxana_dumitru.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\rodica_medrega.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\emilia_madalon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\avans_consignare.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\map.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\admin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\statistics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\sell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\buy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\about.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\account.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\certificate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\casa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\picasso.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\winter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\cards.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\robert.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\maria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\ioana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\carol.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\ana.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\concert.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\team.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\museum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\expert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\judge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\icons8-add-post-50.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\CommunityToolkit.Mvvm.8.3.2\build\CommunityToolkit.Mvvm.targets" Condition="Exists('..\packages\CommunityToolkit.Mvvm.8.3.2\build\CommunityToolkit.Mvvm.targets')" />

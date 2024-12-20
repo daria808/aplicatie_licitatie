@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:local="clr-namespace:Client_ADBD"
-             xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
+            xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
+              xmlns:UserControl="clr-namespace:Client_ADBD.Views.UserControl"
              xmlns:Views="clr-namespace:Client_ADBD.Views"
              StartupUri="./Views/MainWindow.xaml">
     
@@ -17,6 +18,101 @@
             <!-- DataTemplate pentru Pagina Principală -->
             <DataTemplate DataType="{x:Type ViewModels:VM_MainPage}">
                 <Views:MainPage/>
+            </DataTemplate>
+
+            <!-- DataTemplate pentru Pagina Licitatiei-->
+            <DataTemplate DataType="{x:Type ViewModels:VM_AddAuctionPage}">
+                <Views:AddAuctionPage/>
+            </DataTemplate>
+
+            <!-- DataTemplate pentru Pagina Licitatie-->
+            <DataTemplate DataType="{x:Type ViewModels:VM_AuctionPage}">
+                <Views:AuctionPage/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_AddPost}">
+                <Views:AddPostPage/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_AboutUs}">
+                <Views:AboutUsPage/>
+            </DataTemplate>
+
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_About}">
+                <Views:AboutPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_HistoryPage}">
+                <Views:HistoryPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_ExpertsPage}">
+                <Views:ExpertsPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_ContactPage}">
+                <Views:ContactPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_ArtConsultants}">
+                <Views:ArtConsultantsPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_Buy}">
+                <Views:BuyPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_GiftCertificate}">
+                <Views:GiftCertificatePage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_OngoingAuctions}">
+                <Views:OngoingAuctionsPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_ParticipateAuctions}">
+                <Views:ParticipateAuctionsPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_Regulations}">
+                <Views:RegulationsPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_RatePayment}">
+                <Views:RatePaymentPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_Sell}">
+                <Views:SellPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_RegsConsignations}">
+                <Views:RegsConsignationsPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_ConsignationAdvance}">
+                <Views:ConsignationAdvancePage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_RegsSolicitations}">
+                <Views:RegsSolicitationsPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_MainAdminPage}">
+                <Views:MainAdminPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:Vm_UsersDetailes}">
+                <Views:UsersDetailesPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_AdminViewUserProfilePage}">
+                <Views:AdminViewUserProfilePage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_PostPage}">
+                <Views:PostPage />
             </DataTemplate>
 
         </ResourceDictionary>

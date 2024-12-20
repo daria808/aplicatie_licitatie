@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="Client_ADBD.Views.UserControl.BookControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Client_ADBD.Views.UserControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="700">
+    <Border CornerRadius="10" BorderBrush="LightGray" BorderThickness="1" Padding="15" Background="White">
+        <Border.Effect>
+            <DropShadowEffect Color="Black" Direction="270" BlurRadius="10" ShadowDepth="5" Opacity="0.4" />
+        </Border.Effect>
+
+        <StackPanel>
+            <!-- Header -->
+            <TextBlock Text="Caracteristici carte :" 
+                    FontSize="16"
+                    HorizontalAlignment="Left" 
+                    Margin="30,0,0,10" FontWeight="Bold"/>
+
+            <!-- Form Content -->
+            <StackPanel Orientation="Horizontal" Width="635" Height="240">
+
+                <Grid Width="449" Height="238">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="344"/>
+                        <ColumnDefinition Width="239"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Autor :" Grid.Column="0" 
+                        VerticalAlignment="Center" 
+                        Margin="5,0,5,0" 
+                        FontWeight="SemiBold" 
+                        Foreground="Black" Height="16" />
+                    <TextBox Text="{Binding Author}" Grid.Column="1" 
+                      Height="30" 
+                      Width="250"
+                      HorizontalContentAlignment="Left"
+                      VerticalContentAlignment="Center"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center" />
+
+                    <TextBlock Text="Stare carte:" Grid.Row="1" Grid.Column="0" 
+ 
+                        VerticalAlignment="Center" 
+                        Margin="5,0,5,0" 
+                        FontWeight="SemiBold" 
+                        Foreground="Black" Height="16" />
+                    <ComboBox SelectedValue="{Binding BookCondition}"  SelectedValuePath="Content"
+                       Grid.Row="1" Grid.Column="1" 
+                       HorizontalAlignment="Left"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       Height="30"
+                       Width="250" Margin="0,5,0,5">
+
+
+                        <ComboBoxItem Content="nouă" />
+                        <ComboBoxItem Content="foarte bună" />
+                        <ComboBoxItem Content="bună" />
+                        <ComboBoxItem Content="deteriorată" />
+                    </ComboBox>
+
+                    <TextBlock Text="Limbă :" Grid.Row="2" Grid.Column="0" 
+                        VerticalAlignment="Center" 
+                        Margin="5,0,5,0" 
+                        FontWeight="SemiBold" 
+                        Foreground="Black" Height="16" />
+
+                    <TextBox Text="{Binding Language}" 
+                      Grid.Row="2" Grid.Column="1" 
+                      Height="30" 
+                      Width="250"
+                    HorizontalContentAlignment="Left"
+                    VerticalContentAlignment="Center"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center" 
+                      Padding="5" />
+
+                    <TextBlock Text="An publicare:" Grid.Row="3" Grid.Column="0" 
+                        VerticalAlignment="Center" 
+                        Margin="5,0,5,0" 
+                        FontWeight="SemiBold" 
+                        Foreground="Black" Height="16" />
+
+                    <TextBox Text="{Binding Year}" 
+                      Grid.Row="3" Grid.Column="1" 
+                      Height="30" 
+                      Width="250"
+                      HorizontalContentAlignment="Left"
+                      VerticalContentAlignment="Center"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center" 
+                      Padding="5" />
+
+                    <TextBlock Text="Număr pagini:" Grid.Row="4" Grid.Column="0" 
+                         VerticalAlignment="Center" 
+                         Margin="5,0,5,0" 
+                         FontWeight="SemiBold" 
+                         Foreground="Black" Height="16" />
+
+                    <TextBox Text="{Binding NumberOfPage}" 
+                        Grid.Row="4" Grid.Column="1" 
+                        Height="30" 
+                        Width="250"
+                        HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" 
+                        Padding="5" />
+
+                    <TextBlock Text="Editură:" Grid.Row="5" Grid.Column="0" 
+                         VerticalAlignment="Center" 
+                         Margin="5,0,5,0" 
+                         FontWeight="SemiBold" 
+                         Foreground="Black" Height="16" />
+
+                    <TextBox Text="{Binding PublishingHouse}" 
+                        Grid.Row="5" Grid.Column="1" 
+                        Height="30" 
+                        Width="250"
+                        HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" 
+                        Padding="5" />
+
+
+                </Grid>
+
+                <Image Height="100" Width="82" Margin="40" Source="/Views/UserControl/icons8-book-100.png"/>
+
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

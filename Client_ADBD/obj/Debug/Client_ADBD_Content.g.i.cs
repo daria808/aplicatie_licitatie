@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("views/account.jpeg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("views/icons8-add-post-50.png")]
 
 

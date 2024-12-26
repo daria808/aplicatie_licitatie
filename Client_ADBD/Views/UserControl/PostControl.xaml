@@ -43,7 +43,7 @@
 
 
             <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="Bold"
-                    HorizontalAlignment="Left" VerticalAlignment="Top" 
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" 
                     Margin="15,0,0,0" TextWrapping="Wrap" />
 
 
@@ -58,6 +58,7 @@
                 <TextBlock x:Name="PriceTextBlock" Text="{Binding StartPrice}" FontSize="12"
                            HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Gray"
                            Margin="5,0,0,0" />
+                <TextBlock Text=" €" Foreground="Gray"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">

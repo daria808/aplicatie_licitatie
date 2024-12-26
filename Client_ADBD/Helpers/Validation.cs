@@ -10,6 +10,7 @@ using System.Windows;
 using System.Diagnostics;
 using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Controls;
+using System.Numerics;
 
 namespace Client_ADBD.Helpers
 {
@@ -86,11 +87,11 @@ namespace Client_ADBD.Helpers
 
             if (regex.IsMatch(email))
             {
-                return true; 
+                return true;
             }
             else
             {
-                errorMessage = "Email-ul nu are un format valid."; 
+                errorMessage = "Email-ul nu are un format valid.";
                 return false;
             }
         }
@@ -146,9 +147,9 @@ namespace Client_ADBD.Helpers
         {
             if (startDate == default)
             {
-                
+
                 isValid = false;
-                return  "Data de început este obligatorie.";
+                return "Data de început este obligatorie.";
             }
 
             return string.Empty;
@@ -164,30 +165,30 @@ namespace Client_ADBD.Helpers
 
             return string.Empty;
         }
-   
-        public static string IsValidTime(DateTime startDate,string startHour,string startMinute, DateTime endDate,string endHour, string endMinute,ref DateTime startDateTime,ref DateTime endDateTime,ref bool isValid)
-        {
-          
 
-            if (string.IsNullOrWhiteSpace(startHour) || string.IsNullOrWhiteSpace(startMinute)||
+        public static string IsValidTime(DateTime startDate, string startHour, string startMinute, DateTime endDate, string endHour, string endMinute, ref DateTime startDateTime, ref DateTime endDateTime, ref bool isValid)
+        {
+
+
+            if (string.IsNullOrWhiteSpace(startHour) || string.IsNullOrWhiteSpace(startMinute) ||
                 string.IsNullOrWhiteSpace(endHour) || string.IsNullOrWhiteSpace(endMinute))
             {
-                return  "Ora și minutele trebuie selectate.";
-                
+                return "Ora și minutele trebuie selectate.";
+
             }
 
-         
+
             if (isValid)
             {
-                 startDateTime = startDate.AddHours(int.Parse(startHour)).AddMinutes(int.Parse(startMinute));
-                 endDateTime = endDate.AddHours(int.Parse(endHour)).AddMinutes(int.Parse(endMinute));
+                startDateTime = startDate.AddHours(int.Parse(startHour)).AddMinutes(int.Parse(startMinute));
+                endDateTime = endDate.AddHours(int.Parse(endHour)).AddMinutes(int.Parse(endMinute));
 
                 if (endDateTime <= startDateTime)
                 {
                     return "Data de sfârșit trebuie să fie după data de început.";
                 }
             }
-         
+
             return string.Empty;
         }
 
@@ -223,7 +224,7 @@ namespace Client_ADBD.Helpers
                 return "Câmpul corespunzător descrierii este necompletat.";
             }
 
-            if(description.Length>=700)
+            if (description.Length >= 700)
             {
                 return "Descrierea poate avea maxim 700 de caractere.";
             }
@@ -231,19 +232,82 @@ namespace Client_ADBD.Helpers
             return string.Empty;
         }
 
-        public static bool IsValidAuction(string AuctionNameError, string AuctionTypeError,string StartDateError,string EndDateError,string TimeError, string ImagePathError,string DescriptionError,string LocationError)
+        public static bool IsValidAuction(string AuctionNameError, string AuctionTypeError, string StartDateError, string EndDateError, string TimeError, string ImagePathError, string DescriptionError, string LocationError)
         {
             if (string.IsNullOrEmpty(AuctionNameError) && string.IsNullOrEmpty(AuctionTypeError) &&
-              string.IsNullOrEmpty(StartDateError) && string.IsNullOrEmpty(EndDateError) && string.IsNullOrEmpty(TimeError)&&
-              string.IsNullOrEmpty(ImagePathError)&&string.IsNullOrEmpty(LocationError)&&string.IsNullOrEmpty(DescriptionError))
+              string.IsNullOrEmpty(StartDateError) && string.IsNullOrEmpty(EndDateError) && string.IsNullOrEmpty(TimeError) &&
+              string.IsNullOrEmpty(ImagePathError) && string.IsNullOrEmpty(LocationError) && string.IsNullOrEmpty(DescriptionError))
             {
                 return true;
             }
 
-            return false;   
+            return false;
         }
 
-        
-    }   
+        public static string IsValidProducttName(string productName)
+        {
+            if (string.IsNullOrEmpty(productName))
+            {
+
+                return "Numele produsului este necompletat.";
+            }
+
+            return string.Empty;
+        }
+
+        public static string AreValidImagePaths(string[] imagePaths)
+        {
+            string error = "Este nevoie să încărcați cel puțin o cale de imagine.";
+
+            foreach (string element in imagePaths)
+            {
+                if (!string.IsNullOrEmpty(element))
+                {
+                    error = string.Empty;
+                }
+            }
+
+            return error;
+
+        }
+
+        public static string IsValidStartPrice(decimal price)
+        {
+            if (price <= 0)
+                return "Valoarea prețului de start este invalidă.";
+
+            return string.Empty;
+        }
+
+        public static string IsValidListPrice(decimal price)
+        {
+            if (price <= 0)
+                return "Valoarea prețului de listă este invalidă.";
+
+            return string.Empty;
+        }
+
+        public static string IsValidInvDate(DateTime date)
+        {
+            if(date == default)
+            {
+                return "Data de inventariere este obligatorie.";
+            }
+
+            return string.Empty;
+        }
+
+        public static bool IsValidPost(string ProductNameError, string ImagePathError, string DescriptionError, string ListPriceError, string StartPriceError, string InvDateError, string ProductControlError)
+        {
+            if (string.IsNullOrEmpty(ProductNameError) && string.IsNullOrEmpty(ListPriceError) &&
+              string.IsNullOrEmpty(StartPriceError) && string.IsNullOrEmpty(InvDateError) &&
+              string.IsNullOrEmpty(ImagePathError) && string.IsNullOrEmpty(ProductControlError) && string.IsNullOrEmpty(DescriptionError))
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
 }
 

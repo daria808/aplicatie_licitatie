@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Client_ADBD.Models;
+using Client_ADBD.ViewModels;
 namespace Client_ADBD.Views.UserControl
 {
     /// <summary>
@@ -22,7 +23,13 @@ namespace Client_ADBD.Views.UserControl
     {
         public BookControl()
         {
+            ;
+        }
+        public BookControl(Book_ b)
+        {
             InitializeComponent();
+            VM_BookPostControl viewModel = new VM_BookPostControl(b);
+            DataContext=viewModel;
         }
     }
 }

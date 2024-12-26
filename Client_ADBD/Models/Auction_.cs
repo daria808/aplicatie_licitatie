@@ -31,6 +31,7 @@ namespace Client_ADBD.Models
         public string imagePath { get; set; }
         public string description { get; set; }
 
+        public string usernameOwner {  get; set; }  
         public string auctionType {  get; set; }
 
         public Auction_() { }
@@ -44,6 +45,7 @@ namespace Client_ADBD.Models
             imagePath=a.image_path;
             description = a.description;
             auctionNumber=a.auction_number;
+            usernameOwner = DatabaseManager.GetUsernameById(a.id_user);
             auctionType = DatabaseManager.GetAuctionType(a.id_auction_type);
         }
        

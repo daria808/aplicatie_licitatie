@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Client_ADBD.Models;
+using Client_ADBD.ViewModels;
 
 namespace Client_ADBD.Views.UserControl
 {
@@ -23,6 +25,14 @@ namespace Client_ADBD.Views.UserControl
         public SculptureControl()
         {
             InitializeComponent();
+        }
+
+        public SculptureControl(Sculpture_ s)
+        {
+            InitializeComponent();
+            VM_SculpturePostControl viewModel = new VM_SculpturePostControl(s);
+            DataContext=viewModel;
+
         }
     }
 }

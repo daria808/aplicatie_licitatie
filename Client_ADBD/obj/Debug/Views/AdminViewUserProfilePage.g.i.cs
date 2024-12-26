@@ -9,7 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Client_ADBD.ViewModels;
 using Client_ADBD.Views;
+using Client_ADBD.Views.UserControl;
 using System;
 using System.Diagnostics;
 using System.Windows;

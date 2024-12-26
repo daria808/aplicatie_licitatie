@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Client_ADBD.Models;
+using Client_ADBD.ViewModels;
 
 namespace Client_ADBD.Views
 {
@@ -20,9 +22,13 @@ namespace Client_ADBD.Views
     /// </summary>
     public partial class PostPage : Page
     {
-        public PostPage()
+        public PostPage(Post_ p)
         {
             InitializeComponent();
+            VM_PostPage viewModel= new VM_PostPage(p);
+            DataContext = viewModel;
         }
+
+        public PostPage() { }
     }
 }

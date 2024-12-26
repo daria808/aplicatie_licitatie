@@ -33,9 +33,6 @@ namespace Client_ADBD
     partial void InsertAuction(Auction instance);
     partial void UpdateAuction(Auction instance);
     partial void DeleteAuction(Auction instance);
-    partial void InsertWatch_type(Watch_type instance);
-    partial void UpdateWatch_type(Watch_type instance);
-    partial void DeleteWatch_type(Watch_type instance);
     partial void InsertAuction_type(Auction_type instance);
     partial void UpdateAuction_type(Auction_type instance);
     partial void DeleteAuction_type(Auction_type instance);
@@ -66,6 +63,9 @@ namespace Client_ADBD
     partial void InsertProduct(Product instance);
     partial void UpdateProduct(Product instance);
     partial void DeleteProduct(Product instance);
+    partial void InsertProduct_image(Product_image instance);
+    partial void UpdateProduct_image(Product_image instance);
+    partial void DeleteProduct_image(Product_image instance);
     partial void InsertSculpture(Sculpture instance);
     partial void UpdateSculpture(Sculpture instance);
     partial void DeleteSculpture(Sculpture instance);
@@ -87,6 +87,9 @@ namespace Client_ADBD
     partial void InsertWatch_mechanism(Watch_mechanism instance);
     partial void UpdateWatch_mechanism(Watch_mechanism instance);
     partial void DeleteWatch_mechanism(Watch_mechanism instance);
+    partial void InsertWatch_type(Watch_type instance);
+    partial void UpdateWatch_type(Watch_type instance);
+    partial void DeleteWatch_type(Watch_type instance);
     #endregion
 		
 		public AuctionAppDataContext() : 
@@ -124,14 +127,6 @@ namespace Client_ADBD
 			get
 			{
 				return this.GetTable<Auction>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Watch_type> Watch_types
-		{
-			get
-			{
-				return this.GetTable<Watch_type>();
 			}
 		}
 		
@@ -215,6 +210,14 @@ namespace Client_ADBD
 			}
 		}
 		
+		public System.Data.Linq.Table<Product_image> Product_images
+		{
+			get
+			{
+				return this.GetTable<Product_image>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Sculpture> Sculptures
 		{
 			get
@@ -268,6 +271,14 @@ namespace Client_ADBD
 			get
 			{
 				return this.GetTable<Watch_mechanism>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Watch_type> Watch_types
+		{
+			get
+			{
+				return this.GetTable<Watch_type>();
 			}
 		}
 	}
@@ -657,92 +668,6 @@ namespace Client_ADBD
 		{
 			this.SendPropertyChanging();
 			entity.Auction = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Watch type]")]
-	public partial class Watch_type : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id_watch_type;
-		
-		private string _type;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onid_watch_typeChanging(int value);
-    partial void Onid_watch_typeChanged();
-    partial void OntypeChanging(string value);
-    partial void OntypeChanged();
-    #endregion
-		
-		public Watch_type()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_watch_type", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id_watch_type
-		{
-			get
-			{
-				return this._id_watch_type;
-			}
-			set
-			{
-				if ((this._id_watch_type != value))
-				{
-					this.Onid_watch_typeChanging(value);
-					this.SendPropertyChanging();
-					this._id_watch_type = value;
-					this.SendPropertyChanged("id_watch_type");
-					this.Onid_watch_typeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string type
-		{
-			get
-			{
-				return this._type;
-			}
-			set
-			{
-				if ((this._type != value))
-				{
-					this.OntypeChanging(value);
-					this.SendPropertyChanging();
-					this._type = value;
-					this.SendPropertyChanged("type");
-					this.OntypeChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -2086,7 +2011,7 @@ namespace Client_ADBD
 		
 		private System.DateTime _created_at;
 		
-		private string _image_path;
+		private int _lot;
 		
 		private EntityRef<Auction> _Auction;
 		
@@ -2112,8 +2037,8 @@ namespace Client_ADBD
     partial void Onlist_priceChanged();
     partial void Oncreated_atChanging(System.DateTime value);
     partial void Oncreated_atChanged();
-    partial void Onimage_pathChanging(string value);
-    partial void Onimage_pathChanged();
+    partial void OnlotChanging(int value);
+    partial void OnlotChanged();
     #endregion
 		
 		public Post()
@@ -2276,22 +2201,22 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image_path", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string image_path
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lot", DbType="Int NOT NULL")]
+		public int lot
 		{
 			get
 			{
-				return this._image_path;
+				return this._lot;
 			}
 			set
 			{
-				if ((this._image_path != value))
+				if ((this._lot != value))
 				{
-					this.Onimage_pathChanging(value);
+					this.OnlotChanging(value);
 					this.SendPropertyChanging();
-					this._image_path = value;
-					this.SendPropertyChanged("image_path");
-					this.Onimage_pathChanged();
+					this._lot = value;
+					this.SendPropertyChanged("lot");
+					this.OnlotChanged();
 				}
 			}
 		}
@@ -2555,6 +2480,8 @@ namespace Client_ADBD
 		
 		private EntitySet<Post> _Posts;
 		
+		private EntitySet<Product_image> _Product_images;
+		
 		private EntitySet<Sculpture> _Sculptures;
 		
 		private EntitySet<Watch> _Watches;
@@ -2579,6 +2506,7 @@ namespace Client_ADBD
 			this._Jewelries = new EntitySet<Jewelry>(new Action<Jewelry>(this.attach_Jewelries), new Action<Jewelry>(this.detach_Jewelries));
 			this._Paintings = new EntitySet<Painting>(new Action<Painting>(this.attach_Paintings), new Action<Painting>(this.detach_Paintings));
 			this._Posts = new EntitySet<Post>(new Action<Post>(this.attach_Posts), new Action<Post>(this.detach_Posts));
+			this._Product_images = new EntitySet<Product_image>(new Action<Product_image>(this.attach_Product_images), new Action<Product_image>(this.detach_Product_images));
 			this._Sculptures = new EntitySet<Sculpture>(new Action<Sculpture>(this.attach_Sculptures), new Action<Sculpture>(this.detach_Sculptures));
 			this._Watches = new EntitySet<Watch>(new Action<Watch>(this.attach_Watches), new Action<Watch>(this.detach_Watches));
 			OnCreated();
@@ -2716,6 +2644,19 @@ namespace Client_ADBD
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Product_image", Storage="_Product_images", ThisKey="id_product", OtherKey="id_product")]
+		public EntitySet<Product_image> Product_images
+		{
+			get
+			{
+				return this._Product_images;
+			}
+			set
+			{
+				this._Product_images.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Sculpture", Storage="_Sculptures", ThisKey="id_product", OtherKey="id_product")]
 		public EntitySet<Sculpture> Sculptures
 		{
@@ -2810,6 +2751,18 @@ namespace Client_ADBD
 			entity.Product = null;
 		}
 		
+		private void attach_Product_images(Product_image entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = this;
+		}
+		
+		private void detach_Product_images(Product_image entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = null;
+		}
+		
 		private void attach_Sculptures(Sculpture entity)
 		{
 			this.SendPropertyChanging();
@@ -2832,6 +2785,157 @@ namespace Client_ADBD
 		{
 			this.SendPropertyChanging();
 			entity.Product = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Product images]")]
+	public partial class Product_image : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_image;
+		
+		private int _id_product;
+		
+		private string _image_path;
+		
+		private EntityRef<Product> _Product;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_imageChanging(int value);
+    partial void Onid_imageChanged();
+    partial void Onid_productChanging(int value);
+    partial void Onid_productChanged();
+    partial void Onimage_pathChanging(string value);
+    partial void Onimage_pathChanged();
+    #endregion
+		
+		public Product_image()
+		{
+			this._Product = default(EntityRef<Product>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_image", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_image
+		{
+			get
+			{
+				return this._id_image;
+			}
+			set
+			{
+				if ((this._id_image != value))
+				{
+					this.Onid_imageChanging(value);
+					this.SendPropertyChanging();
+					this._id_image = value;
+					this.SendPropertyChanged("id_image");
+					this.Onid_imageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_product", DbType="Int NOT NULL")]
+		public int id_product
+		{
+			get
+			{
+				return this._id_product;
+			}
+			set
+			{
+				if ((this._id_product != value))
+				{
+					if (this._Product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_productChanging(value);
+					this.SendPropertyChanging();
+					this._id_product = value;
+					this.SendPropertyChanged("id_product");
+					this.Onid_productChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image_path", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string image_path
+		{
+			get
+			{
+				return this._image_path;
+			}
+			set
+			{
+				if ((this._image_path != value))
+				{
+					this.Onimage_pathChanging(value);
+					this.SendPropertyChanging();
+					this._image_path = value;
+					this.SendPropertyChanged("image_path");
+					this.Onimage_pathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_Product_image", Storage="_Product", ThisKey="id_product", OtherKey="id_product", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Product Product
+		{
+			get
+			{
+				return this._Product.Entity;
+			}
+			set
+			{
+				Product previousValue = this._Product.Entity;
+				if (((previousValue != value) 
+							|| (this._Product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Product.Entity = null;
+						previousValue.Product_images.Remove(this);
+					}
+					this._Product.Entity = value;
+					if ((value != null))
+					{
+						value.Product_images.Add(this);
+						this._id_product = value.id_product;
+					}
+					else
+					{
+						this._id_product = default(int);
+					}
+					this.SendPropertyChanged("Product");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -4276,6 +4380,92 @@ namespace Client_ADBD
 		{
 			this.SendPropertyChanging();
 			entity.Watch_mechanism = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Watch type]")]
+	public partial class Watch_type : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_watch_type;
+		
+		private string _type;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_watch_typeChanging(int value);
+    partial void Onid_watch_typeChanged();
+    partial void OntypeChanging(string value);
+    partial void OntypeChanged();
+    #endregion
+		
+		public Watch_type()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_watch_type", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_watch_type
+		{
+			get
+			{
+				return this._id_watch_type;
+			}
+			set
+			{
+				if ((this._id_watch_type != value))
+				{
+					this.Onid_watch_typeChanging(value);
+					this.SendPropertyChanging();
+					this._id_watch_type = value;
+					this.SendPropertyChanged("id_watch_type");
+					this.Onid_watch_typeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this.OntypeChanging(value);
+					this.SendPropertyChanging();
+					this._type = value;
+					this.SendPropertyChanged("type");
+					this.OntypeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

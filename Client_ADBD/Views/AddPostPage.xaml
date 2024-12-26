@@ -4,8 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client_ADBD.Views"
-      xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
-      xmlns:UserControl="clr-namespace:Client_ADBD.Views.UserControl"
+      xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels;assembly=Client_ADBD"
+      xmlns:UserControl="clr-namespace:Client_ADBD.Views.UserControl" 
       mc:Ignorable="d"
       Title="AddPostPage" Height="700" Width="1100">
 
@@ -13,7 +13,7 @@
         <ViewModels:VM_AddPost/>
     </Page.DataContext>
 
-    <Page.Resources>
+    <!--<Page.Resources>
         <DataTemplate DataType="{x:Type ViewModels:VM_WatchControl}">
             <UserControl:WatchControl />
         </DataTemplate>
@@ -29,7 +29,7 @@
         <DataTemplate DataType="{x:Type ViewModels:VM_SculptureControl}">
             <UserControl:SculptureControl />
         </DataTemplate>
-    </Page.Resources>
+    </Page.Resources>-->
 
 
  
@@ -37,12 +37,7 @@
            
                 <Grid  Background="#f8f9fa" Margin="0,-27,0,0">
 
-                    <!--<Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-
-                    </Grid.ColumnDefinitions>-->
-
+           
 
 
                     <Button Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Command="{Binding ClosePageCommand}">
@@ -59,12 +54,12 @@
                    
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Nume obiect :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <TextBlock Text="Nume produs :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
                             <TextBox x:Name="tb_AuctionName" Width="440" Height="35"  FontSize="14"  HorizontalAlignment="Left" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" Margin="0,0,40,0" Text="{Binding ProductName, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="{Binding ProductNameError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
                          </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="200,0,0,0" >
-                            <TextBlock Text=" Preț pornire:" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <TextBlock Text=" Preț pornire :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
                             <TextBox x:Name="tb_StartPrice" Width="194" Height="35"  FontSize="14"  HorizontalAlignment="Left" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" Margin="0,0,40,0" Text="{Binding StartPrice, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="{Binding StartPriceError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
                             
@@ -73,13 +68,15 @@
 
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical" Width="479">
-                            <TextBlock Text="Cale imagine:" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
-                            <TextBox x:Name="ImagePathTextBox" Width="440" Height="35" Margin="0,0,0,0" FontSize="14" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" HorizontalAlignment="Left" Text="{Binding ImagePath,UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="Căi de imagini :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <TextBox x:Name="ImagePathTextBox1" Width="440" Height="35" Margin="0,0,0,7" FontSize="14" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" HorizontalAlignment="Left" Text="{Binding ImagePaths[0],UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox x:Name="ImagePathTextBox2" Width="440" Height="35" Margin="0,0,0,7" FontSize="14" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" HorizontalAlignment="Left" Text="{Binding ImagePaths[1],UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox x:Name="ImagePathTextBox3" Width="440" Height="35" Margin="0,0,0,0" FontSize="14" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" HorizontalAlignment="Left" Text="{Binding ImagePaths[2],UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="{Binding ImagePathError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,0,0,0" />
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical"  Margin="200,0,0,0">
-                            <TextBlock Text=" Preț listă:" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <TextBlock Text=" Preț listă :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
                             <TextBox x:Name="tb_ListPrice"  Width="194" Height="35"  FontSize="14"  HorizontalAlignment="Left" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" Margin="0,0,40,0" Text="{Binding ListPrice, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="{Binding ListPriceError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,0,0,0" />
                         </StackPanel>
@@ -96,13 +93,14 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Dată inventariere: " FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <TextBlock Text="Dată inventariere : " FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
                             <DatePicker x:Name="StartDatePicker" Width="250" Height="40" Margin="0,0,80,10" HorizontalAlignment="Left" BorderBrush="#ccc" BorderThickness="1" SelectedDate="{Binding InvDate, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBlock Text="{Binding StartDateError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+                            <TextBlock Text="{Binding InvDateError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
                         </StackPanel>
 
                     </StackPanel>
                     <ContentControl Content="{Binding SelectedProductControl}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ProductControlError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
                         
                     <StackPanel Orientation="Horizontal">
                             

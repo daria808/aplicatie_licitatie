@@ -17,12 +17,6 @@
       <Association Name="User_Auction" Member="User" ThisKey="id_user" OtherKey="id_user" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.[Watch type]" Member="Watch_types">
-    <Type Name="Watch_type">
-      <Column Name="id_watch_type" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="type" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.[Auction type]" Member="Auction_types">
     <Type Name="Auction_type">
       <Column Name="id_auction_type" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -99,7 +93,7 @@
       <Column Name="start_price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
       <Column Name="list_price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
       <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="image_path" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="lot" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Auction_Post" Member="Auction" ThisKey="id_auction" OtherKey="id_auction" Type="Auction" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Post_status_Post" Member="Post_status" ThisKey="id_status" OtherKey="id_status" Type="Post_status" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Product_Post" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
@@ -122,8 +116,17 @@
       <Association Name="Product_Jewelry" Member="Jewelries" ThisKey="id_product" OtherKey="id_product" Type="Jewelry" />
       <Association Name="Product_Painting" Member="Paintings" ThisKey="id_product" OtherKey="id_produs" Type="Painting" />
       <Association Name="Product_Post" Member="Posts" ThisKey="id_product" OtherKey="id_product" Type="Post" />
+      <Association Name="Product_Product_image" Member="Product_images" ThisKey="id_product" OtherKey="id_product" Type="Product_image" />
       <Association Name="Product_Sculpture" Member="Sculptures" ThisKey="id_product" OtherKey="id_product" Type="Sculpture" />
       <Association Name="Product_Watch" Member="Watches" ThisKey="id_product" OtherKey="id_product" Type="Watch" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Product images]" Member="Product_images">
+    <Type Name="Product_image">
+      <Column Name="id_image" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_product" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="image_path" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Product_Product_image" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Sculpture" Member="Sculptures">
@@ -196,6 +199,12 @@
       <Column Name="id_mechanism" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="mechanism" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Watch_mechanism_Watch" Member="Watches" ThisKey="id_mechanism" OtherKey="id_mechanism" Type="Watch" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Watch type]" Member="Watch_types">
+    <Type Name="Watch_type">
+      <Column Name="id_watch_type" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="type" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

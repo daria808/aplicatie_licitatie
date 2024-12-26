@@ -11,16 +11,10 @@
       Title="AuctionPage" Height="800" Width="1150">
 
 
-    <Page.DataContext>
-        <!-- Aici setezi DataContext pentru întreaga fereastră -->
+    <!--<Page.DataContext>
+        --><!-- Aici setezi DataContext pentru întreaga fereastră --><!--
         <ViewModels:VM_AuctionPage/>
-    </Page.DataContext>
-
-    <!--<Page.Resources>
-        <Helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <Helpers::InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
-    </Page.Resources>-->
-
+    </Page.DataContext>-->
 
 
     <Grid Background="White" Margin="0,0,0,0">
@@ -105,14 +99,32 @@
                             </StackPanel>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="224" Width="380" Margin="0,60,0,0">
-                            <Image Source="{Binding AuctionImagePath}" Width="390" Height="210" Margin="0,10,0,0"/>
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="300" Width="380" Margin="0,60,0,0" Orientation="Vertical">
+                            <Image Source="{Binding AuctionImagePath}" Width="390" Height="210" Margin="0,10,0,30"/>
+                            <Button HorizontalAlignment="Center" Margin="15,5,0,0" FontSize="12" Command="{Binding GoToModifyPageCommand}" Background="Transparent" BorderBrush="Gray" BorderThickness="0" Visibility="{Binding OwnerAdminVisibility}">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Foreground" Value="Blue"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Style>
+                                </Button.Style>
+                                <TextBlock Text="Modifică datele licitației" TextDecorations="Underline"/>
+                            </Button>
+                            <Button HorizontalAlignment="Center" Margin="-40,5,0,10" FontSize="12" Command="{Binding DeleteAuctionCommand}" Background="Transparent" BorderBrush="Gray" BorderThickness="0" Visibility="{Binding OwnerAdminVisibility}">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Foreground" Value="Red"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Style>
+                                </Button.Style>
+                                <TextBlock Text="Șterge licitația" TextDecorations="Underline"/>
+                            </Button>
                         </StackPanel>
                     </Grid>
 
                     <Grid Grid.Row="1" Margin="20,0,0,0">
-                        <StackPanel Orientation="Horizontal" Margin="10,60,0,0">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="80,10">
+                        <StackPanel Orientation="Horizontal" Margin="0,60,0,0">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="40,10">
                                 <!--<TextBlock FontSize="12" Text="ALEGEȚI UN LOT DIN 1968 : " Foreground="Gray" HorizontalAlignment="Center" Margin="0,0,0,10"/>-->
                                 <TextBlock FontSize="12" 
                                        Foreground="Gray" 
@@ -122,62 +134,141 @@
                                         <Binding Path="AuctionLotCount" StringFormat="ALEGEȚI UN LOT DIN {0} :" />
                                     </TextBlock.Text>
                                 </TextBlock>
-                                <TextBox Width="145" Height="25" HorizontalAlignment="Left" Margin="0,0,0,10" TextAlignment="Center" 
-                  BorderThickness="0,0,0,1" BorderBrush="Gray" Background="Transparent"/>
+                                <TextBox Width="145"  Text="{Binding SelectedLotNumber,UpdateSourceTrigger=PropertyChanged}" Height="25" HorizontalAlignment="Left" Margin="0,0,0,0" TextAlignment="Center" 
+                                     BorderThickness="0,0,0,1" BorderBrush="Gray" Background="Transparent" Focusable="True">
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter" Command="{Binding GoToPageDetailsCommand}" />
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                    <TextBlock FontSize="12" Text="{Binding LotNumberError}"
+                                   Foreground="Red" 
+                                   HorizontalAlignment="Center" 
+                                   Margin="0,0,0,10"/>
                             </StackPanel>
 
-                            <StackPanel Orientation="Vertical" Margin="80,10" HorizontalAlignment="Center">
+                            
+                            <StackPanel Orientation="Vertical" Margin="50,10" HorizontalAlignment="Center">
                                 <TextBlock FontSize="12" Text="ORDONAȚI LOTURILE DUPĂ" Foreground="Gray" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                                <ComboBox x:Name="cb_loturi" 
-                                          Width="163"
-                                          Height="26"
-                                          FontSize="12"
-                                          Text="Tip licitație"
-                                          IsEditable="True"
-                                          IsReadOnly="True"
-                                          RenderTransformOrigin="0.508,0.844"
-                                          BorderBrush="Transparent"
-                                          BorderThickness="0"
-                                          Foreground="Gray"
-                                          FocusVisualStyle="{x:Null}"
-                                          SelectedValue="{Binding SelectedSortType, UpdateSourceTrigger=PropertyChanged}"
-                                          SelectedValuePath="Content">
-                                    <ComboBox.Template>
-                                        <ControlTemplate TargetType="{x:Type ComboBox}">
-                                            <Grid>
+                                <ComboBox 
+                                              Width="163"
+                                              Height="26"
+                                              FontSize="12"
+                                              Text="TOATE"
+                                              IsEditable="True"
+                                              IsReadOnly="True"
+                                              RenderTransformOrigin="0.508,0.844"
+                                              BorderBrush="Transparent"
+                                              BorderThickness="0"
+                                              Foreground="Gray"
+                                              FocusVisualStyle="{x:Null}"
+                                              SelectedValue="{Binding SelectedSortType, UpdateSourceTrigger=PropertyChanged}"
+                                              SelectedValuePath="Content">
+                                        <ComboBox.Template>
+                                            <ControlTemplate TargetType="{x:Type ComboBox}">
+                                                <Grid>
+                                                    <Border Background="Transparent"
+                                                BorderBrush="Gray"
+                                                BorderThickness="0,0,0,0.5"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Bottom" />
+                                                    <ToggleButton x:Name="ToggleButton"
+                                                Focusable="False"
+                                                IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                ClickMode="Press"
+                                                Background="Transparent"
+                                                BorderBrush="Transparent"
+                                                BorderThickness="1"
+                                                Content="{TemplateBinding Text}"
+                                                Foreground="Black"
+                                                IsEnabled="True" />
+                                                    <ContentPresenter x:Name="ContentSite"
+                                                 IsHitTestVisible="False"
+                                                 Content="{TemplateBinding SelectionBoxItem}"
+                                                 ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                 ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                 Margin="10,0,0,0"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Left" />
+                                                    <Popup x:Name="Popup"
+                                               Placement="Bottom"
+                                               IsOpen="{TemplateBinding IsDropDownOpen}"
+                                               AllowsTransparency="False"
+                                               Focusable="False"
+                                               PopupAnimation="Slide">
+                                                        <Grid>
+                                                            <Border Background="White"
+                                                        BorderThickness="1"
+                                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}">
+                                                                <ScrollViewer>
+                                                                    <ItemsPresenter />
+                                                                </ScrollViewer>
+                                                            </Border>
+                                                        </Grid>
+                                                    </Popup>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </ComboBox.Template>
+
+                                    <!--<System:String xml:space="preserve">TOATE </System:String>-->
+                                        <ComboBoxItem Content="TOATE" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
+                                        <ComboBoxItem x:Name="cbOpt2" Content="PREȚ, ASCENDENT" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
+                                        <ComboBoxItem x:Name="cbOpt3" Content="PREȚ, DESCENDENT" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
+                                    </ComboBox>
+
+                                </StackPanel>
+
+                             <StackPanel Orientation="Vertical" Margin="50,10" HorizontalAlignment="Center">
+                                    <TextBlock FontSize="12" Text="STATUS PRODUS" Foreground="Gray" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                                    <ComboBox x:Name="cb_loturi2" 
+                                                  Width="163"
+                                                  Height="26"
+                                                  FontSize="12"
+                                                  Text="TOATE"
+                                                  IsEditable="True"
+                                                  IsReadOnly="True"
+                                                  RenderTransformOrigin="0.508,0.844"
+                                                  BorderBrush="Transparent"
+                                                  BorderThickness="0"
+                                                  Foreground="Gray"
+                                                  FocusVisualStyle="{x:Null}"
+                                                  SelectedValue="{Binding SelectedSortStatus, UpdateSourceTrigger=PropertyChanged}"
+                                                  SelectedValuePath="Content">
+                                        <ComboBox.Template>
+                                            <ControlTemplate TargetType="{x:Type ComboBox}">
+                                                <Grid>
                                                 <Border Background="Transparent"
-                                            BorderBrush="Gray"
-                                            BorderThickness="0,0,0,0.5"
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Bottom" />
+                                                    BorderBrush="Gray"
+                                                    BorderThickness="0,0,0,0.5"
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Bottom" />
                                                 <ToggleButton x:Name="ToggleButton"
-                                            Focusable="False"
-                                            IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            ClickMode="Press"
-                                            Background="Transparent"
-                                            BorderBrush="Transparent"
-                                            BorderThickness="1"
-                                            Content="{TemplateBinding Text}"
-                                            Foreground="Black"
-                                            IsEnabled="True" />
+                                                        Focusable="False"
+                                                        IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                        ClickMode="Press"
+                                                        Background="Transparent"
+                                                        BorderBrush="Transparent"
+                                                        BorderThickness="1"
+                                                        Content="{TemplateBinding Text}"
+                                                        Foreground="Black"
+                                                        IsEnabled="True" />
                                                 <ContentPresenter x:Name="ContentSite"
-                                             IsHitTestVisible="False"
-                                             Content="{TemplateBinding SelectionBoxItem}"
-                                             ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                             Margin="10,0,0,0"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Left" />
+                                                                IsHitTestVisible="False"
+                                                                Content="{TemplateBinding SelectionBoxItem}"
+                                                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                                Margin="10,0,0,0"
+                                                                VerticalAlignment="Center"
+                                                                    HorizontalAlignment="Left" />
                                                 <Popup x:Name="Popup"
-                                           Placement="Bottom"
-                                           IsOpen="{TemplateBinding IsDropDownOpen}"
-                                           AllowsTransparency="False"
-                                           Focusable="False"
-                                           PopupAnimation="Slide">
+                                                                    Placement="Bottom"
+                                                                    IsOpen="{TemplateBinding IsDropDownOpen}"
+                                                                    AllowsTransparency="False"
+                                                                    Focusable="False"
+                                                                    PopupAnimation="Slide">
                                                     <Grid>
                                                         <Border Background="White"
-                                                    BorderThickness="1"
-                                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}">
+                                                                        BorderThickness="1"
+                                                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}">
                                                             <ScrollViewer>
                                                                 <ItemsPresenter />
                                                             </ScrollViewer>
@@ -185,23 +276,24 @@
                                                     </Grid>
                                                 </Popup>
                                             </Grid>
-                                        </ControlTemplate>
-                                    </ComboBox.Template>
+                                            </ControlTemplate>
+                                        </ComboBox.Template>
 
-                                    <System:String xml:space="preserve">TOATE </System:String>
-                                    <ComboBoxItem x:Name="cbOpt2" Content="PREȚ, ASCENDENT" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
-                                    <ComboBoxItem x:Name="cbOpt3" Content="PREȚ, DESCENDENT" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
-                                </ComboBox>
+                                        <!--<System:String xml:space="preserve">TOATE </System:String>-->
+                                    <ComboBoxItem Content="TOATE" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
+                                    <ComboBoxItem x:Name="cbOpt4" Content="ADJUDECAT" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
+                                        <ComboBoxItem x:Name="cbOpt5" Content="NEADJUDECAT" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
+                                    </ComboBox>
 
                             </StackPanel>
 
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="80,10">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="50,10">
                                 <TextBlock FontSize="12" Text="LOTURI PER PAGINĂ" Foreground="Gray" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                                 <ComboBox x:Name="cb_numarPostari" 
                                       Width="163"
                                       Height="26"
                                       FontSize="12"
-                                      Text="9"
+                                      Text="6"
                                       IsEditable="True"
                                       IsReadOnly="True"
                                       RenderTransformOrigin="0.508,0.844"
@@ -257,9 +349,10 @@
                                         </ControlTemplate>
                                     </ComboBox.Template>
 
-                                    <System:String xml:space="preserve">9 </System:String>
-                                    <ComboBoxItem x:Name="cbOp2" Content="12" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
-                                    <ComboBoxItem x:Name="cbOp3" Content="15" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
+                                    <!--<System:int xml:space="preserve">6 </System:int>-->
+                                    <ComboBoxItem Content="6" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
+                                    <ComboBoxItem x:Name="cbOp2" Content="9" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
+                                    <ComboBoxItem x:Name="cbOp3" Content="12" HorizontalAlignment="Stretch" Foreground="Black" BorderThickness="1"/>
 
                                 </ComboBox>
                             </StackPanel>
@@ -273,9 +366,10 @@
                         <StackPanel Orientation="Vertical">
 
                             <Button Command="{Binding GoToAddPostCommand}"
+                                    Visibility="{Binding OwnerAdminVisibility}"
                                     Width="105" 
                                     Height="50" 
-                                    Margin="100,0,0,0"
+                                    Margin="40,0,0,0"
                                     HorizontalAlignment="Left" 
                                     Background="White" 
                                     BorderBrush="Gray" 
@@ -303,7 +397,7 @@
                                 <!-- Folosim WrapPanel pentru a organiza elementele pe coloane -->
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapPanel ItemWidth="340" ItemHeight="380" Margin="30,10,0,10"/>
+                                        <WrapPanel ItemWidth="340" ItemHeight="380" Margin="30,10,0,30"/>
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>
@@ -313,10 +407,10 @@
                 </Grid>
 
 
-                <StackPanel x:Name="sp_prevNextButtons" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10,0,10">
+                <StackPanel x:Name="sp_prevNextButtons" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
                     <!-- Buton Previous -->
                     <Button x:Name="bt_prev" Width="50" Height="30" DockPanel.Dock="Left" Margin="0,10,0,10"
-                                 Command="{Binding PreviousPageCommad}" Background="Transparent" BorderBrush="Transparent">
+                                 Command="{Binding PreviousPageCommand}" Background="Transparent" BorderBrush="Transparent">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Path Data="M 15,10 L 5,20 L 15,30" Stroke="Black" StrokeThickness="2" Height="20" Stretch="Fill" Width="12" />
                             <TextBlock Text="PREV" Foreground="Black" VerticalAlignment="Center" Margin="5,0,0,0" RenderTransformOrigin="0.578,1.315" />

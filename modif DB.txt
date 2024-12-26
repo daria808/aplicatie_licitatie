@@ -1,0 +1,29 @@
+
+ALTER TABLE [dbo].[Post]
+DROP CONSTRAINT DF__Post__image_path__1332DBDC;
+
+ALTER TABLE [dbo].[Post]
+DROP COLUMN [image_path];
+
+-- 2. Crearea unei noi tabele pentru imaginile asociate fiecărei postări
+CREATE TABLE [dbo].[PostImages] (
+    [id_image]    INT             IDENTITY (1, 1) NOT NULL,
+    [id_post]     INT             NOT NULL,
+    [image_path]  VARCHAR (255)   NOT NULL DEFAULT ('C:/Users/laris/Desktop/Client_ADBD/Client_ADBD/Views/photos/no-image_image.jpg'),
+    PRIMARY KEY CLUSTERED ([id_image] ASC),
+    FOREIGN KEY ([id_post]) REFERENCES [dbo].[Post] ([id_post]) ON DELETE CASCADE,
+    CONSTRAINT [CK_MaxImagesPerPost] CHECK (
+        (SELECT COUNT(*) FROM [dbo].[PostImages] WHERE [id_post] = [PostImages].[id_post]) <= 2
+    )
+);
+
+
+ALTER TABLE [dbo].[Post]
+ADD [lot] INT NOT NULL;
+
+ALTER TABLE [dbo].[Post]
+ADD CONSTRAINT [CK_Post_Lot] CHECK ([lot] > 0);
+
+ALTER TABLE [dbo].[Post]
+ADD CONSTRAINT [UQ_Post_Auction_Lot] UNIQUE ([id_auction], [lot]);
+

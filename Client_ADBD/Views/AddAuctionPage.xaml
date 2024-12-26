@@ -13,10 +13,10 @@
         <TextBlock HorizontalAlignment="Left" Margin="339,0,0,0" TextWrapping="Wrap" Text="Licitatie" VerticalAlignment="Center" FontSize="30" Foreground="Black"/>
 
     </Grid>-->
-    <Page.DataContext>
-        <!-- Aici setezi DataContext pentru întreaga fereastră -->
+    <!--<Page.DataContext>
+        --><!-- Aici setezi DataContext pentru întreaga fereastră --><!--
         <ViewModels:VM_AddAuctionPage/>
-    </Page.DataContext>
+    </Page.DataContext>-->
 
     <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0" >
         <Grid Margin="10,20,20,-268" Background="White">

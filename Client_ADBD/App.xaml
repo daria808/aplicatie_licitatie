@@ -6,7 +6,7 @@
             xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
               xmlns:UserControl="clr-namespace:Client_ADBD.Views.UserControl"
              xmlns:Views="clr-namespace:Client_ADBD.Views"
-             StartupUri="./Views/MainWindow.xaml">
+             StartupUri="./Views/StartWindow.xaml">
     
     <Application.Resources>
         <ResourceDictionary>

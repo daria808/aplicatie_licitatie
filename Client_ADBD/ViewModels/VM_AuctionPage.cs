@@ -5,9 +5,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Client_ADBD.Helpers;
 using Client_ADBD.Models;
 using Client_ADBD.Views;
 using Client_ADBD.Views.UserControl;
@@ -19,6 +21,8 @@ namespace Client_ADBD.ViewModels
     {
         private int _currentPage = 1;
 
+        //private Auction_ _auction;
+        private Visibility _ownerAdminVisibility;
         private string _auctionTitle;
         private string _auctionDescription;
         //private string _auctionShortDescription;
@@ -28,19 +32,112 @@ namespace Client_ADBD.ViewModels
         private int _auctionLotCount;
         private int _auctionNumber;
         private string _selectedSortType;
+        private string _selectedSortStatus;
         private int _selectedLotPerPage;
         private string _auctionImagePath;
+        private string _usernameOwner;
         private ObservableCollection<PostControl> _lotsPerPage;
         //private ObservableCollection<AuctionLot> _lots;
+
+        private int _selectedLotNumber;
+        private string _lotNumberError;
 
         private string _auctionType;
         public ICommand GoToMainPageCommand { get; }
         public ICommand GoToAddPostCommand { get; }
 
         public ICommand ToggleDescriptionCommand { get; }
+        public ICommand GoToPageDetailsCommand {  get; }
+
+        public ICommand PreviousPageCommand {  get; }
+        public ICommand NextPageCommand { get; }
+        public ICommand GoToModifyPageCommand {  get; }
+
+        public ICommand DeleteAuctionCommand { get; }
         public VM_AuctionPage() { }
 
-        public string ButtonText => IsFullDescriptionVisible ? "Ascunde" : "Citește mai mult";
+        public int SelectedLotNumber
+        {
+            get => _selectedLotNumber;
+            set
+        {
+                _selectedLotNumber = value;
+                if (value <= 0 || value > _auctionLotCount)
+                {
+                    LotNumberError = "Număr lot invalid";
+                }
+                else
+                {
+                    LotNumberError = string.Empty;
+                }
+
+                OnPropertyChange(nameof(SelectedLotNumber));
+            }
+        }
+
+        public Visibility OwnerAdminVisibility
+        {
+            get => _ownerAdminVisibility;
+            set
+            {   _ownerAdminVisibility = value;
+                OnPropertyChange(nameof(OwnerAdminVisibility));
+            }
+        }
+
+        private Visibility IsCurrentUserOwner(string username)
+        {
+            if(CurrentUser.User._username == username) 
+                return Visibility.Visible;
+            else 
+                return Visibility.Hidden;
+        }
+
+        public string LotNumberError
+        {
+            get => _lotNumberError;
+            set
+            {
+                _lotNumberError = value;
+                OnPropertyChange(nameof(LotNumberError));
+            }
+        }
+
+        private void GoToChosenLotPage(int lotNumber)
+        {
+
+           int id= DatabaseManager.GetPostIdByLot(lotNumber, _auctionNumber);
+            Post_ p = DatabaseManager.GetPostDetails(id);
+
+            var mainWindow = App.Current.Windows
+                    .OfType<MainWindow>()
+                    .FirstOrDefault();
+            var frame = mainWindow?.FindName("MainFrame") as Frame;
+
+
+            if (frame != null)
+            {
+                frame.Navigate(new PostPage(p));
+            }
+
+        }
+
+
+        public string ButtonText
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ShortDescription) || string.IsNullOrEmpty(FullDescription))
+                {
+                    return string.Empty;
+                }
+                if (FullDescription.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length <= 15)
+                {
+                    return string.Empty;
+                }
+                return IsFullDescriptionVisible ? "Ascunde" : "Citește mai mult";
+            }
+        }
+
         public bool IsFullDescriptionVisible
         {
             get => _isFullDescriptionVisible;
@@ -90,8 +187,8 @@ namespace Client_ADBD.ViewModels
 
         public void SetPostsPreview(List<PostPreview> posts)
         { 
-            if (_vmPostsPreview == null || DisplayedPosts.Count() == 0)
-            {
+            //if (_vmPostsPreview == null || DisplayedPosts.Count() == 0)
+            //{
                 _vmPostsPreview = new ObservableCollection<VM_PostControl>(
 
                     posts.Select(p => new VM_PostControl
@@ -104,7 +201,7 @@ namespace Client_ADBD.ViewModels
                         Author = p.artistName
                     }
                     ));
-            }
+           // }
 
             Posts = new ObservableCollection<PostPreview>(posts);
 
@@ -115,16 +212,16 @@ namespace Client_ADBD.ViewModels
         public VM_AuctionPage(Auction_ auction)
         {
 
-
+            SelectedLotPerPage = 6;
             AuctionTitle = auction.name;
             AuctionDescription =auction.description;
-            //_auctionDescription = auction.description;
             AuctionDate =auction.startTime;
             AuctionLocation =auction.location;
             AuctionImagePath=auction.imagePath;
             AuctionType=auction.auctionType;
             AuctionNumber=auction.auctionNumber;
-            SelectedLotPerPage = 9;
+            _usernameOwner = auction.usernameOwner;
+            OwnerAdminVisibility=IsCurrentUserOwner(_usernameOwner);
 
             SetPostsPreview(DatabaseManager.GetPostPreview(AuctionNumber));
  
@@ -133,7 +230,72 @@ namespace Client_ADBD.ViewModels
             GoToAddPostCommand=new RelayCommand(GoToAddPost);
             GoToMainPageCommand = new RelayCommand(GoToMainPage);
             ToggleDescriptionCommand = new RelayCommand(ToggleDescription);
+            GoToPageDetailsCommand = new RelayCommand<int>(GoToChosenLotPage);
+            PreviousPageCommand = new RelayCommand(PreviousPage);
+            NextPageCommand = new RelayCommand(NextPage);
+            GoToModifyPageCommand = new RelayCommand(GoToModifyPage);
+            DeleteAuctionCommand = new RelayCommand(ShowMessageBox);
+        }
 
+        private void ShowMessageBox()
+        {
+            //MessageBox.Show("Acesta este un mesaj din ViewModel!"); 
+            var result = MessageBox.Show(
+                     "Sunteți sigur că doriți să ștergeți această licitație?",
+                     "Confirmare Ștergere",
+                     MessageBoxButton.OKCancel,
+                     MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.OK)
+            {
+                var rc=false;
+               // var rc=DatabaseManager.DeleteAuction(AuctionNumber);
+                if (rc == false)
+                {
+                    GoToMainPage();
+                    MessageBox.Show("Licitație ștearsă cu succes!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Licitație nu a putut fi ștearsă!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
+        private void GoToModifyPage()
+        {
+
+            var mainWindow = App.Current.Windows
+                    .OfType<MainWindow>()
+                    .FirstOrDefault();
+            var frame = mainWindow?.FindName("MainFrame") as Frame;
+            var a = DatabaseManager.GetAuctionByNumber(_auctionNumber);
+
+            if (frame != null)
+            {
+                frame.Navigate(new ModifyAuctionPage(a));
+            }
+
+        }
+
+
+        private void PreviousPage()
+        {
+
+            if(_currentPage >1)
+            {
+                _currentPage--;
+                UpdateDisplayedPosts();
+            }
+        }
+
+        private void NextPage()
+        {
+            if(_currentPage*_selectedLotPerPage<Posts.Count())
+            {
+                _currentPage++;
+                UpdateDisplayedPosts();
+            }
         }
 
         private ObservableCollection<PostPreview> _posts;
@@ -196,24 +358,6 @@ namespace Client_ADBD.ViewModels
             IsFullDescriptionVisible = !IsFullDescriptionVisible;
         }
 
-        //private void ShowFullDescription()
-        //{
-        //    IsDescriptionExpanded = !IsDescriptionExpanded;
-        //}
-
-        //public string GetShortDescription(string fullDescription)
-        //{
-        //    var words = fullDescription.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        //    var shortDescription = string.Join(" ", words.Take(30));
-        //    return shortDescription+"...";
-        //}
-        //public string ButtonText
-        //{
-        //    get
-        //    {
-        //        return IsFullDescriptionVisible ? "Ascunde" : "Citește mai mult";
-        //    }
-        //}
         private void GoToMainPage()
         {
      
@@ -248,12 +392,6 @@ namespace Client_ADBD.ViewModels
             set { _auctionTitle = value; 
             OnPropertyChange(nameof(AuctionTitle)); }
         }
-        //public string AuctionDescription
-        //{
-        //    get { return _auctionDescription; }
-        //    set { _auctionDescription = value; 
-        //    OnPropertyChange(nameof(AuctionDescription)); }
-        //}
     
         public DateTime AuctionDate
         {
@@ -288,15 +426,39 @@ namespace Client_ADBD.ViewModels
 
         public string SelectedSortType
         {
-            get { return _selectedSortType; }
-            set { _selectedSortType = value; 
-            OnPropertyChange(nameof(SelectedSortType)); }
+            get
+            {
+                if (_selectedSortType == null || _selectedSortType=="TOATE")
+                    return "default";
+                return _selectedSortType;
+            }
+            set { _selectedSortType = value;
+                SetPostsPreview(DatabaseManager.GetPostPreview(AuctionNumber, SelectedSortType, SelectedSortStatus));
+                OnPropertyChange(nameof(SelectedSortType)); }
+        }
+
+        public string SelectedSortStatus
+        {
+            get {
+                if (_selectedSortStatus == null || _selectedSortStatus=="TOATE")
+                    return "default";
+                return _selectedSortStatus; }
+            set
+            {
+                _selectedSortStatus = value;
+                SetPostsPreview(DatabaseManager.GetPostPreview(AuctionNumber, SelectedSortType, SelectedSortStatus));
+                OnPropertyChange(nameof(SelectedSortStatus));
+            }
         }
 
         public int SelectedLotPerPage
         {
-            get { return _selectedLotPerPage; }
-            set { _selectedLotPerPage = value; 
+            get {
+                if (_selectedLotPerPage==0)
+                    return 6;
+                return _selectedLotPerPage; }
+            set { _selectedLotPerPage = value;
+            UpdateDisplayedPosts();
             OnPropertyChange(nameof(SelectedLotPerPage)); }
         }
 
@@ -319,6 +481,8 @@ namespace Client_ADBD.ViewModels
                 OnPropertyChange(nameof(AuctionType));
             }
         }
+
+
 
     }
 

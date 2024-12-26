@@ -1,0 +1,187 @@
+﻿<Page x:Class="Client_ADBD.Views.ModifyAuctionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client_ADBD.Views"
+      xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="800">
+
+    <!--<Grid Background="White">
+        <TextBlock HorizontalAlignment="Left" Margin="339,0,0,0" TextWrapping="Wrap" Text="Licitatie" VerticalAlignment="Center" FontSize="30" Foreground="Black"/>
+
+    </Grid>-->
+    <!--<Page.DataContext>
+        <ViewModels:VM_ModifyAuctionPage/>
+    </Page.DataContext>-->
+
+    <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0" >
+        <Grid Margin="10,20,20,-268" Background="White">
+
+
+
+            <Grid Margin="10,10,10,10" Background="#f8f9fa" RenderTransformOrigin="0.499,0.555">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="1" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Command="{Binding ClosePageCommand}">
+                    <Button.Content>
+                        <Path Data="M 0,0 L 1,1 M 1,0 L 0,1" Stroke="DarkGray" StrokeThickness="3" StrokeLineJoin="Round" Height="20" Stretch="Fill" Width="20"/>
+                    </Button.Content>
+                </Button>
+
+                <Button Content="Salvează modificările" Command="{Binding SaveChangesCommand}" Width="250" Height="50" Background="#007bff" Foreground="White" FontWeight="Bold" FontSize="16" BorderBrush="#007bff" BorderThickness="1" VerticalAlignment="Top" Margin="261,685,189,0">
+                    <Button.Effect>
+                        <DropShadowEffect Color="Black" Direction="270" BlurRadius="10" ShadowDepth="5" Opacity="0.4"/>
+                    </Button.Effect>
+                </Button>
+
+                <StackPanel VerticalAlignment="Top" Margin="142,51,0,0" Height="634" Grid.ColumnSpan="2">
+                    <!-- Numele licitației -->
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Nume Licitație:" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <TextBox x:Name="tb_AuctionName2" Width="475" Height="59"  FontSize="14"  VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" Margin="0,0,40,0" Text="{Binding AuctionName, UpdateSourceTrigger=PropertyChanged}"
+                                     TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                     AcceptsReturn="True"/>
+                            <TextBlock Text="{Binding AuctionNameError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <!-- Timpul de început și sfârșit pe aceeași linie -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,0">
+                        <StackPanel Orientation="Vertical" Margin="0,0,20,0">
+                            <TextBlock Text="Data începerii :" FontSize="14" FontWeight="Medium" Foreground="#333" Margin="0,20,0,8"/>
+                            <DatePicker x:Name="StartDatePicker2" Width="250" Height="40" Margin="0,0,80,10" Padding="10" BorderBrush="#ccc" BorderThickness="1" SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text="{Binding StartDateError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="Ora începerii :" FontSize="14" FontWeight="Medium" Foreground="#333" Margin="0,20,0,12"/>
+                                <!-- Hour ComboBox -->
+                                <ComboBox x:Name="StartHourComboBox2" Width="60" Height="35" Margin="10,0,5,0" FontSize="14" Background="White" SelectedValue="{Binding StartHour, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content">>
+                                    <ComboBoxItem Content="00" />
+                                    <ComboBoxItem Content="01" />
+                                    <ComboBoxItem Content="02" />
+                                    <ComboBoxItem Content="03" />
+                                    <ComboBoxItem Content="04" />
+                                    <ComboBoxItem Content="05" />
+                                    <ComboBoxItem Content="06" />
+                                    <ComboBoxItem Content="07" />
+                                    <ComboBoxItem Content="08" />
+                                    <ComboBoxItem Content="09" />
+                                    <ComboBoxItem Content="10" />
+                                    <ComboBoxItem Content="11" />
+                                    <ComboBoxItem Content="12" />
+                                    <ComboBoxItem Content="13" />
+                                    <ComboBoxItem Content="14" />
+                                    <ComboBoxItem Content="15" />
+                                    <ComboBoxItem Content="16" />
+                                    <ComboBoxItem Content="17" />
+                                    <ComboBoxItem Content="18" />
+                                    <ComboBoxItem Content="19" />
+                                    <ComboBoxItem Content="20" />
+                                    <ComboBoxItem Content="21" />
+                                    <ComboBoxItem Content="22" />
+                                    <ComboBoxItem Content="23" />
+                                </ComboBox>
+
+                                <!-- Minute ComboBox -->
+                                <ComboBox x:Name="StartMinuteComboBox2" Width="60" Height="35" Margin="10,0,0,0" FontSize="14" SelectedValue="{Binding StartMinute, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content">>
+                                    <ComboBoxItem Content="00" />
+                                    <ComboBoxItem Content="15" />
+                                    <ComboBoxItem Content="30" />
+                                    <ComboBoxItem Content="45" />
+                                </ComboBox>
+
+                            </StackPanel>
+                            <TextBlock Text="{Binding TimeError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Data închiderii :" FontSize="14" FontWeight="Medium" Foreground="#333" Margin="0,20,0,8"/>
+                            <DatePicker x:Name="EndTimePicker2" Width="250" Height="40" Margin="0,0,0,10" Padding="10" BorderBrush="#ccc" BorderThickness="1" SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text="{Binding EndDateError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="Ora închiderii :" FontSize="14" FontWeight="Medium" Foreground="#333" Margin="0,20,0,8"/>
+                                <!-- Hour ComboBox -->
+                                <ComboBox x:Name="EndHourComboBox2" Width="60" Height="35" Margin="10,0,5,0" FontSize="14" Background="White" SelectedValue="{Binding EndHour, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content">>
+                                    <ComboBoxItem Content="00" />
+                                    <ComboBoxItem Content="01" />
+                                    <ComboBoxItem Content="02" />
+                                    <ComboBoxItem Content="03" />
+                                    <ComboBoxItem Content="04" />
+                                    <ComboBoxItem Content="05" />
+                                    <ComboBoxItem Content="06" />
+                                    <ComboBoxItem Content="07" />
+                                    <ComboBoxItem Content="08" />
+                                    <ComboBoxItem Content="09" />
+                                    <ComboBoxItem Content="10" />
+                                    <ComboBoxItem Content="11" />
+                                    <ComboBoxItem Content="12" />
+                                    <ComboBoxItem Content="13" />
+                                    <ComboBoxItem Content="14" />
+                                    <ComboBoxItem Content="15" />
+                                    <ComboBoxItem Content="16" />
+                                    <ComboBoxItem Content="17" />
+                                    <ComboBoxItem Content="18" />
+                                    <ComboBoxItem Content="19" />
+                                    <ComboBoxItem Content="20" />
+                                    <ComboBoxItem Content="21" />
+                                    <ComboBoxItem Content="22" />
+                                    <ComboBoxItem Content="23" />
+                                </ComboBox>
+
+                                <!-- Minute ComboBox -->
+                                <ComboBox x:Name="EndMinuteComboBox2" Width="60" Height="35" Margin="10,0,0,0" FontSize="14" SelectedValue="{Binding EndMinute, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content">>
+                                    <ComboBoxItem Content="00" />
+                                    <ComboBoxItem Content="15" />
+                                    <ComboBoxItem Content="30" />
+                                    <ComboBoxItem Content="45" />
+                                </ComboBox>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Calea imaginii -->
+                    <TextBlock Text="Cale imagine:" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                    <TextBox x:Name="ImagePathTextBox2" Width="440" Height="35" Margin="0,0,0,0" FontSize="14" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" HorizontalAlignment="Left" Text="{Binding ImagePath,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding ImagePathError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,0,0,0" />
+
+                    <TextBlock Text="Locație :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                    <TextBox x:Name="LocationTextBox2" Width="440" Height="35" Margin="0,0,0,0" FontSize="14" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" HorizontalAlignment="Left" Text="{Binding Location,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding LocationError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,0,0,0" />
+
+                    <TextBlock Text="Descriere :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                    <TextBox x:Name="tb_description2" Width="470" Height="119" Margin="0,0,0,0" FontSize="14" BorderBrush="#ccc" BorderThickness="1" HorizontalAlignment="Left"
+                              TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                               AcceptsReturn="True" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding DescriptionError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,0,0,0" />
+
+
+
+                    <!--<Button Content="Adaugă licitație" Width="200" Height="40" Background="#007bff" Foreground="White" FontWeight="Bold" FontSize="16" BorderBrush="#007bff" BorderThickness="1" >
+                        <Button.Effect>
+                            <DropShadowEffect Color="Black" Direction="270" BlurRadius="10" ShadowDepth="5" Opacity="0.4"/>
+                        </Button.Effect>
+                    </Button>-->
+
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>

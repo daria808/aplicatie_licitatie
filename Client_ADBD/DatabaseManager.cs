@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Linq;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography.X509Certificates;
@@ -25,6 +26,53 @@ namespace Client_ADBD
             _dbContext = new AuctionAppDataContext();
         }
 
+        public static void UpdateAuction(Auction_ auctionToUpdate)
+        {
+
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var auction = _dbContext.Auctions.SingleOrDefault(a => a.auction_number == auctionToUpdate.auctionNumber);
+
+            if (auction != null)
+            {
+                if (auctionToUpdate.name != auction.name)
+                    auction.name = auctionToUpdate.name;
+
+                if (auctionToUpdate.startTime != auction.start_time)
+                    auction.start_time = auctionToUpdate.startTime;
+
+                if (auctionToUpdate.endTime != auction.end_time)
+                    auction.end_time = auctionToUpdate.endTime;
+
+                if (auctionToUpdate.imagePath != auction.image_path)
+                    auction.image_path = auctionToUpdate.imagePath;
+
+                if (auctionToUpdate.description != auction.description)
+                    auction.description = auctionToUpdate.description;
+
+                if (auctionToUpdate.location != auction.location)
+                    auction.location = auctionToUpdate.location;
+
+                _dbContext.SubmitChanges();
+            }
+             
+            
+        }
+
+        static public string GetUsernameById(int user_id)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var username = _dbContext.Users.Where(u=> u.id_user == user_id).FirstOrDefault().username;  
+            return username;
+
+        }
         static public void PrintUsers()
         {
             if (_dbContext == null)
@@ -184,18 +232,6 @@ namespace Client_ADBD
 
             return Hash.VerifyPassword(password, user.password, user.salt);
         }
-        //static public List<User_> GetUsers()
-        //{
-        //    if (_dbContext == null)
-        //    {
-        //        _dbContext = new AuctionAppDataContext();
-        //    }
-
-        //    List<User_> users = _dbContext.Users.Select(u => new User_(u.id_user, u.username, u.email, u.created_at, u.last_login, u.balance)).ToList();
-
-        //    return users;
-
-        //}
 
         public List<User_> GetUsers()
         {
@@ -752,36 +788,126 @@ namespace Client_ADBD
             return id;
         }
 
-        static public List<PostPreview> GetPostPreview(int auctionNumber)
+        static public string GetFirstProductImagePath(int product_id)
+        {
+            if (_dbContext == null) {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var path = _dbContext.Product_images.Where(p => p.id_product == product_id).FirstOrDefault().image_path;
+
+            return path;
+        }
+
+        //static public List<PostPreview> GetPostPreview(int auctionNumber)
+        //{
+        //    if (_dbContext == null)
+        //    {
+        //        _dbContext = new AuctionAppDataContext();
+        //    }
+
+        //    var auctionId=GetAuctionIdByNumber(auctionNumber);
+        //    var auctionIdType=GetAuctionIdType(auctionId);
+        //    var auctionType = GetAuctionType(auctionIdType);
+
+        //    var previews = (from post in _dbContext.Posts
+        //                    join pr in _dbContext.Products on post.id_product equals pr.id_product
+        //                    join ps in _dbContext.Post_status on post.id_status equals ps.id_status
+        //                    join a in _dbContext.Auctions on post.id_auction equals a.id_auction
+        //                    where post.id_auction == auctionId
+        //                    select new PostPreview
+        //                    {
+        //                       postId= post.id_post,
+        //                       imagePath=GetFirstProductImagePath(pr.id_product),
+        //                       postName=pr.name,
+        //                       artistName= GetManufacturerName(auctionType,pr.id_product),
+        //                       startPrice=post.start_price,
+        //                       postStatus=ps.status_name,
+
+        //                    }).ToList();
+
+        //    return previews;
+        //}
+
+        static public List<PostPreview> GetPostPreview(int auctionNumber,string sortType="default",string postStatus="default")
         {
             if (_dbContext == null)
             {
                 _dbContext = new AuctionAppDataContext();
             }
 
-            var auctionId=GetAuctionIdByNumber(auctionNumber);
-            var auctionIdType=GetAuctionIdType(auctionId);
+            var auctionId = GetAuctionIdByNumber(auctionNumber);
+            var auctionIdType = GetAuctionIdType(auctionId);
             var auctionType = GetAuctionType(auctionIdType);
 
-            var previews = (from post in _dbContext.Posts
-                            join pr in _dbContext.Products on post.id_product equals pr.id_product
-                            join ps in _dbContext.Post_status on post.id_status equals ps.id_status
-                            join a in _dbContext.Auctions on post.id_auction equals a.id_auction
-                            where post.id_auction == auctionId
-                            select new PostPreview
-                            {
-                               postId= post.id_post,
-                               imagePath=post.image_path,
-                               postName=pr.name,
-                               artistName= GetManufacturerName(auctionType,pr.id_product),
-                               startPrice=post.start_price,
-                               postStatus=ps.status_name,
 
-                            }).ToList();
+            var query = from post in _dbContext.Posts
+                        join pr in _dbContext.Products on post.id_product equals pr.id_product
+                        join ps in _dbContext.Post_status on post.id_status equals ps.id_status
+                        join a in _dbContext.Auctions on post.id_auction equals a.id_auction
+                        where post.id_auction == auctionId
+                        select new PostPreview
+                        {
+                            postId = post.id_post,
+                            imagePath = GetFirstProductImagePath(pr.id_product),
+                            postName = pr.name,
+                            artistName = GetManufacturerName(auctionType, pr.id_product),
+                            startPrice = post.start_price,
+                            postStatus = ps.status_name
+                        };
 
-            return previews;
+            if(postStatus !="default")
+            {
+                query = query.Where(post => post.postStatus.ToLower() == postStatus.ToLower());
+            }
+
+            switch(sortType)
+            {
+                case "PREȚ, ASCENDENT":
+                    query = query.OrderBy(post => post.startPrice);
+                
+                    break;
+                case "PREȚ, DESCENDENT":
+                    query = query.OrderByDescending(post => post.startPrice);
+                    break;
+                default:
+                    break;
+
+            }
+            //if(sortType!="default")
+            //{
+            //    if (sortType == "asc")
+            //    {
+            //        query = query.OrderBy(post => post.startPrice);
+            //    }else if(sortType =="desc")
+            //    {
+            //        query = query.OrderByDescending(post => post.startPrice);
+            //    }
+            //}
+
+            return query.ToList();
         }
-        static public void AddWatchPost(int auctionNumber,decimal startPrice,decimal listPrice,DateTime creationTime,string imagePath,
+
+        static public bool DeleteAuction(int auctionNumber)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var auctionToDelete = _dbContext.Auctions.SingleOrDefault(a => a.auction_number == auctionNumber);
+
+            if (auctionToDelete != null)
+            {
+                _dbContext.Auctions.DeleteOnSubmit(auctionToDelete);
+                _dbContext.SubmitChanges();
+                return false;
+            }
+
+            return true;
+        }
+
+        static public void AddWatchPost(int auctionNumber,decimal startPrice,decimal listPrice,DateTime creationTime,string[] imagePath,
             string productName,string description,DateTime inventoryDate,string mechanism,string type,int diameter,string manufacturer)
         {
             if (_dbContext == null)
@@ -823,6 +949,7 @@ namespace Client_ADBD
                     _dbContext.SubmitChanges();
 
                     int idAuction = GetAuctionIdByNumber(auctionNumber);
+                    int lotNumber = GetNextLotNumber(idAuction);
 
                     var newPost = new Post
                     {
@@ -832,13 +959,50 @@ namespace Client_ADBD
                         start_price = startPrice,
                         list_price = listPrice,
                         created_at = creationTime,
-                        image_path = imagePath
+                        lot=lotNumber,
                     };
 
                     _dbContext.Posts.InsertOnSubmit(newPost);
                     _dbContext.SubmitChanges();
 
+                    var newImage = new Product_image
+                    {
+                        id_product = productId,
+                        image_path = imagePath[0]
+                    };
+
+                    _dbContext.Product_images.InsertOnSubmit(newImage);
+                    _dbContext.SubmitChanges();
+
+                    if (!string.IsNullOrEmpty(imagePath[1]))
+                    {
+                        var newImage1 = new Product_image
+                        {
+                            id_product = productId,
+                            image_path = imagePath[1]
+                        };
+
+                        _dbContext.Product_images.InsertOnSubmit(newImage1);
+                        _dbContext.SubmitChanges();
+                    }
+
+                    if (!string.IsNullOrEmpty(imagePath[2]))
+                    {
+                        var newImage2 = new Product_image
+                        {
+                            id_product = productId,
+                            image_path = imagePath[2]
+                        };
+
+                        _dbContext.Product_images.InsertOnSubmit(newImage2);
+                        _dbContext.SubmitChanges();
+                    }
+
+
                     transaction.Complete();
+
+
+
                 }
             }
             catch (Exception ex)
@@ -858,7 +1022,7 @@ namespace Client_ADBD
 
             return id;
         }
-        static public void AddSculpturePost(int auctionNumber, decimal startPrice, decimal listPrice, DateTime creationTime, string imagePath,
+        static public void AddSculpturePost(int auctionNumber, decimal startPrice, decimal listPrice, DateTime creationTime, string[] imagePath,
           string productName, string description, DateTime inventoryDate, string artist,string material,decimal width,decimal length,decimal depth)
         {
 
@@ -903,6 +1067,7 @@ namespace Client_ADBD
                     _dbContext.SubmitChanges();
 
                     int idAuction = GetAuctionIdByNumber(auctionNumber);
+                    int lotNumber = GetNextLotNumber(idAuction);
 
                     var newPost = new Post
                     {
@@ -912,13 +1077,43 @@ namespace Client_ADBD
                         start_price = startPrice,
                         list_price = listPrice,
                         created_at = creationTime,
-                        image_path = imagePath
+                        lot=lotNumber,
+                   
                     };
 
                     _dbContext.Posts.InsertOnSubmit(newPost);
                     _dbContext.SubmitChanges();
 
+
+                    var newImage = new Product_image
+                    {
+                        id_product = productId,
+                        image_path = imagePath[0]
+                    };
+
+                    _dbContext.Product_images.InsertOnSubmit(newImage);
+                    _dbContext.SubmitChanges();
+
+                    var newImage1 = new Product_image
+                    {
+                        id_product = productId,
+                        image_path = imagePath[0]
+                    };
+
+                    _dbContext.Product_images.InsertOnSubmit(newImage1);
+                    _dbContext.SubmitChanges();
+
+                    var newImage2 = new Product_image
+                    {
+                        id_product = productId,
+                        image_path = imagePath[0]
+                    };
+
+                    _dbContext.Product_images.InsertOnSubmit(newImage2);
+                    _dbContext.SubmitChanges();
                     transaction.Complete();
+
+
                 }
             }
             catch (Exception ex)
@@ -926,6 +1121,26 @@ namespace Client_ADBD
 
                 Console.WriteLine($"Eroare la adăugarea sculpturii: {ex.Message}");
             }
+        }
+
+        static public int GetNextLotNumber(int auction_id)
+        {
+            if(_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+            int maxLot = 1; 
+
+            var lots = _dbContext.Posts
+                .Where(post => post.id_auction == auction_id)
+                .Select(post => post.lot);
+
+            if (lots.Any()) 
+            {
+                maxLot = lots.Max() + 1;
+            }
+
+            return maxLot;
         }
         static public int GetBookConditionId(string condition)
         {
@@ -937,7 +1152,7 @@ namespace Client_ADBD
 
             return id;
         }
-        static public void AddBookPost(int auctionNumber, decimal startPrice, decimal listPrice, DateTime creationTime, string imagePath,
+        static public void AddBookPost(int auctionNumber, decimal startPrice, decimal listPrice, DateTime creationTime, string[] imagePath,
          string productName, string description, DateTime inventoryDate, string author, string condition, int year, string ph, int pageNr,string language)
         {
 
@@ -982,6 +1197,7 @@ namespace Client_ADBD
                     _dbContext.SubmitChanges();
 
                     int idAuction = GetAuctionIdByNumber(auctionNumber);
+                    int lotNumber=GetNextLotNumber(idAuction);
 
                     var newPost = new Post
                     {
@@ -991,19 +1207,199 @@ namespace Client_ADBD
                         start_price = startPrice,
                         list_price = listPrice,
                         created_at = creationTime,
-                        image_path = imagePath
+                        lot=lotNumber,
+                     
                     };
 
                     _dbContext.Posts.InsertOnSubmit(newPost);
                     _dbContext.SubmitChanges();
 
+                    var newImage = new Product_image
+                    {
+                        id_product = productId,
+                        image_path = imagePath[0]
+                    };
+
+                    _dbContext.Product_images.InsertOnSubmit(newImage);
+                    _dbContext.SubmitChanges();
+
+                    if (!string.IsNullOrEmpty(imagePath[1]))
+                    {
+                        var newImage1 = new Product_image
+                        {
+                            id_product = productId,
+                            image_path = imagePath[1]
+                        };
+
+
+                        _dbContext.Product_images.InsertOnSubmit(newImage1);
+                        _dbContext.SubmitChanges();
+                    }
+
+                    if (!string.IsNullOrEmpty(imagePath[2]))
+                    {
+                        var newImage2 = new Product_image
+                        {
+                            id_product = productId,
+                            image_path = imagePath[2]
+                        };
+
+                        _dbContext.Product_images.InsertOnSubmit(newImage2);
+                        _dbContext.SubmitChanges();
+                    }
+
                     transaction.Complete();
+
+
+
                 }
             }
             catch (Exception ex)
             {
 
                 Console.WriteLine($"Eroare la adăugarea sculpturii: {ex.Message}");
+            }
+        }
+
+        static public Post_ GetPostDetails(int postId)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var auctionType = (from post in _dbContext.Posts
+                               join ac in _dbContext.Auctions on post.id_auction equals ac.id_auction
+                               join at in _dbContext.Auction_types on ac.id_auction_type equals at.id_auction_type
+                               where post.id_post == postId
+                               select at.type_name).FirstOrDefault();
+
+            string[] imagePaths = _dbContext.Posts
+                                .Where(post => post.id_post == postId) 
+                                .Join(
+                                    _dbContext.Product_images, 
+                                    post => post.id_product,  
+                                    img => img.id_product,
+                                    (post, img) => img 
+                                )
+                                .OrderBy(img => img.id_image) 
+                                .Take(3) 
+                                .Select(img => img.image_path) 
+                                .ToArray(); 
+
+            switch (auctionType)
+            {
+                case "Ceasuri":
+
+                    var WatchPost = (from post in _dbContext.Posts
+                                 join pr in _dbContext.Products on post.id_product equals pr.id_product
+                                 join ps in _dbContext.Post_status on post.id_status equals ps.id_status
+                                 join a in _dbContext.Auctions on post.id_auction equals a.id_auction
+                                 join wch in _dbContext.Watches on pr.id_product equals wch.id_product
+                                 join wm in _dbContext.Watch_mechanisms on wch.id_mechanism equals wm.id_mechanism
+                                 join wt in _dbContext.Watch_types on wch.id_type equals wt.id_watch_type
+                                 where post.id_post == postId
+                                 select new Post_
+                                 {
+                                     postId = postId,
+                                     productStatus = ps.status_name,
+                                     auctionName = a.name,
+                                     auctionNumber = a.auction_number,
+                                     auctionType = auctionType,
+                                     creationTime = post.created_at,
+                                     lotNumber=post.lot,
+                                     product = new Watch_(wm.mechanism, wch.diameter, wch.manufacturer, pr.id_product, pr.name, post.start_price,
+                                                          post.list_price, imagePaths, pr.description, pr.inventory_date)
+
+                                 }).FirstOrDefault();
+                    return WatchPost;
+                case "Bijuterii":
+                    var JewwlryPost = (from post in _dbContext.Posts
+                                       join pr in _dbContext.Products on post.id_product equals pr.id_product
+                                       join ps in _dbContext.Post_status on post.id_status equals ps.id_status
+                                       join a in _dbContext.Auctions on post.id_auction equals a.id_auction
+                                       join jw in _dbContext.Jewelries on pr.id_product equals jw.id_product
+                                       join jt in _dbContext.Jewelry_types on jw.id_type equals jt.id_jewelry_type
+                                       where post.id_post == postId
+                                       select new Post_
+                                       {
+                                           postId = postId,
+                                           productStatus = ps.status_name,
+                                           auctionName=a.name,
+                                           auctionNumber = a.auction_number,
+                                           auctionType = auctionType,
+                                           creationTime = post.created_at,
+                                           lotNumber = post.lot,
+                                           product = new Jewelry_(pr.id_product, pr.name, pr.description, pr.inventory_date, post.start_price,
+                                           post.list_price, imagePaths, jt.type, jw.brand, jw.weight, jw.creation_year)
+                                       }).FirstOrDefault();
+                    return JewwlryPost;
+                case "Carti":
+                    var BookPost = (from post in _dbContext.Posts
+                                    join pr in _dbContext.Products on post.id_product equals pr.id_product
+                                    join ps in _dbContext.Post_status on post.id_status equals ps.id_status
+                                    join a in _dbContext.Auctions on post.id_auction equals a.id_auction
+                                    join bk in _dbContext.Books on pr.id_product equals bk.id_product
+                                    join bc in _dbContext.Book_conditions on bk.id_condition equals bc.id_book_condition
+                                    where post.id_post == postId
+                                    select new Post_
+                                    {
+                                        postId = postId,
+                                        productStatus = ps.status_name,
+                                        auctionName = a.name,
+                                        auctionNumber = a.auction_number,
+                                        auctionType = auctionType,
+                                        creationTime = post.created_at,
+                                        lotNumber = post.lot,
+                                        product = new Book_(pr.id_product, pr.name, pr.description, pr.inventory_date, post.start_price, post.list_price,
+                                        bc.condition, bk.author, bk.publication_year, bk.publishing_house, bk.page_number, bk.book_language, imagePaths)
+                                    }).FirstOrDefault();
+                    return BookPost;
+                case "Sculpturi":
+                    var SculpturePost = (from post in _dbContext.Posts
+                                         join pr in _dbContext.Products on post.id_product equals pr.id_product
+                                         join ps in _dbContext.Post_status on post.id_status equals ps.id_status
+                                         join a in _dbContext.Auctions on post.id_auction equals a.id_auction
+                                         join sc in _dbContext.Sculptures on pr.id_product equals sc.id_product
+                                         join sm in _dbContext.Sculpture_materials on sc.id_sculpture_material equals sm.id_sculpture_material
+                                         where post.id_post == postId
+                                         select new Post_
+                                         {
+                                             postId = postId,
+                                             productStatus = ps.status_name,
+                                             auctionName = a.name,
+                                             auctionNumber = a.auction_number,
+                                             auctionType = auctionType,
+                                             creationTime = post.created_at,
+                                             lotNumber = post.lot,
+                                             product = new Sculpture_(pr.id_product, pr.name, pr.description, pr.inventory_date, post.start_price, post.list_price,
+                                           imagePaths, sm.material, sc.artist, sc.length, sc.width, sc.depth)
+                                         }).FirstOrDefault();
+                    return SculpturePost;
+                case "Tablouri":
+                    var PaintingPost = (from post in _dbContext.Posts
+                                        join pr in _dbContext.Products on post.id_product equals pr.id_product
+                                        join ps in _dbContext.Post_status on post.id_status equals ps.id_status
+                                        join a in _dbContext.Auctions on post.id_auction equals a.id_auction
+                                        join pn in _dbContext.Paintings on pr.id_product equals pn.id_produs
+                                        join pt in _dbContext.Painting_types on pn.id_type equals pt.id_painting_type
+                                        where post.id_post == postId
+                                        select new Post_
+                                        {
+                                            postId = postId,
+                                            productStatus = ps.status_name,
+                                            auctionName = a.name,
+                                            auctionNumber = a.auction_number,
+                                            auctionType = auctionType,
+                                            lotNumber = post.lot,
+                                            creationTime = post.created_at,
+                                            product = new Painting_(pr.id_product, pr.name, pr.description, pr.inventory_date, post.start_price, post.list_price,
+                                            pt.type, pn.artist, pn.creation_year, pn.length, pn.width, imagePaths
+                                           )
+                                        }).FirstOrDefault();
+                    return PaintingPost;
+                default:
+                    return null;
             }
         }
 
@@ -1017,7 +1413,7 @@ namespace Client_ADBD
 
             return id;
         }
-        static public void AddJewelryPost(int auctionNumber, decimal startPrice, decimal listPrice, DateTime creationTime, string imagePath,
+        static public void AddJewelryPost(int auctionNumber, decimal startPrice, decimal listPrice, DateTime creationTime, string[] imagePath,
          string productName, string description, DateTime inventoryDate,string type, string brand,decimal weight, int year)
         {
 
@@ -1059,6 +1455,7 @@ namespace Client_ADBD
                     _dbContext.SubmitChanges();
 
                     int idAuction = GetAuctionIdByNumber(auctionNumber);
+                    int lotNumber = GetNextLotNumber(idAuction);
 
                     var newPost = new Post
                     {
@@ -1068,13 +1465,51 @@ namespace Client_ADBD
                         start_price = startPrice,
                         list_price = listPrice,
                         created_at = creationTime,
-                        image_path = imagePath
+                        lot=lotNumber,
+                       
                     };
 
                     _dbContext.Posts.InsertOnSubmit(newPost);
                     _dbContext.SubmitChanges();
 
+
+                    var newImage = new Product_image
+                    {
+                        id_product = productId,
+                        image_path = imagePath[0]
+                    };
+
+                    _dbContext.Product_images.InsertOnSubmit(newImage);
+                    _dbContext.SubmitChanges();
+
+                    if (!string.IsNullOrEmpty(imagePath[1]))
+                    {
+                        var newImage1 = new Product_image
+                        {
+                            id_product = productId,
+                            image_path = imagePath[1]
+                        };
+
+
+                        _dbContext.Product_images.InsertOnSubmit(newImage1);
+                        _dbContext.SubmitChanges();
+                    }
+
+                    if (!string.IsNullOrEmpty(imagePath[2]))
+                    {
+                        var newImage2 = new Product_image
+                        {
+                            id_product = productId,
+                            image_path = imagePath[2]
+                        };
+
+                        _dbContext.Product_images.InsertOnSubmit(newImage2);
+                        _dbContext.SubmitChanges();
+                    }
+
                     transaction.Complete();
+
+                
                 }
             }
             catch (Exception ex)
@@ -1084,6 +1519,21 @@ namespace Client_ADBD
             }
 
 
+        }
+
+        static public int GetPostIdByLot(int lotNumber,int auctionNumber)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+          
+            var id=(from post in _dbContext.Posts
+                    join a in _dbContext.Auctions on post.id_auction equals a.id_auction
+                    where a.auction_number ==auctionNumber
+                    select post.id_post).FirstOrDefault();
+
+            return id;
         }
 
         static public int GetPaintingIdType(string type)
@@ -1097,7 +1547,7 @@ namespace Client_ADBD
             return id;
         }
 
-        static public void AddPaintingPost(int auctionNumber, decimal startPrice, decimal listPrice, DateTime creationTime, string imagePath,
+        static public void AddPaintingPost(int auctionNumber, decimal startPrice, decimal listPrice, DateTime creationTime, string[] imagePath,
        string productName, string description, DateTime inventoryDate, string type, string artist, int year,decimal length,decimal width)
         {
 
@@ -1140,6 +1590,7 @@ namespace Client_ADBD
                     _dbContext.SubmitChanges();
 
                     int idAuction = GetAuctionIdByNumber(auctionNumber);
+                    int lotNumber = GetNextLotNumber(idAuction);
 
                     var newPost = new Post
                     {
@@ -1149,13 +1600,49 @@ namespace Client_ADBD
                         start_price = startPrice,
                         list_price = listPrice,
                         created_at = creationTime,
-                        image_path = imagePath
+                        lot=lotNumber,
                     };
 
                     _dbContext.Posts.InsertOnSubmit(newPost);
                     _dbContext.SubmitChanges();
 
+                    var newImage = new Product_image
+                    {
+                        id_product = productId,
+                        image_path = imagePath[0]
+                    };
+
+                    _dbContext.Product_images.InsertOnSubmit(newImage);
+                    _dbContext.SubmitChanges();
+
+                    if (!string.IsNullOrEmpty(imagePath[1]))
+                    {
+                        var newImage1 = new Product_image
+                        {
+                            id_product = productId,
+                            image_path = imagePath[1]
+                        };
+
+
+                        _dbContext.Product_images.InsertOnSubmit(newImage1);
+                        _dbContext.SubmitChanges();
+                    }
+
+                    if (!string.IsNullOrEmpty(imagePath[2]))
+                    {
+                        var newImage2 = new Product_image
+                        {
+                            id_product = productId,
+                            image_path = imagePath[2]
+                        };
+
+                        _dbContext.Product_images.InsertOnSubmit(newImage2);
+                        _dbContext.SubmitChanges();
+                    }
+
                     transaction.Complete();
+
+
                 }
             }
             catch (Exception ex)

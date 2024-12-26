@@ -116,7 +116,8 @@
     <Compile Include="Helpers\Validation.cs" />
     <Compile Include="Models\Auction_.cs" />
     <Compile Include="Models\Book_.cs" />
-    <Compile Include="Models\IPost.cs" />
+    <Compile Include="Models\Painting_.cs" />
+    <Compile Include="Models\Post_.cs" />
     <Compile Include="Models\Jewelry_.cs" />
     <Compile Include="Models\PostPreview.cs" />
     <Compile Include="Models\IProduct.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="ViewModels\VM_AuctionPage.cs" />
     <Compile Include="ViewModels\VM_Base.cs" />
     <Compile Include="ViewModels\VM_BookControl.cs" />
+    <Compile Include="ViewModels\VM_BookPostControl.cs" />
     <Compile Include="ViewModels\VM_Buy.cs" />
     <Compile Include="ViewModels\VM_ConsignationAdvance.cs" />
     <Compile Include="ViewModels\VM_ContactPage.cs" />
@@ -143,12 +145,16 @@
     <Compile Include="ViewModels\VM_GiftCertificate.cs" />
     <Compile Include="ViewModels\VM_HistoryPage.cs" />
     <Compile Include="ViewModels\VM_JewelryControl.cs" />
+    <Compile Include="ViewModels\VM_JewelryPostControl.cs" />
     <Compile Include="ViewModels\VM_LogInWindow.cs" />
     <Compile Include="ViewModels\VM_MainAdminPage.cs" />
     <Compile Include="ViewModels\VM_MainPage.cs" />
     <Compile Include="ViewModels\VM_MainWindow.cs" />
+    <Compile Include="ViewModels\VM_ModifyAuctionPage.cs" />
+    <Compile Include="ViewModels\VM_ModifyPostPage.cs" />
     <Compile Include="ViewModels\VM_OngoingAuctions.cs" />
     <Compile Include="ViewModels\VM_PaintingControl.cs" />
+    <Compile Include="ViewModels\VM_PaintingPostControl.cs" />
     <Compile Include="ViewModels\VM_ParticipateAuctions.cs" />
     <Compile Include="ViewModels\VM_PasswordChangeDialog.cs" />
     <Compile Include="ViewModels\VM_PostControl.cs" />
@@ -158,10 +164,12 @@
     <Compile Include="ViewModels\VM_RegsSolicitations.cs" />
     <Compile Include="ViewModels\VM_Regulations.cs" />
     <Compile Include="ViewModels\VM_SculptureControl.cs" />
+    <Compile Include="ViewModels\VM_SculpturePostControl.cs" />
     <Compile Include="ViewModels\VM_Sell.cs" />
     <Compile Include="ViewModels\VM_StartWindow.cs" />
     <Compile Include="ViewModels\Vm_UsersDetailes.cs" />
     <Compile Include="ViewModels\VM_WatchControl.cs" />
+    <Compile Include="ViewModels\VM_WatchPostControl.cs" />
     <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
@@ -222,6 +230,12 @@
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ModifyAuctionPage.xaml.cs">
+      <DependentUpon>ModifyAuctionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModifyPostPage.xaml.cs">
+      <DependentUpon>ModifyPostPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OngoingAuctionPage.xaml.cs">
       <DependentUpon>OngoingAuctionPage.xaml</DependentUpon>
     </Compile>
@@ -268,8 +282,14 @@
     <Compile Include="Views\UserControl\JewelryControl.xaml.cs">
       <DependentUpon>JewelryControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControl\JewelryPostControl.xaml.cs">
+      <DependentUpon>JewelryPostControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControl\PaintingControl.xaml.cs">
       <DependentUpon>PaintingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\PaintingPostControl.xaml.cs">
+      <DependentUpon>PaintingPostControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControl\PostControl.xaml.cs">
       <DependentUpon>PostControl.xaml</DependentUpon>
@@ -277,8 +297,14 @@
     <Compile Include="Views\UserControl\SculptureControl.xaml.cs">
       <DependentUpon>SculptureControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControl\SculpturePostControl.xaml.cs">
+      <DependentUpon>SculpturePostControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControl\WatchControl.xaml.cs">
       <DependentUpon>WatchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl\WatchPostControl.xaml.cs">
+      <DependentUpon>WatchPostControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UsersDetailesPage.xaml.cs">
       <DependentUpon>UsersDetailesPage.xaml</DependentUpon>
@@ -363,6 +389,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ModifyAuctionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModifyPostPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\OngoingAuctionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -419,7 +453,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControl\JewelryPostControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControl\PaintingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl\PaintingPostControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -431,7 +473,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControl\SculpturePostControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControl\WatchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl\WatchPostControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,121 @@
+﻿<Page x:Class="Client_ADBD.Views.ModifyPostPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client_ADBD.Views"
+      xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
+      xmlns:UserControl="clr-namespace:Client_ADBD.Views.UserControl"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ModifyPostPage">
+
+    <Page.Resources>
+        <DataTemplate DataType="{x:Type ViewModels:VM_WatchControl}">
+            <UserControl:WatchControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:VM_PaintingControl}">
+            <UserControl:PaintingControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:VM_JewelryControl}">
+            <UserControl:JewelryControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:VM_BookControl}">
+            <UserControl:BookControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:VM_SculptureControl}">
+            <UserControl:SculptureControl />
+        </DataTemplate>
+    </Page.Resources>
+
+
+
+    <Grid Background="White">
+
+        <Grid  Background="#f8f9fa" Margin="0,-27,0,0">
+
+
+
+
+            <Button Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Command="{Binding ClosePageCommand}">
+                <Button.Content>
+                    <Path Data="M 0,0 L 1,1 M 1,0 L 0,1" Stroke="DarkGray" StrokeThickness="3" StrokeLineJoin="Round" Height="20" Stretch="Fill" Width="20"/>
+                </Button.Content>
+            </Button>
+
+
+
+            <ScrollViewer Height="Auto" VerticalScrollBarVisibility="Hidden" Margin="0,0,43,6">
+
+                <StackPanel VerticalAlignment="Top" Margin="30,10,24,0" Height="811" Grid.ColumnSpan="2">
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Nume produs :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <TextBox x:Name="tb_AuctionName" Width="440" Height="35"  FontSize="14"  HorizontalAlignment="Left" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" Margin="0,0,40,0" Text="{Binding ProductName, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{Binding ProductNameError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="200,0,0,0" >
+                            <TextBlock Text=" Preț pornire :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <TextBox x:Name="tb_StartPrice" Width="194" Height="35"  FontSize="14"  HorizontalAlignment="Left" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" Margin="0,0,40,0" Text="{Binding StartPrice, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{Binding StartPriceError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Width="479">
+                            <TextBlock Text="Căi de imagini :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <TextBox x:Name="ImagePathTextBox1" Width="440" Height="35" Margin="0,0,0,7" FontSize="14" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" HorizontalAlignment="Left" Text="{Binding ImagePaths[0],UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox x:Name="ImagePathTextBox2" Width="440" Height="35" Margin="0,0,0,7" FontSize="14" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" HorizontalAlignment="Left" Text="{Binding ImagePaths[1],UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox x:Name="ImagePathTextBox3" Width="440" Height="35" Margin="0,0,0,0" FontSize="14" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" HorizontalAlignment="Left" Text="{Binding ImagePaths[2],UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{Binding ImagePathError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,0,0,0" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical"  Margin="200,0,0,0">
+                            <TextBlock Text=" Preț listă :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <TextBox x:Name="tb_ListPrice"  Width="194" Height="35"  FontSize="14"  HorizontalAlignment="Left" VerticalContentAlignment="Center" BorderBrush="#ccc" BorderThickness="1" Margin="0,0,40,0" Text="{Binding ListPrice, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{Binding ListPriceError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,0,0,0" />
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Margin="0,0,240,0">
+                            <TextBlock Text="Descriere :" FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <TextBox x:Name="tb_description" Width="440" Height="80" Margin="0,0,0,0" FontSize="14" BorderBrush="#ccc" BorderThickness="1" HorizontalAlignment="Left"
+                            TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                             AcceptsReturn="True" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{Binding DescriptionError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,0,0,0" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Dată inventariere : " FontSize="16" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <DatePicker x:Name="StartDatePicker" Width="250" Height="40" Margin="0,0,80,10" HorizontalAlignment="Left" BorderBrush="#ccc" BorderThickness="1" SelectedDate="{Binding InvDate, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text="{Binding InvDateError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+                        </StackPanel>
+
+                    </StackPanel>
+                    <ContentControl Content="{Binding SelectedProductControl}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding ProductControlError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+
+                    <StackPanel Orientation="Horizontal">
+
+
+
+                    </StackPanel>
+
+                    <!--<ContentControl Grid.Row="1"   Content="{Binding SelectedItemContent}" />-->
+
+                    <Button Content="Adaugă produs" Command="{Binding AddPostCommand}" Width="250" Height="50" Background="#007bff" Foreground="White" FontWeight="Bold" FontSize="16" BorderBrush="#007bff" BorderThickness="1" VerticalAlignment="Top" Margin="50">
+                        <Button.Effect>
+                            <DropShadowEffect Color="Black" Direction="270" BlurRadius="10" ShadowDepth="5" Opacity="0.4"/>
+                        </Button.Effect>
+                    </Button>
+                </StackPanel>
+            </ScrollViewer>
+
+        </Grid>
+
+    </Grid>
+</Page>

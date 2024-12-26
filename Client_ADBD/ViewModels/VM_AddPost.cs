@@ -13,11 +13,12 @@ namespace Client_ADBD.ViewModels
     internal class VM_AddPost:VM_Base
     {
         private object _selectedProductControl;
-        private int auctionNumber {  get; set; }
+        private int _auctionNumber {  get; set; }
         private string _productName {  get; set; }
         private decimal _startPrice {  get; set; }
         private decimal _listPrice {  get; set; }
-        private string _imagePath {  get; set; }
+
+        private string[] _imagePaths = new string[3];
         private string _description {   get; set; }
         private DateTime _invDate { get; set; }=DateTime.Now;
 
@@ -27,6 +28,7 @@ namespace Client_ADBD.ViewModels
             set
             {
                 _productName = value;
+                ProductNameError=Helpers.validation.IsValidProducttName(value);
                 OnPropertyChange(nameof(ProductName));
             }
         }
@@ -37,6 +39,7 @@ namespace Client_ADBD.ViewModels
             set
             {
                 _startPrice = value;
+                StartPriceError=Helpers.validation.IsValidStartPrice(value);
                 OnPropertyChange(nameof(StartPrice));
             }
         }
@@ -47,6 +50,7 @@ namespace Client_ADBD.ViewModels
             set
             {
                 _listPrice = value;
+                ListPriceError=Helpers.validation.IsValidListPrice(value);
                 OnPropertyChange(nameof(ListPrice));
             }
         }
@@ -57,17 +61,19 @@ namespace Client_ADBD.ViewModels
             set
             {
                 _description = value;
+                DescriptionError=Helpers.validation.IsValidDescription(value);
                 OnPropertyChange(nameof(Description));
             }
         }
 
-        public string ImagePath
+        public string[] ImagePaths
         {
-            get => _imagePath;
+            get => _imagePaths;
             set
             {
-                _imagePath = value;
-                OnPropertyChange(nameof(ImagePath));
+                _imagePaths = value;
+                ImagePathError=Helpers.validation.AreValidImagePaths(value);
+                OnPropertyChange(nameof(ImagePaths));
             }
         }
 
@@ -77,6 +83,7 @@ namespace Client_ADBD.ViewModels
             set
             {
                 _invDate = value;
+                InvDateError=Helpers.validation.IsValidInvDate(value);
                 OnPropertyChange(nameof(InvDate));
             }
         }
@@ -102,14 +109,109 @@ namespace Client_ADBD.ViewModels
         { 
 
             ProductType = productType;
-            this.auctionNumber=auctionNumber;
+            this._auctionNumber=auctionNumber;
             UpdateSelectedControl();
             ClosePageCommand=new RelayCommand(ClosePage);
             AddPostCommand = new RelayCommand(AddPost);
         }
 
+        private string _productNameError;
+        public string ProductNameError
+        {
+            get => _productNameError;
+            set
+            {
+                _productNameError = value;
+                OnPropertyChange(nameof(ProductNameError));
+            }
+        }
+
+        private string _imagePathError;
+
+        public string ImagePathError
+        {
+            get => _imagePathError;
+            set
+            {
+                _imagePathError = value;
+                OnPropertyChange(nameof(ImagePathError));
+            }
+        }
+
+        private string _descriptionError;
+        public string DescriptionError
+        {
+            get => _descriptionError;
+            set
+            {
+                _descriptionError = value;
+                OnPropertyChange(nameof(DescriptionError));
+            }
+        }
+
+        private string _listPriceError;
+        public string ListPriceError
+        {
+            get => _listPriceError;
+            set
+            {
+                _listPriceError = value;
+                OnPropertyChange(nameof(ListPriceError));
+            }
+        }
+
+        private string _startPriceError;
+        public string StartPriceError
+        {
+            get => _startPriceError;
+            set
+            {
+                _startPriceError = value;
+                OnPropertyChange(nameof(StartPriceError));
+            }
+        }
+
+        public string _invDateError;
+        public string InvDateError
+        {
+            get => _invDateError;
+            set
+            {
+                _invDateError = value;
+                OnPropertyChange(nameof(InvDateError));
+            }
+        }
+
+        private string _productControlError;
+
+        public string ProductControlError
+        {
+            get => _productControlError;
+            set
+            {
+                _productControlError = value;
+                OnPropertyChange(nameof(ProductControlError));
+            }
+        }
+
         private void AddPost()
         {
+            ProductNameError = string.Empty;
+            ImagePathError = string.Empty;
+            DescriptionError = string.Empty;
+            ListPriceError = string.Empty;
+            StartPriceError = string.Empty;
+            InvDateError = string.Empty;
+            ProductControlError = string.Empty;
+
+            ProductNameError = Helpers.validation.IsValidProducttName(ProductName);
+            ImagePathError=Helpers.validation.AreValidImagePaths(ImagePaths);
+            DescriptionError=Helpers.validation.IsValidDescription(Description);
+            StartPriceError = Helpers.validation.IsValidStartPrice(StartPrice);
+            ListPriceError=Helpers.validation.IsValidListPrice(ListPrice);
+            InvDateError=Helpers.validation.IsValidInvDate(InvDate);
+
+            
             switch (SelectedProductControl)
             {
                 case VM_PaintingControl paintingVM when paintingVM.IsValid:
@@ -120,11 +222,19 @@ namespace Client_ADBD.ViewModels
                         decimal width = paintingVM.Width;
                         string technique = paintingVM.Technique2;
 
-                        DatabaseManager.AddPaintingPost
-                            (auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePath, ProductName,
-                            Description, InvDate,technique,artist,year, length,width);
+                        if (string.IsNullOrEmpty(artist) || year <= 0 ||length<=0||width<=0||technique==null)
+                        {
+                            ProductControlError = "Detaliile produsului sunt incorecte.";
+                        }
 
-                        ClosePage();
+                        if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
+                        {
+                            DatabaseManager.AddPaintingPost
+                            (_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName,
+                            Description, InvDate, technique, artist, year, length, width);
+
+                            ClosePage();
+                        }
                         break;
                     }
 
@@ -135,11 +245,19 @@ namespace Client_ADBD.ViewModels
                         int diameter = watchVM.Diameter;
                         string mechanism = watchVM.Mechanism;
 
-                        DatabaseManager.AddWatchPost
-                            (auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePath, ProductName,
-                            Description, InvDate, mechanism,type, diameter, brand);
+                        if (string.IsNullOrEmpty(brand) || type==null || diameter <=0 || mechanism == null)
+                        {
+                            ProductControlError = "Detaliile produsului sunt incorecte.";
+                        }
 
-                        ClosePage();
+                        if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
+                        {
+                            DatabaseManager.AddWatchPost
+                            (_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName,
+                            Description, InvDate, mechanism, type, diameter, brand);
+
+                            ClosePage();
+                        }
                         break;
                     }
 
@@ -151,10 +269,18 @@ namespace Client_ADBD.ViewModels
                         decimal weight = jewelryVM.Weight;
                         int year = jewelryVM.Year;
 
-                        DatabaseManager.AddJewelryPost(auctionNumber,StartPrice,ListPrice, DateTime.Now, ImagePath,ProductName
-                            ,Description,InvDate,type,brand,weight,year);
+                        if (string.IsNullOrEmpty(brand) || string.IsNullOrEmpty(material) || weight <=0  || type == null)
+                        {
+                            ProductControlError = "Detaliile produsului sunt incorecte.";
+                        }
 
-                        ClosePage();
+                        if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
+                        {
+                            DatabaseManager.AddJewelryPost(_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName
+                            , Description, InvDate, type, brand, weight, year);
+
+                            ClosePage();
+                        }
                         break;
                     }
                 case VM_BookControl bookVM when bookVM.IsValid:
@@ -166,10 +292,18 @@ namespace Client_ADBD.ViewModels
                         int numberOfPage=bookVM.NumberOfPage;
                         string publishingHouse = bookVM.PublishingHouse;
 
-                        DatabaseManager.AddBookPost(auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePath, ProductName
-                           , Description, InvDate,author,bookCondition,year,publishingHouse,numberOfPage,language);
+                        if (string.IsNullOrEmpty(author) || bookCondition == null || year <= 0 || string.IsNullOrEmpty(language)||numberOfPage<=0|| string.IsNullOrEmpty(publishingHouse))
+                        {
+                            ProductControlError = "Detaliile produsului sunt incorecte.";
+                        }
 
-                        ClosePage();
+                        if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
+                        {
+                            DatabaseManager.AddBookPost(_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName
+                           , Description, InvDate, author, bookCondition, year, publishingHouse, numberOfPage, language);
+
+                            ClosePage();
+                        }
                         break;
                     }
                 case VM_SculptureControl sculptureVM when sculptureVM.IsValid:
@@ -180,25 +314,28 @@ namespace Client_ADBD.ViewModels
                         decimal length=sculptureVM.Length;
                         decimal depth=sculptureVM.Depth;
 
-                        DatabaseManager.AddSculpturePost(auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePath, ProductName
-                           , Description, InvDate,artist,material, width, length, depth);
+                        if (string.IsNullOrEmpty(artist) || length <= 0 || width <= 0 || string.IsNullOrEmpty(material) || depth <= 0 )
+                        {
+                            ProductControlError = "Detaliile produsului sunt incorecte.";
+                        }
 
-                        ClosePage();
-                           
+                        if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
+                        {
+                            DatabaseManager.AddSculpturePost(_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName
+                           , Description, InvDate, artist, material, width, length, depth);
+
+                            ClosePage();
+                        }
                         break;
                     }
-                //default:
-                //    {
-                  
-                //        break;
-                //    }
+         
             }
 
 
         }
         private void ClosePage()
         {
-            var a = DatabaseManager.GetAuctionByNumber(auctionNumber);
+            var a = DatabaseManager.GetAuctionByNumber(_auctionNumber);
 
             var mainWindow = App.Current.Windows
                      .OfType<MainWindow>()

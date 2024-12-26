@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Client_ADBD.Models
 {
-    internal class Watch_:IProduct
+    public class Watch_:IProduct
     {
         public string Mechanism {  get; set; }
-        decimal Diameter {  get; set; }
-        string Manufacturer {  get; set; }
-        string Type {  get; set; }
+        public decimal Diameter {  get; set; }
+         public string Manufacturer {  get; set; }
+        public string Type {  get; set; }
 
-        public Watch_(string mechanism, decimal diameter, string manufacturer,int productId,string name,
-                string description, DateTime ivnDate):base(productId,name, description,ivnDate)
+        public Watch_(string mechanism, decimal diameter, string manufacturer,int productId,string name,decimal startPrice, decimal listPrice, string[]imagePaths,
+                string description, DateTime ?invDate): base(productId, name, description, invDate, startPrice, listPrice, imagePaths)
         {
             Mechanism = mechanism;
             Diameter = diameter;

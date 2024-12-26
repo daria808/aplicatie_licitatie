@@ -191,15 +191,7 @@ namespace Client_ADBD.ViewModels
 
         private void ClosePage()
         {
-            //var mainWindow = App.Current.MainWindow as MainWindow;
-            //var frame = mainWindow?.FindName("MainFrame") as Frame;
-
-            //if (frame != null)
-            //{
-            //    // Navighează către AddAuctionPage
-            //    frame.Navigate(new MainPage());
-            //}
-
+  
             var mainWindow = App.Current.Windows
                      .OfType<MainWindow>()
                      .FirstOrDefault();

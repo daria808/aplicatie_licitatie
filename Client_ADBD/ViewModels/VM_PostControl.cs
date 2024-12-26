@@ -28,16 +28,19 @@ namespace Client_ADBD.ViewModels
 
         private void GotoPostDetailsPage()
         {
-            var p = DatabaseManager.GetPostStatusById(Id);
+            //var p = DatabaseManager.GetPostStatusById(Id);
+            Post_ p = DatabaseManager.GetPostDetails(_id);
+
 
             var mainWindow = App.Current.Windows
                      .OfType<MainWindow>()
                      .FirstOrDefault();
             var frame = mainWindow?.FindName("MainFrame") as Frame;
 
+
             if (frame != null)
             {
-                frame.Navigate(new PostPage());
+                frame.Navigate(new PostPage(p));
             }
         }
         public int Id
@@ -97,19 +100,21 @@ namespace Client_ADBD.ViewModels
                 OnPropertyChange(nameof(Status));
             }
         }
-        private void GotoPostPage(Post p)
-        {
-            var mainWindow = App.Current.Windows
-                    .OfType<MainWindow>()
-                    .FirstOrDefault();
+        //private void GotoPostPage()
+        //{
+        //    Post_ p = DatabaseManager.GetPostDetails(_id);
 
-            var frame = mainWindow?.FindName("MainFrame") as Frame;
+        //    var mainWindow = App.Current.Windows
+        //            .OfType<MainWindow>()
+        //            .FirstOrDefault();
 
-            if (frame != null)
-            {
-                //frame.Navigate(new VM_PostPage(p));
-            }
-        }
+        //    var frame = mainWindow?.FindName("MainFrame") as Frame;
+
+        //    if (frame != null)
+        //    {
+        //        frame.Navigate(new PostPage(p));
+        //    }
+        //}
 
     }
 }

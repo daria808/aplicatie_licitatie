@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Client_ADBD.Views;
+using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Client_ADBD.ViewModels
 {
@@ -57,14 +61,34 @@ namespace Client_ADBD.ViewModels
             }
         }
 
-
+        public ICommand NavigateToAuctionDetailsCommand { get; }
         public VM_StatisticsControler(int id)
         {
             Id = id;
+            NavigateToAuctionDetailsCommand = new RelayCommand(GoToAuctionPage);
 
-            var databaseManager = new DatabaseManager();
-            Total = databaseManager.GetTotalBidsForAuction(id);
-            Procent = databaseManager.GetSoldPercentage(id);
+            // var databaseManager = new DatabaseManager();
+            Total = DatabaseManager.GetTotalBidsForAuction(id);
+            Procent = DatabaseManager.GetSoldPercentage(id);
+        }
+
+        private void GoToAuctionPage()
+        {
+            //NavigationService.OpenWindow("ErrorWindow","Postare");
+
+            //var a=DatabaseManager.GetAuctionByName(Name);
+            var a = DatabaseManager.GetAuctionByName(Name);
+
+            var mainWindow = App.Current.Windows
+                     .OfType<MainWindow>()
+                     .FirstOrDefault();
+            var frame = mainWindow?.FindName("MainFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new AuctionPage(a, true, true));
+            }
+
         }
     }
 }

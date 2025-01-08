@@ -38,6 +38,42 @@ namespace Client_ADBD.ViewModels
         private string _usernameOwner;
         private ObservableCollection<PostControl> _lotsPerPage;
         //private ObservableCollection<AuctionLot> _lots;
+        
+        private decimal _totalEarnings;
+        private double _rate;
+
+
+        private Visibility _fromResults;
+        public Visibility FromResults
+        {
+            get { return _fromResults; }
+            set
+            {
+                _fromResults = value;
+                OnPropertyChange(nameof(FromResults));
+            }
+        }
+
+        public decimal TotalEarnings
+        {
+            get => _totalEarnings;
+            set
+            {
+                _totalEarnings = value;
+                OnPropertyChange(nameof(TotalEarnings));
+            }
+        }
+
+
+        public double Rate
+        {
+            get => _rate;
+            set
+            {
+                _rate = value;
+                OnPropertyChange(nameof(Rate));
+            }
+        }
 
         private int _selectedLotNumber;
         private string _lotNumberError;
@@ -54,7 +90,9 @@ namespace Client_ADBD.ViewModels
         public ICommand GoToModifyPageCommand {  get; }
 
         public ICommand DeleteAuctionCommand { get; }
-        public VM_AuctionPage() { }
+        public VM_AuctionPage() {
+        
+        }
 
         public int SelectedLotNumber
         {
@@ -209,8 +247,11 @@ namespace Client_ADBD.ViewModels
             UpdateDisplayedPosts();
         }
         
-        public VM_AuctionPage(Auction_ auction)
+        public VM_AuctionPage(Auction_ auction,bool fromResults=false, bool statistics = false)
         {
+
+            TotalEarnings = DatabaseManager.GetTotalBidsForAuction(auction.id);
+            Rate = DatabaseManager.GetSoldPercentage(auction.id);
 
             SelectedLotPerPage = 6;
             AuctionTitle = auction.name;
@@ -224,17 +265,49 @@ namespace Client_ADBD.ViewModels
             OwnerAdminVisibility=IsCurrentUserOwner(_usernameOwner);
 
             SetPostsPreview(DatabaseManager.GetPostPreview(AuctionNumber));
+
+            if(fromResults==false)
+            {
+                FromResults=Visibility.Hidden;
+            }
+            else
+            {
+                FromResults=Visibility.Visible;
+            }
  
             AuctionLotCount = Posts.Count();
 
             GoToAddPostCommand=new RelayCommand(GoToAddPost);
-            GoToMainPageCommand = new RelayCommand(GoToMainPage);
+            if (statistics == true)
+            {
+                GoToMainPageCommand = new RelayCommand(GoToStatistics);
+            }
+            else
+            {
+                GoToMainPageCommand = new RelayCommand(GoToMainPage);
+
+            }
+
+
             ToggleDescriptionCommand = new RelayCommand(ToggleDescription);
             GoToPageDetailsCommand = new RelayCommand<int>(GoToChosenLotPage);
             PreviousPageCommand = new RelayCommand(PreviousPage);
             NextPageCommand = new RelayCommand(NextPage);
             GoToModifyPageCommand = new RelayCommand(GoToModifyPage);
             DeleteAuctionCommand = new RelayCommand(ShowMessageBox);
+        }
+
+        private void GoToStatistics()
+        {
+            var mainWindow = App.Current.Windows
+                .OfType<MainWindow>()
+                .FirstOrDefault();
+            var frame = mainWindow?.FindName("MainFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new VM_Statistics());
+            }
         }
 
         private void ShowMessageBox()

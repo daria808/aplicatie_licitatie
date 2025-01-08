@@ -27,10 +27,10 @@ namespace Client_ADBD.Views
         {
             InitializeComponent();
         }
-        public AuctionPage(Auction_ a)
+        public AuctionPage(Auction_ a,bool FromResult=false, bool Statistics = false)
         {
             InitializeComponent();
-            VM_AuctionPage viewModel= new VM_AuctionPage(a);
+            VM_AuctionPage viewModel= new VM_AuctionPage(a,FromResult, Statistics);
             DataContext = viewModel;
 
         }

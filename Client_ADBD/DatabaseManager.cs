@@ -597,14 +597,26 @@ namespace Client_ADBD
             return Hash.VerifyPassword(password, user.password, user.salt);
         }
 
-        public List<User_> GetUsers()
+        static public List<User_> GetUsers()
         {
             if (_dbContext == null)
             {
                 _dbContext = new AuctionAppDataContext();
             }
 
-
+            var u = _dbContext.Users
+                      .Select(u => new
+                      {
+                          u.id_user,
+                          u.fisrt_name,
+                          u.last_name,
+                          u.username,
+                          u.email,
+                          u.created_at,
+                          u.last_login,
+                          u.balance
+                      })
+                      .ToList();
 
             List<User_> users = _dbContext.Users
                       .Select(u => new
@@ -2086,7 +2098,7 @@ namespace Client_ADBD
         }
     
     
-        public decimal GetTotalBidsForAuction(int nr)
+        static public decimal GetTotalBidsForAuction(int nr)
         {
             using (var dbContext = new AuctionAppDataContext())
             {
@@ -2118,7 +2130,7 @@ namespace Client_ADBD
 
         }
 
-        public int GetTotalItemsInAuction(int auctionNumber)
+        static public int GetTotalItemsInAuction(int auctionNumber)
         {
             using (var dbContext = new AuctionAppDataContext())
             {
@@ -2137,24 +2149,36 @@ namespace Client_ADBD
             }
         }
 
-        public int GetSoldItemsInAuction(int auctionNumber)
+        static public int GetSoldItemsInAuction(int auctionNumber)
         {
             using (var dbContext = new AuctionAppDataContext())
             {
-                string nume = " ";
-                var res = GetPostLastOffer(auctionNumber, ref nume);
+                int soldItemsCount = 0;
 
-                if (res == -1)
-                    return 0; // Dacă licitația nu există, returnăm 0
+                // Obținem toate postările asociate licitației
+                var posts = dbContext.Posts
+                    .Where(p => p.id_auction == auctionNumber)  // Filtrăm postările care sunt asociate cu licitația
+                    .ToList();
 
-                // Numără postările vândute din licitație
-                
+                foreach (var post in posts)
+                {
+                    string nume = string.Empty;
 
-                return 1;
+                    // Apelăm funcția GetPostLastOffer pentru fiecare postare
+                    var res = GetPostLastOffer(post.id_post, ref nume);
+
+                    // Dacă GetPostLastOffer returnează un rezultat valid (adică diferit de -1), considerăm postarea vândută
+                    if (res != -1)
+                    {
+                        soldItemsCount++;  // Creștem contorul de postări vândute
+                    }
+                }
+
+                return soldItemsCount;  // Returnăm numărul de postări vândute
             }
         }
 
-        public double GetSoldPercentage(int auctionNumber)
+        static public double GetSoldPercentage(int auctionNumber)
         {
             using (var dbContext = new AuctionAppDataContext())
             {

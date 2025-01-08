@@ -3,33 +3,129 @@
   "WorkspaceRootPath": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_auctionpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\viewmodels\\vm_auctionpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_usersdetailes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\viewmodels\\vm_usersdetailes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_adminviewuserprofilepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\viewmodels\\vm_adminviewuserprofilepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\views\\adminviewuserprofilepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\views\\adminviewuserprofilepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\views\\adminviewuserprofilepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\views\\adminviewuserprofilepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\views\\adminwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\views\\adminwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_adminwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\viewmodels\\vm_adminwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\views\\usercontrol\\statisticscontroler.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\views\\usercontrol\\statisticscontroler.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\models\\user_.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\models\\user_.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_loginwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\viewmodels\\vm_loginwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\4cn5axqj..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\citvhqte..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\viewmodels\\vm_account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\auctionapp.dbml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\auctionapp.dbml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_startwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\viewmodels\\vm_startwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\h1tw34zh..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\views\\startwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\views\\startwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\views\\startwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\views\\startwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_auctionpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\viewmodels\\vm_auctionpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_statisticscontroler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\viewmodels\\vm_statisticscontroler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_statistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\views\\auctionpage.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\views\\auctionpage.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\views\\statisticspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\views\\statisticspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\views\\usercontrol\\statisticscontroler.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\views\\usercontrol\\statisticscontroler.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_statistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\viewmodels\\vm_statistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\viewmodels\\vm_auctioncontroler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\viewmodels\\vm_auctioncontroler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|c:\\users\\daria\\desktop\\adbd_final\\aplicatie_licitatie\\client_adbd\\views\\auctionpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{ED79B01C-04F4-41BC-855C-25738F9F8E0E}|Client_ADBD\\Client_ADBD.csproj|solutionrelative:client_adbd\\views\\auctionpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/._SQLEXPRESS/AuctionApp/True/SqlTable/dbo.Bid.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\v0tuefbi..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\v0tuefbi..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\h1tw34zh..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\v0tuefbi..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\h1tw34zh..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\citvhqte..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\citvhqte..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\4cn5axqj..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Daria\\AppData\\Local\\Temp\\4cn5axqj..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,7 +135,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 81,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -51,78 +147,350 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AdminWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\AdminWindow.xaml",
+              "RelativeDocumentMoniker": "Client_ADBD\\Views\\AdminWindow.xaml",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\AdminWindow.xaml",
+              "RelativeToolTip": "Client_ADBD\\Views\\AdminWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-08T18:59:52.408Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdminViewUserProfilePage.xaml",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\AdminViewUserProfilePage.xaml",
+              "RelativeDocumentMoniker": "Client_ADBD\\Views\\AdminViewUserProfilePage.xaml",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\AdminViewUserProfilePage.xaml",
+              "RelativeToolTip": "Client_ADBD\\Views\\AdminViewUserProfilePage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-08T18:58:55.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "VM_AuctionPage.cs",
-              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_AuctionPage.cs",
-              "RelativeDocumentMoniker": "Client_ADBD\\ViewModels\\VM_AuctionPage.cs",
-              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_AuctionPage.cs",
-              "RelativeToolTip": "Client_ADBD\\ViewModels\\VM_AuctionPage.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAwwDwAAAAmAAAAAAAAAA==",
+              "Title": "Vm_UsersDetailes.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\Vm_UsersDetailes.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\ViewModels\\Vm_UsersDetailes.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\Vm_UsersDetailes.cs",
+              "RelativeToolTip": "Client_ADBD\\ViewModels\\Vm_UsersDetailes.cs",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAmwJUAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-08T16:42:31.349Z",
+              "WhenOpened": "2025-01-08T18:30:09.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AdminViewUserProfilePage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\AdminViewUserProfilePage.xaml.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\Views\\AdminViewUserProfilePage.xaml.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\AdminViewUserProfilePage.xaml.cs",
+              "RelativeToolTip": "Client_ADBD\\Views\\AdminViewUserProfilePage.xaml.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T19:00:10.772Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "VM_AdminViewUserProfilePage.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_AdminViewUserProfilePage.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\ViewModels\\VM_AdminViewUserProfilePage.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_AdminViewUserProfilePage.cs",
+              "RelativeToolTip": "Client_ADBD\\ViewModels\\VM_AdminViewUserProfilePage.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:51:51.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "VM_AdminWindow.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_AdminWindow.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\ViewModels\\VM_AdminWindow.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_AdminWindow.cs",
+              "RelativeToolTip": "Client_ADBD\\ViewModels\\VM_AdminWindow.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABMAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:56:05.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SQLQuery4.sql ",
+              "DocumentMoniker": "C:\\Users\\Daria\\AppData\\Local\\Temp\\4cn5axqj..sql",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\4cn5axqj..sql",
+              "ToolTip": "SQLQuery4.sql *",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-01-08T18:43:03.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SQLQuery3.sql ",
+              "DocumentMoniker": "C:\\Users\\Daria\\AppData\\Local\\Temp\\citvhqte..sql",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\citvhqte..sql",
+              "ToolTip": "SQLQuery3.sql *",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-01-08T18:36:29.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "User_.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Models\\User_.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\Models\\User_.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Models\\User_.cs",
+              "RelativeToolTip": "Client_ADBD\\Models\\User_.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAwCYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:30:04.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "VM_StartWindow.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_StartWindow.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\ViewModels\\VM_StartWindow.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_StartWindow.cs",
+              "RelativeToolTip": "Client_ADBD\\ViewModels\\VM_StartWindow.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T17:59:42.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "DatabaseManager.cs",
               "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\DatabaseManager.cs",
               "RelativeDocumentMoniker": "Client_ADBD\\DatabaseManager.cs",
               "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\DatabaseManager.cs",
               "RelativeToolTip": "Client_ADBD\\DatabaseManager.cs",
-              "ViewState": "AgIAAFQIAAAAAAAAAAAIwGgIAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAM4BAAAAAAAAAAASwOIBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-08T15:41:29.268Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
+              "Title": "VM_LogInWindow.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_LogInWindow.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\ViewModels\\VM_LogInWindow.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_LogInWindow.cs",
+              "RelativeToolTip": "Client_ADBD\\ViewModels\\VM_LogInWindow.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAcwFsAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:01:08.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\App.xaml.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\App.xaml.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\App.xaml.cs",
+              "RelativeToolTip": "Client_ADBD\\App.xaml.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAABgAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:14:55.157Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "VM_Account.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_Account.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\ViewModels\\VM_Account.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_Account.cs",
+              "RelativeToolTip": "Client_ADBD\\ViewModels\\VM_Account.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAewIgAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:14:56.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "StartWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\StartWindow.xaml",
+              "RelativeDocumentMoniker": "Client_ADBD\\Views\\StartWindow.xaml",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\StartWindow.xaml",
+              "RelativeToolTip": "Client_ADBD\\Views\\StartWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-08T18:00:48.408Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AuctionApp.dbml",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\AuctionApp.dbml",
+              "RelativeDocumentMoniker": "Client_ADBD\\AuctionApp.dbml",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\AuctionApp.dbml",
+              "RelativeToolTip": "Client_ADBD\\AuctionApp.dbml",
+              "ViewState": "AgIAALUAAAAAAAAAAAAAALUAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001722|",
+              "WhenOpened": "2025-01-08T18:19:42.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "VM_StatisticsControler.cs",
               "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_StatisticsControler.cs",
               "RelativeDocumentMoniker": "Client_ADBD\\ViewModels\\VM_StatisticsControler.cs",
               "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_StatisticsControler.cs",
               "RelativeToolTip": "Client_ADBD\\ViewModels\\VM_StatisticsControler.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAEEAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAAwFsAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-08T15:27:00.022Z",
+              "WhenOpened": "2025-01-08T17:37:52.869Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 15,
+              "Title": "SQLQuery2.sql ",
+              "DocumentMoniker": "C:\\Users\\Daria\\AppData\\Local\\Temp\\h1tw34zh..sql",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\h1tw34zh..sql",
+              "ToolTip": "SQLQuery2.sql *",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-01-08T18:02:37.704Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "StartWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\StartWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\Views\\StartWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\StartWindow.xaml.cs",
+              "RelativeToolTip": "Client_ADBD\\Views\\StartWindow.xaml.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T18:00:52.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "StatisticsControler.xaml",
               "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\UserControl\\StatisticsControler.xaml",
               "RelativeDocumentMoniker": "Client_ADBD\\Views\\UserControl\\StatisticsControler.xaml",
               "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\UserControl\\StatisticsControler.xaml",
               "RelativeToolTip": "Client_ADBD\\Views\\UserControl\\StatisticsControler.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-01-08T15:21:25.593Z",
+              "WhenOpened": "2025-01-08T17:34:55.584Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SQLQuery1.sql ",
-              "DocumentMoniker": "C:\\Users\\Daria\\AppData\\Local\\Temp\\v0tuefbi..sql",
-              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\v0tuefbi..sql",
-              "ToolTip": "SQLQuery1.sql *",
+              "DocumentIndex": 18,
+              "Title": "VM_AuctionPage.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_AuctionPage.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\ViewModels\\VM_AuctionPage.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_AuctionPage.cs",
+              "RelativeToolTip": "Client_ADBD\\ViewModels\\VM_AuctionPage.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAwCsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T16:42:31.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "StatisticsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\StatisticsPage.xaml",
+              "RelativeDocumentMoniker": "Client_ADBD\\Views\\StatisticsPage.xaml",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\StatisticsPage.xaml",
+              "RelativeToolTip": "Client_ADBD\\Views\\StatisticsPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-08T17:39:15.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AuctionPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\AuctionPage.xaml.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\Views\\AuctionPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\AuctionPage.xaml.cs",
+              "RelativeToolTip": "Client_ADBD\\Views\\AuctionPage.xaml.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAuwCMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T17:53:07.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "VM_AuctionControler.cs",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_AuctionControler.cs",
+              "RelativeDocumentMoniker": "Client_ADBD\\ViewModels\\VM_AuctionControler.cs",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_AuctionControler.cs",
+              "RelativeToolTip": "Client_ADBD\\ViewModels\\VM_AuctionControler.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAuwEsAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T16:46:02.707Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "dbo.Bid [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/._SQLEXPRESS/AuctionApp/True/SqlTable/dbo.Bid.sql",
+              "ToolTip": "dbo.Bid [Data]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-01-08T15:03:40.364Z",
+              "WhenOpened": "2025-01-08T17:10:41.645Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 23,
               "Title": "VM_Statistics.cs",
               "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_Statistics.cs",
               "RelativeDocumentMoniker": "Client_ADBD\\ViewModels\\VM_Statistics.cs",
               "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\ViewModels\\VM_Statistics.cs",
               "RelativeToolTip": "Client_ADBD\\ViewModels\\VM_Statistics.cs",
-              "ViewState": "AgIAAIoAAAAAAAAAAAAAwJQAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAgwJQAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-08T14:41:10.409Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "AuctionPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\AuctionPage.xaml",
+              "RelativeDocumentMoniker": "Client_ADBD\\Views\\AuctionPage.xaml",
+              "ToolTip": "C:\\Users\\Daria\\Desktop\\adbd_final\\aplicatie_licitatie\\Client_ADBD\\Views\\AuctionPage.xaml",
+              "RelativeToolTip": "Client_ADBD\\Views\\AuctionPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-08T16:50:04.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "v0tuefbi..sql",
+              "DocumentMoniker": "C:\\Users\\Daria\\AppData\\Local\\Temp\\v0tuefbi..sql",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\v0tuefbi..sql",
+              "ToolTip": "C:\\Users\\Daria\\AppData\\Local\\Temp\\v0tuefbi..sql",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\v0tuefbi..sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-01-08T15:03:40.364Z"
             }
           ]
         },

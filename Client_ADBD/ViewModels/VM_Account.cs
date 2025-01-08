@@ -181,15 +181,16 @@ namespace Client_ADBD.ViewModels
 
                 dbManager.UpdateUser(Username, FirstName, LastName, Email, Balance);
 
-                var user = (new DatabaseManager()).GetUsers().FirstOrDefault(u => u._username == Username);
-                if (user != null)
-                {
-                    CurrentUser.User = user;  // Setează utilizatorul curent cu cel actualizat
+                var users= DatabaseManager.GetUsers();
+                //var user = (new DatabaseManager()).GetUsers().FirstOrDefault(u => u._username == Username);
+                //if (user != null)
+                //{
+                //    CurrentUser.User = user;  // Setează utilizatorul curent cu cel actualizat
 
 
-                    _mainWindow.SelectedViewModel = new VM_Account(CurrentUser.User, _mainWindow);
+                //    _mainWindow.SelectedViewModel = new VM_Account(CurrentUser.User, _mainWindow);
 
-                }
+                //}
 
 
                 MessageBox.Show("Modificările au fost salvate cu succes!", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -299,7 +300,7 @@ namespace Client_ADBD.ViewModels
 
                 MessageBox.Show("Felicitări! Rolul tău a fost actualizat la ofertant.", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                var user = (new DatabaseManager()).GetUsers().FirstOrDefault(u => u._username == Username);
+                var user = DatabaseManager.GetUsers().FirstOrDefault(u => u._username == Username);
                 if (user != null)
                 {
                     CurrentUser.User = user;  // Setează utilizatorul curent cu cel actualizat

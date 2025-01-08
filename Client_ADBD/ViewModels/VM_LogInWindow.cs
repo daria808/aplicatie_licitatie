@@ -89,7 +89,7 @@ namespace Client_ADBD.ViewModels
             else
             {
                 DatabaseManager.AddUser(FirstName, LastName, Username2, Password2, Email);
-                var user = (new DatabaseManager()).GetUsers().FirstOrDefault(u => u._username == Username2);
+                var user = DatabaseManager.GetUsers().FirstOrDefault(u => u._username == Username2);
                 if (user != null)
                 {
                     CurrentUser.User = user;
@@ -124,7 +124,9 @@ namespace Client_ADBD.ViewModels
             }
             else if (DatabaseManager.VerifyUserCredentials(Username, Password))
             {
-                var user = (new DatabaseManager()).GetUsers().FirstOrDefault(u => u._username == Username);
+               
+
+                var user = DatabaseManager.GetUsers().FirstOrDefault(u => u._username == Username);
                 if (user != null)
                 {
                     CurrentUser.User = user;

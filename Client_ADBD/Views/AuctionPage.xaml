@@ -95,6 +95,13 @@
                                     </Button.Style>
                                     <TextBlock Text="{Binding ButtonText}" TextDecorations="Underline"/>
                                 </Button>
+                                
+
+                            </StackPanel>
+                            <StackPanel Margin="40,20,0,0" Visibility="{Binding FromResults}">
+                                <TextBlock FontSize="14" Text="REZULTATE: " VerticalAlignment="Center" FontFamily="Calibri" FontWeight="Bold"/>
+                                <TextBlock FontSize="14" Text="{Binding TotalEarnings, StringFormat='Total: {0:N2} €'}" VerticalAlignment="Center" FontFamily="Calibri" Margin="15,0,0,0" TextWrapping="Wrap"/>
+                                <TextBlock FontSize="14" Text="{Binding Rate, StringFormat='Procent: {0:N2} %'}" VerticalAlignment="Center" FontFamily="Calibri" Margin="15,0,0,0" TextWrapping="Wrap"/>
 
                             </StackPanel>
                         </StackPanel>

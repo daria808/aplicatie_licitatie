@@ -68,7 +68,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ViewModels:VM_OngoingAuctions}">
-                <Views:OngoingAuctionsPage />
+                <Views:OngoingAuctionPage />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ViewModels:VM_ParticipateAuctions}">
@@ -113,6 +113,10 @@
 
             <DataTemplate DataType="{x:Type ViewModels:VM_PostPage}">
                 <Views:PostPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_Statistics}">
+                <Views:StatisticsPage />
             </DataTemplate>
 
         </ResourceDictionary>

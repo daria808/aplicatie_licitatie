@@ -22,6 +22,8 @@ namespace Client_ADBD.ViewModels
         private string newPassword;
         private string confirmPassword;
 
+        public ICommand BackCommand { get; set; }
+
         public string OldPassword
         {
             get { return oldPassword; }
@@ -157,6 +159,18 @@ namespace Client_ADBD.ViewModels
             }
 
             SaveCommand = new RelayCommand(() => SaveChanges());
+            BackCommand = new RelayCommand(GoBack);
+        }
+
+        private void GoBack()
+        {
+            var mainWindow = App.Current.MainWindow as MainWindow;
+            var frame = mainWindow?.FindName("MainFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new VM_MainPage());
+            }
         }
         private void SaveChanges()
         {

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AuctionApp" Class="AuctionAppDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-470P72I\SQLEXPRESS;Initial Catalog=AuctionApp;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="Client_ADBD.Properties.Settings" SettingsPropertyName="AuctionAppConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=AuctionApp;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="Client_ADBD.Properties.Settings" SettingsPropertyName="AuctionAppConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Auction" Member="Auctions">
     <Type Name="Auction">
       <Column Name="id_auction" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -21,6 +21,7 @@
     <Type Name="Watch_type">
       <Column Name="id_watch_type" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="type" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Watch_type_Watch" Member="Watches" ThisKey="id_watch_type" OtherKey="id_type" Type="Watch" />
     </Type>
   </Table>
   <Table Name="dbo.[Auction type]" Member="Auction_types">
@@ -112,6 +113,7 @@
       <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="lot" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Post_Bid" Member="Bids" ThisKey="id_post" OtherKey="id_post" Type="Bid" />
+      <Association Name="Post_PostImage" Member="PostImages" ThisKey="id_post" OtherKey="id_post" Type="PostImage" />
       <Association Name="Auction_Post" Member="Auction" ThisKey="id_auction" OtherKey="id_auction" Type="Auction" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Post_status_Post" Member="Post_status" ThisKey="id_status" OtherKey="id_status" Type="Post_status" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Product_Post" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
@@ -122,6 +124,14 @@
       <Column Name="id_status" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="status_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Post_status_Post" Member="Posts" ThisKey="id_status" OtherKey="id_status" Type="Post" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PostImages" Member="PostImages">
+    <Type Name="PostImage">
+      <Column Name="id_image" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_post" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="image_path" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Post_PostImage" Member="Post" ThisKey="id_post" OtherKey="id_post" Type="Post" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Product" Member="Products">
@@ -208,8 +218,9 @@
       <Column Name="id_mechanism" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="diameter" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
       <Column Name="manufacturer" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="id_type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Product_Watch" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Watch_type_Watch" Member="Watch_type" ThisKey="id_type" OtherKey="id_watch_type" Type="Watch_type" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Watch_mechanism_Watch" Member="Watch_mechanism" ThisKey="id_mechanism" OtherKey="id_mechanism" Type="Watch_mechanism" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>

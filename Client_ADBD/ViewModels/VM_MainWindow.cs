@@ -34,6 +34,7 @@ namespace Client_ADBD.ViewModels
 
             ShowMainPage();
             BackCommand = new RelayCommand(OnBackPressed);
+            ShowStatisticsCommand = new RelayCommand(OnShowStatisticsPressed);
             ShowAccountCommand = new RelayCommand(ShowAccount);
             ShowAboutCommand = new RelayCommand(ShowAbout);
             ShowHowToBuy = new RelayCommand(ShowBuy);
@@ -65,6 +66,10 @@ namespace Client_ADBD.ViewModels
             NavigationService.NavigateTo("LogInWindow");
         }
 
+        public void OnShowStatisticsPressed()
+        {
+            SelectedViewModel = new VM_Statistics();
+        }
         public void ShowAccount()
         {
             var currentUser = CurrentUser.User;  // Accesăm utilizatorul curent

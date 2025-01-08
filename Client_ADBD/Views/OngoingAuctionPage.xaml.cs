@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client_ADBD.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,8 @@ namespace Client_ADBD.Views
     {
         public OngoingAuctionPage()
         {
-            //InitializeComponent();
+            InitializeComponent();
+            this.DataContext = new VM_OngoingAuctions();
         }
     }
 }

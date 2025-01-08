@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Client_ADBD.Views.UserControl.StatisticsControler"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="400"
+             BorderThickness="1"
+             BorderBrush="Gray"
+             Margin="10">
+    <Border CornerRadius="10" BorderBrush="Transparent" BorderThickness="1">
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Data și ora licitației -->
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
+                <TextBlock Text="{Binding EndTime, StringFormat={}{0:dd}}" 
+                           FontSize="24" FontWeight="Bold" Foreground="Black" />
+                <TextBlock Text="{Binding EndTime, StringFormat={}{0:MMM yyyy}}" 
+                           FontSize="12" Foreground="Gray" />
+                <TextBlock Text="{Binding EndTime, StringFormat={}{0:dddd}}" 
+                           FontSize="12" Foreground="#FF009688" FontWeight="Bold" />
+                <TextBlock Text="{Binding EndTime, StringFormat={}{0:HH:mm}}" 
+                           FontSize="12" Foreground="Black" />
+            </StackPanel>
+
+            <!-- Imaginea licitației -->
+            <Image Grid.Column="1"
+                   Source="{Binding ImagePath}"
+                   Margin="10" Stretch="UniformToFill" Height="100" MaxWidth="200" />
+
+            <!-- Detalii licitației -->
+            <StackPanel Grid.Column="2" Orientation="Vertical" Margin="10">
+                <!-- Titlul licitației -->
+                <TextBlock Text="{Binding Name}" 
+                           FontSize="14" 
+                           FontWeight="Bold" 
+                           Foreground="Black" 
+                           TextWrapping="Wrap" />
+
+                <!-- Locația și alte detalii -->
+                <TextBlock Text="{Binding Location}" 
+                           FontSize="12" 
+                           Foreground="Gray" 
+                           TextWrapping="Wrap" />
+
+                <TextBlock Text="{Binding Total, StringFormat='Total: {0:N2} €'}" 
+                           FontSize="12" 
+                           Foreground="Gray" 
+                           TextWrapping="Wrap" />
+
+                <TextBlock Text="{Binding Procent, StringFormat='Procent: {0:N2} %'}" 
+                           FontSize="12" 
+                           Foreground="Gray" 
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

@@ -41,6 +41,11 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
+            <!-- Back Button -->
+            <Button Name="btnBack" Padding="5" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}" Background="White" BorderThickness="0" Height="40" Width="65">
+                <Image Source="undo.png" Width="58" Height="36" />
+            </Button>
+
             <!-- Welcome Message -->
             <TextBlock Text="{Binding WelcomeMessage}" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Times New Roman" FontStyle="Italic" Grid.Row="1" Margin="10"/>
 

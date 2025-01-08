@@ -66,6 +66,9 @@ namespace Client_ADBD
     partial void InsertPost_status(Post_status instance);
     partial void UpdatePost_status(Post_status instance);
     partial void DeletePost_status(Post_status instance);
+    partial void InsertPostImage(PostImage instance);
+    partial void UpdatePostImage(PostImage instance);
+    partial void DeletePostImage(PostImage instance);
     partial void InsertProduct(Product instance);
     partial void UpdateProduct(Product instance);
     partial void DeleteProduct(Product instance);
@@ -96,7 +99,7 @@ namespace Client_ADBD
     #endregion
 		
 		public AuctionAppDataContext() : 
-				base(global::Client_ADBD.Properties.Settings.Default.AuctionAppConnectionString1, mappingSource)
+				base(global::Client_ADBD.Properties.Settings.Default.AuctionAppConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -218,6 +221,14 @@ namespace Client_ADBD
 			get
 			{
 				return this.GetTable<Post_status>();
+			}
+		}
+		
+		public System.Data.Linq.Table<PostImage> PostImages
+		{
+			get
+			{
+				return this.GetTable<PostImage>();
 			}
 		}
 		
@@ -692,6 +703,8 @@ namespace Client_ADBD
 		
 		private string _type;
 		
+		private EntitySet<Watch> _Watches;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -704,6 +717,7 @@ namespace Client_ADBD
 		
 		public Watch_type()
 		{
+			this._Watches = new EntitySet<Watch>(new Action<Watch>(this.attach_Watches), new Action<Watch>(this.detach_Watches));
 			OnCreated();
 		}
 		
@@ -747,6 +761,19 @@ namespace Client_ADBD
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Watch_type_Watch", Storage="_Watches", ThisKey="id_watch_type", OtherKey="id_type")]
+		public EntitySet<Watch> Watches
+		{
+			get
+			{
+				return this._Watches;
+			}
+			set
+			{
+				this._Watches.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -765,6 +792,18 @@ namespace Client_ADBD
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Watches(Watch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Watch_type = this;
+		}
+		
+		private void detach_Watches(Watch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Watch_type = null;
 		}
 	}
 	
@@ -2352,6 +2391,8 @@ namespace Client_ADBD
 		
 		private EntitySet<Bid> _Bids;
 		
+		private EntitySet<PostImage> _PostImages;
+		
 		private EntityRef<Auction> _Auction;
 		
 		private EntityRef<Post_status> _Post_status;
@@ -2383,6 +2424,7 @@ namespace Client_ADBD
 		public Post()
 		{
 			this._Bids = new EntitySet<Bid>(new Action<Bid>(this.attach_Bids), new Action<Bid>(this.detach_Bids));
+			this._PostImages = new EntitySet<PostImage>(new Action<PostImage>(this.attach_PostImages), new Action<PostImage>(this.detach_PostImages));
 			this._Auction = default(EntityRef<Auction>);
 			this._Post_status = default(EntityRef<Post_status>);
 			this._Product = default(EntityRef<Product>);
@@ -2574,6 +2616,19 @@ namespace Client_ADBD
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_PostImage", Storage="_PostImages", ThisKey="id_post", OtherKey="id_post")]
+		public EntitySet<PostImage> PostImages
+		{
+			get
+			{
+				return this._PostImages;
+			}
+			set
+			{
+				this._PostImages.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auction_Post", Storage="_Auction", ThisKey="id_auction", OtherKey="id_auction", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Auction Auction
 		{
@@ -2707,6 +2762,18 @@ namespace Client_ADBD
 			this.SendPropertyChanging();
 			entity.Post = null;
 		}
+		
+		private void attach_PostImages(PostImage entity)
+		{
+			this.SendPropertyChanging();
+			entity.Post = this;
+		}
+		
+		private void detach_PostImages(PostImage entity)
+		{
+			this.SendPropertyChanging();
+			entity.Post = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Post status]")]
@@ -2820,6 +2887,157 @@ namespace Client_ADBD
 		{
 			this.SendPropertyChanging();
 			entity.Post_status = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PostImages")]
+	public partial class PostImage : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_image;
+		
+		private int _id_post;
+		
+		private string _image_path;
+		
+		private EntityRef<Post> _Post;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_imageChanging(int value);
+    partial void Onid_imageChanged();
+    partial void Onid_postChanging(int value);
+    partial void Onid_postChanged();
+    partial void Onimage_pathChanging(string value);
+    partial void Onimage_pathChanged();
+    #endregion
+		
+		public PostImage()
+		{
+			this._Post = default(EntityRef<Post>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_image", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_image
+		{
+			get
+			{
+				return this._id_image;
+			}
+			set
+			{
+				if ((this._id_image != value))
+				{
+					this.Onid_imageChanging(value);
+					this.SendPropertyChanging();
+					this._id_image = value;
+					this.SendPropertyChanged("id_image");
+					this.Onid_imageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_post", DbType="Int NOT NULL")]
+		public int id_post
+		{
+			get
+			{
+				return this._id_post;
+			}
+			set
+			{
+				if ((this._id_post != value))
+				{
+					if (this._Post.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_postChanging(value);
+					this.SendPropertyChanging();
+					this._id_post = value;
+					this.SendPropertyChanged("id_post");
+					this.Onid_postChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image_path", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string image_path
+		{
+			get
+			{
+				return this._image_path;
+			}
+			set
+			{
+				if ((this._image_path != value))
+				{
+					this.Onimage_pathChanging(value);
+					this.SendPropertyChanging();
+					this._image_path = value;
+					this.SendPropertyChanged("image_path");
+					this.Onimage_pathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_PostImage", Storage="_Post", ThisKey="id_post", OtherKey="id_post", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Post Post
+		{
+			get
+			{
+				return this._Post.Entity;
+			}
+			set
+			{
+				Post previousValue = this._Post.Entity;
+				if (((previousValue != value) 
+							|| (this._Post.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Post.Entity = null;
+						previousValue.PostImages.Remove(this);
+					}
+					this._Post.Entity = value;
+					if ((value != null))
+					{
+						value.PostImages.Add(this);
+						this._id_post = value.id_post;
+					}
+					else
+					{
+						this._id_post = default(int);
+					}
+					this.SendPropertyChanged("Post");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -4414,9 +4632,11 @@ namespace Client_ADBD
 		
 		private string _manufacturer;
 		
-		private int _id_type;
+		private System.Nullable<int> _id_type;
 		
 		private EntityRef<Product> _Product;
+		
+		private EntityRef<Watch_type> _Watch_type;
 		
 		private EntityRef<Watch_mechanism> _Watch_mechanism;
 		
@@ -4434,13 +4654,14 @@ namespace Client_ADBD
     partial void OndiameterChanged();
     partial void OnmanufacturerChanging(string value);
     partial void OnmanufacturerChanged();
-    partial void Onid_typeChanging(int value);
+    partial void Onid_typeChanging(System.Nullable<int> value);
     partial void Onid_typeChanged();
     #endregion
 		
 		public Watch()
 		{
 			this._Product = default(EntityRef<Product>);
+			this._Watch_type = default(EntityRef<Watch_type>);
 			this._Watch_mechanism = default(EntityRef<Watch_mechanism>);
 			OnCreated();
 		}
@@ -4553,8 +4774,8 @@ namespace Client_ADBD
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_type", DbType="Int NOT NULL")]
-		public int id_type
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_type", DbType="Int")]
+		public System.Nullable<int> id_type
 		{
 			get
 			{
@@ -4564,6 +4785,10 @@ namespace Client_ADBD
 			{
 				if ((this._id_type != value))
 				{
+					if (this._Watch_type.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.Onid_typeChanging(value);
 					this.SendPropertyChanging();
 					this._id_type = value;
@@ -4603,6 +4828,40 @@ namespace Client_ADBD
 						this._id_product = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Product");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Watch_type_Watch", Storage="_Watch_type", ThisKey="id_type", OtherKey="id_watch_type", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Watch_type Watch_type
+		{
+			get
+			{
+				return this._Watch_type.Entity;
+			}
+			set
+			{
+				Watch_type previousValue = this._Watch_type.Entity;
+				if (((previousValue != value) 
+							|| (this._Watch_type.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Watch_type.Entity = null;
+						previousValue.Watches.Remove(this);
+					}
+					this._Watch_type.Entity = value;
+					if ((value != null))
+					{
+						value.Watches.Add(this);
+						this._id_type = value.id_watch_type;
+					}
+					else
+					{
+						this._id_type = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Watch_type");
 				}
 			}
 		}

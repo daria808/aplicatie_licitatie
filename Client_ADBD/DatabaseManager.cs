@@ -2084,6 +2084,101 @@ namespace Client_ADBD
 
 
         }
+    
+    
+        public decimal GetTotalBidsForAuction(int nr)
+        {
+            using (var dbContext = new AuctionAppDataContext())
+            {
+                // Găsește id-ul licitației
+                var auction = dbContext.Auctions
+                    .FirstOrDefault(a => a.auction_number == nr);
+
+                if (auction == null)
+                    return 0; // Licitația nu există
+                              // Găsește toate id-urile postărilor asociate licitației
+                var postIds = dbContext.Posts
+                    .Where(p => p.id_auction == auction.id_auction)
+                    .Select(p => p.id_post)
+                    .ToList();
+
+                var verificare = dbContext.Bids.Where(b => postIds.Contains(b.id_post));
+                if (!verificare.Any())  // Dacă nu există niciun element în verificare
+                {
+                    return 0;  // Dacă nu există intrări, returnăm 0
+                }
+
+                var total = dbContext.Bids
+                    .Where(b => postIds.Contains(b.id_post) && b.bid_price != null)  // Verificăm dacă bid_price nu este null
+                    .Sum(b => b.bid_price);  // Calculăm suma doar pentru valori valide
+
+
+                return total;
+            }
+
+        }
+
+        public int GetTotalItemsInAuction(int auctionNumber)
+        {
+            using (var dbContext = new AuctionAppDataContext())
+            {
+                // Găsește id-ul licitației
+                var auction = dbContext.Auctions
+                    .FirstOrDefault(a => a.auction_number == auctionNumber);
+
+                if (auction == null)
+                    return 0; // Licitația nu există
+
+                // Numără toate postările asociate licitației
+                var totalItems = dbContext.Posts
+                    .Count(p => p.id_auction == auction.id_auction);
+
+                return totalItems;
+            }
+        }
+
+        public int GetSoldItemsInAuction(int auctionNumber)
+        {
+            using (var dbContext = new AuctionAppDataContext())
+            {
+                string nume = " ";
+                var res = GetPostLastOffer(auctionNumber, ref nume);
+
+                if (res == -1)
+                    return 0; // Dacă licitația nu există, returnăm 0
+
+                // Numără postările vândute din licitație
+                
+
+                return 1;
+            }
+        }
+
+        public double GetSoldPercentage(int auctionNumber)
+        {
+            using (var dbContext = new AuctionAppDataContext())
+            {
+                // Găsește licitația asociată
+                var auction = dbContext.Auctions
+                    .FirstOrDefault(a => a.auction_number == auctionNumber);
+
+                if (auction == null)
+                    return 0; // Licitația nu există, procentul este 0
+
+                // Obține numărul total de articole
+                var totalItems = GetTotalItemsInAuction(auctionNumber);
+
+                if (totalItems == 0)
+                    return 0; // Dacă nu există articole, procentul este 0
+
+                // Obține numărul articolelor vândute
+                var soldItems = GetSoldItemsInAuction(auctionNumber);
+
+                // Calculează procentul
+                return (double)soldItems / totalItems * 100;
+            }
+        }
+
     }
 
 }

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\laris\Desktop\apl_l3\aplicatie_licitatie\Client_ADBD\obj\Debug\
+C:\Users\Daria\Desktop\adbd_final\aplicatie_licitatie\Client_ADBD\obj\Debug\
 Client_ADBD
 none
 false
 DEBUG;TRACE
-C:\Users\laris\Desktop\apl_l3\aplicatie_licitatie\Client_ADBD\App.xaml
-451574265019
+C:\Users\Daria\Desktop\adbd_final\aplicatie_licitatie\Client_ADBD\App.xaml
+472038344442
 
-11581745510
-311990759825
-Views\AboutPage.xaml;Views\AboutUsPage.xaml;Views\AccountPage.xaml;Views\AddAuctionPage.xaml;Views\AddPostPage.xaml;Views\AdminViewUserProfilePage.xaml;Views\AdminWindow.xaml;Views\ArtConsultantsPage.xaml;Views\AuctionPage.xaml;Views\BuyPage.xaml;Views\ConsignationAdvancePage.xaml;Views\ContactPage.xaml;Views\ErrorWindow.xaml;Views\ExpertsPage.xaml;Views\GiftCertificatePage.xaml;Views\HistoryPage.xaml;Views\LogInWindow.xaml;Views\MainAdminPage.xaml;Views\MainPage.xaml;Views\MainWindow.xaml;Views\ModifyAuctionPage.xaml;Views\ModifyPostPage.xaml;Views\OngoingAuctionPage.xaml;Views\ParticipateAuctionsPage.xaml;Views\PasswordChangeDialog.xaml;Views\PostPage.xaml;Views\RatePaymentPage.xaml;Views\RegsConsignationsPage.xaml;Views\RegsSolicitationsPage.xaml;Views\RegulationsPage.xaml;Views\SellPage.xaml;Views\StartWindow.xaml;Views\UserControl\AuctionControler.xaml;Views\UserControl\BookControl.xaml;Views\UserControl\BookPostControl.xaml;Views\UserControl\JewelryControl.xaml;Views\UserControl\JewelryPostControl.xaml;Views\UserControl\PaintingControl.xaml;Views\UserControl\PaintingPostControl.xaml;Views\UserControl\PostControl.xaml;Views\UserControl\SculptureControl.xaml;Views\UserControl\SculpturePostControl.xaml;Views\UserControl\WatchControl.xaml;Views\UserControl\WatchPostControl.xaml;Views\UsersDetailesPage.xaml;
+1191442075689
+31762421924
+Views\AboutPage.xaml;Views\AboutUsPage.xaml;Views\AccountPage.xaml;Views\AddAuctionPage.xaml;Views\AddPostPage.xaml;Views\AdminViewUserProfilePage.xaml;Views\AdminWindow.xaml;Views\ArtConsultantsPage.xaml;Views\AuctionPage.xaml;Views\BuyPage.xaml;Views\ConsignationAdvancePage.xaml;Views\ContactPage.xaml;Views\ErrorWindow.xaml;Views\ExpertsPage.xaml;Views\GiftCertificatePage.xaml;Views\HistoryPage.xaml;Views\LogInWindow.xaml;Views\MainAdminPage.xaml;Views\MainPage.xaml;Views\MainWindow.xaml;Views\ModifyAuctionPage.xaml;Views\ModifyPostPage.xaml;Views\OngoingAuctionPage.xaml;Views\ParticipateAuctionsPage.xaml;Views\PasswordChangeDialog.xaml;Views\PostPage.xaml;Views\RatePaymentPage.xaml;Views\RegsConsignationsPage.xaml;Views\RegsSolicitationsPage.xaml;Views\RegulationsPage.xaml;Views\SellPage.xaml;Views\StartWindow.xaml;Views\StatisticsPage.xaml;Views\UserControl\AuctionControler.xaml;Views\UserControl\BookControl.xaml;Views\UserControl\BookPostControl.xaml;Views\UserControl\JewelryControl.xaml;Views\UserControl\JewelryPostControl.xaml;Views\UserControl\PaintingControl.xaml;Views\UserControl\PaintingPostControl.xaml;Views\UserControl\PostControl.xaml;Views\UserControl\SculptureControl.xaml;Views\UserControl\SculpturePostControl.xaml;Views\UserControl\StatisticsControler.xaml;Views\UserControl\WatchControl.xaml;Views\UserControl\WatchPostControl.xaml;Views\UsersDetailesPage.xaml;
 
 False
 

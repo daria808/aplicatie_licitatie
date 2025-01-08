@@ -159,7 +159,8 @@
                     Height="50"
                     BorderBrush="Transparent"
                     BorderThickness="0"
-                    Background="Transparent">
+                    Background="Transparent"
+                    Command="{Binding ShowStatisticsCommand}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Width="172">
                         <Image x:Name="statistici_buttonImage"
                            Source="/Views/statistics.png"

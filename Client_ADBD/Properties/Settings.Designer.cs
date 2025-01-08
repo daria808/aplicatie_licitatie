@@ -44,5 +44,16 @@ namespace Client_ADBD.Properties {
                 return ((string)(this["AuctionAppConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=AuctionApp;Integrated Security=True;Encr" +
+            "ypt=True;TrustServerCertificate=True")]
+        public string AuctionAppConnectionString2 {
+            get {
+                return ((string)(this["AuctionAppConnectionString2"]));
+            }
+        }
     }
 }

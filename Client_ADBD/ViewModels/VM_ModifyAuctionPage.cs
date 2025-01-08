@@ -337,14 +337,31 @@ namespace Client_ADBD.ViewModels
                 }
 
                 if (isModified)
-                {          
+                {
+                    startDateTime = new DateTime(
+                              startDateTime.Year,   // Păstrează anul din startDateTime
+                              startDateTime.Month,  // Păstrează luna din startDateTime
+                              startDateTime.Day,    // Păstrează ziua din startDateTime
+                              int.Parse(StartHour), // Ora din StartHour
+                              int.Parse(StartMinute), // Minutul din StartMinute
+                              0                      // Păstrează secunda 0
+                          );
+
+                    endDateTime = new DateTime(
+                              endDateTime.Year,   // Păstrează anul din startDateTime
+                              endDateTime.Month,  // Păstrează luna din startDateTime
+                              endDateTime.Day,    // Păstrează ziua din startDateTime
+                              int.Parse(EndHour), // Ora din StartHour
+                              int.Parse(EndMinute), // Minutul din StartMinute
+                              0                      // Păstrează secunda 0
+                          );
 
                     Auction_ auctionToUpdate = new Auction_
                     {
                         auctionNumber = _initialAuction.auctionNumber,  // Păstrează numărul licitației neschimbat
                         name = AuctionName != _initialAuction.name ? AuctionName : _initialAuction.name,
-                        startTime = StartDate != _initialAuction.startTime ? startDateTime : _initialAuction.startTime,
-                        endTime = EndDate != _initialAuction.endTime ? endDateTime : _initialAuction.endTime,
+                        startTime = startDateTime != _initialAuction.startTime ? startDateTime : _initialAuction.startTime,
+                        endTime = endDateTime != _initialAuction.endTime ? endDateTime : _initialAuction.endTime,
                         imagePath = ImagePath != _initialAuction.imagePath ? ImagePath : _initialAuction.imagePath,
                         description = Description != _initialAuction.description ? Description : _initialAuction.description,
                         location = Location != _initialAuction.location ? Location : _initialAuction.location

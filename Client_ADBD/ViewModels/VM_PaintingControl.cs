@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client_ADBD.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,17 @@ namespace Client_ADBD.ViewModels
 {
     internal class VM_PaintingControl:VM_Base
     {
+
+        public VM_PaintingControl() { }
+        public VM_PaintingControl(Painting_ p)
+        {
+            Artist=p.Artist;
+            Year=p.CreationYear;
+            Length=p.Length;
+            Width=p.Width;
+            Technique=p.Type;
+
+        }
 
         private bool _isValid = true;
 

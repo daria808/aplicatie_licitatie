@@ -3,11 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Client_ADBD.Models;
 
 namespace Client_ADBD.ViewModels
 {
     internal class VM_SculptureControl:VM_Base
     {
+
+        public VM_SculptureControl() { }
+        public VM_SculptureControl(Sculpture_ s) 
+        {
+            Artist = s.Artist;  
+            Material = s.Material;
+            Height=s.Length;
+            Length=s.Width;
+            Depth = s.Depth;
+           
+        }
+
         private bool _isValid=true;
 
         private string _artist;

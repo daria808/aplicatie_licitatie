@@ -7,7 +7,7 @@
       xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
       xmlns:UserControl="clr-namespace:Client_ADBD.Views.UserControl"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="1100"
       Title="ModifyPostPage">
 
     <Page.Resources>
@@ -32,7 +32,7 @@
 
     <Grid Background="White">
 
-        <Grid  Background="#f8f9fa" Margin="0,-27,0,0">
+        <Grid  Background="#f8f9fa" Margin="19,27,0,0">
 
 
 
@@ -97,7 +97,7 @@
 
                     </StackPanel>
                     <ContentControl Content="{Binding SelectedProductControl}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding ProductControlError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+                    <TextBlock Text="{Binding ProductControlError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" HorizontalAlignment="Center" Margin="0,5,0,0" />
 
                     <StackPanel Orientation="Horizontal">
 
@@ -107,7 +107,7 @@
 
                     <!--<ContentControl Grid.Row="1"   Content="{Binding SelectedItemContent}" />-->
 
-                    <Button Content="Adaugă produs" Command="{Binding AddPostCommand}" Width="250" Height="50" Background="#007bff" Foreground="White" FontWeight="Bold" FontSize="16" BorderBrush="#007bff" BorderThickness="1" VerticalAlignment="Top" Margin="50">
+                    <Button Content="Modifică datele postării" Command="{Binding SaveChangesCommand}" Width="250" Height="50" Background="#007bff" Foreground="White" FontWeight="Bold" FontSize="16" BorderBrush="#007bff" BorderThickness="1" VerticalAlignment="Top" Margin="50">
                         <Button.Effect>
                             <DropShadowEffect Color="Black" Direction="270" BlurRadius="10" ShadowDepth="5" Opacity="0.4"/>
                         </Button.Effect>

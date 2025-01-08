@@ -11,6 +11,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Client_ADBD.Views.UserControl;
+using Client_ADBD.Helpers;
+using System.Security.Cryptography;
+using System.Windows.Threading;
 
 namespace Client_ADBD.ViewModels
 {
@@ -18,7 +21,10 @@ namespace Client_ADBD.ViewModels
     {
         private int _postId;
 
+        private Visibility _ownerAdminVisibility;
         private Visibility _imageGridVisibility;
+        private Visibility _customerVisibility;
+
         private int _blurRadius;
         private string[] _imagePaths;
         private string _productName;
@@ -28,8 +34,12 @@ namespace Client_ADBD.ViewModels
         private string _postStatus;
         private string _selectedImagePath;
         private int _postLotNumber;
+        private string _productType;
 
+        private string _lastBidUser;
+        private decimal _bidPrice;
 
+        private decimal _lastBidPrice;
 
         private int _auctionNumber;
 
@@ -38,10 +48,22 @@ namespace Client_ADBD.ViewModels
 
         private object _selectedProductControl;
 
+        private DispatcherTimer _timer;
+        private DateTime _auctionEndTime;
+        private DateTime _auctionStartTime;
+
         public ICommand CloseImageCommand {  get; set; }    
         public ICommand SelectImageCommand { get; set; }
 
         public ICommand ToggleDescriptionCommand { get; }
+        public ICommand GoBackToAuctionPageCommand { get; set; }
+
+        public ICommand GoToModifyPostPageCommand { get; set; }
+
+        public ICommand DeletePostCommand { get; set; }
+
+        public ICommand AddBidCommand { get; set; }
+
         public VM_PostPage(Post_ p)
         {
 
@@ -49,13 +71,18 @@ namespace Client_ADBD.ViewModels
             {
                 _postId = p.postId;
                 _auctionNumber = p.auctionNumber;
+                _auctionEndTime=DatabaseManager.GetAuctionByNumber(_auctionNumber).endTime;
+                _auctionStartTime=DatabaseManager.GetAuctionByNumber(_auctionNumber).startTime;
                 _productName = p.product.Name;
+                _lastBidUser = p.lastOfferUser;
+                _lastBidPrice=p.lastOffer;
                 _productStartPrice=p.product.startPrice;
                 _productListPrice = p.product.listPrice;
                 _imagePaths = p.product.imagePaths;
                 _postStatus=p.productStatus;
                 _postDescription=p.product.Description;
                 _postLotNumber = p.lotNumber;
+                _productType=p.auctionType;
 
                 SelectedProductControl = p.auctionType switch
                 {
@@ -79,13 +106,253 @@ namespace Client_ADBD.ViewModels
 
             }
 
+            _lastBidPriceStr=GetLastOfferText(_lastBidPrice);
+
             ImageGridVisibility = Visibility.Hidden;
             BlurRadius = 0;
+
             GoBackToAuctionPageCommand = new RelayCommand(GoBackToAuctionPage);
             CloseImageCommand = new RelayCommand(CloseImage);
             SelectImageCommand = new RelayCommand<string>(SelectImage);
             ToggleDescriptionCommand = new RelayCommand(ToggleDescription);
- 
+            GoToModifyPostPageCommand = new RelayCommand(GoToModifyPage);
+            DeletePostCommand = new RelayCommand(DeletePost);
+            AddBidCommand = new RelayCommand(AddBid);
+
+            if (DatabaseManager.GetPostUser(_auctionNumber) == CurrentUser.User._username)
+            {
+                OwnerAdminVisibility = Visibility.Visible;
+            }
+            else
+            {
+                OwnerAdminVisibility = Visibility.Hidden;
+            }
+
+           
+
+           if(DatabaseManager.GetPostUser(_auctionNumber) == CurrentUser.User._username||_auctionEndTime<DateTime.Now||_auctionStartTime>DateTime.Now)
+            {
+                CustomerVisibility= Visibility.Hidden;
+               
+            }
+            else
+            {
+                CustomerVisibility = Visibility.Visible;
+            }
+
+            Helpers.Timer.AddEventToTimer(UpdateTimeLeft,1,-1);
+        }
+
+        private string _status2;
+        public string Status2
+        {
+            get { return _status2; }
+            set
+            {
+                _status2 = value;
+                OnPropertyChange(nameof(Status2));
+            }
+        }
+
+
+
+        private string _timeLeft2;
+        public string TimeLeft2
+        {
+            get => _timeLeft2;
+            set
+            {
+                if (_timeLeft2 != value)
+                {
+                    _timeLeft2 = value;
+                    OnPropertyChange(nameof(TimeLeft2));
+                }
+            }
+        }
+
+      
+        public string FormatTime()
+        {
+
+            TimeSpan timeLeft2 = default;
+
+            if (_auctionStartTime > DateTime.Now)
+            {
+
+                timeLeft2 = _auctionStartTime - DateTime.Now;
+                Status2= "Upcoming";
+            }
+            else if (_auctionEndTime > DateTime.Now)
+            {
+                timeLeft2 = _auctionEndTime - DateTime.Now;
+                Status2= "Ongoing";
+            }
+            else
+            {
+                Status2 = "Closed";
+            }
+
+
+            int years = timeLeft2.Days / 365;
+            int months = (timeLeft2.Days % 365) / 30;
+            int days = (timeLeft2.Days % 365) % 30;
+            int hours = timeLeft2.Hours;
+            int minutes = timeLeft2.Minutes;
+            int seconds = timeLeft2.Seconds;
+
+            // Construim un șir formatat pentru a afișa timpul rămas
+            string result = "";
+
+            if (years > 0) result += $"{years}y ";
+            if (months > 0) result += $"{months}m ";
+            if (days > 0) result += $"{days}d ";
+            if (hours > 0) result += $"{hours}h ";
+            if (minutes > 0) result += $"{minutes}m ";
+            if (seconds > 0) result += $"{seconds}s";
+
+            if (string.Compare(Status2, "Closed") == 0)
+            {
+                return string.Empty;
+            }
+            else if (string.Compare(Status2, "Ongoing") == 0)
+            {
+                return string.Concat("Timpul rămas până la șfârșit : ", result.Trim());
+            }
+            else if (string.Compare(Status2, "Upcoming") == 0)
+            {
+                return string.Concat("Timpul rămas până la început: ", result.Trim());
+            }
+
+            return string.Empty;
+
+        }
+
+        public void UpdateTimeLeft()
+        {
+
+            TimeLeft2 = FormatTime();
+
+        }
+        private void AddBid()
+        {
+            if (BidPrice < 0)
+            {
+                var result = MessageBox.Show(
+                     "Suma introdusa este incorectă.",
+                     "Eroare ofertă",
+                     MessageBoxButton.OK,
+                     MessageBoxImage.Warning);
+                return;
+            }
+
+            if(BidPrice > CurrentUser.User._balance)
+            {
+              var result = MessageBox.Show(
+                          "Sold insuficient.",
+                          "Eroare ofertă",
+                          MessageBoxButton.OK,
+                          MessageBoxImage.Warning);
+                return;
+            }else if(BidPrice <= _lastBidPrice) 
+            {
+                var result = MessageBox.Show(
+                           "Ofertă trebuie să fie mai mare decât cea curentă.",
+                           "Eroare ofertă",
+                           MessageBoxButton.OK,
+                           MessageBoxImage.Warning);
+
+               
+                return;
+            }
+            else
+            {
+                DatabaseManager.AddBid(_postId, CurrentUser.User._id, BidPrice);
+                _lastBidPrice = DatabaseManager.GetPostLastOffer(_postId, ref _lastBidUser);
+                LastBidPrice= GetLastOfferText(_lastBidPrice); 
+            }
+        }
+        public decimal BidPrice
+        {
+            get => _bidPrice;
+            set
+            {
+                _bidPrice = value;
+                OnPropertyChange(nameof(BidPrice));
+            }
+        }
+
+        private string GetLastOfferText(decimal lastOffer)
+        {
+            if(lastOffer<0)
+                return string.Empty;
+
+            return "Ultima ofertă: " + lastOffer.ToString("F2") + " $";
+        }
+
+        private string _lastBidPriceStr;
+        public string LastBidPrice
+        {
+            get => _lastBidPriceStr;
+            set
+            {
+                _lastBidPriceStr = value;
+                OnPropertyChange(nameof(LastBidPrice));
+            }
+            
+        }
+   
+        private void DeletePost()
+        {
+
+            var result = MessageBox.Show(
+                     "Sunteți sigur că doriți să ștergeți această postare?",
+                     "Confirmare ștergere",
+                     MessageBoxButton.OKCancel,
+                     MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.OK)
+            {
+                var rc = false;
+                rc = DatabaseManager.DeletePost(_postId,_productType);
+
+                if (rc == false)
+                {
+                    GoBackToAuctionPage();
+                    MessageBox.Show("Postare ștearsă cu succes!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Postarea nu a putut fi ștearsă!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+
+        }
+
+        public Visibility CustomerVisibility
+        {
+            get => _customerVisibility;
+            set
+            {
+                _customerVisibility = value;
+                OnPropertyChange(nameof(CustomerVisibility));
+            }
+        }
+        private void GoToModifyPage()
+        {
+       
+            Post_ p = DatabaseManager.GetPostDetails(_postId);
+
+            var mainWindow = App.Current.Windows
+                     .OfType<MainWindow>()
+                     .FirstOrDefault();
+            var frame = mainWindow?.FindName("MainFrame") as Frame;
+
+
+            if (frame != null)
+            {
+                frame.Navigate(new ModifyPostPage(p));
+            }
+
         }
 
         public int PostLotNumber
@@ -242,6 +509,16 @@ namespace Client_ADBD.ViewModels
                 OnPropertyChange(nameof(ProductListPrice));
             }
         }
+
+        public Visibility OwnerAdminVisibility
+        {
+            get => _ownerAdminVisibility;
+            set
+            {
+                _ownerAdminVisibility = value;
+                OnPropertyChange(nameof(OwnerAdminVisibility));
+            }
+        }
         public Visibility ImageGridVisibility
         {
             get => _imageGridVisibility;
@@ -265,9 +542,6 @@ namespace Client_ADBD.ViewModels
                 OnPropertyChange(nameof(BlurRadius));
             }
         }
-
-
-        public ICommand GoBackToAuctionPageCommand {  get; set; }
 
         public decimal ProductStartPrice
         {
@@ -302,7 +576,7 @@ namespace Client_ADBD.ViewModels
 
         public string[] ImagePaths
         {
-            get { return _imagePaths; }
+            get { return _imagePaths;  }
             set
             {
                 if (_imagePaths != value)

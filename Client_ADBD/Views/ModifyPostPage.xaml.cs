@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client_ADBD.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Client_ADBD.Models;
 
 namespace Client_ADBD.Views
 {
@@ -23,6 +25,13 @@ namespace Client_ADBD.Views
         public ModifyPostPage()
         {
             InitializeComponent();
+        }
+
+        public ModifyPostPage(Post_ post)
+        {
+            InitializeComponent();
+            VM_ModifyPostPage viewModel= new VM_ModifyPostPage(post);
+            DataContext = viewModel;
         }
     }
 }

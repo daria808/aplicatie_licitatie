@@ -4,34 +4,16 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client_ADBD.Views"
+      xmlns:Helpers="clr-namespace:Client_ADBD.Helpers"
       xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
       xmlns:UserControl="clr-namespace:Client_ADBD.Views.UserControl"
       mc:Ignorable="d"
       Title="PostPage" Height="800" Width="1150">
 
 
-    <!--<Page.DataContext>
-        <ViewModels:VM_PostPage/>
-    </Page.DataContext>
-
-
     <Page.Resources>
-        <DataTemplate DataType="{x:Type ViewModels:VM_WatchPostControl}">
-            <UserControl:WatchPostControl />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type ViewModels:VM_PaintingPostControl}">
-            <UserControl:PaintingPostControl />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type ViewModels:VM_JewelryPostControl}">
-            <UserControl:JewelryPostControl />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type ViewModels:VM_BookPostControl}">
-            <UserControl:BookPostControl />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type ViewModels:VM_SculpturePostControl}">
-            <UserControl:SculpturePostControl />
-        </DataTemplate>
-    </Page.Resources>-->
+        <Helpers:ImageSourceConverter x:Key="ImageSourceConverter" />
+    </Page.Resources>
 
 
     <Grid Background="White">
@@ -68,18 +50,18 @@
                 <TextBlock Text="{Binding AuctionNumber, StringFormat='Licitație #{0}'}" Foreground="Gray" FontSize="14" Margin="10,10,0,100"/>
 
 
-                <Image Source="{Binding ImagePaths[0]}" Height="389" Width="480">
+                <Image Source="{Binding ImagePaths[0], Converter={StaticResource ImageSourceConverter}}" Height="389" Width="480">
                     <Image.InputBindings>
                         <MouseBinding Command="{Binding SelectImageCommand}" CommandParameter="{Binding ImagePaths[0]}" Gesture="LeftClick" />
                     </Image.InputBindings>
                 </Image>
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
-                    <Image Source="{Binding ImagePaths[1]}" Width="100" Height="100" Margin="5" Stretch="UniformToFill">
+                    <Image Source="{Binding ImagePaths[1], Converter={StaticResource ImageSourceConverter}}" Width="100" Height="100" Margin="5" Stretch="UniformToFill">
                         <Image.InputBindings>
                             <MouseBinding Command="{Binding SelectImageCommand}" CommandParameter="{Binding ImagePaths[1]}" Gesture="LeftClick" />
                         </Image.InputBindings>
                     </Image>
-                    <Image Source="{Binding ImagePaths[2]}" Width="100" Height="100" Margin="5" Stretch="UniformToFill">
+                    <Image Source="{Binding ImagePaths[2], Converter={StaticResource ImageSourceConverter}}" Width="100" Height="100" Margin="5" Stretch="UniformToFill">
                     <Image.InputBindings>
                         <MouseBinding Command="{Binding SelectImageCommand}" CommandParameter="{Binding ImagePaths[1]}" Gesture="LeftClick" />
                     </Image.InputBindings>
@@ -88,41 +70,43 @@
             </StackPanel>
 
         
-            <StackPanel Grid.Column="1" Margin="20,60,0,0" Orientation="Vertical">
+            <StackPanel Grid.Column="1" Margin="20,30,0,0" Orientation="Vertical">
 
-                <TextBlock Text="{Binding PostLotNumber, StringFormat='Lot #{0}'}" Foreground="Gray" FontSize="14" HorizontalAlignment="Right" Margin="0,10,80,20"/>
+                <TextBlock Text="{Binding PostLotNumber, StringFormat='Lot #{0}'}" Foreground="Gray" FontSize="14" HorizontalAlignment="Right" Margin="0,0,80,50"/>
                 <TextBlock Text="{Binding ProductName}" FontSize="20" FontWeight="Bold" Foreground="Black" Margin="0,0,0,10" TextWrapping="Wrap" />
                 <TextBlock Text="{Binding ProductArtist}" FontSize="12" Foreground="Black" Margin="0,0,0,15" TextDecorations="Underline" TextWrapping="Wrap" />
                 <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,0,50,30" />
 
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBlock Text="PREȚ DE PORNIRE: " FontSize="12" FontWeight="Bold" />
+                    <TextBlock Text="PREȚ DE PORNIRE: " FontSize="12" FontWeight="Bold"  Margin="0,0,5,0"/>
                     <TextBlock Text="{Binding ProductStartPrice}" FontSize="12" />
                     <TextBlock Text=" €"/>
                 </StackPanel>
                 <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,0,50,20" />
 
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBlock Text="PREȚ DE LISTĂ: " FontSize="12" FontWeight="Bold" />
+                    <TextBlock Text="PREȚ DE LISTĂ: " FontSize="12" FontWeight="Bold" Margin="0,0,5,0"/>
                     <TextBlock Text="{Binding ProductListPrice}" FontSize="12" />
                     <TextBlock Text=" €"/>
                 </StackPanel>
                 <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,0,50,20" />
 
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBlock Text="{Binding PostStatus}" FontSize="12" FontWeight="Bold" />
+                    <TextBlock Text="{Binding PostStatus}" FontSize="16" FontWeight="SemiBold" Foreground="Green" FontFamily="Arial Narrow"/>
           
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBlock Text="{Binding LastOffer}" FontSize="12" FontWeight="Bold" Foreground="Red" />
-                 
+                    <TextBlock Text="{Binding LastBidPrice}" FontSize="12" FontWeight="Medium" Foreground="ForestGreen" />
+
                 </StackPanel>
+                
+                
                 <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,0,50,20" />
 
                 <ContentControl Content="{Binding SelectedProductControl}" Margin="30,0,0,0"/>
                 <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,10,50,25" />
-                <TextBlock Text="DESCRIERE: " FontSize="14" FontWeight="Bold" Margin="0,0,0,5" />
+                <TextBlock Text="DESCRIERE: " FontSize="12" FontWeight="Bold" Margin="0,0,0,5" />
                 <TextBlock Text="{Binding PostDescription}" FontSize="12" TextWrapping="Wrap" />
                 <Button HorizontalAlignment="Left" Margin="15,5,0,0" FontSize="12" Command="{Binding ToggleDescriptionCommand}" Background="Transparent" BorderBrush="Gray" BorderThickness="0">
                     <Button.Style>
@@ -133,9 +117,49 @@
                     </Button.Style>
                     <TextBlock Text="{Binding ButtonText}" TextDecorations="Underline"/>
                 </Button>
-                <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,10,50,25" />
+                <Border BorderBrush="#D1D1D1" BorderThickness="0,0,0,1" Margin="0,10,50,5" />
 
-                <Button HorizontalAlignment="Left" Margin="15,20,0,0" FontSize="12" Command="{Binding GoToModifyPageCommand}" Background="Transparent" BorderBrush="Gray" BorderThickness="0" Visibility="{Binding OwnerAdminVisibility}">
+                <!--<StackPanel Orientation="Horizontal">-->
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Visibility="{Binding CustomerVisibility}" >
+
+                        <TextBlock Text="LICITEAZĂ : " 
+                             FontSize="12" 
+                             Margin="0,10"
+                             HorizontalAlignment="Left" FontWeight="Bold" />    
+
+                        <TextBox Name="BidTextBox" 
+                            Width="100"
+                            Text="{Binding BidPrice}"
+                            HorizontalAlignment="Left" 
+                            Margin="20,0,0,10"/>
+
+                        <Button Content="Plasați oferta" 
+                                Width="100" 
+                                Margin="20,0,0,10" 
+                                Command="{Binding AddBidCommand}"
+                                HorizontalAlignment="Left"  />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                        <TextBlock Text="{Binding Status2}" 
+                          FontSize="14" 
+                          Margin="15,0"
+                          FontFamily="Arial Narrow" 
+                                   
+                          HorizontalAlignment="Left" Foreground="PaleVioletRed" FontStyle="Italic" />
+
+                        <TextBlock Text="{Binding TimeLeft2}" 
+                             FontSize="14" 
+                             Margin="15,0"
+                             FontFamily="Arial Narrow"      
+                             HorizontalAlignment="Left" Foreground="PaleVioletRed" TextWrapping="Wrap" FontStyle="Italic" />
+                        
+
+                    </StackPanel>
+                    
+                <!--</StackPanel>-->
+
+                <Button HorizontalAlignment="Left" Margin="15,20,0,0" FontSize="12" Command="{Binding GoToModifyPostPageCommand}" Background="Transparent" BorderBrush="Gray" BorderThickness="0" Visibility="{Binding OwnerAdminVisibility}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Foreground" Value="Blue"/>

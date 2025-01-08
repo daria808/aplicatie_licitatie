@@ -79,7 +79,7 @@ namespace Client_ADBD.ViewModels
             else if (EndTime > DateTime.Now)
             {
                 timeLeft = EndTime - DateTime.Now;
-                Status = "Oncoming";
+                Status = "Ongoing";
             }
             else
             {

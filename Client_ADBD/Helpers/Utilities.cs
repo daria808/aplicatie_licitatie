@@ -10,12 +10,17 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using System.Net.NetworkInformation;
 using System.ComponentModel;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace Client_ADBD.Helpers
 {
 
+
     public class ImageSourceConverter : IValueConverter
     {
+
+      
         public static BitmapImage GetImageSource(string path)
         {
             if (!string.IsNullOrEmpty(path) && File.Exists(path))
@@ -54,9 +59,70 @@ namespace Client_ADBD.Helpers
       
     }
 
+    public class Timer
+    {
+        private static bool _isTimerRunning = false;
 
+        private static DispatcherTimer _timer = null;
+
+        private static void InitiateTimer()
+        {
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+
+        }
+
+        /// <summary>
+        /// seconds=-1 =>setare minute  
+        /// minutes=-1 =>setare secunde
+        /// </summary>
+        /// <param name="function"></param>
+        /// <param name="seconds"> </param>
+        /// <param name="minutes"></param>
+        public static void AddEventToTimer(Action function,int seconds,int minutes)
+        {
+            if (_timer == null)
+            {
+                InitiateTimer();
+            }
+
+            if (seconds > 0)
+            {
+                _timer.Interval = TimeSpan.FromSeconds(seconds);
+            }
+            else if (minutes > 0)
+            {
+                _timer.Interval = TimeSpan.FromMinutes(minutes);
+            }
+
+            _timer.Tick -= (s, e) => function();
+            _timer.Tick += (s, e) => function();
+
+            if (!_isTimerRunning)
+            {
+                _timer.Start();
+                _isTimerRunning = true;
+            }
+        }
+
+        public static void StopTimer()
+        {
+            _timer.Stop();
+            _isTimerRunning = false;
+        }
+
+
+    }
     public class Utilities
     {
+
+        public static DateTime ConvertDateTimeNullToNotNull(DateTime? date)
+        {
+            return date ?? default(DateTime);
+        }
+
         public static string Username;
 
         public static string _status = "default";
@@ -77,6 +143,8 @@ namespace Client_ADBD.Helpers
 
 
         public static event EventHandler OnStatusChanged;
+
+
     }
 
 }

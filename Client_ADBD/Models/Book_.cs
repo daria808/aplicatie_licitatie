@@ -15,7 +15,7 @@ namespace Client_ADBD.Models
         public int PageNumber {  get; set; }
         public string Language { get; set; }
 
-        public Book_(int  productId,string name,string description, DateTime ?invDate,decimal startPrice,decimal listPrice,string condition, string author, 
+        public Book_(int  productId,string name,string description, DateTime invDate,decimal startPrice,decimal listPrice,string condition, string author, 
             int publicationYear, string publishingHouse, int pageNumber, string language, string[] imagePaths) :base(productId, name,description,invDate,startPrice,listPrice,imagePaths)
         {
             Condition = condition;

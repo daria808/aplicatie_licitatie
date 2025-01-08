@@ -17,11 +17,28 @@
       <Association Name="User_Auction" Member="User" ThisKey="id_user" OtherKey="id_user" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.[Watch type]" Member="Watch_types">
+    <Type Name="Watch_type">
+      <Column Name="id_watch_type" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="type" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.[Auction type]" Member="Auction_types">
     <Type Name="Auction_type">
       <Column Name="id_auction_type" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="type_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Association Name="Auction_type_Auction" Member="Auctions" ThisKey="id_auction_type" OtherKey="id_auction_type" Type="Auction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Bid" Member="Bids">
+    <Type Name="Bid">
+      <Column Name="id_bid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_post" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bid_price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="bid_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Post_Bid" Member="Post" ThisKey="id_post" OtherKey="id_post" Type="Post" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_Bid" Member="User" ThisKey="id_user" OtherKey="id_user" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Book" Member="Books">
@@ -94,6 +111,7 @@
       <Column Name="list_price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
       <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="lot" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Post_Bid" Member="Bids" ThisKey="id_post" OtherKey="id_post" Type="Bid" />
       <Association Name="Auction_Post" Member="Auction" ThisKey="id_auction" OtherKey="id_auction" Type="Auction" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Post_status_Post" Member="Post_status" ThisKey="id_status" OtherKey="id_status" Type="Post_status" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Product_Post" Member="Product" ThisKey="id_product" OtherKey="id_product" Type="Product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
@@ -179,6 +197,7 @@
       <Column Name="last_login" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="balance" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
       <Association Name="User_Auction" Member="Auctions" ThisKey="id_user" OtherKey="id_user" Type="Auction" />
+      <Association Name="User_Bid" Member="Bids" ThisKey="id_user" OtherKey="id_user" Type="Bid" />
       <Association Name="User_User_role" Member="User_roles" ThisKey="id_user" OtherKey="id_user" Type="User_role" />
     </Type>
   </Table>
@@ -199,12 +218,6 @@
       <Column Name="id_mechanism" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="mechanism" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Watch_mechanism_Watch" Member="Watches" ThisKey="id_mechanism" OtherKey="id_mechanism" Type="Watch" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[Watch type]" Member="Watch_types">
-    <Type Name="Watch_type">
-      <Column Name="id_watch_type" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="type" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

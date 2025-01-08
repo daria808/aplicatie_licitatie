@@ -14,7 +14,7 @@ namespace Client_ADBD.Models
         public decimal Width { get; set; }
         public decimal Depth { get; set; }
 
-        public Sculpture_(int productId, string name, string description, DateTime ?invDate,decimal startPrice,decimal listPrice,string[] imagePaths,
+        public Sculpture_(int productId, string name, string description, DateTime invDate,decimal startPrice,decimal listPrice,string[] imagePaths,
             string material, string artist, decimal length, decimal width, decimal depth) : base(productId, name, description, invDate, startPrice, listPrice, imagePaths)
         {
             Material = material;

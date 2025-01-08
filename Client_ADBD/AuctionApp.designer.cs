@@ -33,9 +33,15 @@ namespace Client_ADBD
     partial void InsertAuction(Auction instance);
     partial void UpdateAuction(Auction instance);
     partial void DeleteAuction(Auction instance);
+    partial void InsertWatch_type(Watch_type instance);
+    partial void UpdateWatch_type(Watch_type instance);
+    partial void DeleteWatch_type(Watch_type instance);
     partial void InsertAuction_type(Auction_type instance);
     partial void UpdateAuction_type(Auction_type instance);
     partial void DeleteAuction_type(Auction_type instance);
+    partial void InsertBid(Bid instance);
+    partial void UpdateBid(Bid instance);
+    partial void DeleteBid(Bid instance);
     partial void InsertBook(Book instance);
     partial void UpdateBook(Book instance);
     partial void DeleteBook(Book instance);
@@ -87,9 +93,6 @@ namespace Client_ADBD
     partial void InsertWatch_mechanism(Watch_mechanism instance);
     partial void UpdateWatch_mechanism(Watch_mechanism instance);
     partial void DeleteWatch_mechanism(Watch_mechanism instance);
-    partial void InsertWatch_type(Watch_type instance);
-    partial void UpdateWatch_type(Watch_type instance);
-    partial void DeleteWatch_type(Watch_type instance);
     #endregion
 		
 		public AuctionAppDataContext() : 
@@ -130,11 +133,27 @@ namespace Client_ADBD
 			}
 		}
 		
+		public System.Data.Linq.Table<Watch_type> Watch_types
+		{
+			get
+			{
+				return this.GetTable<Watch_type>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Auction_type> Auction_types
 		{
 			get
 			{
 				return this.GetTable<Auction_type>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Bid> Bids
+		{
+			get
+			{
+				return this.GetTable<Bid>();
 			}
 		}
 		
@@ -271,14 +290,6 @@ namespace Client_ADBD
 			get
 			{
 				return this.GetTable<Watch_mechanism>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Watch_type> Watch_types
-		{
-			get
-			{
-				return this.GetTable<Watch_type>();
 			}
 		}
 	}
@@ -671,6 +682,92 @@ namespace Client_ADBD
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Watch type]")]
+	public partial class Watch_type : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_watch_type;
+		
+		private string _type;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_watch_typeChanging(int value);
+    partial void Onid_watch_typeChanged();
+    partial void OntypeChanging(string value);
+    partial void OntypeChanged();
+    #endregion
+		
+		public Watch_type()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_watch_type", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_watch_type
+		{
+			get
+			{
+				return this._id_watch_type;
+			}
+			set
+			{
+				if ((this._id_watch_type != value))
+				{
+					this.Onid_watch_typeChanging(value);
+					this.SendPropertyChanging();
+					this._id_watch_type = value;
+					this.SendPropertyChanged("id_watch_type");
+					this.Onid_watch_typeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this.OntypeChanging(value);
+					this.SendPropertyChanging();
+					this._type = value;
+					this.SendPropertyChanged("type");
+					this.OntypeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Auction type]")]
 	public partial class Auction_type : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -782,6 +879,246 @@ namespace Client_ADBD
 		{
 			this.SendPropertyChanging();
 			entity.Auction_type = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Bid")]
+	public partial class Bid : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_bid;
+		
+		private int _id_post;
+		
+		private System.Nullable<int> _id_user;
+		
+		private decimal _bid_price;
+		
+		private System.DateTime _bid_date;
+		
+		private EntityRef<Post> _Post;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_bidChanging(int value);
+    partial void Onid_bidChanged();
+    partial void Onid_postChanging(int value);
+    partial void Onid_postChanged();
+    partial void Onid_userChanging(System.Nullable<int> value);
+    partial void Onid_userChanged();
+    partial void Onbid_priceChanging(decimal value);
+    partial void Onbid_priceChanged();
+    partial void Onbid_dateChanging(System.DateTime value);
+    partial void Onbid_dateChanged();
+    #endregion
+		
+		public Bid()
+		{
+			this._Post = default(EntityRef<Post>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_bid", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_bid
+		{
+			get
+			{
+				return this._id_bid;
+			}
+			set
+			{
+				if ((this._id_bid != value))
+				{
+					this.Onid_bidChanging(value);
+					this.SendPropertyChanging();
+					this._id_bid = value;
+					this.SendPropertyChanged("id_bid");
+					this.Onid_bidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_post", DbType="Int NOT NULL")]
+		public int id_post
+		{
+			get
+			{
+				return this._id_post;
+			}
+			set
+			{
+				if ((this._id_post != value))
+				{
+					if (this._Post.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_postChanging(value);
+					this.SendPropertyChanging();
+					this._id_post = value;
+					this.SendPropertyChanged("id_post");
+					this.Onid_postChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_user", DbType="Int")]
+		public System.Nullable<int> id_user
+		{
+			get
+			{
+				return this._id_user;
+			}
+			set
+			{
+				if ((this._id_user != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_userChanging(value);
+					this.SendPropertyChanging();
+					this._id_user = value;
+					this.SendPropertyChanged("id_user");
+					this.Onid_userChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bid_price", DbType="Decimal(10,2) NOT NULL")]
+		public decimal bid_price
+		{
+			get
+			{
+				return this._bid_price;
+			}
+			set
+			{
+				if ((this._bid_price != value))
+				{
+					this.Onbid_priceChanging(value);
+					this.SendPropertyChanging();
+					this._bid_price = value;
+					this.SendPropertyChanged("bid_price");
+					this.Onbid_priceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bid_date", DbType="DateTime NOT NULL")]
+		public System.DateTime bid_date
+		{
+			get
+			{
+				return this._bid_date;
+			}
+			set
+			{
+				if ((this._bid_date != value))
+				{
+					this.Onbid_dateChanging(value);
+					this.SendPropertyChanging();
+					this._bid_date = value;
+					this.SendPropertyChanged("bid_date");
+					this.Onbid_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_Bid", Storage="_Post", ThisKey="id_post", OtherKey="id_post", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Post Post
+		{
+			get
+			{
+				return this._Post.Entity;
+			}
+			set
+			{
+				Post previousValue = this._Post.Entity;
+				if (((previousValue != value) 
+							|| (this._Post.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Post.Entity = null;
+						previousValue.Bids.Remove(this);
+					}
+					this._Post.Entity = value;
+					if ((value != null))
+					{
+						value.Bids.Add(this);
+						this._id_post = value.id_post;
+					}
+					else
+					{
+						this._id_post = default(int);
+					}
+					this.SendPropertyChanged("Post");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Bid", Storage="_User", ThisKey="id_user", OtherKey="id_user", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Bids.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Bids.Add(this);
+						this._id_user = value.id_user;
+					}
+					else
+					{
+						this._id_user = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -2013,6 +2350,8 @@ namespace Client_ADBD
 		
 		private int _lot;
 		
+		private EntitySet<Bid> _Bids;
+		
 		private EntityRef<Auction> _Auction;
 		
 		private EntityRef<Post_status> _Post_status;
@@ -2043,6 +2382,7 @@ namespace Client_ADBD
 		
 		public Post()
 		{
+			this._Bids = new EntitySet<Bid>(new Action<Bid>(this.attach_Bids), new Action<Bid>(this.detach_Bids));
 			this._Auction = default(EntityRef<Auction>);
 			this._Post_status = default(EntityRef<Post_status>);
 			this._Product = default(EntityRef<Product>);
@@ -2221,6 +2561,19 @@ namespace Client_ADBD
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Post_Bid", Storage="_Bids", ThisKey="id_post", OtherKey="id_post")]
+		public EntitySet<Bid> Bids
+		{
+			get
+			{
+				return this._Bids;
+			}
+			set
+			{
+				this._Bids.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auction_Post", Storage="_Auction", ThisKey="id_auction", OtherKey="id_auction", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Auction Auction
 		{
@@ -2341,6 +2694,18 @@ namespace Client_ADBD
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Bids(Bid entity)
+		{
+			this.SendPropertyChanging();
+			entity.Post = this;
+		}
+		
+		private void detach_Bids(Bid entity)
+		{
+			this.SendPropertyChanging();
+			entity.Post = null;
 		}
 	}
 	
@@ -3699,6 +4064,8 @@ namespace Client_ADBD
 		
 		private EntitySet<Auction> _Auctions;
 		
+		private EntitySet<Bid> _Bids;
+		
 		private EntitySet<User_role> _User_roles;
 		
     #region Extensibility Method Definitions
@@ -3730,6 +4097,7 @@ namespace Client_ADBD
 		public User()
 		{
 			this._Auctions = new EntitySet<Auction>(new Action<Auction>(this.attach_Auctions), new Action<Auction>(this.detach_Auctions));
+			this._Bids = new EntitySet<Bid>(new Action<Bid>(this.attach_Bids), new Action<Bid>(this.detach_Bids));
 			this._User_roles = new EntitySet<User_role>(new Action<User_role>(this.attach_User_roles), new Action<User_role>(this.detach_User_roles));
 			OnCreated();
 		}
@@ -3947,6 +4315,19 @@ namespace Client_ADBD
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Bid", Storage="_Bids", ThisKey="id_user", OtherKey="id_user")]
+		public EntitySet<Bid> Bids
+		{
+			get
+			{
+				return this._Bids;
+			}
+			set
+			{
+				this._Bids.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_User_role", Storage="_User_roles", ThisKey="id_user", OtherKey="id_user")]
 		public EntitySet<User_role> User_roles
 		{
@@ -3987,6 +4368,18 @@ namespace Client_ADBD
 		}
 		
 		private void detach_Auctions(Auction entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Bids(Bid entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Bids(Bid entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
@@ -4380,92 +4773,6 @@ namespace Client_ADBD
 		{
 			this.SendPropertyChanging();
 			entity.Watch_mechanism = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Watch type]")]
-	public partial class Watch_type : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id_watch_type;
-		
-		private string _type;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onid_watch_typeChanging(int value);
-    partial void Onid_watch_typeChanged();
-    partial void OntypeChanging(string value);
-    partial void OntypeChanged();
-    #endregion
-		
-		public Watch_type()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_watch_type", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id_watch_type
-		{
-			get
-			{
-				return this._id_watch_type;
-			}
-			set
-			{
-				if ((this._id_watch_type != value))
-				{
-					this.Onid_watch_typeChanging(value);
-					this.SendPropertyChanging();
-					this._id_watch_type = value;
-					this.SendPropertyChanged("id_watch_type");
-					this.Onid_watch_typeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string type
-		{
-			get
-			{
-				return this._type;
-			}
-			set
-			{
-				if ((this._type != value))
-				{
-					this.OntypeChanging(value);
-					this.SendPropertyChanging();
-					this._type = value;
-					this.SendPropertyChanged("type");
-					this.OntypeChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }

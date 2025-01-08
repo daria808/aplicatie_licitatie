@@ -242,7 +242,7 @@ namespace Client_ADBD.ViewModels
                     {
                         string brand = watchVM.Brand;
                         string type = watchVM.Type;
-                        int diameter = watchVM.Diameter;
+                        decimal diameter = watchVM.Diameter;
                         string mechanism = watchVM.Mechanism;
 
                         if (string.IsNullOrEmpty(brand) || type==null || diameter <=0 || mechanism == null)
@@ -265,11 +265,11 @@ namespace Client_ADBD.ViewModels
                     {
                         string brand = jewelryVM.Brand;
                         string type = jewelryVM.Type2;
-                        string material = jewelryVM.Material;
+                        //string material = jewelryVM.Material;
                         decimal weight = jewelryVM.Weight;
                         int year = jewelryVM.Year;
 
-                        if (string.IsNullOrEmpty(brand) || string.IsNullOrEmpty(material) || weight <=0  || type == null)
+                        if (string.IsNullOrEmpty(brand) || weight <=0  || type == null)
                         {
                             ProductControlError = "Detaliile produsului sunt incorecte.";
                         }

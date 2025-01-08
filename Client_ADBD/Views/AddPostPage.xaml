@@ -4,16 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Client_ADBD.Views"
-      xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels;assembly=Client_ADBD"
-      xmlns:UserControl="clr-namespace:Client_ADBD.Views.UserControl" 
+      xmlns:ViewModels="clr-namespace:Client_ADBD.ViewModels"
+      xmlns:UserControl="clr-namespace:Client_ADBD.Views.UserControl"
       mc:Ignorable="d"
       Title="AddPostPage" Height="700" Width="1100">
 
-    <Page.DataContext>
-        <ViewModels:VM_AddPost/>
-    </Page.DataContext>
 
-    <!--<Page.Resources>
+    <Page.Resources>
         <DataTemplate DataType="{x:Type ViewModels:VM_WatchControl}">
             <UserControl:WatchControl />
         </DataTemplate>
@@ -29,11 +26,10 @@
         <DataTemplate DataType="{x:Type ViewModels:VM_SculptureControl}">
             <UserControl:SculptureControl />
         </DataTemplate>
-    </Page.Resources>-->
+    </Page.Resources>
 
 
- 
-        <Grid Background="White">
+    <Grid Background="White">
            
                 <Grid  Background="#f8f9fa" Margin="0,-27,0,0">
 
@@ -100,14 +96,8 @@
 
                     </StackPanel>
                     <ContentControl Content="{Binding SelectedProductControl}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding ProductControlError, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
-                        
-                    <StackPanel Orientation="Horizontal">
-                            
-
-                            
-                        </StackPanel>
-                    
+                    <TextBlock Text="{Binding ProductControlError, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Foreground="Red" FontSize="12" Margin="0,5,0,0" />
+                 
                         <!--<ContentControl Grid.Row="1"   Content="{Binding SelectedItemContent}" />-->
 
                     <Button Content="Adaugă produs" Command="{Binding AddPostCommand}" Width="250" Height="50" Background="#007bff" Foreground="White" FontWeight="Bold" FontSize="16" BorderBrush="#007bff" BorderThickness="1" VerticalAlignment="Top" Margin="50">

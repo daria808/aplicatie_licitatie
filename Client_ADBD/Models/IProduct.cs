@@ -11,12 +11,12 @@ namespace Client_ADBD.Models
         public int ProductID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        DateTime ?  InventoryDate { get; set; }
+        public DateTime InventoryDate { get; set; }
         public decimal startPrice { get; set; }
         public decimal listPrice { get; set; }
         public string[] imagePaths {  get; set; }
 
-        public IProduct(int productID, string name, string description, DateTime? inventoryDate, decimal startPrice, decimal listPrice, string[] imagePaths)
+        public IProduct(int productID, string name, string description, DateTime inventoryDate, decimal startPrice, decimal listPrice, string[] imagePaths)
         {
             ProductID = productID;
             Name = name;

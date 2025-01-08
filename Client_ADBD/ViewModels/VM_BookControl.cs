@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Client_ADBD.Models;
 
 namespace Client_ADBD.ViewModels
 {
     internal class VM_BookControl:VM_Base
     {
+        public VM_BookControl() { }
+        public VM_BookControl(Book_ b)
+        {
+            Author = b.Author;
+            BookCondition = b.Condition;
+            Language = b.Language;
+            Year=b.PublicationYear;
+            NumberOfPage=b.PageNumber;
+            PublishingHouse = b.PublishingHouse;
+        }
+
         private bool _isValid = true;
 
         private string _author;

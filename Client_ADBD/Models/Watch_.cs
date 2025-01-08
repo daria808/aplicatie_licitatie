@@ -14,12 +14,12 @@ namespace Client_ADBD.Models
         public string Type {  get; set; }
 
         public Watch_(string mechanism, decimal diameter, string manufacturer,int productId,string name,decimal startPrice, decimal listPrice, string[]imagePaths,
-                string description, DateTime ?invDate): base(productId, name, description, invDate, startPrice, listPrice, imagePaths)
+                string description, DateTime invDate,string type): base(productId, name, description, invDate, startPrice, listPrice, imagePaths)
         {
             Mechanism = mechanism;
             Diameter = diameter;
             Manufacturer = manufacturer;
-            Type = name;
+            Type = type;
         }
 
 

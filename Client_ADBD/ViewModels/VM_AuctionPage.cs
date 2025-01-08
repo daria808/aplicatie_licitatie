@@ -239,17 +239,16 @@ namespace Client_ADBD.ViewModels
 
         private void ShowMessageBox()
         {
-            //MessageBox.Show("Acesta este un mesaj din ViewModel!"); 
             var result = MessageBox.Show(
                      "Sunteți sigur că doriți să ștergeți această licitație?",
-                     "Confirmare Ștergere",
+                     "Confirmare ștergere",
                      MessageBoxButton.OKCancel,
                      MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.OK)
             {
                 var rc=false;
-               // var rc=DatabaseManager.DeleteAuction(AuctionNumber);
+                rc=DatabaseManager.DeleteAuction(AuctionNumber);
                 if (rc == false)
                 {
                     GoToMainPage();

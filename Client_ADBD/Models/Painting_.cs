@@ -15,7 +15,7 @@ namespace Client_ADBD.Models
         public decimal Width { get; set; }
      
 
-        public Painting_(int productId, string name, string description, DateTime? invDate, decimal startPrice, decimal listPrice, string type, string artist,
+        public Painting_(int productId, string name, string description, DateTime invDate, decimal startPrice, decimal listPrice, string type, string artist,
             int creationYear, decimal length,decimal width, string[] imagePaths) : base(productId, name, description, invDate, startPrice, listPrice, imagePaths)
         {
             Type = type;

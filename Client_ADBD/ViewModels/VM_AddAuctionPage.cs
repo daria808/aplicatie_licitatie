@@ -323,6 +323,10 @@ namespace Client_ADBD.ViewModels
 
             if (Helpers.validation.IsValidAuction(AuctionNameError, AuctionTypeError, StartDateError, EndDateError, TimeError,ImagePathError,DescriptionError,LocationError))
             {
+                if(AuctionType=="Cărți")
+                {
+                    AuctionType = "Carti";
+                }
 
                 DatabaseManager.AddAuction(AuctionName, AuctionType, startDateTime, endDateTime, ImagePath, Description, Location, CurrentUser.User._username /*Helpers.Utilities.Username*/);
                 Auction_ new_auction=DatabaseManager.GetAuctionByName(AuctionName);

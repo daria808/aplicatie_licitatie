@@ -26,6 +26,355 @@ namespace Client_ADBD
             _dbContext = new AuctionAppDataContext();
         }
 
+        public static string GetWatchTypeById(int id)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var watch = _dbContext.Watch_types.SingleOrDefault(p => p.id_watch_type ==id);
+
+            return watch.type;
+        }
+
+        public static string GetWatchMechanismById(int id)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var watch = _dbContext.Watch_mechanisms.SingleOrDefault(p => p.id_mechanism == id);
+
+            return watch.mechanism;
+        }
+
+        public static string GetJewelryTypeById(int id)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var j = _dbContext.Jewelry_types.SingleOrDefault(p => p.id_jewelry_type == id);
+
+            return j.type;
+        }
+
+        public static void UpdateCommonPostDetails(int postId, decimal startPrice, decimal listPrice,int productId,string productName, string description,DateTime invDate,string[] ImagePaths)
+        {
+
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var post = _dbContext.Posts.SingleOrDefault(p => p.id_post == postId);
+
+            if (post != null)
+            {
+
+                if (startPrice != post.start_price)
+                    post.start_price = startPrice;
+
+
+                if (listPrice != post.list_price)
+                    post.list_price = listPrice;
+
+            }
+
+            var product = _dbContext.Products.SingleOrDefault(p => p.id_product == productId);
+
+            if (product != null)
+            {
+                if(product.name!=productName)
+                {
+                    product.name = productName;
+                }
+
+                if (product.description != description)
+                {
+                    product.description = description;
+                }
+
+                if (product.inventory_date != invDate)
+                {
+                    product.inventory_date = invDate;
+                }
+            }
+
+            var productImages = _dbContext.Product_images
+              .Where(p => p.id_product == productId)
+              .OrderBy(p => p.id_image) 
+              .Take(3)
+              .ToList();
+
+            if (!string.IsNullOrEmpty(ImagePaths[0]))
+            {
+                if (productImages.Count > 0)
+                {
+                    productImages[0].image_path = ImagePaths[0];
+                }
+                else
+                {
+                    _dbContext.Product_images.InsertOnSubmit(new Product_image
+                    {
+                        id_product = productId,
+                        image_path = ImagePaths[0]
+                    });
+                }
+            }
+
+            if (ImagePaths.Length>1 )
+            {
+               if(!string.IsNullOrEmpty(ImagePaths[1]))
+               { 
+                    if (productImages.Count > 1)
+                    {
+
+                        productImages[1].image_path = ImagePaths[1];
+                    }
+                    else
+                    {
+                        _dbContext.Product_images.InsertOnSubmit(new Product_image
+                        {
+                            id_product = productId,
+                            image_path = ImagePaths[1]
+                        });
+                    }
+                }
+                else
+                {
+                    _dbContext.Product_images.DeleteOnSubmit(productImages[1]);
+                }
+            }
+
+            if (ImagePaths.Length>2)
+            {
+                if(!string.IsNullOrEmpty(ImagePaths[2]))
+                {
+                    if (productImages.Count > 2)
+                    {
+                        productImages[2].image_path = ImagePaths[2];
+                    }
+                    else
+                    {
+                        _dbContext.Product_images.InsertOnSubmit(new Product_image
+                        {
+                            id_product = productId,
+                            image_path = ImagePaths[2]
+                        });
+                    }
+                }else
+                {
+                    _dbContext.Product_images.DeleteOnSubmit(productImages[2]);
+                }
+            }
+
+
+
+            _dbContext.SubmitChanges();
+        }
+
+        public static void UpdateWatchPostDetails(int productId,decimal diameter,string manufacturer,string type,string mechanism)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var watch = _dbContext.Watches.SingleOrDefault(w => w.id_product == productId);
+
+           
+            if (watch.diameter!=diameter)
+            {
+                watch.diameter = diameter;
+            }
+
+            if (watch.manufacturer!=manufacturer)
+            {
+                watch.manufacturer = manufacturer;
+            }
+
+            int idType = GetIdWatchType(type);
+
+            if (watch.id_type!=idType)
+            {
+                watch.id_type = idType;
+            }
+
+            int idMechanism = GetIdWatchMechanism(mechanism);
+
+            if (watch.id_mechanism!=idMechanism)
+            {
+                watch.id_mechanism = idMechanism;
+
+            }
+
+            _dbContext.SubmitChanges();
+            
+        }
+
+        public static void UpdateJewelryPostDetails(int productId, string brand, decimal weight, int creationYear, string type)
+        {
+
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var jewelry = _dbContext.Jewelries.SingleOrDefault(j => j.id_product == productId);
+
+            if (jewelry.brand != brand)
+            {
+                jewelry.brand = brand;
+            }
+
+            if (jewelry.weight != weight)
+            {
+                jewelry.weight = weight;
+            }
+
+            if (jewelry.creation_year != creationYear)
+            {
+                jewelry.creation_year = creationYear;
+            }
+
+            int idType = GetJewelryIdType(type);
+
+            if (jewelry.id_type != idType)
+            {
+                jewelry.id_type = idType;
+            }
+
+            _dbContext.SubmitChanges();
+        }
+            
+        public static void UpdateBookPostDetails(int productId,string author,int publicationYear,string publishingHouse,int pageNumber,string language,string condition)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var book = _dbContext.Books.SingleOrDefault(b => b.id_product == productId);
+
+
+            if (book.author != author)
+            {
+                book.author = author;
+            }
+
+            if (book.publication_year != publicationYear)
+            {
+                book.publication_year =publicationYear;
+            }
+
+            if (book.publishing_house != publishingHouse)
+            {
+                book.publishing_house = publishingHouse;
+            }
+
+            if (book.page_number != pageNumber)
+            {
+                book.page_number = pageNumber;
+            }
+
+            if (book.book_language != language)
+            {
+                book.book_language = language;
+            }
+
+            int conditionId = GetBookConditionId(condition);
+
+            if (conditionId != book.id_condition)
+            {
+                book.id_condition = conditionId;
+            }
+
+            _dbContext.SubmitChanges();
+
+        }
+
+        public static void UpdateSculpturePostDetails(int productId,string artist,decimal length,decimal width,decimal depth,string material)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var sculpture = _dbContext.Sculptures.FirstOrDefault(s => s.id_product ==productId);
+            if (sculpture.artist != artist)
+            {
+                sculpture.artist = artist;
+            }
+
+            if (sculpture.length != length)
+            {
+                sculpture.length = length;
+            }
+
+            if (sculpture.width != width)
+            {
+                sculpture.width = width;
+            }
+
+            if (sculpture.depth != depth)
+            {
+                sculpture.depth = depth;
+            }
+
+            int materialId = GetSculptureMaterialId(material);
+
+            if (materialId != sculpture.id_sculpture_material)
+            {
+                sculpture.id_sculpture_material = materialId;
+            }
+
+            _dbContext.SubmitChanges();
+
+        }
+
+        public static void UpdatePaintingPostDetails(int productId,string artist,decimal length,decimal width,string type,int creationYear)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+            var painting = _dbContext.Paintings.FirstOrDefault(p => p.id_produs == productId);
+
+     
+            if (painting.artist != artist)
+            {
+                painting.artist =artist;
+            }
+
+            if (painting.creation_year != creationYear)
+            {
+                painting.creation_year = creationYear;
+            }
+
+
+            if (painting.length != length)
+            {
+                painting.length = length;
+            }
+
+            if (painting.width != width)
+            {
+                painting.width = width;
+            }
+
+            int typeId = GetPaintingIdType(type);
+
+            if (painting.id_type != typeId)
+            {
+                painting.id_type = typeId;
+            }
+
+            _dbContext.SubmitChanges();
+        }
         public static void UpdateAuction(Auction_ auctionToUpdate)
         {
 
@@ -59,7 +408,6 @@ namespace Client_ADBD
                 _dbContext.SubmitChanges();
             }
              
-            
         }
 
         static public string GetUsernameById(int user_id)
@@ -70,6 +418,22 @@ namespace Client_ADBD
             }
 
             var username = _dbContext.Users.Where(u=> u.id_user == user_id).FirstOrDefault().username;  
+            return username;
+
+        }
+
+        static public string GetPostUser(int auction_number)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var username=(from u in _dbContext.Users
+                          join a in _dbContext.Auctions on u.id_user equals a.id_user
+                          where a.auction_number == auction_number
+                          select u.username).FirstOrDefault();
+
             return username;
 
         }
@@ -591,34 +955,6 @@ namespace Client_ADBD
             }
         }
 
-        //static public List<IPost>GetAuctionPosts(int auctionId)
-        //{
-        //    if (_dbContext == null)
-        //    {
-        //        _dbContext = new AuctionAppDataContext();
-        //    }
-
-        //    var dbPosts = _dbContext.Posts.Where(p => p.id_auction == auctionId);
-        //    var dbProduct = _dbContext.Products.Where(pr => pr.id_product == pr.id_product).FirstOrDefault();
-
-
-        //    List<IPost> posts = dbPosts.Select(p => new IPost
-        //    {
-        //        postId = p.id_post,
-        //        productId=p.id_product,
-        //        productStatus=GetPostStatusById(p.id_post),
-        //        auctionName=GetAuctionNameByPost(p.id_auction),
-        //        startPrice=p.start_price,
-        //        listPrice=p.list_price,
-        //        creationTime=p.created_at,
-        //        imagePath=p.image_path,
-        //        product=new Product_(p.id_product,dbProduct.name,dbProduct.description,dbProduct.inventory_date)
-
-        //    }).ToList();
-
-        //    return posts;
-        //}
-
         static public string GetAuctionType(int idAuctionType)
         {
             if (_dbContext == null)
@@ -737,24 +1073,6 @@ namespace Client_ADBD
 
             return name;
         }
-
-        //static public string GetAuctionType(int auctionNumber)
-        //{
-        //    if (_dbContext == null)
-        //    {
-        //        _dbContext = new AuctionAppDataContext();
-        //    }
-
-        //    var auctionType = (from a in _dbContext.Auctions
-        //                       join at in _dbContext.Auction_types
-        //                       on a.id_auction_type equals at.id_auction_type
-        //                       where a.auction_number == auctionNumber
-        //                       select at.type_name)
-        //            .FirstOrDefault();
-
-        //    return auctionType;
-        //}
-
         static public string GetManufacturerName(string auction_type,int productId)
         {
 
@@ -798,37 +1116,6 @@ namespace Client_ADBD
 
             return path;
         }
-
-        //static public List<PostPreview> GetPostPreview(int auctionNumber)
-        //{
-        //    if (_dbContext == null)
-        //    {
-        //        _dbContext = new AuctionAppDataContext();
-        //    }
-
-        //    var auctionId=GetAuctionIdByNumber(auctionNumber);
-        //    var auctionIdType=GetAuctionIdType(auctionId);
-        //    var auctionType = GetAuctionType(auctionIdType);
-
-        //    var previews = (from post in _dbContext.Posts
-        //                    join pr in _dbContext.Products on post.id_product equals pr.id_product
-        //                    join ps in _dbContext.Post_status on post.id_status equals ps.id_status
-        //                    join a in _dbContext.Auctions on post.id_auction equals a.id_auction
-        //                    where post.id_auction == auctionId
-        //                    select new PostPreview
-        //                    {
-        //                       postId= post.id_post,
-        //                       imagePath=GetFirstProductImagePath(pr.id_product),
-        //                       postName=pr.name,
-        //                       artistName= GetManufacturerName(auctionType,pr.id_product),
-        //                       startPrice=post.start_price,
-        //                       postStatus=ps.status_name,
-
-        //                    }).ToList();
-
-        //    return previews;
-        //}
-
         static public List<PostPreview> GetPostPreview(int auctionNumber,string sortType="default",string postStatus="default")
         {
             if (_dbContext == null)
@@ -874,18 +1161,70 @@ namespace Client_ADBD
                     break;
 
             }
-            //if(sortType!="default")
-            //{
-            //    if (sortType == "asc")
-            //    {
-            //        query = query.OrderBy(post => post.startPrice);
-            //    }else if(sortType =="desc")
-            //    {
-            //        query = query.OrderByDescending(post => post.startPrice);
-            //    }
-            //}
 
             return query.ToList();
+        }
+
+        static public bool DeletePost(int postId,string auctionType)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            //var postToDelete = _dbContext.Posts.SingleOrDefault(p => p.id_post== postId);
+
+            var productToDelete = (from pr in _dbContext.Products
+                                   join post in _dbContext.Posts on pr.id_product equals post.id_product
+                                    select pr).First();
+
+            if (productToDelete != null)
+            {
+                _dbContext.Products.DeleteOnSubmit(productToDelete);
+                _dbContext.SubmitChanges();
+                return false;
+            }
+
+            //switch(auctionType)
+            //{
+                           
+            //    case "Ceasuri":
+            //        var w = _dbContext.Watches.Where(w => w.id_product == postToDelete.id_product).First();
+            //        _dbContext.Watches.DeleteOnSubmit(w);
+            //        break;
+
+            //    case "Bijuterii":
+            //        var j = _dbContext.Jewelries.Where(w => w.id_product == postToDelete.id_product).First();
+            //        _dbContext.Jewelries.DeleteOnSubmit(j);
+            //        _dbContext.SubmitChanges();
+            //        break;
+            //    case "Carti":
+            //        var b = _dbContext.Books.Where(w => w.id_product == postToDelete.id_product).First();
+            //        _dbContext.Books.DeleteOnSubmit(b);
+            //        _dbContext.SubmitChanges();
+            //        break;
+            //    case "Sculpturi":
+            //        var s = _dbContext.Sculptures.Where(w => w.id_product == postToDelete.id_product).First();
+            //        _dbContext.Sculptures.DeleteOnSubmit(s);
+            //        _dbContext.SubmitChanges();
+            //        break;
+            //    case "Tablouri":
+            //        var p = _dbContext.Paintings.Where(w => w.id_produs == postToDelete.id_product).First();
+            //        _dbContext.Paintings.DeleteOnSubmit(p);
+            //        _dbContext.SubmitChanges();
+            //        break;  
+            //    default:
+            //        break;
+                    
+            //}
+            //if (postToDelete != null)
+            //{
+            //    _dbContext.Posts.DeleteOnSubmit(postToDelete);
+            //    _dbContext.SubmitChanges();
+            //    return false;
+            //}
+
+            return true;
         }
 
         static public bool DeleteAuction(int auctionNumber)
@@ -901,6 +1240,7 @@ namespace Client_ADBD
             {
                 _dbContext.Auctions.DeleteOnSubmit(auctionToDelete);
                 _dbContext.SubmitChanges();
+
                 return false;
             }
 
@@ -908,7 +1248,7 @@ namespace Client_ADBD
         }
 
         static public void AddWatchPost(int auctionNumber,decimal startPrice,decimal listPrice,DateTime creationTime,string[] imagePath,
-            string productName,string description,DateTime inventoryDate,string mechanism,string type,int diameter,string manufacturer)
+            string productName,string description,DateTime inventoryDate,string mechanism,string type,decimal diameter,string manufacturer)
         {
             if (_dbContext == null)
             {
@@ -1285,7 +1625,10 @@ namespace Client_ADBD
                                 .OrderBy(img => img.id_image) 
                                 .Take(3) 
                                 .Select(img => img.image_path) 
-                                .ToArray(); 
+                                .ToArray();
+
+            string lastOfferUser = string.Empty;
+            decimal lastOffer = DatabaseManager.GetPostLastOffer(postId, ref lastOfferUser);
 
             switch (auctionType)
             {
@@ -1308,8 +1651,10 @@ namespace Client_ADBD
                                      auctionType = auctionType,
                                      creationTime = post.created_at,
                                      lotNumber=post.lot,
+                                     lastOffer=lastOffer,
+                                     lastOfferUser=lastOfferUser,
                                      product = new Watch_(wm.mechanism, wch.diameter, wch.manufacturer, pr.id_product, pr.name, post.start_price,
-                                                          post.list_price, imagePaths, pr.description, pr.inventory_date)
+                                                          post.list_price, imagePaths, pr.description, Helpers.Utilities.ConvertDateTimeNullToNotNull(pr.inventory_date),wt.type)
 
                                  }).FirstOrDefault();
                     return WatchPost;
@@ -1330,7 +1675,9 @@ namespace Client_ADBD
                                            auctionType = auctionType,
                                            creationTime = post.created_at,
                                            lotNumber = post.lot,
-                                           product = new Jewelry_(pr.id_product, pr.name, pr.description, pr.inventory_date, post.start_price,
+                                           lastOffer = lastOffer,
+                                           lastOfferUser = lastOfferUser,
+                                           product = new Jewelry_(pr.id_product, pr.name, pr.description, Helpers.Utilities.ConvertDateTimeNullToNotNull(pr.inventory_date), post.start_price,
                                            post.list_price, imagePaths, jt.type, jw.brand, jw.weight, jw.creation_year)
                                        }).FirstOrDefault();
                     return JewwlryPost;
@@ -1351,7 +1698,9 @@ namespace Client_ADBD
                                         auctionType = auctionType,
                                         creationTime = post.created_at,
                                         lotNumber = post.lot,
-                                        product = new Book_(pr.id_product, pr.name, pr.description, pr.inventory_date, post.start_price, post.list_price,
+                                        lastOffer = lastOffer,
+                                        lastOfferUser = lastOfferUser,
+                                        product = new Book_(pr.id_product, pr.name, pr.description, Helpers.Utilities.ConvertDateTimeNullToNotNull(pr.inventory_date), post.start_price, post.list_price,
                                         bc.condition, bk.author, bk.publication_year, bk.publishing_house, bk.page_number, bk.book_language, imagePaths)
                                     }).FirstOrDefault();
                     return BookPost;
@@ -1372,7 +1721,9 @@ namespace Client_ADBD
                                              auctionType = auctionType,
                                              creationTime = post.created_at,
                                              lotNumber = post.lot,
-                                             product = new Sculpture_(pr.id_product, pr.name, pr.description, pr.inventory_date, post.start_price, post.list_price,
+                                             lastOffer = lastOffer,
+                                             lastOfferUser = lastOfferUser,
+                                             product = new Sculpture_(pr.id_product, pr.name, pr.description, Helpers.Utilities.ConvertDateTimeNullToNotNull(pr.inventory_date), post.start_price, post.list_price,
                                            imagePaths, sm.material, sc.artist, sc.length, sc.width, sc.depth)
                                          }).FirstOrDefault();
                     return SculpturePost;
@@ -1393,7 +1744,9 @@ namespace Client_ADBD
                                             auctionType = auctionType,
                                             lotNumber = post.lot,
                                             creationTime = post.created_at,
-                                            product = new Painting_(pr.id_product, pr.name, pr.description, pr.inventory_date, post.start_price, post.list_price,
+                                            lastOffer = lastOffer,
+                                            lastOfferUser = lastOfferUser,
+                                            product = new Painting_(pr.id_product, pr.name, pr.description, Helpers.Utilities.ConvertDateTimeNullToNotNull(pr.inventory_date), post.start_price, post.list_price,
                                             pt.type, pn.artist, pn.creation_year, pn.length, pn.width, imagePaths
                                            )
                                         }).FirstOrDefault();
@@ -1545,6 +1898,84 @@ namespace Client_ADBD
             var id = _dbContext.Painting_types.Where(p => p.type == type).FirstOrDefault().id_painting_type;
 
             return id;
+        }
+
+        public static decimal GetPostLastOffer(int postID, ref string lastOfferUser)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var lastOffer = _dbContext.Bids
+                  .Where(b => b.id_post == postID)  
+                  .OrderByDescending(b => b.bid_date)  
+                  .FirstOrDefault();
+
+            if (lastOffer == null)
+            {
+                lastOfferUser=string.Empty;
+                return -1;
+            }
+            else
+            {
+                if (lastOffer.id_user != null)
+                {
+                    lastOfferUser = GetUsernameById(lastOffer.id_user ?? 0);
+                }
+                else {
+                    lastOfferUser = string.Empty;
+                }
+
+
+                return lastOffer.bid_price;
+            }
+        }
+        public static void AddBid(int postId, int idUsesr, decimal bidPrice)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var newBid = new Bid
+            {
+                id_post = postId,
+                id_user = idUsesr,
+                bid_price = bidPrice,
+                bid_date = DateTime.Now,
+            };
+
+            _dbContext.Bids.InsertOnSubmit(newBid);
+            _dbContext.SubmitChanges();
+        }
+        
+        static public void UpdatePostStatus()
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            var postsToUpdate = (from p in _dbContext.Posts
+                                 join a in _dbContext.Auctions on p.id_auction equals a.id_auction
+                                 join ps in _dbContext.Post_status on p.id_status equals ps.id_status
+                                 where a.end_time < DateTime.Now && ps.status_name == "Neadjudecat"
+                                 select p);
+
+            foreach (var post in postsToUpdate)
+            {
+                string user = string.Empty;
+                decimal bidOffer = DatabaseManager.GetPostLastOffer(post.id_post, ref user);
+
+                if (bidOffer > 0)
+                {
+                    post.id_status = _dbContext.Post_status.Where(p => p.status_name == "Adjudecat").FirstOrDefault().id_status;
+                }
+            }
+
+
+            _dbContext.SubmitChanges();
         }
 
         static public void AddPaintingPost(int auctionNumber, decimal startPrice, decimal listPrice, DateTime creationTime, string[] imagePath,

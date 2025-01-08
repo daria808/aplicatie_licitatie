@@ -137,7 +137,7 @@
                                              HorizontalAlignment="Stretch" 
                                              Foreground="Black"
                                              BorderThickness="1"/>
-                                <ComboBoxItem x:Name="cbOpt4" Content="Scultpuri" 
+                                <ComboBoxItem x:Name="cbOpt4" Content="Sculpturi" 
                                             HorizontalAlignment="Stretch" 
                                             Foreground="Black"
                                             BorderThickness="1"/>

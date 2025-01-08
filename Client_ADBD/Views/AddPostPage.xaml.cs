@@ -24,6 +24,7 @@ namespace Client_ADBD.Views
        
         public AddPostPage()
         {
+
             InitializeComponent();
         }
 

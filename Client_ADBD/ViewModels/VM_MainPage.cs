@@ -15,8 +15,6 @@ namespace Client_ADBD.ViewModels
 {
     internal class VM_MainPage:VM_Base
     {
-        private DispatcherTimer _timer;
-
         public string _sortFilter;
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommad { get; }
@@ -74,13 +72,14 @@ namespace Client_ADBD.ViewModels
                 Status = Helpers.Utilities.Status;
             };
 
-            _timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(1)
-            };
-            _timer.Tick += (s, e) => UpdateTimeLeftForDisplayedAuctions();
-            _timer.Start();
+            Helpers.Timer.AddEventToTimer(UpdatePostStatus, -1, 5);
+            Helpers.Timer.AddEventToTimer(UpdateTimeLeftForDisplayedAuctions,1,-1);
 
+        }
+
+        private void UpdatePostStatus()
+        {
+            DatabaseManager.UpdatePostStatus();
         }
 
         private int _currentPage = 1;
@@ -151,7 +150,9 @@ namespace Client_ADBD.ViewModels
                     auctionViewModel.UpdateTimeLeft();
                 }
 
-                //DisplayedAuctions = new ObservableCollection<VM_AuctionControler>(auctionViewModels);
+
+
+             
             }
 
 
@@ -218,6 +219,8 @@ namespace Client_ADBD.ViewModels
                     .OfType<MainWindow>()
                     .FirstOrDefault();
             var frame = mainWindow?.FindName("MainFrame") as Frame;
+
+          
 
             if (frame != null)
             {

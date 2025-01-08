@@ -7,20 +7,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Client_ADBD.Models;
+using System.Runtime.InteropServices.ComTypes;
+using System.Collections.ObjectModel;
 
 namespace Client_ADBD.ViewModels
 {
     internal class VM_ModifyPostPage:VM_Base
     {
+        private Post_ _initialPost;
+
+        private int _postId;
+
         private object _selectedProductControl;
         private int _auctionNumber { get; set; }
         private string _productName { get; set; }
         private decimal _startPrice { get; set; }
         private decimal _listPrice { get; set; }
 
-        private string[] _imagePaths = new string[3];
+        private ObservableCollection<string> _imagePaths = new ObservableCollection<string> { null, null, null };
         private string _description { get; set; }
         private DateTime _invDate { get; set; } = DateTime.Now;
+
+        bool isModified=false;
 
         public string ProductName
         {
@@ -66,14 +75,16 @@ namespace Client_ADBD.ViewModels
             }
         }
 
-        public string[] ImagePaths
+        public ObservableCollection<string> ImagePaths
         {
             get => _imagePaths;
             set
             {
-                _imagePaths = value;
-                ImagePathError = Helpers.validation.AreValidImagePaths(value);
-                OnPropertyChange(nameof(ImagePaths));
+                if (_imagePaths != value)
+                {
+                    _imagePaths = value;
+                    OnPropertyChange(nameof(ImagePaths));
+                }
             }
         }
 
@@ -105,14 +116,27 @@ namespace Client_ADBD.ViewModels
         public ICommand ClosePageCommand { get; set; }
         public ICommand AddPostCommand { get; set; }
 
-        public VM_ModifyPostPage(string productType, int auctionNumber)
+        public ICommand SaveChangesCommand { get; set; }
+        public VM_ModifyPostPage(Post_ p)
         {
+            _initialPost = p;
+            ProductType = p.auctionType;
+            _auctionNumber = p.auctionNumber;
 
-            ProductType = productType;
-            this._auctionNumber = auctionNumber;
-            UpdateSelectedControl();
+            UpdateSelectedControl(p.product);
+
+            _postId = p.postId;
+            _auctionNumber = p.auctionNumber;
+            _productName = p.product.Name;
+            _startPrice = p.product.startPrice;
+            _listPrice = p.product.listPrice;
+            //_imagePaths = p.product.imagePaths;
+            _imagePaths = new ObservableCollection<string>(p.product.imagePaths);
+            _description = p.product.Description;
+            _invDate=p.product.InventoryDate;
+
             ClosePageCommand = new RelayCommand(ClosePage);
-            AddPostCommand = new RelayCommand(AddPost);
+            SaveChangesCommand = new RelayCommand(SaveChanges);
         }
 
         private string _productNameError;
@@ -194,7 +218,7 @@ namespace Client_ADBD.ViewModels
             }
         }
 
-        private void AddPost()
+        private void SaveChanges()
         {
             ProductNameError = string.Empty;
             ImagePathError = string.Empty;
@@ -204,12 +228,25 @@ namespace Client_ADBD.ViewModels
             InvDateError = string.Empty;
             ProductControlError = string.Empty;
 
+            string[] imagePathArray = ImagePaths.ToArray();
+
             ProductNameError = Helpers.validation.IsValidProducttName(ProductName);
-            ImagePathError = Helpers.validation.AreValidImagePaths(ImagePaths);
+            ImagePathError = Helpers.validation.AreValidImagePaths(imagePathArray);
             DescriptionError = Helpers.validation.IsValidDescription(Description);
             StartPriceError = Helpers.validation.IsValidStartPrice(StartPrice);
             ListPriceError = Helpers.validation.IsValidListPrice(ListPrice);
             InvDateError = Helpers.validation.IsValidInvDate(InvDate);
+
+            if (ProductName != _initialPost.product.Name ||
+                imagePathArray != _initialPost.product.imagePaths ||
+                 Description != _initialPost.product.Description ||
+                 ListPrice != _initialPost.product.listPrice ||
+                 StartPrice != _initialPost.product.startPrice ||
+                 InvDate != _initialPost.product.InventoryDate)
+            {
+
+                isModified = true;
+            }
 
 
             switch (SelectedProductControl)
@@ -229,9 +266,32 @@ namespace Client_ADBD.ViewModels
 
                         if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
                         {
-                            DatabaseManager.AddPaintingPost
-                            (_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName,
-                            Description, InvDate, technique, artist, year, length, width);
+                            if(isModified)
+                            {
+                                DatabaseManager.UpdateCommonPostDetails(_postId, StartPrice, ListPrice, _initialPost.product.ProductID, ProductName, Description, InvDate, imagePathArray);
+                                isModified = false;
+                            }
+                            if (_initialPost.product is Painting_ painting)
+                            {
+
+                                if (artist != painting.Artist ||
+                                    year != painting.CreationYear ||
+                                    length!= painting.Length ||
+                                    width != painting.Width ||
+                                    technique!=painting.Type
+                                    )
+                                {
+
+                                    isModified = true;
+                                }
+                            }
+
+                            if(isModified)
+                            {
+
+                               // DatabaseManager.UpdateCommonPostDetails(_postId, StartPrice, ListPrice, _initialPost.product.ProductID, ProductName, Description, InvDate);
+                                DatabaseManager.UpdatePaintingPostDetails(_initialPost.product.ProductID, artist, length, width, technique, year);
+                            }
 
                             ClosePage();
                         }
@@ -242,7 +302,7 @@ namespace Client_ADBD.ViewModels
                     {
                         string brand = watchVM.Brand;
                         string type = watchVM.Type;
-                        int diameter = watchVM.Diameter;
+                        decimal diameter = watchVM.Diameter;
                         string mechanism = watchVM.Mechanism;
 
                         if (string.IsNullOrEmpty(brand) || type == null || diameter <= 0 || mechanism == null)
@@ -252,10 +312,30 @@ namespace Client_ADBD.ViewModels
 
                         if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
                         {
-                            DatabaseManager.AddWatchPost
-                            (_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName,
-                            Description, InvDate, mechanism, type, diameter, brand);
+                            if (isModified)
+                            {
+                                DatabaseManager.UpdateCommonPostDetails(_postId, StartPrice, ListPrice, _initialPost.product.ProductID, ProductName, Description, InvDate, imagePathArray);
+                                isModified = false;
+                            }
+                            if (_initialPost.product is Watch_ watch)
+                            {
 
+
+                                if (brand != watch.Manufacturer ||
+                                    type != watch.Type||
+                                    diameter!=watch.Diameter ||
+                                    mechanism!=watch.Mechanism 
+                                    )
+                                {
+
+                                    isModified = true;
+                                }
+                            }
+
+                            if (isModified)
+                            {
+                                DatabaseManager.UpdateWatchPostDetails(_initialPost.product.ProductID, diameter, brand, type, mechanism);
+                            }
                             ClosePage();
                         }
                         break;
@@ -265,20 +345,39 @@ namespace Client_ADBD.ViewModels
                     {
                         string brand = jewelryVM.Brand;
                         string type = jewelryVM.Type2;
-                        string material = jewelryVM.Material;
+                        //string material = jewelryVM.Material;
                         decimal weight = jewelryVM.Weight;
                         int year = jewelryVM.Year;
 
-                        if (string.IsNullOrEmpty(brand) || string.IsNullOrEmpty(material) || weight <= 0 || type == null)
+                        if (string.IsNullOrEmpty(brand) || weight <= 0 || type == null)
                         {
                             ProductControlError = "Detaliile produsului sunt incorecte.";
                         }
 
                         if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
                         {
-                            DatabaseManager.AddJewelryPost(_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName
-                            , Description, InvDate, type, brand, weight, year);
+                            if(isModified)
+                            {
+                                isModified = false;
+                                DatabaseManager.UpdateCommonPostDetails(_postId, StartPrice, ListPrice, _initialPost.product.ProductID, ProductName, Description, InvDate, imagePathArray);
+                            }
+                            if (_initialPost.product is Jewelry_ jwl)
+                            {
 
+                                if (brand != jwl.Brand||
+                                    year != jwl.CreationYear ||
+                                    weight != jwl.Weight||
+                                    type != jwl.Type)
+                                {
+
+                                    isModified = true;
+                                }
+                            }
+
+                            if (isModified)
+                            {
+                                DatabaseManager.UpdateJewelryPostDetails(_initialPost.product.ProductID, brand, weight, year, type);
+                            }
                             ClosePage();
                         }
                         break;
@@ -299,8 +398,31 @@ namespace Client_ADBD.ViewModels
 
                         if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
                         {
-                            DatabaseManager.AddBookPost(_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName
-                           , Description, InvDate, author, bookCondition, year, publishingHouse, numberOfPage, language);
+                            if(isModified)
+                            {
+                                DatabaseManager.UpdateCommonPostDetails(_postId, StartPrice, ListPrice, _initialPost.product.ProductID, ProductName, Description, InvDate, imagePathArray);
+                                isModified = false;
+                            }
+
+                            if (_initialPost.product is Book_ book)
+                            {
+
+                                if (author != book.Author ||
+                                    year != book.PublicationYear ||
+                                    bookCondition!=book.Condition ||
+                                    language!=book.Language ||
+                                    numberOfPage!=book.PageNumber||
+                                     publishingHouse!=book.PublishingHouse)
+                                {
+
+                                    isModified = true;
+                                }
+                            }
+
+                            if (isModified)
+                            {
+                                DatabaseManager.UpdateBookPostDetails(_initialPost.product.ProductID, author, year, publishingHouse, numberOfPage, language, bookCondition);
+                            }
 
                             ClosePage();
                         }
@@ -321,8 +443,30 @@ namespace Client_ADBD.ViewModels
 
                         if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
                         {
-                            DatabaseManager.AddSculpturePost(_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName
-                           , Description, InvDate, artist, material, width, length, depth);
+                            if(isModified)
+                            {
+                                DatabaseManager.UpdateCommonPostDetails(_postId, StartPrice, ListPrice, _initialPost.product.ProductID, ProductName, Description, InvDate, imagePathArray);
+                                isModified = false;
+                            }
+
+                            if (_initialPost.product is Sculpture_ scl)
+                            {
+
+                                if (artist != scl.Artist ||
+                                    material != scl.Material ||
+                                    length != scl.Length ||
+                                    width != scl.Width ||
+                                    depth != scl.Depth )
+                                {
+
+                                    isModified = true;
+                                }
+                            }
+
+                            if (isModified)
+                            {
+                                DatabaseManager.UpdateSculpturePostDetails(_initialPost.product.ProductID, artist, length, width, depth, material);
+                            }
 
                             ClosePage();
                         }
@@ -350,15 +494,15 @@ namespace Client_ADBD.ViewModels
 
 
 
-        private void UpdateSelectedControl()
+        private void UpdateSelectedControl(IProduct pr)
         {
             SelectedProductControl = ProductType switch
             {
-                "Tablouri" => new VM_PaintingControl(),
-                "Ceasuri" => new VM_WatchControl(),
-                "Bijuterii" => new VM_JewelryControl(),
-                "Carti" => new VM_BookControl(),
-                "Sculpturi" => new VM_SculptureControl(),
+                "Tablouri" when pr is Painting_ painting => new VM_PaintingControl(painting),
+                "Ceasuri" when pr is Watch_ watch => new VM_WatchControl(watch),
+                "Bijuterii" when pr is Jewelry_ jewelry => new VM_JewelryControl(jewelry),
+                "Carti" when pr is Book_ book => new VM_BookControl(book),
+                "Sculpturi" when pr is Sculpture_ sculpture => new VM_SculptureControl(sculpture),
                 _ => null,
             };
         }

@@ -28,13 +28,12 @@ namespace Client_ADBD.Views
             InitializeComponent();
             VM_MainPage viewModel = new VM_MainPage();
             DataContext = viewModel;
-            List<Auction_> auctions = DatabaseManager.GetAuction(viewModel.Status,viewModel.SelectedSortOption);
+            List<Auction_> auctions = DatabaseManager.GetAuction(viewModel.Status, viewModel.SelectedSortOption);
             viewModel.SetAuctions(auctions);
-
-          
-
+         
         }
 
-        
+     
     }
+    
 }

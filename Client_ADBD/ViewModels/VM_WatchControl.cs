@@ -3,16 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Client_ADBD.Models;
 
 namespace Client_ADBD.ViewModels
 {
     internal class VM_WatchControl:VM_Base
     {
+        public VM_WatchControl() { }    
+        public VM_WatchControl(Watch_ w)
+        {
+            Brand=w.Manufacturer;
+            Type=w.Type;
+            Diameter=w.Diameter;
+            Mechanism=w.Mechanism;
+        }
         private bool _isValid = true;
 
         private string _brand;
         private string _type;
-        private int _diameter;
+        private decimal _diameter;
         private string _mechanism;
 
        
@@ -51,7 +60,7 @@ namespace Client_ADBD.ViewModels
                 }
             }
         }
-        public int Diameter
+        public decimal Diameter
         {
             get => _diameter;
             set

@@ -25,8 +25,6 @@ namespace Client_ADBD.Views
         public AddAuctionPage()
         {
             InitializeComponent();
-            VM_AddAuctionPage viewModel = new VM_AddAuctionPage();
-            DataContext = viewModel;
         }
     }
 }

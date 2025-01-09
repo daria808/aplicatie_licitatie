@@ -23,14 +23,14 @@ namespace Client_ADBD.Views
     public partial class AuctionPage : Page
     {
 
-        public AuctionPage() 
+        public AuctionPage()
         {
             InitializeComponent();
         }
-        public AuctionPage(Auction_ a,bool FromResult=false, bool Statistics = false)
+        public AuctionPage(Auction_ a, bool FromResult = false, bool Statistics = false, bool admStats = false, bool isAdmin = false)
         {
             InitializeComponent();
-            VM_AuctionPage viewModel= new VM_AuctionPage(a,FromResult, Statistics);
+            VM_AuctionPage viewModel = new VM_AuctionPage(a, FromResult, Statistics, admStats, isAdmin);
             DataContext = viewModel;
 
         }

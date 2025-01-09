@@ -15,15 +15,22 @@ namespace Client_ADBD.ViewModels
     internal class VM_ModifyAuctionPage:VM_Base
     {
         private Auction_ _initialAuction {  get; set; }
-
+        private bool Admin;
         public VM_ModifyAuctionPage() { }
-        public VM_ModifyAuctionPage(Auction_ a) {
-
+        public VM_ModifyAuctionPage(Auction_ a, bool isAdmin) {
+            Admin = isAdmin;
             _initialAuction = a;
 
-            ClosePageCommand = new RelayCommand(ClosePage);
+            if (Admin == true)
+            {
+                ClosePageCommand = new RelayCommand(ClosePageAdmin);
+            }
+            else
+            {
+                ClosePageCommand = new RelayCommand(ClosePage);
+            }
             SaveChangesCommand = new RelayCommand(SaveChanges);
-            AuctionName=a.name;
+            AuctionName =a.name;
             StartDate = a.startTime;
             StartHour = a.startTime.ToString("HH");
             StartMinute = a.startTime.ToString("mm");
@@ -198,6 +205,20 @@ namespace Client_ADBD.ViewModels
                 frame.Navigate(new AuctionPage(a));
             }
 
+        }
+
+        private void ClosePageAdmin()
+        {
+            var a = DatabaseManager.GetAuctionByNumber(_initialAuction.auctionNumber);
+
+
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new AuctionPage(a, false, false, false, true));
+            }
         }
 
         private string _auctionNameError;
@@ -385,14 +406,28 @@ namespace Client_ADBD.ViewModels
             //{
             //    frame.Navigate(new VM_AuctionPage(new_auction));
             //}
-            var mainWindow = App.Current.Windows
-                    .OfType<MainWindow>()
-                    .FirstOrDefault();
-            var frame = mainWindow?.FindName("MainFrame") as Frame;
 
-            if (frame != null)
+            if (Admin == true)
             {
-                frame.Navigate(new AuctionPage(new_auction));
+                var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+                var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+                if (frame != null)
+                {
+                    frame.Navigate(new AuctionPage(new_auction, true));
+                }
+            }
+            else
+            {
+                var mainWindow = App.Current.Windows
+                        .OfType<MainWindow>()
+                        .FirstOrDefault();
+                var frame = mainWindow?.FindName("MainFrame") as Frame;
+
+                if (frame != null)
+                {
+                    frame.Navigate(new AuctionPage(new_auction));
+                }
             }
         }
     }

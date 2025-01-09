@@ -21,17 +21,17 @@ namespace Client_ADBD.Views
     /// </summary>
     public partial class AddPostPage : Page
     {
-       
+
         public AddPostPage()
         {
 
             InitializeComponent();
         }
 
-        public AddPostPage(string postType,int auctionNumber)
+        public AddPostPage(string postType, int auctionNumber, bool isAdmin = false)
         {
             InitializeComponent();
-             VM_AddPost viewModel= new VM_AddPost(postType,auctionNumber);
+            VM_AddPost viewModel = new VM_AddPost(postType, auctionNumber, isAdmin);
             //VM_AddPost viewModel = new VM_AddPost("Sculpturi",1);
             DataContext = viewModel;
 

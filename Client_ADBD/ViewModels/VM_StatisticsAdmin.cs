@@ -155,7 +155,7 @@ namespace Client_ADBD.ViewModels
             if (_vmAuctions == null || DisplayedAuctions.Count() == 0)
             {
                 _vmAuctions = new ObservableCollection<VM_StatisticsControler>(
-                     closedAuctions.Select(a => new VM_StatisticsControler(a.id)
+                     closedAuctions.Select(a => new VM_StatisticsControler(a.id, true)
                      {
                          Id = a.id,
                          Name = a.name,

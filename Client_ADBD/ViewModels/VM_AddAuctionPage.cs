@@ -183,15 +183,41 @@ namespace Client_ADBD.ViewModels
         }
         public ICommand ClosePageCommand { get; }
         public ICommand AddAuctionCommand { get; }
-        public VM_AddAuctionPage()
+
+        private bool Admin;
+        public VM_AddAuctionPage(bool isAdmin = false)
         {
-            ClosePageCommand = new RelayCommand(ClosePage);
+            Admin = isAdmin;
+
+
+            if (Admin == true)
+            {
+                ClosePageCommand = new RelayCommand(ClosePageAdmin);
+            }
+            else if (Admin == false)
+            {
+                ClosePageCommand = new RelayCommand(ClosePage);
+            }
+
+
             AddAuctionCommand = new RelayCommand(AddAuction);
+
+        }
+
+        private void ClosePageAdmin()
+        {
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new VM_AdminLicitatii());
+            }
         }
 
         private void ClosePage()
         {
-  
+
             var mainWindow = App.Current.Windows
                      .OfType<MainWindow>()
                      .FirstOrDefault();
@@ -330,10 +356,28 @@ namespace Client_ADBD.ViewModels
 
                 DatabaseManager.AddAuction(AuctionName, AuctionType, startDateTime, endDateTime, ImagePath, Description, Location, CurrentUser.User._username /*Helpers.Utilities.Username*/);
                 Auction_ new_auction=DatabaseManager.GetAuctionByName(AuctionName);
-                ShowAuctionPage(new_auction);
+                if (Admin == true)
+                {
+                    ShowAuctionPageAdmin(new_auction);
+                }
+                else
+                {
+                    ShowAuctionPage(new_auction);
+                }
             }
   
 
+        }
+
+        private void ShowAuctionPageAdmin(Auction_ new_auction)
+        {
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new VM_AuctionPage(new_auction, false, false, false, true));
+            }
         }
         private void ShowAuctionPage(Auction_ new_auction)
         {

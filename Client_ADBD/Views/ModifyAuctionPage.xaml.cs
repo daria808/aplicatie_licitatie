@@ -22,11 +22,11 @@ namespace Client_ADBD.Views
     /// </summary>
     public partial class ModifyAuctionPage : Page
     {
-        public ModifyAuctionPage(Auction_ a)
+        public ModifyAuctionPage(Auction_ a, bool isAdmin = false)
         {
             InitializeComponent();
-            VM_ModifyAuctionPage viewModel= new VM_ModifyAuctionPage(a);
-            DataContext=viewModel;
+            VM_ModifyAuctionPage viewModel = new VM_ModifyAuctionPage(a, isAdmin);
+            DataContext = viewModel;
         }
     }
 }

@@ -22,15 +22,15 @@ namespace Client_ADBD.Views
     /// </summary>
     public partial class ModifyPostPage : Page
     {
-        public ModifyPostPage()
+        public ModifyPostPage(bool isAdmin = false)
         {
             InitializeComponent();
         }
 
-        public ModifyPostPage(Post_ post)
+        public ModifyPostPage(Post_ post, bool isAdmin = false)
         {
             InitializeComponent();
-            VM_ModifyPostPage viewModel= new VM_ModifyPostPage(post);
+            VM_ModifyPostPage viewModel = new VM_ModifyPostPage(post, isAdmin);
             DataContext = viewModel;
         }
     }

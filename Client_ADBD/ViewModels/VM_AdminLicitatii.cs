@@ -144,7 +144,7 @@ namespace Client_ADBD.ViewModels
             if (_vmAuctions == null || DisplayedAuctions.Count() == 0)
             {
                 _vmAuctions = new ObservableCollection<VM_AuctionControler>(
-                     auctions.Select(a => new VM_AuctionControler
+                     auctions.Select(a => new VM_AuctionControler(true)
                      {
                          Id = a.id,
                          Name = a.name,
@@ -226,17 +226,12 @@ namespace Client_ADBD.ViewModels
 
         private void ShowAddAuction()
         {
-
-            var mainWindow = App.Current.Windows
-                    .OfType<MainWindow>()
-                    .FirstOrDefault();
-            var frame = mainWindow?.FindName("MainFrame") as Frame;
-
-
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
 
             if (frame != null)
             {
-                frame.Navigate(new VM_AddAuctionPage());
+                frame.Navigate(new VM_AddAuctionPage(true)); //va trebui sa dau un parametru
             }
         }
 

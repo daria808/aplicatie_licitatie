@@ -117,8 +117,11 @@ namespace Client_ADBD.ViewModels
         public ICommand AddPostCommand { get; set; }
 
         public ICommand SaveChangesCommand { get; set; }
-        public VM_ModifyPostPage(Post_ p)
+
+        private bool Admin;
+        public VM_ModifyPostPage(Post_ p, bool isAdmin = false)
         {
+            Admin = isAdmin;
             _initialPost = p;
             ProductType = p.auctionType;
             _auctionNumber = p.auctionNumber;
@@ -135,7 +138,15 @@ namespace Client_ADBD.ViewModels
             _description = p.product.Description;
             _invDate=p.product.InventoryDate;
 
-            ClosePageCommand = new RelayCommand(ClosePage);
+            if (isAdmin == false)
+            {
+                ClosePageCommand = new RelayCommand(ClosePage);
+            }
+            else
+            {
+                ClosePageCommand = new RelayCommand(ClosePageAdmin);
+            }
+
             SaveChangesCommand = new RelayCommand(SaveChanges);
         }
 
@@ -293,7 +304,14 @@ namespace Client_ADBD.ViewModels
                                 DatabaseManager.UpdatePaintingPostDetails(_initialPost.product.ProductID, artist, length, width, technique, year);
                             }
 
-                            ClosePage();
+                            if (Admin == true)
+                            {
+                                ClosePageAdmin();
+                            }
+                            else
+                            {
+                                ClosePage();
+                            }
                         }
                         break;
                     }
@@ -336,7 +354,14 @@ namespace Client_ADBD.ViewModels
                             {
                                 DatabaseManager.UpdateWatchPostDetails(_initialPost.product.ProductID, diameter, brand, type, mechanism);
                             }
-                            ClosePage();
+                            if (Admin == true)
+                            {
+                                ClosePageAdmin();
+                            }
+                            else
+                            {
+                                ClosePage();
+                            }
                         }
                         break;
                     }
@@ -378,7 +403,14 @@ namespace Client_ADBD.ViewModels
                             {
                                 DatabaseManager.UpdateJewelryPostDetails(_initialPost.product.ProductID, brand, weight, year, type);
                             }
-                            ClosePage();
+                            if (Admin == true)
+                            {
+                                ClosePageAdmin();
+                            }
+                            else
+                            {
+                                ClosePage();
+                            }
                         }
                         break;
                     }
@@ -424,7 +456,14 @@ namespace Client_ADBD.ViewModels
                                 DatabaseManager.UpdateBookPostDetails(_initialPost.product.ProductID, author, year, publishingHouse, numberOfPage, language, bookCondition);
                             }
 
-                            ClosePage();
+                            if (Admin == true)
+                            {
+                                ClosePageAdmin();
+                            }
+                            else
+                            {
+                                ClosePage();
+                            }
                         }
                         break;
                     }
@@ -468,7 +507,14 @@ namespace Client_ADBD.ViewModels
                                 DatabaseManager.UpdateSculpturePostDetails(_initialPost.product.ProductID, artist, length, width, depth, material);
                             }
 
-                            ClosePage();
+                            if (Admin == true)
+                            {
+                                ClosePageAdmin();
+                            }
+                            else
+                            {
+                                ClosePage();
+                            }
                         }
                         break;
                     }
@@ -492,7 +538,18 @@ namespace Client_ADBD.ViewModels
             }
         }
 
+        private void ClosePageAdmin()
+        {
+            var a = DatabaseManager.GetAuctionByNumber(_auctionNumber);
 
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new AuctionPage(a, false, false, false, true));
+            }
+        }
 
         private void UpdateSelectedControl(IProduct pr)
         {

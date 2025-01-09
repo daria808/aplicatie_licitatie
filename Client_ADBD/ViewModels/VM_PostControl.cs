@@ -11,7 +11,7 @@ using Client_ADBD.Models;
 
 namespace Client_ADBD.ViewModels
 {//Current Price: $0"
-    internal class VM_PostControl:VM_Base
+    internal class VM_PostControl : VM_Base
     {
         private int _id;
         private string _imagePath;
@@ -20,12 +20,34 @@ namespace Client_ADBD.ViewModels
         private decimal _startPrice;
         private string _status;
 
-        public ICommand GoToPostDetailsPageCommand {  get; set; }
+        public ICommand GoToPostDetailsPageCommand { get; set; }
 
-        public VM_PostControl() {
-            GoToPostDetailsPageCommand = new RelayCommand(GotoPostDetailsPage);
+        public VM_PostControl(bool isAdmin)
+        {
+            if (isAdmin == true)
+            {
+                GoToPostDetailsPageCommand = new RelayCommand(GotoPostDetailsAdminPage);
+            }
+            else
+            {
+                GoToPostDetailsPageCommand = new RelayCommand(GotoPostDetailsPage);
+            }
         }
 
+        private void GotoPostDetailsAdminPage()
+        {
+            //var p = DatabaseManager.GetPostStatusById(Id);
+            Post_ p = DatabaseManager.GetPostDetails(_id);
+
+
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new PostPage(p, true));
+            }
+        }
         private void GotoPostDetailsPage()
         {
             //var p = DatabaseManager.GetPostStatusById(Id);

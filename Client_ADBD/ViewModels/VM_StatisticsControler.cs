@@ -62,14 +62,19 @@ namespace Client_ADBD.ViewModels
         }
 
         public ICommand NavigateToAuctionDetailsCommand { get; }
-        public VM_StatisticsControler(int id)
+        public VM_StatisticsControler(int id, bool admin = false)
         {
             Id = id;
-            NavigateToAuctionDetailsCommand = new RelayCommand(GoToAuctionPage);
+            if (admin == true)
+            {
+                NavigateToAuctionDetailsCommand = new RelayCommand(GoToAuctionPageAdmin);
+            }
+            else
+            {
+                NavigateToAuctionDetailsCommand = new RelayCommand(GoToAuctionPage);
+            }
 
             // var databaseManager = new DatabaseManager();
-
-            
             Total = DatabaseManager.GetTotalBidsForAuction(id);
             Procent = DatabaseManager.GetSoldPercentage(id);
         }
@@ -89,6 +94,23 @@ namespace Client_ADBD.ViewModels
             if (frame != null)
             {
                 frame.Navigate(new AuctionPage(a, true, true));
+            }
+
+        }
+
+        private void GoToAuctionPageAdmin()
+        {
+            //NavigationService.OpenWindow("ErrorWindow","Postare");
+
+            //var a=DatabaseManager.GetAuctionByName(Name);
+            var a = DatabaseManager.GetAuctionByName(Name);
+
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new VM_AuctionPage(a, true, false, true));
             }
 
         }

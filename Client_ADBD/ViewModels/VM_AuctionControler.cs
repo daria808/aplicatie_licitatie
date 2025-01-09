@@ -13,7 +13,7 @@ using System.Windows.Controls;
 
 namespace Client_ADBD.ViewModels
 {
-    internal class VM_AuctionControler:VM_Base
+    internal class VM_AuctionControler : VM_Base
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -21,25 +21,55 @@ namespace Client_ADBD.ViewModels
         public DateTime EndTime { get; set; }
         public string Location { get; set; }
         public string Status { get; set; }
-        public int Number {  get; set; }    
+        public int Number { get; set; }
 
         private string _timeLeft;
-        public ICommand NavigateToAuctionDetailsCommand {  get; }
+        public ICommand NavigateToAuctionDetailsCommand { get; }
 
-        public VM_AuctionControler() 
+        public VM_AuctionControler(bool isAdmin = false)
         {
-            NavigateToAuctionDetailsCommand = new RelayCommand(GoToAuctionPage);
+            if (isAdmin == false)
+            {
+
+                NavigateToAuctionDetailsCommand = new RelayCommand(GoToAuctionPage);
+            }
+            else
+            {
+                NavigateToAuctionDetailsCommand = new RelayCommand(GoToAuctionAdminiPage);
+            }
+
+
         }
 
         /// <summary>
         /// MODIFICAT!!!
         /// </summary>
+        /// 
+        private void GoToAuctionAdminiPage()
+        {
+            //NavigationService.OpenWindow("ErrorWindow","Postare");
+
+            var a = DatabaseManager.GetAuctionByName(Name);
+            //var a = DatabaseManager.GetAuctionByNumber(Number);
+
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new VM_AuctionPage(a, true, false, false, true));
+            }
+        }
+
         private void GoToAuctionPage()
         {
             //NavigationService.OpenWindow("ErrorWindow","Postare");
 
-            //var a=DatabaseManager.GetAuctionByName(Name);
-            var a = DatabaseManager.GetAuctionByNumber(Number);
+            var a = DatabaseManager.GetAuctionByName(Name);
+            // var a = DatabaseManager.GetAuctionByNumber(Number);
+
+
+
 
             var mainWindow = App.Current.Windows
                      .OfType<MainWindow>()
@@ -48,7 +78,7 @@ namespace Client_ADBD.ViewModels
 
             if (frame != null)
             {
-                frame.Navigate(new AuctionPage(a));
+                frame.Navigate(new AuctionPage(a, true, false));
             }
 
         }
@@ -68,7 +98,7 @@ namespace Client_ADBD.ViewModels
         public string FormatTime()
         {
 
-            TimeSpan timeLeft=default;
+            TimeSpan timeLeft = default;
 
             if (StartTime > DateTime.Now)
             {
@@ -85,7 +115,7 @@ namespace Client_ADBD.ViewModels
             {
                 Status = "Closed";
             }
-               
+
 
             int years = timeLeft.Days / 365;
             int months = (timeLeft.Days % 365) / 30;
@@ -104,19 +134,19 @@ namespace Client_ADBD.ViewModels
             if (minutes > 0) result += $"{minutes}m ";
             if (seconds > 0) result += $"{seconds}s";
 
-            if(string.Compare(Status,"Closed")==0)
-            { 
+            if (string.Compare(Status, "Closed") == 0)
+            {
                 return string.Empty;
             }
-            else if(string.Compare(Status, "Ongoing") == 0)
+            else if (string.Compare(Status, "Ongoing") == 0)
             {
                 return string.Concat("Timpul rămas până la șfârșit : ", result.Trim());
             }
-            else if(string.Compare(Status,"Upcoming")==0)
+            else if (string.Compare(Status, "Upcoming") == 0)
             {
                 return string.Concat("Timpul rămas până la început: ", result.Trim());
             }
-            
+
             return string.Empty;
 
         }

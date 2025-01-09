@@ -22,10 +22,10 @@ namespace Client_ADBD.Views
     /// </summary>
     public partial class PostPage : Page
     {
-        public PostPage(Post_ p)
+        public PostPage(Post_ p, bool isAdmin = false)
         {
             InitializeComponent();
-            VM_PostPage viewModel= new VM_PostPage(p);
+            VM_PostPage viewModel = new VM_PostPage(p, isAdmin);
             DataContext = viewModel;
         }
 

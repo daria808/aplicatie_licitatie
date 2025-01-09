@@ -105,13 +105,24 @@ namespace Client_ADBD.ViewModels
         public ICommand ClosePageCommand { get; set; }  
         public ICommand AddPostCommand { get; set; }
 
-        public VM_AddPost(string productType,int auctionNumber)
-        { 
+        private bool Admin;
 
+        public VM_AddPost(string productType, int auctionNumber, bool isAdmin)
+        {
+            Admin = isAdmin;
             ProductType = productType;
-            this._auctionNumber=auctionNumber;
+            this._auctionNumber = auctionNumber;
             UpdateSelectedControl();
-            ClosePageCommand=new RelayCommand(ClosePage);
+
+            if (isAdmin == true)
+            {
+                ClosePageCommand = new RelayCommand(ClosePageAdmin);
+            }
+            else
+            {
+                ClosePageCommand = new RelayCommand(ClosePage);
+            }
+
             AddPostCommand = new RelayCommand(AddPost);
         }
 
@@ -233,7 +244,14 @@ namespace Client_ADBD.ViewModels
                             (_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName,
                             Description, InvDate, technique, artist, year, length, width);
 
-                            ClosePage();
+                            if (Admin == true)
+                            {
+                                ClosePageAdmin();
+                            }
+                            else
+                            {
+                                ClosePage();
+                            }
                         }
                         break;
                     }
@@ -256,7 +274,14 @@ namespace Client_ADBD.ViewModels
                             (_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName,
                             Description, InvDate, mechanism, type, diameter, brand);
 
-                            ClosePage();
+                            if (Admin == true)
+                            {
+                                ClosePageAdmin();
+                            }
+                            else
+                            {
+                                ClosePage();
+                            }
                         }
                         break;
                     }
@@ -279,7 +304,14 @@ namespace Client_ADBD.ViewModels
                             DatabaseManager.AddJewelryPost(_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName
                             , Description, InvDate, type, brand, weight, year);
 
-                            ClosePage();
+                            if (Admin == true)
+                            {
+                                ClosePageAdmin();
+                            }
+                            else
+                            {
+                                ClosePage();
+                            }
                         }
                         break;
                     }
@@ -302,7 +334,14 @@ namespace Client_ADBD.ViewModels
                             DatabaseManager.AddBookPost(_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName
                            , Description, InvDate, author, bookCondition, year, publishingHouse, numberOfPage, language);
 
-                            ClosePage();
+                            if (Admin == true)
+                            {
+                                ClosePageAdmin();
+                            }
+                            else
+                            {
+                                ClosePage();
+                            }
                         }
                         break;
                     }
@@ -324,7 +363,14 @@ namespace Client_ADBD.ViewModels
                             DatabaseManager.AddSculpturePost(_auctionNumber, StartPrice, ListPrice, DateTime.Now, ImagePaths, ProductName
                            , Description, InvDate, artist, material, width, length, depth);
 
-                            ClosePage();
+                            if (Admin == true)
+                            {
+                                ClosePageAdmin();
+                            }
+                            else
+                            {
+                                ClosePage();
+                            }
                         }
                         break;
                     }
@@ -332,6 +378,19 @@ namespace Client_ADBD.ViewModels
             }
 
 
+        }
+
+        private void ClosePageAdmin()
+        {
+            var a = DatabaseManager.GetAuctionByNumber(_auctionNumber);
+
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new VM_AuctionPage(a, false, false, false, true));
+            }
         }
         private void ClosePage()
         {

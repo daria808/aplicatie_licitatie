@@ -65,10 +65,10 @@ namespace Client_ADBD.ViewModels
         public ICommand DeletePostCommand { get; set; }
 
         public ICommand AddBidCommand { get; set; }
-
-        public VM_PostPage(Post_ p)
+        private bool Admin;
+        public VM_PostPage(Post_ p, bool isAdmin = false)
         {
-
+            Admin = isAdmin;
             if (p != null)
             {
                 _postId = p.postId;
@@ -113,11 +113,24 @@ namespace Client_ADBD.ViewModels
             ImageGridVisibility = Visibility.Hidden;
             BlurRadius = 0;
 
-            GoBackToAuctionPageCommand = new RelayCommand(GoBackToAuctionPage);
+            if (Admin == true)
+            {
+                GoBackToAuctionPageCommand = new RelayCommand(GoBackToAuctionAdminPage);
+                GoToModifyPostPageCommand = new RelayCommand(GoToModifyPageAdmin);
+            }
+            else
+            {
+                GoBackToAuctionPageCommand = new RelayCommand(GoBackToAuctionPage);
+                GoToModifyPostPageCommand = new RelayCommand(GoToModifyPage);
+            }
+
+
             CloseImageCommand = new RelayCommand(CloseImage);
             SelectImageCommand = new RelayCommand<string>(SelectImage);
             ToggleDescriptionCommand = new RelayCommand(ToggleDescription);
-            GoToModifyPostPageCommand = new RelayCommand(GoToModifyPage);
+
+
+
             DeletePostCommand = new RelayCommand(DeletePost);
             AddBidCommand = new RelayCommand(AddBid);
 
@@ -350,6 +363,21 @@ namespace Client_ADBD.ViewModels
                 _customerVisibility = value;
                 OnPropertyChange(nameof(CustomerVisibility));
             }
+        }
+
+        private void GoToModifyPageAdmin()
+        {
+
+            Post_ p = DatabaseManager.GetPostDetails(_postId);
+
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new ModifyPostPage(p, true));
+            }
+
         }
         private void GoToModifyPage()
         {
@@ -626,7 +654,18 @@ namespace Client_ADBD.ViewModels
             }
         }
 
-        
+        private void GoBackToAuctionAdminPage()
+        {
+            Auction_ a = DatabaseManager.GetAuctionByNumber(_auctionNumber);
+
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new AuctionPage(a, true, false, false, true));
+            }
+        }
 
     }
 }

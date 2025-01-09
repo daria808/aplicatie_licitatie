@@ -21,11 +21,9 @@ namespace Client_ADBD.ViewModels
     {
         private int _currentPage = 1;
 
-        //private Auction_ _auction;
         private Visibility _ownerAdminVisibility;
         private string _auctionTitle;
         private string _auctionDescription;
-        //private string _auctionShortDescription;
         private bool _isFullDescriptionVisible = false;
         private DateTime _auctionDate;
         private string _auctionLocation;
@@ -37,7 +35,6 @@ namespace Client_ADBD.ViewModels
         private string _auctionImagePath;
         private string _usernameOwner;
         private ObservableCollection<PostControl> _lotsPerPage;
-        //private ObservableCollection<AuctionLot> _lots;
 
         private List<int> _postsLotNumbers;
         private int _maxLotNumber;
@@ -245,7 +242,7 @@ namespace Client_ADBD.ViewModels
             //{
                 _vmPostsPreview = new ObservableCollection<VM_PostControl>(
 
-                    posts.Select(p => new VM_PostControl
+                    posts.Select(p => new VM_PostControl(Admin)
                     {
                         Id = p.postId,
                         Name = p.postName,
@@ -262,9 +259,11 @@ namespace Client_ADBD.ViewModels
             _currentPage = 1;
             UpdateDisplayedPosts();
         }
-        
-        public VM_AuctionPage(Auction_ auction,bool fromResults=false, bool statistics = false)
+
+        private bool Admin;
+        public VM_AuctionPage(Auction_ auction,bool fromResults=false, bool statistics = false, bool admStats = false, bool isAdmin = false)
         {
+            Admin = isAdmin;
 
             TotalEarnings = DatabaseManager.GetTotalBidsForAuction(auction.auctionNumber);
             Rate = DatabaseManager.GetSoldPercentage(auction.auctionNumber);
@@ -304,25 +303,54 @@ namespace Client_ADBD.ViewModels
             AuctionLotCount = Posts.Count();
 
             GoToAddPostCommand=new RelayCommand(GoToAddPost);
-            if (statistics == true)
+
+            if (isAdmin == true)
             {
+                GoToAddPostCommand = new RelayCommand(GoToAddPostAdmin);
+                GoToMainPageCommand = new RelayCommand(GoToAdminPage);
+                GoToModifyPageCommand = new RelayCommand(GoToModifyAdminPage);
+            }
+            else if (admStats == true)
+            {
+                GoToAddPostCommand = new RelayCommand(GoToAddPost);
+                GoToMainPageCommand = new RelayCommand(GoToAdminStats);
+                GoToModifyPageCommand = new RelayCommand(GoToModifyPage);
+
+            }
+            else if (statistics == true)
+            {
+                GoToAddPostCommand = new RelayCommand(GoToAddPost);
                 GoToMainPageCommand = new RelayCommand(GoToStatistics);
+                GoToModifyPageCommand = new RelayCommand(GoToModifyPage);
+
             }
             else
             {
+                GoToAddPostCommand = new RelayCommand(GoToAddPost);
                 GoToMainPageCommand = new RelayCommand(GoToMainPage);
+                GoToModifyPageCommand = new RelayCommand(GoToModifyPage);
 
             }
+
 
 
             ToggleDescriptionCommand = new RelayCommand(ToggleDescription);
             GoToPageDetailsCommand = new RelayCommand<int>(GoToChosenLotPage);
             PreviousPageCommand = new RelayCommand(PreviousPage);
             NextPageCommand = new RelayCommand(NextPage);
-            GoToModifyPageCommand = new RelayCommand(GoToModifyPage);
             DeleteAuctionCommand = new RelayCommand(ShowMessageBox);
         }
 
+        private void GoToAdminPage()
+        {
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new VM_AdminLicitatii());
+            }
+        }
         private void GoToStatistics()
         {
             var mainWindow = App.Current.Windows
@@ -333,6 +361,17 @@ namespace Client_ADBD.ViewModels
             if (frame != null)
             {
                 frame.Navigate(new VM_Statistics());
+            }
+        }
+
+        private void GoToAdminStats()
+        {
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new VM_StatisticsAdmin());
             }
         }
 
@@ -352,6 +391,17 @@ namespace Client_ADBD.ViewModels
                 {
                     GoToMainPage();
                     MessageBox.Show("Licitație ștearsă cu succes!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    if(Admin == true)
+                    {
+                        var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+                        var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+                        if (frame != null)
+                        {
+                            frame.Navigate(new VM_AdminLicitatii());
+                        }
+                    }
                 }
                 else
                 {
@@ -375,8 +425,17 @@ namespace Client_ADBD.ViewModels
             }
 
         }
+        private void GoToModifyAdminPage()
+        {
+            var a = DatabaseManager.GetAuctionByNumber(_auctionNumber);
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
 
-
+            if (frame != null)
+            {
+                frame.Navigate(new ModifyAuctionPage(a, true));
+            }
+        }
         private void PreviousPage()
         {
 
@@ -483,7 +542,17 @@ namespace Client_ADBD.ViewModels
                 frame.Navigate(new AddPostPage(AuctionType,AuctionNumber));
             }
         }
- 
+
+        private void GoToAddPostAdmin()
+        {
+            var adminWindow = App.Current.Windows.OfType<AdminWindow>().FirstOrDefault();
+            var frame = adminWindow?.FindName("AdminFrame") as Frame;
+
+            if (frame != null)
+            {
+                frame.Navigate(new AddPostPage(AuctionType, AuctionNumber, true));
+            }
+        }
         public string AuctionTitle
         {
             get { return _auctionTitle; }
@@ -579,8 +648,6 @@ namespace Client_ADBD.ViewModels
                 OnPropertyChange(nameof(AuctionType));
             }
         }
-
-
 
     }
 

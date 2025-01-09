@@ -129,6 +129,7 @@
     <Compile Include="ViewModels\VM_AddAuctionPage.cs" />
     <Compile Include="ViewModels\VM_Account.cs" />
     <Compile Include="ViewModels\VM_AddPost.cs" />
+    <Compile Include="ViewModels\VM_AdminLicitatii.cs" />
     <Compile Include="ViewModels\VM_AdminViewUserProfilePage.cs" />
     <Compile Include="ViewModels\VM_AdminWindow.cs" />
     <Compile Include="ViewModels\VM_ArtConsultants.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="ViewModels\VM_Sell.cs" />
     <Compile Include="ViewModels\VM_StartWindow.cs" />
     <Compile Include="ViewModels\VM_Statistics.cs" />
+    <Compile Include="ViewModels\VM_StatisticsAdmin.cs" />
     <Compile Include="ViewModels\VM_StatisticsControler.cs" />
     <Compile Include="ViewModels\Vm_UsersDetailes.cs" />
     <Compile Include="ViewModels\VM_WatchControl.cs" />
@@ -186,6 +188,9 @@
     </Compile>
     <Compile Include="Views\AddPostPage.xaml.cs">
       <DependentUpon>AddPostPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminLicitatiiPage.xaml.cs">
+      <DependentUpon>AdminLicitatiiPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AdminViewUserProfilePage.xaml.cs">
       <DependentUpon>AdminViewUserProfilePage.xaml</DependentUpon>
@@ -272,6 +277,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\StatisticsAdminPage.xaml.cs">
+      <DependentUpon>StatisticsAdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
@@ -334,6 +342,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddPostPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminLicitatiiPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -444,6 +456,10 @@
     <Page Include="Views\StartWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\StatisticsAdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StatisticsPage.xaml">
       <SubType>Designer</SubType>
@@ -728,6 +744,27 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\icons8-add-post-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="photos\icons8-add-user-male-60.png" />
+    <Resource Include="photos\icons8-arrow-40.png" />
+    <Resource Include="photos\icons8-arrow-40_r.png" />
+    <Resource Include="photos\icons8-facebook-f-40.png" />
+    <Resource Include="photos\icons8-google-40.png" />
+    <Resource Include="photos\icons8-male-user-60.png" />
+    <Resource Include="photos\icons8-right-arrow-40.png" />
+    <Resource Include="photos\icons8-twitter-40.png" />
+    <Resource Include="photos\icons8-user-60.png" />
+    <Resource Include="photos\no-image_image.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="photos\icons8-logout-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\auction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\usser.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\CommunityToolkit.Mvvm.8.3.2\build\CommunityToolkit.Mvvm.targets" Condition="Exists('..\packages\CommunityToolkit.Mvvm.8.3.2\build\CommunityToolkit.Mvvm.targets')" />

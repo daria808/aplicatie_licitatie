@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Client_ADBD.Models;
+using Client_ADBD.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,14 @@ namespace Client_ADBD.Views.UserControl
         public BookPostControl()
         {
             InitializeComponent();
+        }
+
+        public BookPostControl(Book_ b)
+        {
+            InitializeComponent();
+            VM_BookPostControl viewModel = new VM_BookPostControl(b);
+            DataContext=viewModel;
+
         }
     }
 }

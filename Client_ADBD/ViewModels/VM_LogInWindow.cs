@@ -89,6 +89,7 @@ namespace Client_ADBD.ViewModels
             else
             {
                 DatabaseManager.AddUser(FirstName, LastName, Username2, Password2, Email);
+              //  DatabaseManager.AddUser(FirstName, LastName, Username2, Password2, Email);
                 var user = DatabaseManager.GetUsers().FirstOrDefault(u => u._username == Username2);
                 if (user != null)
                 {
@@ -124,7 +125,7 @@ namespace Client_ADBD.ViewModels
             }
             else if (DatabaseManager.VerifyUserCredentials(Username, Password))
             {
-               
+
 
                 var user = DatabaseManager.GetUsers().FirstOrDefault(u => u._username == Username);
                 if (user != null)
@@ -140,12 +141,16 @@ namespace Client_ADBD.ViewModels
                         NavigationService.NavigateTo("MainWindow");
                     }
                 }
-                else
-                {
-                    NavigationService.OpenWindow("ErrorWindow", "Utilizatorul nu a fost găsit!");
-                }
             }
+            else
+            {
 
+                MessageBox.Show(
+                    "Credentialele invalide!",
+                    "Eroare autentificare",                                                                          // Titlul ferestrei
+                    MessageBoxButton.OK,                                                                             // Buton OK
+                    MessageBoxImage.Error);
+            }
         }
         private void ChangeToSignIn()
         {

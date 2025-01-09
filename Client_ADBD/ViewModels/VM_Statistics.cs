@@ -76,6 +76,8 @@ namespace Client_ADBD.ViewModels
             Helpers.Timer.AddEventToTimer(UpdatePostStatus, -1, 5);
         }
 
+
+
         private void OnBackPressed()
         {
             var mainWindow = App.Current.MainWindow as MainWindow;
@@ -137,7 +139,7 @@ namespace Client_ADBD.ViewModels
             }
         }
 
-        
+
         public void SetAuctions(List<Auction_> auctions)
         {
             // Filtrare postări cu status "closed"
@@ -146,7 +148,7 @@ namespace Client_ADBD.ViewModels
             if (_vmAuctions == null || DisplayedAuctions.Count() == 0)
             {
                 _vmAuctions = new ObservableCollection<VM_StatisticsControler>(
-                     closedAuctions.Select(a => new VM_StatisticsControler(a.id)
+                     closedAuctions.Select(a => new VM_StatisticsControler(a.auctionNumber)
                      {
                          Id = a.id,
                          Name = a.name,
@@ -179,7 +181,7 @@ namespace Client_ADBD.ViewModels
 
         }
 
-       
+
         public void NextPage()
         {
             if (_currentPage * _itemsPerPage < Auctions.Count)

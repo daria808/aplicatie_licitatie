@@ -337,7 +337,10 @@ namespace Client_ADBD.ViewModels
         }
         private void ShowAuctionPage(Auction_ new_auction)
         {
-            var mainWindow = App.Current.MainWindow as MainWindow;
+            //var mainWindow = App.Current.MainWindow as MainWindow;
+            var mainWindow = App.Current.Windows
+                     .OfType<MainWindow>()
+                     .FirstOrDefault();
             var frame = mainWindow?.FindName("MainFrame") as Frame;
 
             if (frame != null)

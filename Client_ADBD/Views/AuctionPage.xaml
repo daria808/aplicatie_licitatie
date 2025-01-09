@@ -138,14 +138,14 @@
                                        HorizontalAlignment="Center" 
                                        Margin="0,0,0,10">
                                     <TextBlock.Text>
-                                        <Binding Path="AuctionLotCount" StringFormat="ALEGEȚI UN LOT DIN {0} :" />
+                                        <Binding Path="MaxLotNumber" StringFormat="INTRODUCEȚI NUMĂRUL LOTULUI:" />
                                     </TextBlock.Text>
                                 </TextBlock>
-                                <TextBox Width="145"  Text="{Binding SelectedLotNumber,UpdateSourceTrigger=PropertyChanged}" Height="25" HorizontalAlignment="Left" Margin="0,0,0,0" TextAlignment="Center" 
+                                <TextBox AcceptsReturn="False" Width="145"  Text="{Binding SelectedLotNumber,UpdateSourceTrigger=LostFocus}" Height="25" HorizontalAlignment="Left" Margin="10,0,0,0" TextAlignment="Center" 
                                      BorderThickness="0,0,0,1" BorderBrush="Gray" Background="Transparent" Focusable="True">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Key="Enter" Command="{Binding GoToPageDetailsCommand}" />
-                                    </TextBox.InputBindings>
+                                    <!--<TextBox.InputBindings>
+                                        <KeyBinding Key="Tab" Command="{Binding GoToPageDetailsCommand}" />
+                                    </TextBox.InputBindings>-->
                                 </TextBox>
                                     <TextBlock FontSize="12" Text="{Binding LotNumberError}"
                                    Foreground="Red" 

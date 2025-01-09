@@ -224,7 +224,7 @@ namespace Client_ADBD.ViewModels
 
                         if (string.IsNullOrEmpty(artist) || year <= 0 ||length<=0||width<=0||technique==null)
                         {
-                            ProductControlError = "Detaliile produsului sunt incorecte.";
+                            ProductControlError = "Detaliile produsului sunt incorecte\\incomplete.";
                         }
 
                         if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
@@ -247,7 +247,7 @@ namespace Client_ADBD.ViewModels
 
                         if (string.IsNullOrEmpty(brand) || type==null || diameter <=0 || mechanism == null)
                         {
-                            ProductControlError = "Detaliile produsului sunt incorecte.";
+                            ProductControlError = "Detaliile produsului sunt incorecte\\incomplete.";
                         }
 
                         if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
@@ -271,7 +271,7 @@ namespace Client_ADBD.ViewModels
 
                         if (string.IsNullOrEmpty(brand) || weight <=0  || type == null)
                         {
-                            ProductControlError = "Detaliile produsului sunt incorecte.";
+                            ProductControlError = "Detaliile produsului sunt incorecte\\incomplete.";
                         }
 
                         if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
@@ -294,7 +294,7 @@ namespace Client_ADBD.ViewModels
 
                         if (string.IsNullOrEmpty(author) || bookCondition == null || year <= 0 || string.IsNullOrEmpty(language)||numberOfPage<=0|| string.IsNullOrEmpty(publishingHouse))
                         {
-                            ProductControlError = "Detaliile produsului sunt incorecte.";
+                            ProductControlError = "Detaliile produsului sunt incorecte\\.";
                         }
 
                         if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))
@@ -316,7 +316,7 @@ namespace Client_ADBD.ViewModels
 
                         if (string.IsNullOrEmpty(artist) || length <= 0 || width <= 0 || string.IsNullOrEmpty(material) || depth <= 0 )
                         {
-                            ProductControlError = "Detaliile produsului sunt incorecte.";
+                            ProductControlError = "Detaliile produsului sunt incorecte\\incomplete.";
                         }
 
                         if (Helpers.validation.IsValidPost(ProductNameError, ImagePathError, DescriptionError, ListPriceError, StartPriceError, InvDateError, ProductControlError))

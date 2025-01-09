@@ -11,6 +11,10 @@
         mc:Ignorable="d"
         Title="MainWindow" 
         WindowState="Maximized"
+         WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="White"
         
         WindowStartupLocation="CenterScreen">
 
@@ -283,9 +287,35 @@
 
                 <!--CommandBinding="{Binding ProductsCommand}"-->
 
-                <Button Grid.Row="7" Name="btnBack" Padding="5" Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding BackCommand}" Background="#FF009688" BorderThickness="0" Height="40" Width="65">
+                <Button Grid.Row="7" Name="btnBack" Padding="5" Margin="0,200,0,30" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding BackCommand}" Background="#FF009688" BorderThickness="0" Height="40" Width="65">
                     <Image Source="undo.png" Width="58" Height="36" />
                 </Button>
+
+                <Button Grid.Row="2"
+                      x:Name="btnExit"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Top"
+                      Width="Auto"
+                      Height="50"
+                      BorderBrush="Transparent"
+                      BorderThickness="0"
+                      Background="Transparent"
+                      Command="{Binding ExitCommand}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Width="172">
+                        <Image x:Name="exit_buttonImage"
+                            Source="C:\Users\laris\Desktop\New folder\aplicatie_licitatie\Client_ADBD\photos\icons8-logout-40.png"
+                            Opacity="0.8"
+                            Width="37"
+                            Height="30"
+                            Margin="10,0,10,0" />
+                        <TextBlock Text="Exit"
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                FontSize="16"
+                               FontFamily="Times New Roman" />
+                    </StackPanel>
+                </Button>
+
 
             </StackPanel>
         </Grid>

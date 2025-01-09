@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Client_ADBD.Models;
+using Client_ADBD.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,13 @@ namespace Client_ADBD.Views.UserControl
     /// </summary>
     public partial class SculpturePostControl : System.Windows.Controls.UserControl 
     {
+        public SculpturePostControl(Sculpture_ s)
+        {
+            InitializeComponent();
+            VM_SculpturePostControl viewModel = new VM_SculpturePostControl(s);
+            DataContext = viewModel;
+        }
+
         public SculpturePostControl()
         {
             InitializeComponent();

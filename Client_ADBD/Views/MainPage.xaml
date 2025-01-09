@@ -120,7 +120,7 @@
 
 
                     <Button Width="200" Height="40" FontSize="16" Background="#4CAF50" BorderBrush="Black" BorderThickness="1" 
-                         VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Foreground="White" Command="{Binding AddAuctionCommand}">
+                         Visibility="{Binding IsAdminBidder}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Foreground="White" Command="{Binding AddAuctionCommand}">
 
                         <Button.Effect>
                             <DropShadowEffect Color="Gray" BlurRadius="8" Direction="270" ShadowDepth="3" Opacity="0.5"/>

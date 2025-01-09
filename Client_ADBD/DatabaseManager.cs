@@ -177,6 +177,29 @@ namespace Client_ADBD
             _dbContext.SubmitChanges();
         }
 
+        public static List<Auction_> GetAuctionsByUserId(int userId, string statusFilter = "default", string sortFilter = "default")
+        {
+            // Creează o instanță de DataContext
+            using (var context = new AuctionAppDataContext()) // Înlocuiește cu numele contextului tău de LINQ to SQL
+            {
+                var query = context.Auctions.Where(a => a.id_user == userId);
+
+                // Maparea între obiectele Auction și Auction_
+                var auctionList = query.Select(a => new Auction_
+                {
+                    id = a.id_auction,               // Mapare id
+                    name = a.name,           // Mapare name
+                    startTime = a.start_time, // Mapare start_time
+                    endTime = a.end_time,    // Mapare end_time
+                    location = a.location,   // Mapare location
+                    imagePath = a.image_path, // Mapare imagePath
+                    auctionNumber = a.auction_number // Mapare auctionNumber
+                }).ToList(); // Execută și convertește la List<Auction_>
+
+                return auctionList; // Returnează lista de Auction_
+            }
+        }
+
         public static void UpdateWatchPostDetails(int productId,decimal diameter,string manufacturer,string type,string mechanism)
         {
             if (_dbContext == null)
@@ -297,6 +320,15 @@ namespace Client_ADBD
 
         }
 
+        public static List<int> GetPostLotsNumber(int auction_id)
+        {
+            if (_dbContext == null)
+            {
+                _dbContext = new AuctionAppDataContext();
+            }
+
+            return _dbContext.Posts.Where(p=>p.id_auction==auction_id).Select(p=>p.lot).ToList();
+        }
         public static void UpdateSculpturePostDetails(int productId,string artist,decimal length,decimal width,decimal depth,string material)
         {
             if (_dbContext == null)
@@ -960,6 +992,21 @@ namespace Client_ADBD
 
                 // Salvează modificările
                 _dbContext.SubmitChanges();
+
+                //CurrentUser.User = new User_
+                //{
+                //    _id= existingUser.id_user,
+                //    _firstName = firstName,
+                //    _lastName = lastName,
+                //    _email = email,
+                //    _balance = balance,
+                //    _username = username,
+                //    _lastLogin = existingUser.last_login,
+                //    _dateCreated=existingUser.created_at,
+                    
+
+                //};
+                CurrentUser.User._balance = balance;
             }
             catch (Exception ex)
             {
@@ -1188,6 +1235,7 @@ namespace Client_ADBD
 
             var productToDelete = (from pr in _dbContext.Products
                                    join post in _dbContext.Posts on pr.id_product equals post.id_product
+                                   where post.id_post == postId
                                     select pr).First();
 
             if (productToDelete != null)
@@ -1446,24 +1494,49 @@ namespace Client_ADBD
                     _dbContext.Product_images.InsertOnSubmit(newImage);
                     _dbContext.SubmitChanges();
 
-                    var newImage1 = new Product_image
+                    if (!string.IsNullOrEmpty(imagePath[1]))
                     {
-                        id_product = productId,
-                        image_path = imagePath[0]
-                    };
+                        var newImage1 = new Product_image
+                        {
+                            id_product = productId,
+                            image_path = imagePath[1]
+                        };
 
-                    _dbContext.Product_images.InsertOnSubmit(newImage1);
-                    _dbContext.SubmitChanges();
+                        _dbContext.Product_images.InsertOnSubmit(newImage1);
+                        _dbContext.SubmitChanges();
+                    }
 
-                    var newImage2 = new Product_image
+                    if (!string.IsNullOrEmpty(imagePath[2]))
                     {
-                        id_product = productId,
-                        image_path = imagePath[0]
-                    };
+                        var newImage2 = new Product_image
+                        {
+                            id_product = productId,
+                            image_path = imagePath[2]
+                        };
 
-                    _dbContext.Product_images.InsertOnSubmit(newImage2);
-                    _dbContext.SubmitChanges();
-                    transaction.Complete();
+                        _dbContext.Product_images.InsertOnSubmit(newImage2);
+                        _dbContext.SubmitChanges();
+                    }
+
+
+                    //var newImage1 = new Product_image
+                    //{
+                    //    id_product = productId,
+                    //    image_path = imagePath[0]
+                    //};
+
+                    //_dbContext.Product_images.InsertOnSubmit(newImage1);
+                    //_dbContext.SubmitChanges();
+
+                    //var newImage2 = new Product_image
+                    //{
+                    //    id_product = productId,
+                    //    image_path = imagePath[0]
+                    //};
+
+                    //_dbContext.Product_images.InsertOnSubmit(newImage2);
+                    //_dbContext.SubmitChanges();
+                   transaction.Complete();
 
 
                 }
@@ -1895,7 +1968,7 @@ namespace Client_ADBD
           
             var id=(from post in _dbContext.Posts
                     join a in _dbContext.Auctions on post.id_auction equals a.id_auction
-                    where a.auction_number ==auctionNumber
+                    where a.auction_number ==auctionNumber && post.lot ==lotNumber
                     select post.id_post).FirstOrDefault();
 
             return id;
@@ -1983,6 +2056,20 @@ namespace Client_ADBD
                 if (bidOffer > 0)
                 {
                     post.id_status = _dbContext.Post_status.Where(p => p.status_name == "Adjudecat").FirstOrDefault().id_status;
+                    
+                }
+
+                if(!string.IsNullOrEmpty(user))
+                {
+                    var user2 = (from u in _dbContext.Users
+                                 where u.username == user
+                                 select u).FirstOrDefault();
+
+                    if (user2 != null)
+                    {
+                        user2.balance -= bidOffer;
+                    }
+                    
                 }
             }
 
@@ -2149,16 +2236,32 @@ namespace Client_ADBD
             }
         }
 
+        //static public int GetAuctionNumberById(int id)
+        //{
+        //    if (_dbContext == null)
+        //    {
+        //        _dbContext = new AuctionAppDataContext();
+        //    }
+
+        //    int auctionNumber = (from a in _dbContext.Auctions
+        //                         where a.id_auction == id
+        //                         select a
+        //                       ).FirstOrDefault().auction_number;
+        //    return auctionNumber;
+        //}
         static public int GetSoldItemsInAuction(int auctionNumber)
         {
             using (var dbContext = new AuctionAppDataContext())
             {
                 int soldItemsCount = 0;
 
-                // Obținem toate postările asociate licitației
-                var posts = dbContext.Posts
-                    .Where(p => p.id_auction == auctionNumber)  // Filtrăm postările care sunt asociate cu licitația
-                    .ToList();
+
+              //  Obținem toate postările asociate licitației
+              int auctionId=GetAuctionIdByNumber(auctionNumber);
+               var posts = dbContext.Posts
+                   .Where(p => p.id_auction == auctionId)  // Filtrăm postările care sunt asociate cu licitația
+                   .ToList();
+
 
                 foreach (var post in posts)
                 {

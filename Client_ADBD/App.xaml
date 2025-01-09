@@ -118,6 +118,13 @@
             <DataTemplate DataType="{x:Type ViewModels:VM_Statistics}">
                 <Views:StatisticsPage />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:VM_StatisticsAdmin}">
+                <Views:StatisticsAdminPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:VM_AdminLicitatii}">
+                <Views:AdminLicitatiiPage />
+            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

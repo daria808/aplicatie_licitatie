@@ -36,6 +36,8 @@ namespace Client_ADBD.ViewModels
         private int _postLotNumber;
         private string _productType;
 
+    
+
         private string _lastBidUser;
         private decimal _bidPrice;
 
@@ -89,8 +91,8 @@ namespace Client_ADBD.ViewModels
                     "Tablouri" => new PaintingPostControl(p.product as Client_ADBD.Models.Painting_),
                     "Ceasuri" => new WatchPostControl(p.product as Client_ADBD.Models.Watch_),
                     "Bijuterii" => new JewelryPostControl(p.product as Client_ADBD.Models.Jewelry_),
-                    "Carti" => new BookControl(p.product as Client_ADBD.Models.Book_),
-                    "Sculpturi" => new SculptureControl(p.product as Client_ADBD.Models.Sculpture_),
+                    "Carti" => new BookPostControl(p.product as Client_ADBD.Models.Book_),
+                    "Sculpturi" => new SculpturePostControl(p.product as Client_ADBD.Models.Sculpture_),
                     _ => null,
                 };
 
@@ -264,6 +266,18 @@ namespace Client_ADBD.ViewModels
                
                 return;
             }
+            else if(BidPrice<_productStartPrice)
+            {
+
+                var result = MessageBox.Show(
+                           "Ofertă trebuie să fie mai mare decât prețul de pornire.",
+                           "Eroare ofertă",
+                           MessageBoxButton.OK,
+                           MessageBoxImage.Warning);
+
+
+                return;
+            }
             else
             {
                 DatabaseManager.AddBid(_postId, CurrentUser.User._id, BidPrice);
@@ -418,9 +432,18 @@ namespace Client_ADBD.ViewModels
             {
                 return string.Empty;
             }
+          
 
             var words = description.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            return string.Join(" ", words.Take(numberOfWords)) + " ...";
+
+            if (words.Length > numberOfWords)
+            {
+                return string.Join(" ", words.Take(numberOfWords)) + " ...";
+            }
+            else
+            {
+                return string.Join(" ", words.Take(numberOfWords));
+            }
 
         }
 
@@ -439,7 +462,7 @@ namespace Client_ADBD.ViewModels
                 return IsFullDescriptionVisible ? "Ascunde" : "Citește mai mult";
             }
         }
-
+        
         public string DescriptionText => IsFullDescriptionVisible ? FullDescription : ShortDescription;
 
         private void ToggleDescription()

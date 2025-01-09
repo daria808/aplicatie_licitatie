@@ -38,6 +38,19 @@ namespace Client_ADBD.ViewModels
         private string _usernameOwner;
         private ObservableCollection<PostControl> _lotsPerPage;
         //private ObservableCollection<AuctionLot> _lots;
+
+        private List<int> _postsLotNumbers;
+        private int _maxLotNumber;
+
+        public int MaxLotNumber
+        {
+            get => _maxLotNumber;
+            set
+            {
+                _maxLotNumber = value;
+                OnPropertyChange(nameof(MaxLotNumber));
+            }
+        }
         
         private decimal _totalEarnings;
         private double _rate;
@@ -100,13 +113,16 @@ namespace Client_ADBD.ViewModels
             set
         {
                 _selectedLotNumber = value;
-                if (value <= 0 || value > _auctionLotCount)
+                
+                if(!_postsLotNumbers.Contains(value))
                 {
                     LotNumberError = "Număr lot invalid";
+                  
                 }
                 else
                 {
                     LotNumberError = string.Empty;
+                    GoToChosenLotPage(_selectedLotNumber);
                 }
 
                 OnPropertyChange(nameof(SelectedLotNumber));
@@ -250,8 +266,18 @@ namespace Client_ADBD.ViewModels
         public VM_AuctionPage(Auction_ auction,bool fromResults=false, bool statistics = false)
         {
 
-            TotalEarnings = DatabaseManager.GetTotalBidsForAuction(auction.id);
-            Rate = DatabaseManager.GetSoldPercentage(auction.id);
+            TotalEarnings = DatabaseManager.GetTotalBidsForAuction(auction.auctionNumber);
+            Rate = DatabaseManager.GetSoldPercentage(auction.auctionNumber);
+
+            _postsLotNumbers=DatabaseManager.GetPostLotsNumber(auction.id);
+            if (_postsLotNumbers.Count!=0)
+            {
+                MaxLotNumber = _postsLotNumbers.Max();
+            }
+            else
+            {
+                MaxLotNumber=0;
+            }
 
             SelectedLotPerPage = 6;
             AuctionTitle = auction.name;
@@ -315,10 +341,10 @@ namespace Client_ADBD.ViewModels
             var result = MessageBox.Show(
                      "Sunteți sigur că doriți să ștergeți această licitație?",
                      "Confirmare ștergere",
-                     MessageBoxButton.OKCancel,
+                     MessageBoxButton.YesNo,
                      MessageBoxImage.Warning);
 
-            if (result == MessageBoxResult.OK)
+            if (result == MessageBoxResult.Yes)
             {
                 var rc=false;
                 rc=DatabaseManager.DeleteAuction(AuctionNumber);

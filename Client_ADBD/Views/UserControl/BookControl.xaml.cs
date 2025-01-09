@@ -23,7 +23,7 @@ namespace Client_ADBD.Views.UserControl
     {
         public BookControl()
         {
-            ;
+            InitializeComponent();
         }
         public BookControl(Book_ b)
         {

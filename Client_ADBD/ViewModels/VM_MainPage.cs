@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using Client_ADBD.Views;
 using System.Windows.Controls;
+using System.Windows;
+using Client_ADBD.Helpers;
 
 namespace Client_ADBD.ViewModels
 {
@@ -19,6 +21,17 @@ namespace Client_ADBD.ViewModels
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommad { get; }
         public ICommand AddAuctionCommand { get; }
+        private Visibility _isAdminBidder;
+        public Visibility IsAdminBidder
+        {
+            get => _isAdminBidder;
+            set
+            {
+                _isAdminBidder = value;
+                OnPropertyChange(nameof(IsAdminBidder));
+            }
+
+        }
 
         public string SelectedSortOption
         {
@@ -75,6 +88,15 @@ namespace Client_ADBD.ViewModels
             Helpers.Timer.AddEventToTimer(UpdatePostStatus, -1, 5);
             Helpers.Timer.AddEventToTimer(UpdateTimeLeftForDisplayedAuctions,1,-1);
 
+            if(CurrentUser.User._isAdmin==true||CurrentUser.User._isBidder==true)
+            {
+                IsAdminBidder=Visibility.Visible;
+            }
+            else
+            {
+                IsAdminBidder=Visibility.Hidden;
+            }
+
         }
 
         private void UpdatePostStatus()
@@ -83,7 +105,7 @@ namespace Client_ADBD.ViewModels
         }
 
         private int _currentPage = 1;
-        private readonly int _itemsPerPage = 5;
+        private readonly int _itemsPerPage = 4;
 
         private ObservableCollection<Auction_> _auctions;
         public ObservableCollection<Auction_> Auctions

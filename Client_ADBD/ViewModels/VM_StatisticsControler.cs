@@ -68,6 +68,8 @@ namespace Client_ADBD.ViewModels
             NavigateToAuctionDetailsCommand = new RelayCommand(GoToAuctionPage);
 
             // var databaseManager = new DatabaseManager();
+
+            
             Total = DatabaseManager.GetTotalBidsForAuction(id);
             Procent = DatabaseManager.GetSoldPercentage(id);
         }

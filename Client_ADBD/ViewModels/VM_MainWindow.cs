@@ -29,6 +29,7 @@ namespace Client_ADBD.ViewModels
         public ICommand ShowStatisticsCommand { get; }
         public ICommand ShowHowToBuy { get; }
         public ICommand ShowHowToSell { get; }
+        public ICommand ExitCommand { get; }
         public VM_MainWindow()
         {
 
@@ -39,8 +40,22 @@ namespace Client_ADBD.ViewModels
             ShowAboutCommand = new RelayCommand(ShowAbout);
             ShowHowToBuy = new RelayCommand(ShowBuy);
             ShowHowToSell = new RelayCommand(ShowSell);
+            ExitCommand = new RelayCommand(Exit);
         }
 
+        private void Exit()
+        {
+            var result = MessageBox.Show(
+                "Doriți să părăsiți aplicația?",
+                "Exit",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
+        }
         public string Status
         {
             get { return _status; }

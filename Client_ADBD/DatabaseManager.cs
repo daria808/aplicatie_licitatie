@@ -20,10 +20,10 @@ namespace Client_ADBD
 {
     internal class DatabaseManager
     {
-        private static AuctionAppDataContext _dbContext;
+        private static AuctionAppEntities _dbContext;
         public DatabaseManager()
         {
-            _dbContext = new AuctionAppDataContext();
+            _dbContext = new AuctionAppEntities();
         }
 
         public static string GetWatchTypeById(int id)
@@ -271,7 +271,7 @@ namespace Client_ADBD
                 jewelry.id_type = idType;
             }
 
-            _dbContext.SubmitChanges();
+            _dbContext.SaveChanges();
         }
             
         public static void UpdateBookPostDetails(int productId,string author,int publicationYear,string publishingHouse,int pageNumber,string language,string condition)
@@ -508,7 +508,7 @@ namespace Client_ADBD
             };
 
 
-            _dbContext.Users.InsertOnSubmit(newUser);
+            _dbContext.Users.Add(newUser);
             _dbContext.SubmitChanges();
 
             var role = new User_role

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="73fbe19b9e1648558b0fe2b9952a5bc5" Name="Diagram1">
+        <EntityTypeShape EntityType="AuctionAppModel.Auction" Width="1.5" PointX="0.75" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Auction_type" Width="1.5" PointX="1.5" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Bid" Width="1.5" PointX="8.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Book" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Book_condition" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Jewelry" Width="1.5" PointX="6" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Jewelry_type" Width="1.5" PointX="3.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Painting" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Painting_type" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Post" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Post_status" Width="1.5" PointX="0.75" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Product" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Product_image" Width="1.5" PointX="3" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Sculpture" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Sculpture_material" Width="1.5" PointX="3.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.User_role" Width="1.5" PointX="3.75" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.User_type" Width="1.5" PointX="1.5" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.User" Width="1.5" PointX="1.5" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Watch" Width="1.5" PointX="6" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Watch_mechanism" Width="1.5" PointX="3.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionAppModel.Watch_type" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="AuctionAppModel.FK__Auction__id_auct__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Auction__id_user__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Post__id_auction__160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Bid__id_post__503BEA1C" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Bid__id_user__51300E55" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Book__id_conditi__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Book__id_product__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Jewelry__id_prod__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Jewelry__id_type__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Painting__id_pro__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Painting__id_typ__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Post__id_product__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Post__id_status__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Product_i__id_pr__31B762FC" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Sculpture__id_pr__00200768" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Watch__id_produc__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Sculpture__id_sc__01142BA1" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__User_role__id_ti__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__User_role__id_us__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionAppModel.FK__Watch__id_mechan__628FA481" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

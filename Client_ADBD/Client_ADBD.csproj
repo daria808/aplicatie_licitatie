@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -44,6 +45,12 @@
     <Reference Include="CommunityToolkit.Mvvm, Version=8.3.0.0, Culture=neutral, PublicKeyToken=4aff67a105548ee2, processorArchitecture=MSIL">
       <HintPath>..\packages\CommunityToolkit.Mvvm.8.3.2\lib\netstandard2.0\CommunityToolkit.Mvvm.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="HandyControl, Version=3.5.1.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
       <HintPath>..\packages\HandyControl.3.5.1\lib\net48\HandyControl.dll</HintPath>
     </Reference>
@@ -75,6 +82,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -100,13 +109,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Auction.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
     <Compile Include="AuctionApp.cs" />
-    <Compile Include="AuctionApp.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AuctionApp.dbml</DependentUpon>
+    <Compile Include="Auction_type.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bid.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Book.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Book_condition.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseManager.cs" />
+    <Compile Include="EntityVersion.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityVersion.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityVersion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityVersion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityVersion.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Convertor.cs" />
     <Compile Include="Helpers\CurrentUser.cs" />
     <Compile Include="Helpers\Hash.cs" />
@@ -114,6 +148,12 @@
     <Compile Include="Helpers\ScrollViewerExtensions.cs" />
     <Compile Include="Helpers\Utilities.cs" />
     <Compile Include="Helpers\Validation.cs" />
+    <Compile Include="Jewelry.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Jewelry_type.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Auction_.cs" />
     <Compile Include="Models\Book_.cs" />
     <Compile Include="Models\Painting_.cs" />
@@ -124,6 +164,39 @@
     <Compile Include="Models\Sculpture_.cs" />
     <Compile Include="Models\User_.cs" />
     <Compile Include="Models\Watch_.cs" />
+    <Compile Include="Painting.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Painting_type.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Post.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Post_status.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product_image.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sculpture.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sculpture_material.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User_role.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User_type.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\VM_About.cs" />
     <Compile Include="ViewModels\VM_AboutUs.cs" />
     <Compile Include="ViewModels\VM_AddAuctionPage.cs" />
@@ -324,6 +397,15 @@
     </Compile>
     <Compile Include="Views\UsersDetailesPage.xaml.cs">
       <DependentUpon>UsersDetailesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Watch.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Watch_mechanism.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Watch_type.cs">
+      <DependentUpon>EntityVersion.tt</DependentUpon>
     </Compile>
     <Page Include="Views\AboutPage.xaml">
       <SubType>Designer</SubType>
@@ -540,13 +622,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="AuctionApp.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>AuctionApp.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="AuctionApp.dbml.layout">
-      <DependentUpon>AuctionApp.dbml</DependentUpon>
+    <EntityDeploy Include="EntityVersion.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EntityVersion.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EntityVersion.edmx.diagram">
+      <DependentUpon>EntityVersion.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -583,6 +664,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\photos\icons8-add-user-male-60.png" />
@@ -766,6 +848,21 @@
   <ItemGroup>
     <Resource Include="Views\usser.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="photos\l1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EntityVersion.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityVersion.edmx</DependentUpon>
+      <LastGenOutput>EntityVersion.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityVersion.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityVersion.edmx</DependentUpon>
+      <LastGenOutput>EntityVersion.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\CommunityToolkit.Mvvm.8.3.2\build\CommunityToolkit.Mvvm.targets" Condition="Exists('..\packages\CommunityToolkit.Mvvm.8.3.2\build\CommunityToolkit.Mvvm.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -773,5 +870,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\CommunityToolkit.Mvvm.8.3.2\build\CommunityToolkit.Mvvm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CommunityToolkit.Mvvm.8.3.2\build\CommunityToolkit.Mvvm.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
 </Project>

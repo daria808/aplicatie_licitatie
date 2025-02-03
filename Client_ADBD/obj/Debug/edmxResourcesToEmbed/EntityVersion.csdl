@@ -1,0 +1,625 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AuctionAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Auction">
+    <Key>
+      <PropertyRef Name="id_auction" />
+    </Key>
+    <Property Name="id_auction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_auction_type" Type="Int32" Nullable="false" />
+    <Property Name="id_user" Type="Int32" Nullable="false" />
+    <Property Name="auction_number" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="location" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="start_time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="end_time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="image_path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Auction_type" Relationship="Self.FK__Auction__id_auct__0A9D95DB" FromRole="Auction" ToRole="Auction_type" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Auction__id_user__0B91BA14" FromRole="Auction" ToRole="Users" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK__Post__id_auction__160F4887" FromRole="Auction" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="Auction_type">
+    <Key>
+      <PropertyRef Name="id_auction_type" />
+    </Key>
+    <Property Name="id_auction_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Auctions" Relationship="Self.FK__Auction__id_auct__0A9D95DB" FromRole="Auction_type" ToRole="Auction" />
+  </EntityType>
+  <EntityType Name="Bid">
+    <Key>
+      <PropertyRef Name="id_bid" />
+    </Key>
+    <Property Name="id_bid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_post" Type="Int32" Nullable="false" />
+    <Property Name="id_user" Type="Int32" />
+    <Property Name="bid_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="bid_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Post" Relationship="Self.FK__Bid__id_post__503BEA1C" FromRole="Bid" ToRole="Post" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Bid__id_user__51300E55" FromRole="Bid" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="id_book" />
+    </Key>
+    <Property Name="id_book" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_product" Type="Int32" Nullable="false" />
+    <Property Name="id_condition" Type="Int32" Nullable="false" />
+    <Property Name="author" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="publication_year" Type="Int32" Nullable="false" />
+    <Property Name="publishing_house" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="page_number" Type="Int32" Nullable="false" />
+    <Property Name="book_language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Book_condition" Relationship="Self.FK__Book__id_conditi__71D1E811" FromRole="Book" ToRole="Book_condition" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Book__id_product__70DDC3D8" FromRole="Book" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Book_condition">
+    <Key>
+      <PropertyRef Name="id_book_condition" />
+    </Key>
+    <Property Name="id_book_condition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="condition" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Books" Relationship="Self.FK__Book__id_conditi__71D1E811" FromRole="Book_condition" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Jewelry">
+    <Key>
+      <PropertyRef Name="id_jewelry" />
+    </Key>
+    <Property Name="id_jewelry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_product" Type="Int32" Nullable="false" />
+    <Property Name="id_type" Type="Int32" Nullable="false" />
+    <Property Name="brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="weight" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="creation_year" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Jewelry__id_prod__787EE5A0" FromRole="Jewelry" ToRole="Product" />
+    <NavigationProperty Name="Jewelry_type" Relationship="Self.FK__Jewelry__id_type__797309D9" FromRole="Jewelry" ToRole="Jewelry_type" />
+  </EntityType>
+  <EntityType Name="Jewelry_type">
+    <Key>
+      <PropertyRef Name="id_jewelry_type" />
+    </Key>
+    <Property Name="id_jewelry_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Jewelries" Relationship="Self.FK__Jewelry__id_type__797309D9" FromRole="Jewelry_type" ToRole="Jewelry" />
+  </EntityType>
+  <EntityType Name="Painting">
+    <Key>
+      <PropertyRef Name="id_painting" />
+    </Key>
+    <Property Name="id_painting" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_produs" Type="Int32" Nullable="false" />
+    <Property Name="id_type" Type="Int32" Nullable="false" />
+    <Property Name="artist" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="creation_year" Type="Int32" Nullable="false" />
+    <Property Name="length" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="width" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Painting__id_pro__68487DD7" FromRole="Painting" ToRole="Product" />
+    <NavigationProperty Name="Painting_type" Relationship="Self.FK__Painting__id_typ__693CA210" FromRole="Painting" ToRole="Painting_type" />
+  </EntityType>
+  <EntityType Name="Painting_type">
+    <Key>
+      <PropertyRef Name="id_painting_type" />
+    </Key>
+    <Property Name="id_painting_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Paintings" Relationship="Self.FK__Painting__id_typ__693CA210" FromRole="Painting_type" ToRole="Painting" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="id_post" />
+    </Key>
+    <Property Name="id_post" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_product" Type="Int32" Nullable="false" />
+    <Property Name="id_status" Type="Int32" Nullable="false" />
+    <Property Name="id_auction" Type="Int32" Nullable="false" />
+    <Property Name="start_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="list_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="lot" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Auction" Relationship="Self.FK__Post__id_auction__160F4887" FromRole="Post" ToRole="Auction" />
+    <NavigationProperty Name="Bids" Relationship="Self.FK__Bid__id_post__503BEA1C" FromRole="Post" ToRole="Bid" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Post__id_product__14270015" FromRole="Post" ToRole="Product" />
+    <NavigationProperty Name="Post_status" Relationship="Self.FK__Post__id_status__151B244E" FromRole="Post" ToRole="Post_status" />
+  </EntityType>
+  <EntityType Name="Post_status">
+    <Key>
+      <PropertyRef Name="id_status" />
+    </Key>
+    <Property Name="id_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="status_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK__Post__id_status__151B244E" FromRole="Post_status" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id_product" />
+    </Key>
+    <Property Name="id_product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="inventory_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Books" Relationship="Self.FK__Book__id_product__70DDC3D8" FromRole="Product" ToRole="Book" />
+    <NavigationProperty Name="Jewelries" Relationship="Self.FK__Jewelry__id_prod__787EE5A0" FromRole="Product" ToRole="Jewelry" />
+    <NavigationProperty Name="Paintings" Relationship="Self.FK__Painting__id_pro__68487DD7" FromRole="Product" ToRole="Painting" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK__Post__id_product__14270015" FromRole="Product" ToRole="Post" />
+    <NavigationProperty Name="Product_images" Relationship="Self.FK__Product_i__id_pr__31B762FC" FromRole="Product" ToRole="Product_images" />
+    <NavigationProperty Name="Sculptures" Relationship="Self.FK__Sculpture__id_pr__00200768" FromRole="Product" ToRole="Sculpture" />
+    <NavigationProperty Name="Watches" Relationship="Self.FK__Watch__id_produc__619B8048" FromRole="Product" ToRole="Watch" />
+  </EntityType>
+  <EntityType Name="Product_image">
+    <Key>
+      <PropertyRef Name="id_image" />
+    </Key>
+    <Property Name="id_image" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_product" Type="Int32" Nullable="false" />
+    <Property Name="image_path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Product_i__id_pr__31B762FC" FromRole="Product_images" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Sculpture">
+    <Key>
+      <PropertyRef Name="id_sculpture" />
+    </Key>
+    <Property Name="id_sculpture" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_product" Type="Int32" Nullable="false" />
+    <Property Name="id_sculpture_material" Type="Int32" Nullable="false" />
+    <Property Name="artist" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="length" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="width" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="depth" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Sculpture__id_pr__00200768" FromRole="Sculpture" ToRole="Product" />
+    <NavigationProperty Name="Sculpture_material" Relationship="Self.FK__Sculpture__id_sc__01142BA1" FromRole="Sculpture" ToRole="Sculpture_material" />
+  </EntityType>
+  <EntityType Name="Sculpture_material">
+    <Key>
+      <PropertyRef Name="id_sculpture_material" />
+    </Key>
+    <Property Name="id_sculpture_material" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="material" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Sculptures" Relationship="Self.FK__Sculpture__id_sc__01142BA1" FromRole="Sculpture_material" ToRole="Sculpture" />
+  </EntityType>
+  <EntityType Name="User_role">
+    <Key>
+      <PropertyRef Name="id_role" />
+    </Key>
+    <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_user" Type="Int32" Nullable="false" />
+    <Property Name="id_tip" Type="Int32" Nullable="false" />
+    <Property Name="role_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="User_type" Relationship="Self.FK__User_role__id_ti__5629CD9C" FromRole="User_role" ToRole="User_type" />
+    <NavigationProperty Name="User" Relationship="Self.FK__User_role__id_us__5535A963" FromRole="User_role" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User_type">
+    <Key>
+      <PropertyRef Name="id_type" />
+    </Key>
+    <Property Name="id_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="User_role" Relationship="Self.FK__User_role__id_ti__5629CD9C" FromRole="User_type" ToRole="User_role" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fisrt_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="salt" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="last_login" Type="DateTime" Precision="3" />
+    <Property Name="balance" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="Auctions" Relationship="Self.FK__Auction__id_user__0B91BA14" FromRole="Users" ToRole="Auction" />
+    <NavigationProperty Name="Bids" Relationship="Self.FK__Bid__id_user__51300E55" FromRole="Users" ToRole="Bid" />
+    <NavigationProperty Name="User_role" Relationship="Self.FK__User_role__id_us__5535A963" FromRole="Users" ToRole="User_role" />
+  </EntityType>
+  <EntityType Name="Watch">
+    <Key>
+      <PropertyRef Name="id_watch" />
+    </Key>
+    <Property Name="id_watch" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_product" Type="Int32" />
+    <Property Name="id_mechanism" Type="Int32" />
+    <Property Name="diameter" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="manufacturer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_type" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Watch__id_produc__619B8048" FromRole="Watch" ToRole="Product" />
+    <NavigationProperty Name="Watch_mechanism" Relationship="Self.FK__Watch__id_mechan__628FA481" FromRole="Watch" ToRole="Watch_mechanism" />
+  </EntityType>
+  <EntityType Name="Watch_mechanism">
+    <Key>
+      <PropertyRef Name="id_mechanism" />
+    </Key>
+    <Property Name="id_mechanism" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mechanism" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Watches" Relationship="Self.FK__Watch__id_mechan__628FA481" FromRole="Watch_mechanism" ToRole="Watch" />
+  </EntityType>
+  <EntityType Name="Watch_type">
+    <Key>
+      <PropertyRef Name="id_watch_type" />
+    </Key>
+    <Property Name="id_watch_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Auction__id_auct__0A9D95DB">
+    <End Role="Auction_type" Type="Self.Auction_type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Auction" Type="Self.Auction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Auction_type">
+        <PropertyRef Name="id_auction_type" />
+      </Principal>
+      <Dependent Role="Auction">
+        <PropertyRef Name="id_auction_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Auction__id_user__0B91BA14">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Auction" Type="Self.Auction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="Auction">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Post__id_auction__160F4887">
+    <End Role="Auction" Type="Self.Auction" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Auction">
+        <PropertyRef Name="id_auction" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="id_auction" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Bid__id_post__503BEA1C">
+    <End Role="Post" Type="Self.Post" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Bid" Type="Self.Bid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="id_post" />
+      </Principal>
+      <Dependent Role="Bid">
+        <PropertyRef Name="id_post" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Bid__id_user__51300E55">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Bid" Type="Self.Bid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="Bid">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Book__id_conditi__71D1E811">
+    <End Role="Book_condition" Type="Self.Book_condition" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book_condition">
+        <PropertyRef Name="id_book_condition" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="id_condition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Book__id_product__70DDC3D8">
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id_product" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Jewelry__id_prod__787EE5A0">
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Jewelry" Type="Self.Jewelry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id_product" />
+      </Principal>
+      <Dependent Role="Jewelry">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Jewelry__id_type__797309D9">
+    <End Role="Jewelry_type" Type="Self.Jewelry_type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Jewelry" Type="Self.Jewelry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jewelry_type">
+        <PropertyRef Name="id_jewelry_type" />
+      </Principal>
+      <Dependent Role="Jewelry">
+        <PropertyRef Name="id_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Painting__id_pro__68487DD7">
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Painting" Type="Self.Painting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id_product" />
+      </Principal>
+      <Dependent Role="Painting">
+        <PropertyRef Name="id_produs" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Painting__id_typ__693CA210">
+    <End Role="Painting_type" Type="Self.Painting_type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Painting" Type="Self.Painting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Painting_type">
+        <PropertyRef Name="id_painting_type" />
+      </Principal>
+      <Dependent Role="Painting">
+        <PropertyRef Name="id_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Post__id_product__14270015">
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id_product" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Post__id_status__151B244E">
+    <End Role="Post_status" Type="Self.Post_status" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post_status">
+        <PropertyRef Name="id_status" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="id_status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product_i__id_pr__31B762FC">
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Product_images" Type="Self.Product_image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id_product" />
+      </Principal>
+      <Dependent Role="Product_images">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sculpture__id_pr__00200768">
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sculpture" Type="Self.Sculpture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id_product" />
+      </Principal>
+      <Dependent Role="Sculpture">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Watch__id_produc__619B8048">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Watch" Type="Self.Watch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id_product" />
+      </Principal>
+      <Dependent Role="Watch">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sculpture__id_sc__01142BA1">
+    <End Role="Sculpture_material" Type="Self.Sculpture_material" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sculpture" Type="Self.Sculpture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sculpture_material">
+        <PropertyRef Name="id_sculpture_material" />
+      </Principal>
+      <Dependent Role="Sculpture">
+        <PropertyRef Name="id_sculpture_material" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_role__id_ti__5629CD9C">
+    <End Role="User_type" Type="Self.User_type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="User_role" Type="Self.User_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User_type">
+        <PropertyRef Name="id_type" />
+      </Principal>
+      <Dependent Role="User_role">
+        <PropertyRef Name="id_tip" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_role__id_us__5535A963">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="User_role" Type="Self.User_role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="User_role">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Watch__id_mechan__628FA481">
+    <End Role="Watch_mechanism" Type="Self.Watch_mechanism" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Watch" Type="Self.Watch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Watch_mechanism">
+        <PropertyRef Name="id_mechanism" />
+      </Principal>
+      <Dependent Role="Watch">
+        <PropertyRef Name="id_mechanism" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AuctionAppEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Auctions" EntityType="Self.Auction" />
+    <EntitySet Name="Auction_types" EntityType="Self.Auction_type" />
+    <EntitySet Name="Bids" EntityType="Self.Bid" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="Book_conditions" EntityType="Self.Book_condition" />
+    <EntitySet Name="Jewelries" EntityType="Self.Jewelry" />
+    <EntitySet Name="Jewelry_types" EntityType="Self.Jewelry_type" />
+    <EntitySet Name="Paintings" EntityType="Self.Painting" />
+    <EntitySet Name="Painting_types" EntityType="Self.Painting_type" />
+    <EntitySet Name="Posts" EntityType="Self.Post" />
+    <EntitySet Name="Post_status" EntityType="Self.Post_status" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Product_images" EntityType="Self.Product_image" />
+    <EntitySet Name="Sculptures" EntityType="Self.Sculpture" />
+    <EntitySet Name="Sculpture_materials" EntityType="Self.Sculpture_material" />
+    <EntitySet Name="User_roles" EntityType="Self.User_role" />
+    <EntitySet Name="User_types" EntityType="Self.User_type" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Watches" EntityType="Self.Watch" />
+    <EntitySet Name="Watch_mechanism" EntityType="Self.Watch_mechanism" />
+    <EntitySet Name="Watch_types" EntityType="Self.Watch_type" />
+    <AssociationSet Name="FK__Auction__id_auct__0A9D95DB" Association="Self.FK__Auction__id_auct__0A9D95DB">
+      <End Role="Auction_type" EntitySet="Auction_types" />
+      <End Role="Auction" EntitySet="Auctions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Auction__id_user__0B91BA14" Association="Self.FK__Auction__id_user__0B91BA14">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Auction" EntitySet="Auctions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Post__id_auction__160F4887" Association="Self.FK__Post__id_auction__160F4887">
+      <End Role="Auction" EntitySet="Auctions" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Bid__id_post__503BEA1C" Association="Self.FK__Bid__id_post__503BEA1C">
+      <End Role="Post" EntitySet="Posts" />
+      <End Role="Bid" EntitySet="Bids" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Bid__id_user__51300E55" Association="Self.FK__Bid__id_user__51300E55">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Bid" EntitySet="Bids" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Book__id_conditi__71D1E811" Association="Self.FK__Book__id_conditi__71D1E811">
+      <End Role="Book_condition" EntitySet="Book_conditions" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Book__id_product__70DDC3D8" Association="Self.FK__Book__id_product__70DDC3D8">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Jewelry__id_prod__787EE5A0" Association="Self.FK__Jewelry__id_prod__787EE5A0">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Jewelry" EntitySet="Jewelries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Jewelry__id_type__797309D9" Association="Self.FK__Jewelry__id_type__797309D9">
+      <End Role="Jewelry_type" EntitySet="Jewelry_types" />
+      <End Role="Jewelry" EntitySet="Jewelries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Painting__id_pro__68487DD7" Association="Self.FK__Painting__id_pro__68487DD7">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Painting" EntitySet="Paintings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Painting__id_typ__693CA210" Association="Self.FK__Painting__id_typ__693CA210">
+      <End Role="Painting_type" EntitySet="Painting_types" />
+      <End Role="Painting" EntitySet="Paintings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Post__id_product__14270015" Association="Self.FK__Post__id_product__14270015">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Post__id_status__151B244E" Association="Self.FK__Post__id_status__151B244E">
+      <End Role="Post_status" EntitySet="Post_status" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product_i__id_pr__31B762FC" Association="Self.FK__Product_i__id_pr__31B762FC">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Product_images" EntitySet="Product_images" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sculpture__id_pr__00200768" Association="Self.FK__Sculpture__id_pr__00200768">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Sculpture" EntitySet="Sculptures" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Watch__id_produc__619B8048" Association="Self.FK__Watch__id_produc__619B8048">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Watch" EntitySet="Watches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sculpture__id_sc__01142BA1" Association="Self.FK__Sculpture__id_sc__01142BA1">
+      <End Role="Sculpture_material" EntitySet="Sculpture_materials" />
+      <End Role="Sculpture" EntitySet="Sculptures" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_role__id_ti__5629CD9C" Association="Self.FK__User_role__id_ti__5629CD9C">
+      <End Role="User_type" EntitySet="User_types" />
+      <End Role="User_role" EntitySet="User_roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_role__id_us__5535A963" Association="Self.FK__User_role__id_us__5535A963">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="User_role" EntitySet="User_roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Watch__id_mechan__628FA481" Association="Self.FK__Watch__id_mechan__628FA481">
+      <End Role="Watch_mechanism" EntitySet="Watch_mechanism" />
+      <End Role="Watch" EntitySet="Watches" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

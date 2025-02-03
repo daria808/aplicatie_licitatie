@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AuctionAppModelStoreContainer" CdmEntityContainer="AuctionAppEntities">
+    <EntitySetMapping Name="Auctions">
+      <EntityTypeMapping TypeName="AuctionAppModel.Auction">
+        <MappingFragment StoreEntitySet="Auction">
+          <ScalarProperty Name="id_auction" ColumnName="id_auction" />
+          <ScalarProperty Name="id_auction_type" ColumnName="id_auction_type" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="auction_number" ColumnName="auction_number" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="start_time" ColumnName="start_time" />
+          <ScalarProperty Name="end_time" ColumnName="end_time" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="image_path" ColumnName="image_path" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Auction_types">
+      <EntityTypeMapping TypeName="AuctionAppModel.Auction_type">
+        <MappingFragment StoreEntitySet="Auction type">
+          <ScalarProperty Name="id_auction_type" ColumnName="id_auction_type" />
+          <ScalarProperty Name="type_name" ColumnName="type_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bids">
+      <EntityTypeMapping TypeName="AuctionAppModel.Bid">
+        <MappingFragment StoreEntitySet="Bid">
+          <ScalarProperty Name="id_bid" ColumnName="id_bid" />
+          <ScalarProperty Name="id_post" ColumnName="id_post" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="bid_price" ColumnName="bid_price" />
+          <ScalarProperty Name="bid_date" ColumnName="bid_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="AuctionAppModel.Book">
+        <MappingFragment StoreEntitySet="Book">
+          <ScalarProperty Name="id_book" ColumnName="id_book" />
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+          <ScalarProperty Name="id_condition" ColumnName="id_condition" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="publication_year" ColumnName="publication_year" />
+          <ScalarProperty Name="publishing_house" ColumnName="publishing_house" />
+          <ScalarProperty Name="page_number" ColumnName="page_number" />
+          <ScalarProperty Name="book_language" ColumnName="book_language" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Book_conditions">
+      <EntityTypeMapping TypeName="AuctionAppModel.Book_condition">
+        <MappingFragment StoreEntitySet="Book condition">
+          <ScalarProperty Name="id_book_condition" ColumnName="id_book_condition" />
+          <ScalarProperty Name="condition" ColumnName="condition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jewelries">
+      <EntityTypeMapping TypeName="AuctionAppModel.Jewelry">
+        <MappingFragment StoreEntitySet="Jewelry">
+          <ScalarProperty Name="id_jewelry" ColumnName="id_jewelry" />
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+          <ScalarProperty Name="id_type" ColumnName="id_type" />
+          <ScalarProperty Name="brand" ColumnName="brand" />
+          <ScalarProperty Name="weight" ColumnName="weight" />
+          <ScalarProperty Name="creation_year" ColumnName="creation_year" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jewelry_types">
+      <EntityTypeMapping TypeName="AuctionAppModel.Jewelry_type">
+        <MappingFragment StoreEntitySet="Jewelry type">
+          <ScalarProperty Name="id_jewelry_type" ColumnName="id_jewelry_type" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Paintings">
+      <EntityTypeMapping TypeName="AuctionAppModel.Painting">
+        <MappingFragment StoreEntitySet="Painting">
+          <ScalarProperty Name="id_painting" ColumnName="id_painting" />
+          <ScalarProperty Name="id_produs" ColumnName="id_produs" />
+          <ScalarProperty Name="id_type" ColumnName="id_type" />
+          <ScalarProperty Name="artist" ColumnName="artist" />
+          <ScalarProperty Name="creation_year" ColumnName="creation_year" />
+          <ScalarProperty Name="length" ColumnName="length" />
+          <ScalarProperty Name="width" ColumnName="width" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Painting_types">
+      <EntityTypeMapping TypeName="AuctionAppModel.Painting_type">
+        <MappingFragment StoreEntitySet="Painting type">
+          <ScalarProperty Name="id_painting_type" ColumnName="id_painting_type" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="AuctionAppModel.Post">
+        <MappingFragment StoreEntitySet="Post">
+          <ScalarProperty Name="id_post" ColumnName="id_post" />
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+          <ScalarProperty Name="id_status" ColumnName="id_status" />
+          <ScalarProperty Name="id_auction" ColumnName="id_auction" />
+          <ScalarProperty Name="start_price" ColumnName="start_price" />
+          <ScalarProperty Name="list_price" ColumnName="list_price" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="lot" ColumnName="lot" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Post_status">
+      <EntityTypeMapping TypeName="AuctionAppModel.Post_status">
+        <MappingFragment StoreEntitySet="Post status">
+          <ScalarProperty Name="id_status" ColumnName="id_status" />
+          <ScalarProperty Name="status_name" ColumnName="status_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="AuctionAppModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="inventory_date" ColumnName="inventory_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product_images">
+      <EntityTypeMapping TypeName="AuctionAppModel.Product_image">
+        <MappingFragment StoreEntitySet="Product images">
+          <ScalarProperty Name="id_image" ColumnName="id_image" />
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+          <ScalarProperty Name="image_path" ColumnName="image_path" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sculptures">
+      <EntityTypeMapping TypeName="AuctionAppModel.Sculpture">
+        <MappingFragment StoreEntitySet="Sculpture">
+          <ScalarProperty Name="id_sculpture" ColumnName="id_sculpture" />
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+          <ScalarProperty Name="id_sculpture_material" ColumnName="id_sculpture_material" />
+          <ScalarProperty Name="artist" ColumnName="artist" />
+          <ScalarProperty Name="length" ColumnName="length" />
+          <ScalarProperty Name="width" ColumnName="width" />
+          <ScalarProperty Name="depth" ColumnName="depth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sculpture_materials">
+      <EntityTypeMapping TypeName="AuctionAppModel.Sculpture_material">
+        <MappingFragment StoreEntitySet="Sculpture material">
+          <ScalarProperty Name="id_sculpture_material" ColumnName="id_sculpture_material" />
+          <ScalarProperty Name="material" ColumnName="material" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_roles">
+      <EntityTypeMapping TypeName="AuctionAppModel.User_role">
+        <MappingFragment StoreEntitySet="User role">
+          <ScalarProperty Name="id_role" ColumnName="id_role" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_tip" ColumnName="id_tip" />
+          <ScalarProperty Name="role_date" ColumnName="role_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_types">
+      <EntityTypeMapping TypeName="AuctionAppModel.User_type">
+        <MappingFragment StoreEntitySet="User type">
+          <ScalarProperty Name="id_type" ColumnName="id_type" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="AuctionAppModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="fisrt_name" ColumnName="fisrt_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="salt" ColumnName="salt" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="last_login" ColumnName="last_login" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Watches">
+      <EntityTypeMapping TypeName="AuctionAppModel.Watch">
+        <MappingFragment StoreEntitySet="Watch">
+          <ScalarProperty Name="id_watch" ColumnName="id_watch" />
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+          <ScalarProperty Name="id_mechanism" ColumnName="id_mechanism" />
+          <ScalarProperty Name="diameter" ColumnName="diameter" />
+          <ScalarProperty Name="manufacturer" ColumnName="manufacturer" />
+          <ScalarProperty Name="id_type" ColumnName="id_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Watch_mechanism">
+      <EntityTypeMapping TypeName="AuctionAppModel.Watch_mechanism">
+        <MappingFragment StoreEntitySet="Watch mechanism">
+          <ScalarProperty Name="id_mechanism" ColumnName="id_mechanism" />
+          <ScalarProperty Name="mechanism" ColumnName="mechanism" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Watch_types">
+      <EntityTypeMapping TypeName="AuctionAppModel.Watch_type">
+        <MappingFragment StoreEntitySet="Watch type">
+          <ScalarProperty Name="id_watch_type" ColumnName="id_watch_type" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
